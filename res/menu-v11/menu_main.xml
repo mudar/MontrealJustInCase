@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/menu_about"
+        android:icon="@drawable/ic_actionbar_info_details"
+        android:showAsAction="ifRoom"
+        android:title="@string/menu_about"/>
+
+    <item
+        android:id="@+id/menu_preferences"
+        android:icon="@drawable/ic_menu_preferences"
+        android:showAsAction="ifRoom"
+        android:title="@string/menu_preferences"/>
+
+</menu>

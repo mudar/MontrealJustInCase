@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="hello">Hello World, Montréal Just in Case!</string>
+    <string name="app_name">MTL Just in Case</string>
+    <string name="google_map_api_key"></string>__YOUR_GOOGLE_MAP_API_KEY__
+    <string name="google_map_api_key_debug"></string>__YOUR_GOOGLE_MAP_API_KEY_DEBUG__
+    <string name="app_label_fire_halls">Fire Halls</string>
+    <string name="app_label_spvm_stations">SPVM Stations</string>
+    <string name="app_label_water_supplies">Water Supplies</string>
+    <string name="app_label_emergency_hostels">Emergency Hostels</string>
+    <string name="app_label_about">About</string>
+    <string name="btn_fire_halls">Fire Halls</string>
+    <string name="btn_spvm_stations">SPVM Stations</string>
+    <string name="btn_water_supplies">Water\nSupplies</string>
+    <string name="btn_emergency_hostels">Emergency\nHostels</string>
+    <string name="menu_view_list">List</string>
+    <string name="menu_view_map">Map</string>
+    <string name="menu_preferences">Settings</string>
+    <string name="menu_help">Help</string>
+    <string name="menu_about">About</string>
+    <string name="menu_link_kml">Open in GMaps</string>
+    <string name="placemarks_empty_list">List is empty&#8230;</string>
+    <string name="placemark_distance">%.1fkm</string>
+    <string name="placemark_distance_min">&lt;100m</string>
+    <string name="logo_open_data">@drawable/logo_open_data_en</string>
+    <string name="toast_sync_error">Sync error: <xliff:g id="error">%1$s</xliff:g></string>
+    <string name="eula_assets_filename">gpl-3.0-standalone.html</string>
+    <string name="eula_title">GNU General Public License v3.0</string>
+    <string name="dialog_btn_ok">Ok</string>
+    <string name="dialog_btn_cancel">Cancel</string>
+    <string name="dialog_title_maps_chooser">Display Map using&#8230;</string>
+    <string name="dialog_btn_eula_accept">Accept</string>
+    <string name="dialog_btn_eula_decline">Decline</string>
+    <string name="toast_network_connection_error">Network connection is unavailable&#8230;</string>
+    <!-- <string name="dialog_network_connection_message">The application needs a network connection. Please turn on mobile network or Wi-Fi in Settings&#8230;</string> -->
+    <string name="toast_sync_finished">Loading completed successfully!</string>
+    <string name="dialog_remote_kml_title">Open in GMaps</string>
+    <string name="dialog_remote_kml_summary">Do you want to download the remote KML file? It will be opened using your Google Maps app&#8230;</string>
+    <string name="dialog_prefs_todo_summary">Coming soon&#8230; This is still a beta version!\nSettings will allow you to:\n– Sort lists by Distance or Name;\n– Set interface language to English or French;\n– Display distances using Metric or Imperial units;\n– Update data using the city\'s remote server.</string>
+    <string name="about_contents_1">In case of emergency, please contact the City\'s security services directly. Do not rely on information provided here as it will not contain the updated security measures.</string>
+    <string name="about_contents_2">Montréal Just in Case provides you with the geographic locations and addresses for four public safety services:</string>
+    <string name="about_contents_2_1">1. Fire Halls;</string>
+    <string name="about_contents_2_2">2. Neighbourhood Police Stations (SPVM);</string>
+    <string name="about_contents_2_3">3. Water Supplies – Contingency measures: Locations of water supplies available to the population in case of heat wave or other events related to public safety;</string>
+    <string name="about_contents_2_4">4. Emergency accommodation centres and air conditioned public places.</string>
+    <string name="about_contents_3">The source of the data is the City of Montréal on its Open Data Portal. Tap to access the URL of each source:</string>
+    <string name="about_contents_3_1"><a href="http://donnees.ville.montreal.qc.ca/archives/fiche-donnees/casernes-pompiers">Fire Halls</a></string>
+    <string name="about_contents_3_2"><a href="http://donnees.ville.montreal.qc.ca/archives/fiche-donnees/carte-postes-quartier">SPVM Stations</a></string>
+    <string name="about_contents_3_3"><a href="http://donnees.ville.montreal.qc.ca/archives/fiche-donnees/points-eau">Water Supplies</a></string>
+    <string name="about_contents_3_4"><a href="http://donnees.ville.montreal.qc.ca/archives/fiche-donnees/centres-hebergement-urgence">Emergency Hostels</a></string>
+    <string name="about_contents_3_5"><a href="http://donnees.ville.montreal.qc.ca/licence-texte-complet">Licence related to the use and redistribution of the data</a></string>
+    <string name="about_contents_credits">Android app developed by <a href="http://www.montrealjustincase.com/">Mudar Noufal</a>. Source code is released under the GPLv3 license from the Free Software Foundation.</string>
+
+</resources>

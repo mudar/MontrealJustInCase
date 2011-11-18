@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/paddingMedium"
+            android:text="@string/about_contents_1" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/paddingMedium"
+            android:text="@string/about_contents_2" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/paddingMedium"
+            android:text="@string/about_contents_2_1" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/paddingMedium"
+            android:text="@string/about_contents_2_2" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/paddingMedium"
+            android:text="@string/about_contents_2_3" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/paddingMedium"
+            android:text="@string/about_contents_2_4" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/paddingMedium"
+            android:text="@string/about_contents_3" />
+
+        <TextView
+            
+            android:id="@+id/about_links_1"
+            style="@style/AboutLinks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/paddingMedium"
+            android:text="@string/about_contents_3_1" />
+
+        <TextView
+            android:id="@+id/about_links_2"
+            style="@style/AboutLinks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/paddingMedium"
+            android:text="@string/about_contents_3_2" />
+
+        <TextView
+            android:id="@+id/about_links_3"
+            style="@style/AboutLinks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/paddingMedium"
+            android:text="@string/about_contents_3_3" />
+
+        <TextView
+            android:id="@+id/about_links_4"
+            style="@style/AboutLinks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/paddingMedium"
+            android:text="@string/about_contents_3_4" />
+
+        <TextView
+            android:id="@+id/about_links_5"
+            style="@style/AboutLinks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/paddingMedium"
+            android:text="@string/about_contents_3_5" />
+
+        <TextView
+            android:id="@+id/about_links_credits"
+            android:linksClickable="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/paddingMedium"
+            android:text="@string/about_contents_credits" />
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerInside"
+            android:src="@string/logo_open_data" />
+    </LinearLayout>
+
+</ScrollView>

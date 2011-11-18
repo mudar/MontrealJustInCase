@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/ListItem"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/placemark_name"
+        style="@style/ListItemTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:lines="1"
+        android:scrollHorizontally="true" />
+
+    <TextView
+        android:id="@+id/placemark_address"
+        style="@style/ListItemSummary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/placemark_name"
+        android:ellipsize="end"
+        android:lines="1"
+        android:scrollHorizontally="true" />
+
+    <TextView
+        android:id="@+id/placemark_distance"
+        style="@style/ListItemDistance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/placemark_name"
+        android:layout_toRightOf="@+id/placemark_address" />
+
+</RelativeLayout>

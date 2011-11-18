@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <ca.mudar.mtlaucasou.ui.widgets.DashboardLayout
+        android:id="@+id/dashboard_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <Button
+            android:id="@+id/home_btn_fire_halls"
+            style="@style/DashboardButton"
+            android:drawableTop="@drawable/btn_dashboard_fire_halls"
+            android:text="@string/btn_fire_halls" />
+
+        <Button
+            android:id="@+id/home_btn_spvm_stations"
+            style="@style/DashboardButton"
+            android:drawableTop="@drawable/btn_dashboard_spvm_stations"
+            android:text="@string/btn_spvm_stations" />
+
+        <Button
+            android:id="@+id/home_btn_water_supplies"
+            style="@style/DashboardButton"
+            android:drawableTop="@drawable/btn_dashboard_water_supplies"
+            android:text="@string/btn_water_supplies" />
+
+        <Button
+            android:id="@+id/home_btn_emergency_hostels"
+            style="@style/DashboardButton"
+            android:drawableTop="@drawable/btn_dashboard_emergency_hostels"
+            android:text="@string/btn_emergency_hostels" />
+    </ca.mudar.mtlaucasou.ui.widgets.DashboardLayout>
+
+</LinearLayout>

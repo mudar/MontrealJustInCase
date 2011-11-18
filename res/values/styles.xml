@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="BigButton">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:drawablePadding">2dp</item>
+        <item name="android:background">@null</item>
+        <item name="android:textColor">@color/body_text_2</item>
+        <item name="android:textSize">@dimen/textSizeMedium</item>
+    </style>
+
+    <!-- <style name="Theme.AuCasOu" parent="Theme.Sherlock.Light"> -->
+    <!-- <item name="android:windowBackground">@color/background_1</item> -->
+    <!-- <item name="selectableItemBackground">@drawable/actionbar_btn_selectable</item> -->
+    <!-- <item name="abBackground">@color/actionbar_background</item> -->
+    <!-- <item name="abIcon">@drawable/ic_logo_actionbar</item> -->
+    <!-- <item name="abTitleTextStyle">@style/AuCasOu.ActionBar.TitleTextStyle</item> -->
+    <!-- </style> -->
+
+    <style name="AuCasOu.ActionBar.TitleTextStyle" parent="TextAppearance.Widget.Title">
+        <item name="android:textColor">@color/actionbar_text</item>
+    </style>
+
+    <style name="DashboardButton">
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:drawablePadding">@dimen/paddingSmall</item>
+        <item name="android:textSize">@dimen/textSizeLarge</item>
+        <item name="android:textColor">@color/dashboard_text</item>
+        <item name="android:background">@null</item>
+    </style>
+
+    <!-- <style name="About"> -->
+    <!-- <item name="android:background">@color/background_1</item> -->
+    <!-- <item name="android:textColor">#ffffff</item> -->
+    <!-- <item name="android:padding">@dimen/bodyPaddingLarge</item> -->
+    <!-- </style> -->
+
+    <style name="AboutLinks">
+        <item name="android:minHeight">?android:attr/listPreferredItemHeight</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:linksClickable">true</item>
+        
+        <item name="android:layout_marginLeft">@dimen/bodyPaddingMedium</item>
+    </style>
+
+    <style name="ListItem">
+        <item name="android:background">@drawable/list_selector</item>
+        <item name="android:minHeight">?android:attr/listPreferredItemHeight</item>
+        <item name="android:paddingLeft">@dimen/paddingMedium</item>
+        <item name="android:paddingRight">@dimen/paddingMedium</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="ListItemTitle">
+        <item name="android:textColor">@color/body_text_1</item>
+        <item name="android:textSize">@dimen/textSizeLarge</item>
+    </style>
+
+    <style name="ListItemSummary">
+        <item name="android:textColor">@color/body_text_2</item>
+        <item name="android:textSize">@dimen/textSizeSmall</item>
+    </style>
+
+    <style name="ListItemDistance">
+        <item name="android:textColor">@color/body_text_2</item>
+        <item name="android:textSize">@dimen/textSizeSmall</item>
+        <item name="android:gravity">right</item>
+    </style>
+
+</resources>

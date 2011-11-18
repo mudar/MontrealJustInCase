@@ -1,0 +1,9 @@
+body {background: #fff; color: #000; margin: 0; padding: 0; }
+body#eula { padding: 0.75em 1em; }
+ol { padding-left: 1em; }
+li { margin-bottom: 1em; }
+a,a:hover,a:active,a:visited { color: #000; }
+p {  margin: 0; padding: 0 0 0.5em 0; }
+.qa { padding: 1em; margin: 0; background: #fff; font-size: 1.25em; }
+.question { font-weight: bold; margin-bottom: 0.5em; }
+.qa.even { background: #000; color: #fff; }

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="android.R.id.home" type="id"/>
+    <item name="actionbar_toggle_list" type="id"/>
+    <item name="menu_link_kml" type="id"/>
+    <item name="menu_preferences" type="id"/>
+
+</resources>

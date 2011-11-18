@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- <color name="actionbarColorStart">#a02010</color> -->
+    <!-- <color name="actionbarColorEnd">#e03020</color> -->
+    <!-- <color name="dashboardColorStart">#333333</color> -->
+    <!-- <color name="dashboardColorEnd">#191919</color> -->
+    <color name="actionbar_text">#ffaa00</color>
+<!--     <color name="actionbar_background_1">#ff6600</color> -->
+<!--     <color name="actionbar_background_2">#ff8000</color> -->
+    <color name="actionbar_background_1">#404040</color>
+    <color name="actionbar_background_2">#202020</color>
+<!--     <color name="actionbar_focused">#ffcc00</color> -->
+<!--     <color name="actionbar_pressed">#ff9900</color> -->
+    <color name="actionbar_focused">#ffcc00</color>
+    <color name="actionbar_pressed">#ff8000</color>
+    <color name="body_text_1">#ffffffff</color>
+    <color name="body_text_2">#99ffffff</color>
+    <color name="body_text_disabled">#66ffffff</color>
+    <color name="dashboard_text_default">#ddffffff</color>
+    <color name="dashboard_text_focused">#bbffffff</color>
+    <color name="dashboard_text_pressed">#99ffffff</color>
+<!--     <color name="body_text_1_inverse">#ff000000</color> -->
+<!--     <color name="body_text_2_inverse">#99000000</color> -->
+<!--     <color name="body_text_disabled_inverse">#66000000</color> -->
+    <color name="hyperlink">#cc9900</color>
+    <color name="background_1">#404040</color>
+    <color name="listview_color_1">#ff9900</color>
+    <color name="listview_color_2">#cc9900</color>
+    <color name="listview_color_3">#aa6600</color>
+<!--     <color name="background_dashboard">#606060</color> -->
+    <color name="separator_map_list">#e5e5e5</color>
+
+</resources>

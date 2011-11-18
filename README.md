@@ -1,6 +1,6 @@
-![Montréal au cas où / Montreal Just in Case][img_github]
+[![Montréal au cas où / Montréal Just in Case][img_github]][link_aucasou]
 
-##A Montreal Open Data project. Geographic locations of public safety services.
+##A Montréal Open Data project. Geographic locations of public safety services.
 
 Montréal Just in Case is an open source **Android** application that provides you with the geographic locations and addresses for four public safety services:
 
@@ -21,7 +21,10 @@ The source of the data is the City of Montréal on its [Open Data Portal][link_p
 
 [![Available on Android Market][img_qrcode]][link_market]
 
-[The project's Wiki][link_wiki]
+Also: 
+
+   * [Download the APK][link_apk]
+   * [The project's Wiki][link_wiki]
 
 ##Open Data
 
@@ -44,13 +47,13 @@ Data sources are KML files provided by the City of Montréal:
 
 ##Code license
 
-    Montreal Just in Case
+    Montréal Just in Case
     Copyright (C) 2011  Mudar Noufal <mn@mudar.ca>
 
-    Geographic locations of public safety services. A Montreal Open Data
+    Geographic locations of public safety services. A Montréal Open Data
     project.
 
-    This file is part of Montreal Just in Case.
+    This file is part of Montréal Just in Case.
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -73,12 +76,13 @@ This GPLv3 project includes (thanks!) libraries and derivative work of the follo
 * [Google I/O App][link_lib_iosched] iosched (c) Google Inc.
 * [AOSP][link_lib_aosp] (c) The Android Open Source Project.
 
-These four projects are all licensed under the [Apache License v2.0][link_apache].
+These four projects are all released under the [Apache License v2.0][link_apache].
 
 
 [link_market]: http://market.android.com/details?id=ca.mudar.mtlaucasou
-[link_justincase]: http://www.montrealjustincase.com/
+[link_apk]: http://www.montrealaucasou.com/MtlAuCasOu.apk
 [link_aucasou]: http://www.montrealaucasou.com/
+[link_justincase]: http://www.montrealjustincase.com/
 [link_mtl_ouvert]: http://montrealouvert.net/?page_id=113&lang=en
 [link_mudar_ca]: http://www.mudar.ca/
 [link_wiki]: https://github.com/mudar/MontrealJustInCase/wiki/

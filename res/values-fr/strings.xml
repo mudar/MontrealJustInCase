@@ -1,10 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Montreal Just in Case
+    Copyright (C) 2011  Mudar Noufal <mn@mudar.ca>
+
+    Geographic locations of public safety services. A Montreal Open Data
+    project.
+
+    This file is part of Montreal Just in Case.
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <string name="hello">Hello World, Montréal au cas où!</string>
     <string name="app_name">MTL au cas où</string>
-    <string name="google_map_api_key"></string>__YOUR_GOOGLE_MAP_API_KEY__
-    <string name="google_map_api_key_debug"></string>__YOUR_GOOGLE_MAP_API_KEY_DEBUG__
+    <string name="google_map_api_key" _YOUR_GOOGLE_MAP_API_KEY_></string>
+    <string name="google_map_api_key_debug" _YOUR_GOOGLE_MAP_API_KEY_DEBUG_></string>
     <string name="app_label_fire_halls">Casernes de pompiers</string>
     <string name="app_label_spvm_stations">Postes de police de quartier</string>
     <string name="app_label_water_supplies">Points d\'eau</string>
@@ -20,31 +43,31 @@
     <string name="menu_help">Aide</string>
     <string name="menu_about">À propos</string>
     <string name="menu_link_kml">Ouvrir dans GMaps</string>
-    <string name="placemarks_empty_list">La liste est vide&#8230;</string>
-    <string name="placemark_distance">%.1f&#160;km</string>
-    <string name="placemark_distance_min">&lt;100&#160;m</string>
+    <string name="placemarks_empty_list">La liste est vide…</string>
+    <string name="placemark_distance">%.1f km</string>
+    <string name="placemark_distance_min">&lt;100 m</string>
     <string name="logo_open_data">@drawable/logo_open_data_fr</string>
     <string name="toast_sync_error">Erreur de syntaxe: <xliff:g id="error">%1$s</xliff:g></string>
     <string name="eula_assets_filename">gpl-3.0-standalone.html</string>
     <string name="eula_title">GNU General Public License v3.0</string>
     <string name="dialog_btn_ok">Ok</string>
     <string name="dialog_btn_cancel">Annuler</string>
-    <string name="dialog_title_maps_chooser">Afficher la carte avec&#8230;</string>
+    <string name="dialog_title_maps_chooser">Afficher la carte avec…</string>
     <string name="dialog_btn_eula_accept">Accepter</string>
     <string name="dialog_btn_eula_decline">Refuser</string>
-    <string name="toast_network_connection_error">Pas de connexion réseau&#8230;</string>
+    <string name="toast_network_connection_error">Pas de connexion réseau…</string>
     <!-- <string name="dialog_network_connection_message">The application needs a network connection. Please turn on mobile network or Wi-Fi in Settings&#8230;</string> -->
     <string name="toast_sync_finished">Chargement terminé</string>
     <string name="dialog_remote_kml_title">Ouvrir dans GMaps</string>
-    <string name="dialog_remote_kml_summary">Voulez-vous télécharger le fichier KML&#160;? Il sera affiché dans l\'application Google Maps&#8230;</string>
-    <string name="dialog_prefs_todo_summary">À venir&#8230; Ceci est encore une version bêta&#160;!\nCette section vous permettra de&#160;:\n– trier les listes par nom ou par distance,\n– utiliser le français ou l\'anglais pour la langue de l\'interface,\n– afficher les distances avec le système métrique ou impérial,\n– mettre les données à jour à partir du site de la ville.</string>
+    <string name="dialog_remote_kml_summary">Voulez-vous télécharger le fichier KML ? Il sera affiché dans l\'application Google Maps…</string>
+    <string name="dialog_prefs_todo_summary">À venir… Ceci est encore une version bêta !\nCette section vous permettra de :\n– trier les listes par nom ou par distance,\n– utiliser le français ou l\'anglais pour la langue de l\'interface,\n– afficher les distances avec le système métrique ou impérial,\n– mettre les données à jour à partir du site de la ville.</string>
     <string name="about_contents_1">En cas d\'urgence, veuillez contacter le Service de la sécurité publique. Ne vous fiez pas aux informations présentées dans cette application car elle ne contiendra pas les dernirères mesures d\'urgence.</string>
-    <string name="about_contents_2">Montréal au cas où vous donne accès aux localisations géographiques et aux adresses civiques associées à quatre services de sécurité publique&#160;:</string>
+    <string name="about_contents_2">Montréal au cas où vous donne accès aux localisations géographiques et aux adresses civiques associées à quatre services de sécurité publique :</string>
     <string name="about_contents_2_1">1. casernes de pompiers,</string>
     <string name="about_contents_2_2">2. postes de quartier de la police (SPVM),</string>
-    <string name="about_contents_2_3">3. points d\'eau - mesures d\'urgence&#160;: Localisation des points d\'eau mises à la disposition de la population en cas de canicule ou autre événement touchant la sécurité publique,</string>
+    <string name="about_contents_2_3">3. points d\'eau - mesures d\'urgence : Localisation des points d\'eau mises à la disposition de la population en cas de canicule ou autre événement touchant la sécurité publique,</string>
     <string name="about_contents_2_4">4. centres d\'hébergement d\'urgence et lieux publics climatisés.</string>
-    <string name="about_contents_3">Les données sont en provenance du Portail données ouvertes de la Ville de Montréal. Appuyez pour accéder aux adresses URL&#160;:</string>
+    <string name="about_contents_3">Les données sont en provenance du Portail données ouvertes de la Ville de Montréal. Appuyez pour accéder aux adresses URL :</string>
     <string name="about_contents_3_1"><a href="http://donnees.ville.montreal.qc.ca/archives/fiche-donnees/casernes-pompiers">Casernes de pompiers</a></string>
     <string name="about_contents_3_2"><a href="http://donnees.ville.montreal.qc.ca/archives/fiche-donnees/carte-postes-quartier">Postes de la SPVM</a></string>
     <string name="about_contents_3_3"><a href="http://donnees.ville.montreal.qc.ca/archives/fiche-donnees/points-eau">Points d\'eau</a></string>

@@ -1,4 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Montreal Just in Case
+    Copyright (C) 2011  Mudar Noufal <mn@mudar.ca>
+
+    Geographic locations of public safety services. A Montreal Open Data
+    project.
+
+    This file is part of Montreal Just in Case.
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
 <resources>
 
     <!-- <color name="actionbarColorStart">#a02010</color> -->
@@ -6,12 +29,12 @@
     <!-- <color name="dashboardColorStart">#333333</color> -->
     <!-- <color name="dashboardColorEnd">#191919</color> -->
     <color name="actionbar_text">#ffaa00</color>
-<!--     <color name="actionbar_background_1">#ff6600</color> -->
-<!--     <color name="actionbar_background_2">#ff8000</color> -->
+    <!-- <color name="actionbar_background_1">#ff6600</color> -->
+    <!-- <color name="actionbar_background_2">#ff8000</color> -->
     <color name="actionbar_background_1">#404040</color>
     <color name="actionbar_background_2">#202020</color>
-<!--     <color name="actionbar_focused">#ffcc00</color> -->
-<!--     <color name="actionbar_pressed">#ff9900</color> -->
+    <!-- <color name="actionbar_focused">#ffcc00</color> -->
+    <!-- <color name="actionbar_pressed">#ff9900</color> -->
     <color name="actionbar_focused">#ffcc00</color>
     <color name="actionbar_pressed">#ff8000</color>
     <color name="body_text_1">#ffffffff</color>
@@ -20,15 +43,15 @@
     <color name="dashboard_text_default">#ddffffff</color>
     <color name="dashboard_text_focused">#bbffffff</color>
     <color name="dashboard_text_pressed">#99ffffff</color>
-<!--     <color name="body_text_1_inverse">#ff000000</color> -->
-<!--     <color name="body_text_2_inverse">#99000000</color> -->
-<!--     <color name="body_text_disabled_inverse">#66000000</color> -->
+    <!-- <color name="body_text_1_inverse">#ff000000</color> -->
+    <!-- <color name="body_text_2_inverse">#99000000</color> -->
+    <!-- <color name="body_text_disabled_inverse">#66000000</color> -->
     <color name="hyperlink">#cc9900</color>
     <color name="background_1">#404040</color>
     <color name="listview_color_1">#ff9900</color>
     <color name="listview_color_2">#cc9900</color>
     <color name="listview_color_3">#aa6600</color>
-<!--     <color name="background_dashboard">#606060</color> -->
+    <!-- <color name="background_dashboard">#606060</color> -->
     <color name="separator_map_list">#e5e5e5</color>
 
 </resources>

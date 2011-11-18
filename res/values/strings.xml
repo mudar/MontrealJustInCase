@@ -1,10 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Montreal Just in Case
+    Copyright (C) 2011  Mudar Noufal <mn@mudar.ca>
+
+    Geographic locations of public safety services. A Montreal Open Data
+    project.
+
+    This file is part of Montreal Just in Case.
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <string name="hello">Hello World, Montréal Just in Case!</string>
     <string name="app_name">MTL Just in Case</string>
-    <string name="google_map_api_key"></string>__YOUR_GOOGLE_MAP_API_KEY__
-    <string name="google_map_api_key_debug"></string>__YOUR_GOOGLE_MAP_API_KEY_DEBUG__
+    <string name="google_map_api_key" _YOUR_GOOGLE_MAP_API_KEY_></string>
+    <string name="google_map_api_key_debug" _YOUR_GOOGLE_MAP_API_KEY_DEBUG_></string>
     <string name="app_label_fire_halls">Fire Halls</string>
     <string name="app_label_spvm_stations">SPVM Stations</string>
     <string name="app_label_water_supplies">Water Supplies</string>
@@ -20,7 +43,7 @@
     <string name="menu_help">Help</string>
     <string name="menu_about">About</string>
     <string name="menu_link_kml">Open in GMaps</string>
-    <string name="placemarks_empty_list">List is empty&#8230;</string>
+    <string name="placemarks_empty_list">List is empty…</string>
     <string name="placemark_distance">%.1fkm</string>
     <string name="placemark_distance_min">&lt;100m</string>
     <string name="logo_open_data">@drawable/logo_open_data_en</string>
@@ -29,15 +52,15 @@
     <string name="eula_title">GNU General Public License v3.0</string>
     <string name="dialog_btn_ok">Ok</string>
     <string name="dialog_btn_cancel">Cancel</string>
-    <string name="dialog_title_maps_chooser">Display Map using&#8230;</string>
+    <string name="dialog_title_maps_chooser">Display Map using…</string>
     <string name="dialog_btn_eula_accept">Accept</string>
     <string name="dialog_btn_eula_decline">Decline</string>
-    <string name="toast_network_connection_error">Network connection is unavailable&#8230;</string>
+    <string name="toast_network_connection_error">Network connection is unavailable…</string>
     <!-- <string name="dialog_network_connection_message">The application needs a network connection. Please turn on mobile network or Wi-Fi in Settings&#8230;</string> -->
     <string name="toast_sync_finished">Loading completed successfully!</string>
     <string name="dialog_remote_kml_title">Open in GMaps</string>
-    <string name="dialog_remote_kml_summary">Do you want to download the remote KML file? It will be opened using your Google Maps app&#8230;</string>
-    <string name="dialog_prefs_todo_summary">Coming soon&#8230; This is still a beta version!\nSettings will allow you to:\n– Sort lists by Distance or Name;\n– Set interface language to English or French;\n– Display distances using Metric or Imperial units;\n– Update data using the city\'s remote server.</string>
+    <string name="dialog_remote_kml_summary">Do you want to download the remote KML file? It will be opened using your Google Maps app…</string>
+    <string name="dialog_prefs_todo_summary">Coming soon… This is still a beta version!\nSettings will allow you to:\n– Sort lists by Distance or Name;\n– Set interface language to English or French;\n– Display distances using Metric or Imperial units;\n– Update data using the city\'s remote server.</string>
     <string name="about_contents_1">In case of emergency, please contact the City\'s security services directly. Do not rely on information provided here as it will not contain the updated security measures.</string>
     <string name="about_contents_2">Montréal Just in Case provides you with the geographic locations and addresses for four public safety services:</string>
     <string name="about_contents_2_1">1. Fire Halls;</string>

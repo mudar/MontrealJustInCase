@@ -1,3 +1,25 @@
+/*
+    Montréal Just in Case
+    Copyright (C) 2011  Mudar Noufal <mn@mudar.ca>
+
+    Geographic locations of public safety services. A Montréal Open Data
+    project.
+
+    This file is part of Montréal Just in Case.
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 package ca.mudar.mtlaucasou;
 
@@ -57,8 +79,8 @@ public abstract class BaseMapFragment extends Fragment implements LocationListen
     /**
      * Fragment display of list side view
      */
-//    protected int mCurrentSelectedItemIndex = 0;
-//    protected boolean mIsTablet = false;
+    // protected int mCurrentSelectedItemIndex = 0;
+    // protected boolean mIsTablet = false;
 
     /**
      * BaseMapActivity Constructor
@@ -113,32 +135,33 @@ public abstract class BaseMapFragment extends Fragment implements LocationListen
         return root;
     }
 
-//    @Override
-//    public void onActivityCreated(Bundle savedInstanceState) {
-//        super.onActivityCreated(savedInstanceState);
-//
-//        // This is a tablet if this view exists
-//        View root = getSupportActivity().findViewById(R.id.map_root_landscape);
-//        mIsTablet = (root != null);
-//
-//        boolean isVisible = true;
-//        if (savedInstanceState != null) {
-//            if (savedInstanceState.containsKey(Const.KEY_INSTANCE_IS_VISIBLE_MAP)) {
-//                isVisible = savedInstanceState.getBoolean(Const.KEY_INSTANCE_IS_VISIBLE_MAP);
-//            }
-//            // mCurrentSelectedItemIndex =
-//            // savedInstanceState.getInt("currentListIndex", -1);
-//        }
-//        FragmentManager fm = getSupportFragmentManager();
-//        FragmentTransaction ft = fm.beginTransaction();
-//        if (isVisible || mIsTablet) {
-//            ft.show(this);
-//        }
-//        else {
-//            ft.hide(this);
-//        }
-//        ft.commit();
-//    }
+    // @Override
+    // public void onActivityCreated(Bundle savedInstanceState) {
+    // super.onActivityCreated(savedInstanceState);
+    //
+    // // This is a tablet if this view exists
+    // View root = getSupportActivity().findViewById(R.id.map_root_landscape);
+    // mIsTablet = (root != null);
+    //
+    // boolean isVisible = true;
+    // if (savedInstanceState != null) {
+    // if (savedInstanceState.containsKey(Const.KEY_INSTANCE_IS_VISIBLE_MAP)) {
+    // isVisible =
+    // savedInstanceState.getBoolean(Const.KEY_INSTANCE_IS_VISIBLE_MAP);
+    // }
+    // // mCurrentSelectedItemIndex =
+    // // savedInstanceState.getInt("currentListIndex", -1);
+    // }
+    // FragmentManager fm = getSupportFragmentManager();
+    // FragmentTransaction ft = fm.beginTransaction();
+    // if (isVisible || mIsTablet) {
+    // ft.show(this);
+    // }
+    // else {
+    // ft.hide(this);
+    // }
+    // ft.commit();
+    // }
 
     /**
      * Initialize Map: centre and load placemarks
@@ -301,13 +324,14 @@ public abstract class BaseMapFragment extends Fragment implements LocationListen
         Log.v(TAG, "onResume");
         mLocationOverlay.enableMyLocation();
 
-//        if (((BaseMapActivity) getSupportActivity()).isListVisiblePortrait()) {
-//            Log.v(TAG, "isListVisiblePortrait");
-//            FragmentManager fm = getSupportFragmentManager();
-//            FragmentTransaction ft = fm.beginTransaction();
-//            ft.hide(this);
-//            ft.commit();
-//        }
+        // if (((BaseMapActivity) getSupportActivity()).isListVisiblePortrait())
+        // {
+        // Log.v(TAG, "isListVisiblePortrait");
+        // FragmentManager fm = getSupportFragmentManager();
+        // FragmentTransaction ft = fm.beginTransaction();
+        // ft.hide(this);
+        // ft.commit();
+        // }
 
         // if (mMapCenter == null) {
         // mMapController.setZoom(ZOOM_DEFAULT);
@@ -356,7 +380,7 @@ public abstract class BaseMapFragment extends Fragment implements LocationListen
 
         outState.putIntArray(Const.KEY_INSTANCE_COORDS, coords);
         outState.putInt(Const.KEY_INSTANCE_ZOOM, mMapView.getZoomLevel());
-//        outState.putBoolean(Const.KEY_INSTANCE_IS_VISIBLE_MAP, isVisible());
+        // outState.putBoolean(Const.KEY_INSTANCE_IS_VISIBLE_MAP, isVisible());
 
         super.onSaveInstanceState(outState);
     }

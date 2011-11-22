@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="@string/prefs_general_preferences" >
+
+        <ListPreference
+            android:defaultValue="iso"
+            android:dialogTitle="@string/prefs_units_dialog_title"
+            android:entries="@array/prefs_units_entries"
+            android:entryValues="@array/prefs_units_values"
+            android:key="prefs_units_system"
+            android:title="@string/prefs_units_title" />
+
+        <ListPreference
+            android:enabled="false"
+            android:defaultValue="name"
+            android:dialogTitle="@string/prefs_list_sort_dialog_title"
+            android:entries="@array/prefs_list_sort_entries"
+            android:entryValues="@array/prefs_list_sort_values"
+            android:key="prefs_list_sort"
+            android:title="@string/prefs_list_sort_title" />
+
+        <ListPreference
+            android:defaultValue="en"
+            android:dialogTitle="@string/prefs_language_dialog_title"
+            android:entries="@array/prefs_language_entries"
+            android:entryValues="@array/prefs_language_values"
+            android:key="prefs_language"
+            android:title="@string/prefs_language_title" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

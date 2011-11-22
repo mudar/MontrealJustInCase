@@ -29,6 +29,7 @@ import ca.mudar.mtlaucasou.provider.PlacemarkContract.FireHalls;
 import ca.mudar.mtlaucasou.provider.PlacemarkContract.SpvmStations;
 import ca.mudar.mtlaucasou.provider.PlacemarkContract.WaterSupplies;
 import ca.mudar.mtlaucasou.ui.AboutActivity;
+import ca.mudar.mtlaucasou.ui.widgets.MyPreferenceActivity;
 import ca.mudar.mtlaucasou.utils.Const.KmlRemoteUrls;
 import ca.mudar.mtlaucasou.R;
 
@@ -37,11 +38,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.provider.ContactsContract;
-import android.text.InputType;
-import android.util.Log;
 import android.view.MenuItem;
-import android.widget.EditText;
 
 public class ActivityHelper {
 
@@ -104,7 +101,7 @@ public class ActivityHelper {
      * @return boolean
      */
     public boolean onOptionsItemSelected(MenuItem item, int indexSection) {
-        Log.v(TAG, "onOptionsItemSelected. item = " + item.toString());
+        // Log.v(TAG, "onOptionsItemSelected. item = " + item.toString());
 
         Intent intent = new Intent();
         switch (item.getItemId()) {
@@ -112,16 +109,14 @@ public class ActivityHelper {
                 goHome();
                 return true;
             case R.id.menu_preferences:
-                Log.v(TAG, "menu_preferences");
-                showPrefsTodoDialog();
+                intent = new Intent(mActivity, MyPreferenceActivity.class);
+                mActivity.startActivity(intent);
                 return true;
             case R.id.menu_about:
-                Log.v(TAG, "menu_about");
                 intent = new Intent(mActivity, AboutActivity.class);
                 mActivity.startActivity(intent);
                 return true;
             case R.id.menu_link_kml:
-                Log.v(TAG, "menu_kml_link");
                 showAttachmentDownloadDialog(indexSection);
                 return true;
         }
@@ -204,21 +199,6 @@ public class ActivityHelper {
     }
 
     /**
-     * Show the explanatory confirmation dialog before openning the remote KML
-     * file using GMaps.
-     * 
-     * @param index The current section
-     */
-    private void showPrefsTodoDialog() {
-        AlertDialog.Builder alert = new AlertDialog.Builder(mActivity);
-
-        alert.setTitle(R.string.menu_preferences);
-        alert.setMessage(R.string.dialog_prefs_todo_summary);
-        alert.setPositiveButton(R.string.dialog_btn_ok, null);
-        alert.show();
-    }
-
-    /**
      * Start Google Maps activity displaying remote KML file.
      * 
      * @param index The current section
@@ -241,7 +221,7 @@ public class ActivityHelper {
             default:
                 return;
         }
-        Log.v(TAG, "sUrl = " + sUrl);
+
         String title = mActivity.getResources().getString(R.string.dialog_title_maps_chooser);
 
         Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -271,7 +251,7 @@ public class ActivityHelper {
                 uri = EmergencyHostels.CONTENT_URI;
                 break;
             default:
-                Log.v(TAG, "empty URI parsed");
+                // Log.v(TAG, "empty URI parsed");
                 uri = Uri.parse("");
                 break;
         }

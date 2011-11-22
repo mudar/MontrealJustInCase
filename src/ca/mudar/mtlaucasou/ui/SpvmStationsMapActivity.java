@@ -41,4 +41,13 @@ public class SpvmStationsMapActivity extends BaseMapActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_spvm_stations);
     }
+    
+    @Override 
+    public void onResume() {
+        /**
+         * Handle UI language changes.
+         */
+        getSupportActionBar().setTitle(R.string.app_label_spvm_stations);
+        super.onResume();
+    }
 }

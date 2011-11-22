@@ -41,4 +41,13 @@ public class FireHallsMapActivity extends BaseMapActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_fire_halls);
     }
+    
+    @Override 
+    public void onResume() {
+        /**
+         * Handle UI language changes.
+         */
+        getSupportActionBar().setTitle(R.string.app_label_fire_halls);
+        super.onResume();
+    }
 }

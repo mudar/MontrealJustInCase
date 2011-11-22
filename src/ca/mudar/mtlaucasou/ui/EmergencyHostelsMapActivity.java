@@ -42,4 +42,12 @@ public class EmergencyHostelsMapActivity extends BaseMapActivity {
         setContentView(R.layout.activity_map_emergency_hostels);
     }
 
+    @Override
+    public void onResume() {
+        /**
+         * Handle UI language changes.
+         */
+        getSupportActionBar().setTitle(R.string.app_label_emergency_hostels);
+        super.onResume();
+    }
 }

@@ -42,4 +42,12 @@ public class WaterSuppliesMapActivity extends BaseMapActivity {
         setContentView(R.layout.activity_map_water_supplies);
     }
 
+    @Override 
+    public void onResume() {
+        /**
+         * Handle UI language changes.
+         */
+        getSupportActionBar().setTitle(R.string.app_label_water_supplies);
+        super.onResume();
+    }
 }

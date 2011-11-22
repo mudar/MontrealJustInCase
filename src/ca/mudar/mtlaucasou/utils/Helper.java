@@ -23,6 +23,12 @@
 
 package ca.mudar.mtlaucasou.utils;
 
+import ca.mudar.mtlaucasou.R;
+import ca.mudar.mtlaucasou.utils.Const.UnitsDisplay;
+
+import android.content.Context;
+import android.content.res.Resources;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -46,6 +52,84 @@ public class Helper {
             e.printStackTrace();
         }
         return resultString;
+    }
+
+    public static String getDistanceDisplay(Context c, float fDistanceM) {
+        String sDistance;
+
+        AppHelper appHelper = (AppHelper) c.getApplicationContext();
+        Resources res = c.getResources();
+        String units = appHelper.getUnits();
+
+        if (units.equals(Const.PrefsValues.UNITS_IMP)) {
+            /**
+             * Imperial units system, Miles and Feet.
+             */
+
+            float fDistanceMi = fDistanceM / UnitsDisplay.METER_PER_MILE;
+
+            if (fDistanceMi + (UnitsDisplay.ACCURACY_FEET_FAR / UnitsDisplay.FEET_PER_MILE) < 1) {
+                /**
+                 * Display distance in Feet if less than one mile.
+                 */
+                int iDistanceFt = Math.round(fDistanceMi * UnitsDisplay.FEET_PER_MILE);
+
+                if (iDistanceFt <= UnitsDisplay.MIN_FEET) {
+                    /**
+                     * Display "Less than 200 ft", which is +/- equal to the GPS
+                     * accuracy.
+                     */
+                    sDistance = res.getString(R.string.placemark_distance_imp_min);
+                }
+                else {
+                    /**
+                     * When displaying in feet, we round up by 100 ft for
+                     * distances greater than 1000 ft and by 100 ft for smaller
+                     * distances. Example: 1243 ft becomes 1200 and 943 ft
+                     * becomes 940 ft.
+                     */
+                    if (iDistanceFt > 1000) {
+                        iDistanceFt = Math.round(iDistanceFt / UnitsDisplay.ACCURACY_FEET_FAR)
+                                * UnitsDisplay.ACCURACY_FEET_FAR;
+                    }
+                    else {
+                        iDistanceFt = Math.round(iDistanceFt / UnitsDisplay.ACCURACY_FEET_NEAR)
+                                * UnitsDisplay.ACCURACY_FEET_NEAR;
+                    }
+                    sDistance = String.format(res.getString(R.string.placemark_distance_imp_feet),
+                            iDistanceFt);
+                }
+            }
+            else {
+                /**
+                 * Display distance in Miles when greater than 1 mile.
+                 */
+                sDistance = String.format(res.getString(R.string.placemark_distance_imp),
+                        fDistanceMi);
+            }
+        }
+        else {
+            /**
+             * International Units system, Meters and Km.
+             */
+
+            if (fDistanceM <= UnitsDisplay.MIN_METERS) {
+                /**
+                 * Display "Less than 100 m".
+                 */
+                sDistance = res.getString(R.string.placemark_distance_iso_min);
+            }
+            else {
+                /**
+                 * No need to have a constant for 1 Km = 1000 M
+                 */
+                float fDistanceKm = (fDistanceM / 1000);
+                sDistance = String
+                        .format(res.getString(R.string.placemark_distance_iso), fDistanceKm);
+            }
+        }
+
+        return sDistance;
     }
 
 }

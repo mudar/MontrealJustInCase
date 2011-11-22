@@ -35,16 +35,17 @@
     </style>
 
     <style name="Theme.Dashboard" parent="@style/Theme.AuCasOu">
-
-        <!-- <item name="selectableItemBackground">@android:color/transparent</item> -->
         <item name="android:windowBackground">@drawable/background_noise</item>
     </style>
 
     <style name="Theme.About" parent="@style/Theme.AuCasOu">
         <item name="android:textSize">@dimen/textSizeMedium</item>
-        <item name="android:textColor">#ffffff</item>
+        <item name="android:textColor">@color/body_text_1</item>
         <item name="android:textColorLink">@color/hyperlink</item>
-        <!-- <item name="android:linksClickable">true</item> -->
+    </style>
+
+    <style name="Theme.Preferences" parent="@style/Theme.AuCasOu">
+        <item name="android:windowBackground">@color/black</item>
     </style>
 
 </resources>

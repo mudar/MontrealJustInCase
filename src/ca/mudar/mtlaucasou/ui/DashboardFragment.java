@@ -40,7 +40,7 @@ public class DashboardFragment extends Fragment {
         root.findViewById(R.id.home_btn_fire_halls).setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View view) {
-                        Intent intent = new Intent(getActivity().getApplicationContext(),
+                        Intent intent = new Intent(getSupportActivity().getApplicationContext(),
                                 FireHallsMapActivity.class);
                         startActivity(intent);
                     }
@@ -48,7 +48,7 @@ public class DashboardFragment extends Fragment {
         root.findViewById(R.id.home_btn_spvm_stations).setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View view) {
-                        Intent intent = new Intent(getActivity().getApplicationContext(),
+                        Intent intent = new Intent(getSupportActivity().getApplicationContext(),
                                 SpvmStationsMapActivity.class);
                         startActivity(intent);
                     }
@@ -56,7 +56,7 @@ public class DashboardFragment extends Fragment {
         root.findViewById(R.id.home_btn_water_supplies).setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View view) {
-                        Intent intent = new Intent(getActivity().getApplicationContext(),
+                        Intent intent = new Intent(getSupportActivity().getApplicationContext(),
                                 WaterSuppliesMapActivity.class);
                         startActivity(intent);
                     }
@@ -64,7 +64,7 @@ public class DashboardFragment extends Fragment {
         root.findViewById(R.id.home_btn_emergency_hostels).setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View view) {
-                        Intent intent = new Intent(getActivity().getApplicationContext(),
+                        Intent intent = new Intent(getSupportActivity().getApplicationContext(),
                                 EmergencyHostelsMapActivity.class);
                         startActivity(intent);
                     }

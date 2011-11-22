@@ -46,12 +46,14 @@
     <!-- <color name="body_text_1_inverse">#ff000000</color> -->
     <!-- <color name="body_text_2_inverse">#99000000</color> -->
     <!-- <color name="body_text_disabled_inverse">#66000000</color> -->
-    <color name="hyperlink">#cc9900</color>
+    <color name="hyperlink">#ffaa00</color>
     <color name="background_1">#404040</color>
+    <color name="black">#000000</color>
     <color name="listview_color_1">#ff9900</color>
     <color name="listview_color_2">#cc9900</color>
     <color name="listview_color_3">#aa6600</color>
     <!-- <color name="background_dashboard">#606060</color> -->
     <color name="separator_map_list">#e5e5e5</color>
+    <color name="separator_about">#606060</color>
 
 </resources>

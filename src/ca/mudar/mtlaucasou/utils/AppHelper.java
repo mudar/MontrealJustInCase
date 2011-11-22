@@ -23,11 +23,14 @@
 
 package ca.mudar.mtlaucasou.utils;
 
+import ca.mudar.mtlaucasou.utils.Const.PrefsNames;
+import ca.mudar.mtlaucasou.utils.Const.PrefsValues;
+
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.location.Location;
-import android.util.Log;
 import android.widget.Toast;
 
 import java.util.Locale;
@@ -39,6 +42,8 @@ public class AppHelper extends Application {
     protected static final String TAG = "AppHelper";
 
     private Location mLocation;
+    private String mUnits;
+    private String mListSort;
     private String mLanguage;
     private Toast mToast;
 
@@ -47,9 +52,8 @@ public class AppHelper extends Application {
     }
 
     public void setLocation(Location location) {
-        Log.v(TAG,
-                "setLocation. Lat = " + location.getLatitude() + ". Lng = "
-                        + location.getLongitude());
+        // Log.v(TAG,"setLocation. Lat = " + location.getLatitude() +
+        // ". Lng = "+ location.getLongitude());
         this.mLocation = location;
     }
 
@@ -58,8 +62,19 @@ public class AppHelper extends Application {
     }
 
     public void setLanguage(String lang) {
-        Log.v(TAG, "setLanguage = " + lang);
         this.mLanguage = lang;
+        updateUiLanguage();
+    }
+
+    public void updateUiLanguage() {
+
+        Locale locale = new Locale(mLanguage);
+
+        Configuration config = new Configuration();
+        config.locale = locale;
+        Locale.setDefault(locale);
+        getBaseContext().getResources().updateConfiguration(config,
+                getBaseContext().getResources().getDisplayMetrics());
     }
 
     public void showToastText(int res, int duration) {
@@ -72,6 +87,47 @@ public class AppHelper extends Application {
         mToast.setText(msg);
         mToast.setDuration(duration);
         mToast.show();
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        instance = this;
+
+        SharedPreferences prefs = getSharedPreferences(Const.APP_PREFS_NAME, Context.MODE_PRIVATE);
+
+        /**
+         * Initialize UI settings based on preferences.
+         */
+        mUnits = prefs.getString(PrefsNames.UNITS_SYSTEM, PrefsValues.UNITS_ISO);
+
+        mListSort = prefs.getString(PrefsNames.LIST_SORT, PrefsValues.LIST_SORT_NAME);
+
+        mLanguage = prefs.getString(Const.PrefsNames.LANGUAGE, Locale.getDefault().getLanguage());
+        if (!mLanguage.equals(PrefsValues.LANG_EN) && !mLanguage.equals(PrefsValues.LANG_FR)) {
+            mLanguage = PrefsValues.LANG_EN;
+        }
+
+        mToast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
+
+        updateUiLanguage();
+    }
+
+    public String getListSort() {
+        return mListSort;
+    }
+
+    public void setListSort(String sort) {
+//        Log.v(TAG, "setListSort = " + sort);
+        this.mListSort = sort;
+    }
+
+    public String getUnits() {
+        return mUnits;
+    }
+
+    public void setUnits(String units) {
+        this.mUnits = units;
     }
 
     // TODO: verify possible memory leakage of the following code
@@ -87,13 +143,4 @@ public class AppHelper extends Application {
             throw new IllegalStateException("Application not created yet!");
     }
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        instance = this;
-
-        SharedPreferences prefs = getSharedPreferences(Const.APP_PREFS_NAME, Context.MODE_PRIVATE);
-        mLanguage = prefs.getString(Const.PrefsNames.LANGUAGE, Locale.getDefault().getLanguage());
-        mToast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
-    }
 }

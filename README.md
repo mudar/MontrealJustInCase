@@ -4,7 +4,7 @@
 
 Montréal Just in Case is an open source **Android** application that provides you with the geographic locations and addresses for four public safety services:
 
-   * Fire Halls;
+   * Fire Stations;
    * SPVM Stations;
    * Water Supplies;
    * Emergency Hostels.
@@ -34,7 +34,7 @@ This project was done in collaboration with [Montréal Ouvert][link_mtl_ouvert].
 
 Data sources are KML files provided by the City of Montréal:
 
-1. [Fire Halls][link_portal_1]
+1. [Fire Stations][link_portal_1]
 2. [SPVM Stations][link_portal_2]
 3. [Water Supplies][link_portal_3]
 4. [Emergency Hostels][link_portal_4]

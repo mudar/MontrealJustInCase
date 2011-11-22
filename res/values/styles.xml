@@ -58,17 +58,13 @@
         <item name="android:background">@null</item>
     </style>
 
-    <!-- <style name="About"> -->
-    <!-- <item name="android:background">@color/background_1</item> -->
-    <!-- <item name="android:textColor">#ffffff</item> -->
-    <!-- <item name="android:padding">@dimen/bodyPaddingLarge</item> -->
-    <!-- </style> -->
+    <style name="AboutSeparator">
+<!--         <item name="android:layout_margin">@dimen/textSizeXLarge</item> -->
+        <item name="android:background">@color/separator_about</item>
+        <item name="android:layout_marginTop">@dimen/textSizeXLarge</item>
+        <item name="android:layout_marginBottom">@dimen/textSizeXLarge</item>
+        <!-- <item name="android:background">@drawable/about_separator_background</item> -->
 
-    <style name="AboutLinks">
-        <item name="android:minHeight">?android:attr/listPreferredItemHeight</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:linksClickable">true</item>
-        <item name="android:layout_marginLeft">@dimen/bodyPaddingMedium</item>
     </style>
 
     <style name="ListItem">

@@ -46,7 +46,6 @@ import android.os.Bundle;
 import android.provider.BaseColumns;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItem;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -97,14 +96,13 @@ public abstract class BaseMapFragment extends Fragment implements LocationListen
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.v(TAG, "onCreateView");
+//        Log.v(TAG, "onCreateView");
 
         /**
          * Restore map center and zoom
          */
         int savedZoom = ZOOM_DEFAULT;
         if (savedInstanceState != null) {
-            Log.v(TAG, "has saved instance");
             if (savedInstanceState.containsKey(Const.KEY_INSTANCE_COORDS)) {
                 int[] coords = savedInstanceState.getIntArray(Const.KEY_INSTANCE_COORDS);
                 mMapCenter = new GeoPoint(coords[0], coords[1]);
@@ -135,44 +133,13 @@ public abstract class BaseMapFragment extends Fragment implements LocationListen
         return root;
     }
 
-    // @Override
-    // public void onActivityCreated(Bundle savedInstanceState) {
-    // super.onActivityCreated(savedInstanceState);
-    //
-    // // This is a tablet if this view exists
-    // View root = getSupportActivity().findViewById(R.id.map_root_landscape);
-    // mIsTablet = (root != null);
-    //
-    // boolean isVisible = true;
-    // if (savedInstanceState != null) {
-    // if (savedInstanceState.containsKey(Const.KEY_INSTANCE_IS_VISIBLE_MAP)) {
-    // isVisible =
-    // savedInstanceState.getBoolean(Const.KEY_INSTANCE_IS_VISIBLE_MAP);
-    // }
-    // // mCurrentSelectedItemIndex =
-    // // savedInstanceState.getInt("currentListIndex", -1);
-    // }
-    // FragmentManager fm = getSupportFragmentManager();
-    // FragmentTransaction ft = fm.beginTransaction();
-    // if (isVisible || mIsTablet) {
-    // ft.show(this);
-    // }
-    // else {
-    // ft.hide(this);
-    // }
-    // ft.commit();
-    // }
-
     /**
      * Initialize Map: centre and load placemarks
      */
     protected void initMap() {
-        Log.v(TAG, "initMap");
-
         mLocationOverlay = new MyLocationOverlay(getActivity().getApplicationContext(), mMapView);
         mLocationOverlay.enableCompass();
         mLocationOverlay.enableMyLocation();
-        // mMapView.getOverlays().add(mLocationOverlay);
         mMapView.getOverlays().add(INDEX_OVERLAY_MY_LOCATION, mLocationOverlay);
 
         ArrayList<MapMarker> arMapMarker = fetchMapMarkers();
@@ -184,7 +151,7 @@ public abstract class BaseMapFragment extends Fragment implements LocationListen
                 mMapView);
 
         if (arMapMarker.size() > 0) {
-            Log.v(TAG, "Adding markers to map");
+//            Log.v(TAG, "Adding markers to map");
             for (MapMarker marker : arMapMarker) {
                 OverlayItem overlayitem = new OverlayItem(marker.geoPoint, marker.name,
                         marker.address);
@@ -214,8 +181,6 @@ public abstract class BaseMapFragment extends Fragment implements LocationListen
      * defines the zoom.
      */
     protected void initialAnimateToPoint() {
-
-        Log.v(TAG, "initialAnimateToPoint");
 
         List<String> enabledProviders = mLocationManager.getProviders(true);
 
@@ -287,7 +252,7 @@ public abstract class BaseMapFragment extends Fragment implements LocationListen
                         MAP_MARKER_PROJECTION, null,
                         null, null);
         // TODO: verify cursor close vs manage
-        getActivity().startManagingCursor(cur);
+//        getActivity().startManagingCursor(cur);
 
         if (cur.moveToFirst()) {
             final int columnId = cur.getColumnIndex(BaseColumns._ID);
@@ -304,6 +269,7 @@ public abstract class BaseMapFragment extends Fragment implements LocationListen
 
             } while (cur.moveToNext());
         }
+        cur.close();
 
         return alLocations;
     }
@@ -321,25 +287,8 @@ public abstract class BaseMapFragment extends Fragment implements LocationListen
      */
     @Override
     public void onResume() {
-        Log.v(TAG, "onResume");
+//        Log.v(TAG, "onResume");
         mLocationOverlay.enableMyLocation();
-
-        // if (((BaseMapActivity) getSupportActivity()).isListVisiblePortrait())
-        // {
-        // Log.v(TAG, "isListVisiblePortrait");
-        // FragmentManager fm = getSupportFragmentManager();
-        // FragmentTransaction ft = fm.beginTransaction();
-        // ft.hide(this);
-        // ft.commit();
-        // }
-
-        // if (mMapCenter == null) {
-        // mMapController.setZoom(ZOOM_DEFAULT);
-        // }
-        // else {
-        // mMapController.setZoom(ZOOM_NEAR);
-        // mMapController.setCenter(mMapCenter);
-        // }
 
         super.onResume();
     }
@@ -388,7 +337,7 @@ public abstract class BaseMapFragment extends Fragment implements LocationListen
     @Override
     public void onLocationChanged(Location location) {
         // TODO Auto-generated method stub
-        Log.e(TAG, "onLocationChanged");
+//        Log.e(TAG, "onLocationChanged");
         mAppHelper.setLocation(location);
     }
 
@@ -443,7 +392,7 @@ public abstract class BaseMapFragment extends Fragment implements LocationListen
      * @param mapCenter The new location
      */
     public void setMapCenter(GeoPoint mapCenter) {
-        Log.v(TAG, "Geo = " + mapCenter.getLatitudeE6() + "," + mapCenter.getLongitudeE6());
+//        Log.v(TAG, "Geo = " + mapCenter.getLatitudeE6() + "," + mapCenter.getLongitudeE6());
         animateToPoint(mapCenter);
 
         Overlay overlayPlacemarks = mMapView.getOverlays().get(INDEX_OVERLAY_PLACEMARKS);

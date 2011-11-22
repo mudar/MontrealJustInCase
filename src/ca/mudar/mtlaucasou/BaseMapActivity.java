@@ -27,6 +27,7 @@ import com.google.android.maps.GeoPoint;
 
 import ca.mudar.mtlaucasou.BaseListFragment.OnPlacemarkSelectedListener;
 import ca.mudar.mtlaucasou.utils.ActivityHelper;
+import ca.mudar.mtlaucasou.utils.AppHelper;
 import ca.mudar.mtlaucasou.utils.ConnectionHelper;
 import ca.mudar.mtlaucasou.utils.Const;
 
@@ -39,7 +40,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.Menu;
 import android.support.v4.view.MenuInflater;
 import android.support.v4.view.MenuItem;
-import android.util.Log;
 import android.view.View;
 
 public class BaseMapActivity extends FragmentMapActivity implements OnPlacemarkSelectedListener {
@@ -66,6 +66,8 @@ public class BaseMapActivity extends FragmentMapActivity implements OnPlacemarkS
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        ((AppHelper) getApplicationContext()).updateUiLanguage();
 
         /**
          * By default, show map and hide list.
@@ -104,7 +106,7 @@ public class BaseMapActivity extends FragmentMapActivity implements OnPlacemarkS
         Fragment fragmentMap = fm.findFragmentByTag(Const.TAG_FRAGMENT_MAP);
         Fragment fragmentList = fm.findFragmentByTag(Const.TAG_FRAGMENT_LIST);
 
-        // TODO Bug onResume after device (Nook!) shutdown or memory problems.
+        // TODO Bug: onResume after device (Nook!) shutdown or memory problems.
         // Temporary solution is the use of ft.show() in the following lines.
         /**
          * By default, both fragments are shown. No need to use
@@ -158,7 +160,6 @@ public class BaseMapActivity extends FragmentMapActivity implements OnPlacemarkS
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        Log.v(TAG, "onCreateOptionsMenu");
         /**
          * This is because of a ActionBarSherlock/compatibility package with the
          * MenuInflater. Also, versions earlier than Honeycomb understand only

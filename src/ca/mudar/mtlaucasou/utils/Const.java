@@ -29,15 +29,34 @@ public class Const {
 
     public static interface PrefsNames {
         final String HAS_LOADED_DATA = "prefs_has_loaded_data";
-        final String LANGUAGE = "prefs_lang";
+        final String VERSION_DATABASE = "prefs_version_database";
+        final String LANGUAGE = "prefs_language";
         final String UNITS_SYSTEM = "prefs_units_system";
-        final String SORT_ORDER = "prefs_sort_order";
+        final String LIST_SORT = "prefs_list_sort";
+    }
+    
+    public static interface PrefsValues {
+        final String LANG_FR = "fr";
+        final String LANG_EN = "en";
+        final String UNITS_ISO = "iso";
+        final String UNITS_IMP = "imp";
+        final String LIST_SORT_NAME = "name";
+        final String LIST_SORT_DISTANCE = "distance";
     }
 
     public static final String MAPS_DEFAULT_COORDINATES[] = {
             "45.5", "-73.666667"
     };
     public static final int MAPS_MIN_DISTANCE = 25; // Distance in KM
+    
+    public static interface UnitsDisplay {
+        final float FEET_PER_MILE = 5280;
+        final float METER_PER_MILE = 1609.344f;
+        final int ACCURACY_FEET_FAR = 100;
+        final int ACCURACY_FEET_NEAR = 10;
+        final int MIN_FEET = 200;
+        final int MIN_METERS = 100;
+    }
 
     // public static final String INTENT_EXTRA_NAME_SECTION = "section";
     public static final String INTENT_EXTRA_GEO_LAT = "geo_lat";

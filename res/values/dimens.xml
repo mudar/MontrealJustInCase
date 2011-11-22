@@ -27,8 +27,8 @@
     <dimen name="paddingSmall">2dp</dimen>
     <dimen name="paddingMedium">4dp</dimen>
     <dimen name="paddingLarge">6dp</dimen>
-    <dimen name="tabMargin">2dp</dimen>
-    <dimen name="tabPadding">10dp</dimen>
+    <!-- <dimen name="tabMargin">2dp</dimen> -->
+    <!-- <dimen name="tabPadding">10dp</dimen> -->
     <dimen name="bodyPaddingMedium">10dp</dimen>
     <dimen name="bodyPaddingLarge">10dp</dimen>
     <dimen name="textSizeSmall">12sp</dimen>

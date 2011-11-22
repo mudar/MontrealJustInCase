@@ -34,8 +34,6 @@ import org.xmlpull.v1.XmlPullParserException;
 import android.content.ContentProviderOperation;
 import android.content.ContentResolver;
 import android.net.Uri;
-import android.util.Log;
-//import android.util.Log;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -122,9 +120,9 @@ public class RemotePlacemarksHandler extends XmlHandler {
                     builder.withValue(FireHalls.PLACEMARK_ADDRESS,
                             locationInfo.get(RemoteTags.ADDRESS));
                     builder.withValue(FireHalls.PLACEMARK_GEO_LAT,
-                            Double.parseDouble(coords[0]));
-                    builder.withValue(FireHalls.PLACEMARK_GEO_LNG,
                             Double.parseDouble(coords[1]));
+                    builder.withValue(FireHalls.PLACEMARK_GEO_LNG,
+                            Double.parseDouble(coords[0]));
 
                     batch.add(builder.build());
                 }

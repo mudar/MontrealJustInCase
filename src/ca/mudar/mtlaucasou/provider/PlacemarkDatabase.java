@@ -45,11 +45,15 @@ public class PlacemarkDatabase extends SQLiteOpenHelper {
         String EMERGENCY_HOSTELS = "emergency_hostels";
     }
     
-    
     public PlacemarkDatabase(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        
     }
 
+    public static int getDatabaseVersion() {
+        return DATABASE_VERSION;
+    }
+    
     @Override
     public void onCreate(SQLiteDatabase db) {
         Log.v(TAG, "Creating database tables. DB name: " + DATABASE_NAME);

@@ -26,6 +26,7 @@
 
     <string name="hello">Hello World, Montréal au cas où!</string>
     <string name="app_name">MTL au cas où</string>
+    <string name="app_version">0.9.2</string>
     <string name="google_map_api_key" _YOUR_GOOGLE_MAP_API_KEY_></string>
     <string name="google_map_api_key_debug" _YOUR_GOOGLE_MAP_API_KEY_DEBUG_></string>
     <string name="app_label_fire_halls">Casernes de pompiers</string>
@@ -33,21 +34,25 @@
     <string name="app_label_water_supplies">Points d\'eau</string>
     <string name="app_label_emergency_hostels">Hébergements d\'urgence</string>
     <string name="app_label_about">À propos</string>
+    <string name="app_label_preferences">Réglages</string>
     <string name="btn_fire_halls">Casernes\nde pompiers</string>
     <string name="btn_spvm_stations">Postes\nde la SPVM</string>
     <string name="btn_water_supplies">Points\nd\'eau</string>
     <string name="btn_emergency_hostels">Hébergements\nd\'urgence</string>
     <string name="menu_view_list">Liste</string>
     <string name="menu_view_map">Carte</string>
-    <string name="menu_preferences">Préférences</string>
+    <string name="menu_preferences">Réglages</string>
     <string name="menu_help">Aide</string>
     <string name="menu_about">À propos</string>
     <string name="menu_link_kml">Ouvrir dans GMaps</string>
     <string name="placemarks_empty_list">La liste est vide…</string>
-    <string name="placemark_distance">%.1f km</string>
-    <string name="placemark_distance_min">&lt;100 m</string>
+    <string name="placemark_distance_iso">%.1f km</string>
+    <string name="placemark_distance_iso_min">&lt; 100 m</string>
+    <string name="placemark_distance_imp">%.1f mi</string>
+    <string name="placemark_distance_imp_feet">%s pi</string>
+    <string name="placemark_distance_imp_min">&lt; 200 pi</string>
     <string name="logo_open_data">@drawable/logo_open_data_fr</string>
-    <string name="toast_sync_error">Erreur de syntaxe: <xliff:g id="error">%1$s</xliff:g></string>
+    <string name="toast_sync_error">Erreur de syntaxe : <xliff:g id="error">%1$s</xliff:g></string>
     <string name="eula_assets_filename">gpl-3.0-standalone.html</string>
     <string name="eula_title">GNU General Public License v3.0</string>
     <string name="dialog_btn_ok">Ok</string>
@@ -60,19 +65,32 @@
     <string name="toast_sync_finished">Chargement terminé</string>
     <string name="dialog_remote_kml_title">Ouvrir dans GMaps</string>
     <string name="dialog_remote_kml_summary">Voulez-vous télécharger le fichier KML ? Il sera affiché dans l\'application Google Maps…</string>
-    <string name="dialog_prefs_todo_summary">À venir… Ceci est encore une version bêta !\nCette section vous permettra de :\n– trier les listes par nom ou par distance,\n– utiliser le français ou l\'anglais pour la langue de l\'interface,\n– afficher les distances avec le système métrique ou impérial,\n– mettre les données à jour à partir du site de la ville.</string>
-    <string name="about_contents_1">En cas d\'urgence, veuillez contacter le Service de la sécurité publique. Ne vous fiez pas aux informations présentées dans cette application car elle ne contiendra pas les dernirères mesures d\'urgence.</string>
-    <string name="about_contents_2">Montréal au cas où vous donne accès aux localisations géographiques et aux adresses civiques associées à quatre services de sécurité publique :</string>
-    <string name="about_contents_2_1">1. casernes de pompiers,</string>
-    <string name="about_contents_2_2">2. postes de quartier de la police (SPVM),</string>
-    <string name="about_contents_2_3">3. points d\'eau - mesures d\'urgence : Localisation des points d\'eau mises à la disposition de la population en cas de canicule ou autre événement touchant la sécurité publique,</string>
-    <string name="about_contents_2_4">4. centres d\'hébergement d\'urgence et lieux publics climatisés.</string>
-    <string name="about_contents_3">Les données sont en provenance du Portail données ouvertes de la Ville de Montréal. Appuyez pour accéder aux adresses URL :</string>
-    <string name="about_contents_3_1"><a href="http://donnees.ville.montreal.qc.ca/archives/fiche-donnees/casernes-pompiers">Casernes de pompiers</a></string>
-    <string name="about_contents_3_2"><a href="http://donnees.ville.montreal.qc.ca/archives/fiche-donnees/carte-postes-quartier">Postes de la SPVM</a></string>
-    <string name="about_contents_3_3"><a href="http://donnees.ville.montreal.qc.ca/archives/fiche-donnees/points-eau">Points d\'eau</a></string>
-    <string name="about_contents_3_4"><a href="http://donnees.ville.montreal.qc.ca/archives/fiche-donnees/centres-hebergement-urgence">Hébergements d\'urgence</a></string>
-    <string name="about_contents_3_5"><a href="http://donnees.ville.montreal.qc.ca/licence-texte-complet">La licence des données ouvertes</a></string>
-    <string name="about_contents_credits">Application Android réalisée par <a href="http://www.montrealjustincase.com/">Mudar Noufal</a>. Le code source est publié sous la licence GPLv3 de la Free Software Foundation.</string>
+    <string name="about_contents_note">En cas d\'urgence, veuillez contacter le Service de la sécurité publique. Ne vous fiez pas aux informations présentées dans cette application car elle ne contiendra pas les dernirères mesures d\'urgence.</string>
+    <string name="about_contents_project_url"><a href="http://www.montrealaucasou.com/">montrealaucasou.com</a></string>
+    <string name="about_contents_project_version">Version %s</string>
+    <string name="about_contents_intro">Montréal au cas où vous donne accès aux localisations géographiques et aux adresses civiques associées à quatre services de sécurité publique :</string>
+    <string name="about_contents_2_1">casernes de pompiers,</string>
+    <string name="about_contents_2_2">postes de quartier de la police (SPVM),</string>
+    <string name="about_contents_2_3">points d\'eau mises à la disposition de la population en cas de canicule ou autre événement touchant la sécurité publique,</string>
+    <string name="about_contents_2_4">centres d\'hébergement d\'urgence et lieux publics climatisés.</string>
+    <string name="about_contents_credits">Application Android réalisée par <a href="http://www.mudar.ca/">Mudar Noufal</a>. Le code source est publié sous la licence GPLv3 de la Free Software Foundation.</string>
+    <string name="about_contents_open_data">Projet réalisé en collaboration avec <a href="http://montrealouvert.net/donnees-ouvertes-questions-frequemment-demandees/?lang=fr">Montréal ouvert</a>. Cette application est propulsée par le <a href="http://donnees.ville.montreal.qc.ca/">Portail</a> données ouvertes de la Ville de Montréal en conformité avec sa <a href="http://donnees.ville.montreal.qc.ca/licence-texte-complet">licence</a> d\'utilisation des données ouvertes.</string>
+    <string name="prefs_general_preferences">Réglages</string>
+    <string name="prefs_language_title">Langue</string>
+    <string name="prefs_language_summary">Changer la langue de l\'interface</string>
+    <string name="prefs_language_dialog_title">Choix de langue</string>
+    <string name="prefs_language_french">Français</string>
+    <string name="prefs_language_english">English</string>
+    <string name="prefs_units_title">Unités de mesure</string>
+    <string name="prefs_units_summary">Afficher les distances en km ou en milles</string>
+    <string name="prefs_units_dialog_title">Système des unités de mesure</string>
+    <string name="prefs_units_iso">Métrique (km)</string>
+    <string name="prefs_units_imperial">Impérial (mile)</string>
+    <string name="prefs_list_sort_title">Ordre d\'affichage</string>
+    <string name="prefs_list_sort_summary">Modifier l\'ordre d\'affichage des listes</string>
+    <string name="prefs_list_sort_summary_todo">Ordre alphabétique ou distance. À venir…</string>
+    <string name="prefs_list_sort_dialog_title">Trier par</string>
+    <string name="prefs_list_sort_name">Ordre alphabétique</string>
+    <string name="prefs_list_sort_distance">Distance</string>
 
 </resources>

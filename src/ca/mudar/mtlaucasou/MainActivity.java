@@ -23,8 +23,10 @@
 
 package ca.mudar.mtlaucasou;
 
+import ca.mudar.mtlaucasou.provider.PlacemarkDatabase;
 import ca.mudar.mtlaucasou.service.SyncService;
 import ca.mudar.mtlaucasou.utils.ActivityHelper;
+import ca.mudar.mtlaucasou.utils.AppHelper;
 import ca.mudar.mtlaucasou.utils.Const;
 import ca.mudar.mtlaucasou.utils.DetachableResultReceiver;
 import ca.mudar.mtlaucasou.utils.EulaHelper;
@@ -42,38 +44,63 @@ import android.support.v4.view.Menu;
 import android.support.v4.view.MenuInflater;
 import android.support.v4.view.MenuItem;
 import android.support.v4.view.Window;
-import android.util.Log;
+//import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity {
     private static final String TAG = "MainActivity";
 
     private ActivityHelper mActivityHelper;
+    private AppHelper mAppHelper;
     private SyncStatusUpdaterFragment mSyncStatusUpdaterFragment;
     private boolean hasLoadedData;
+    private String lang;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 
-        SharedPreferences prefs = getSharedPreferences(Const.APP_PREFS_NAME, Context.MODE_PRIVATE);
+        /**
+         * SharedPreferences are used to verify determine if syncService is
+         * required for initial launch or on database upgrade.
+         */
+        SharedPreferences prefs = getSharedPreferences(Const.APP_PREFS_NAME,
+                Context.MODE_PRIVATE);
         hasLoadedData = prefs.getBoolean(Const.PrefsNames.HAS_LOADED_DATA, false);
-        if (!hasLoadedData) {
-            Log.v(TAG, "hasLoadedData = false");
+        int dbVersionPrefs = prefs.getInt(Const.PrefsNames.VERSION_DATABASE, -1);
+
+        if (!hasLoadedData || PlacemarkDatabase.getDatabaseVersion() > dbVersionPrefs) {
+            hasLoadedData = false;
             createServiceFragment();
         }
 
-        // TODO Add Eula content
+        /**
+         * Display the GPLv3 licence
+         */
         if (!EulaHelper.hasAcceptedEula(this)) {
             EulaHelper.showEula(false, this);
         }
 
+        /**
+         * Get the ActivityHelper
+         */
         mActivityHelper = ActivityHelper.createInstance(this);
+        mAppHelper = (AppHelper) getApplicationContext();
 
+        lang = mAppHelper.getLanguage();
+
+        mAppHelper.updateUiLanguage();
         setContentView(R.layout.activity_home);
+
         setProgressBarIndeterminateVisibility(Boolean.FALSE);
 
+        /**
+         * Android ICS has support for setHomeButtonEnabled() to disable tap on
+         * actionbar logo on dashboard.
+         */
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
             getActionBar().setHomeButtonEnabled(false);
         }
@@ -82,7 +109,15 @@ public class MainActivity extends FragmentActivity {
     @Override
     public void onResume() {
         super.onResume();
-        Log.v(TAG, "onResume");
+
+        /**
+         * Update the interface language
+         */
+        getSupportActionBar().setTitle(R.string.app_name);
+        if (!lang.equals(mAppHelper.getLanguage())) {
+            lang = mAppHelper.getLanguage();
+            this.onConfigurationChanged();
+        }
 
         /**
          * Starting the sync service is done onResume() for
@@ -90,7 +125,6 @@ public class MainActivity extends FragmentActivity {
          * receiver to the service.
          */
         if (!hasLoadedData && (mSyncStatusUpdaterFragment != null)) {
-            Log.v(TAG, "mSyncStatusUpdaterFragment != null");
             Intent intent = new Intent(Intent.ACTION_SYNC, null, getApplicationContext(),
                     SyncService.class);
             intent.putExtra(SyncService.EXTRA_STATUS_RECEIVER, mSyncStatusUpdaterFragment.mReceiver);
@@ -102,14 +136,13 @@ public class MainActivity extends FragmentActivity {
             SharedPreferences.Editor editor = prefs.edit();
 
             editor.putBoolean(Const.PrefsNames.HAS_LOADED_DATA, true);
+            editor.putInt(Const.PrefsNames.VERSION_DATABASE, PlacemarkDatabase.getDatabaseVersion());
             editor.commit();
             hasLoadedData = true;
         }
     }
 
     private void createServiceFragment() {
-        Log.v(TAG, "createServiceFragment");
-
         FragmentManager fm = getSupportFragmentManager();
 
         mSyncStatusUpdaterFragment = (SyncStatusUpdaterFragment) fm
@@ -157,6 +190,26 @@ public class MainActivity extends FragmentActivity {
         return mActivityHelper.onOptionsItemSelected(item);
     }
 
+    /**
+     * Update the interface language, independently from the phone's UI
+     * language. This does not override the parent function because the Manifest
+     * does not include configChanges.
+     */
+    private void onConfigurationChanged() {
+        View root = findViewById(android.R.id.content).getRootView();
+
+        ((Button) root.findViewById(R.id.home_btn_fire_halls))
+                .setText(R.string.btn_fire_halls);
+        ((Button) root.findViewById(R.id.home_btn_spvm_stations))
+                .setText(R.string.btn_spvm_stations);
+        ((Button) root.findViewById(R.id.home_btn_water_supplies))
+                .setText(R.string.btn_water_supplies);
+        ((Button) root.findViewById(R.id.home_btn_emergency_hostels))
+                .setText(R.string.btn_emergency_hostels);
+
+        invalidateOptionsMenu();
+    }
+
     // @Override
     // public void onAttachedToWindow() {
     // // TODO: verify if this does any difference since it uses
@@ -179,20 +232,14 @@ public class MainActivity extends FragmentActivity {
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
-            Log.v(TAG, "onCreate");
             super.onCreate(savedInstanceState);
             setRetainInstance(true);
             mReceiver = new DetachableResultReceiver(new Handler());
-            if (mReceiver == null) {
-                Log.v(TAG, "mReceiver == null ");
-            }
-            Log.v(TAG, "setReceiver");
             mReceiver.setReceiver(this);
         }
 
         /** {@inheritDoc} */
         public void onReceiveResult(int resultCode, Bundle resultData) {
-            Log.v(TAG, "onReceiveResult");
             MainActivity activity = (MainActivity) getSupportActivity();
             if (activity == null) {
                 return;
@@ -201,13 +248,13 @@ public class MainActivity extends FragmentActivity {
 
             switch (resultCode) {
                 case SyncService.STATUS_RUNNING: {
-                    Log.v(TAG, "SyncService.STATUS_RUNNING");
+                    // Log.v(TAG, "SyncService.STATUS_RUNNING");
                     activity.setProgressBarIndeterminateVisibility(Boolean.TRUE);
                     // mSyncing = true;
                     break;
                 }
                 case SyncService.STATUS_FINISHED: {
-                    Log.v(TAG, "SyncService.STATUS_FINISHED");
+                    // Log.v(TAG, "SyncService.STATUS_FINISHED");
                     activity.setProgressBarIndeterminateVisibility(Boolean.FALSE);
                     // mSyncing = false;
                     // TODO put this in an activity listener
@@ -220,7 +267,7 @@ public class MainActivity extends FragmentActivity {
                     break;
                 }
                 case SyncService.STATUS_ERROR: {
-                    Log.v(TAG, "SyncService.STATUS_ERROR");
+                    // Log.v(TAG, "SyncService.STATUS_ERROR");
                     activity.setProgressBarIndeterminateVisibility(Boolean.FALSE);
                     /**
                      * Error happened down in SyncService, show as toast.
@@ -232,8 +279,6 @@ public class MainActivity extends FragmentActivity {
                     break;
                 }
             }
-
-            // activity.updateRefreshStatus(mSyncing);
         }
 
         // @Override

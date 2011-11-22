@@ -38,7 +38,6 @@ import android.os.Handler;
 import android.provider.BaseColumns;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.SupportActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
@@ -85,7 +84,7 @@ public class BaseListFragment extends ListFragment implements
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        // Log.v(TAG, "onCreate");
+//        Log.v(TAG, "onCreate");
         super.onCreate(savedInstanceState);
 
         mActivityHelper = ActivityHelper.createInstance(getActivity());
@@ -145,7 +144,7 @@ public class BaseListFragment extends ListFragment implements
         double geoLng = cursor.getDouble(cursor
                 .getColumnIndexOrThrow(PlacemarkColumns.PLACEMARK_GEO_LNG));
 
-        Log.v(TAG, "onListItemClick. id = " + id + ". Geo = " + geoLat + "," + geoLng);
+//        Log.v(TAG, "onListItemClick. id = " + id + ". Geo = " + geoLat + "," + geoLng);
 
         GeoPoint geoPoint = new GeoPoint((int) (geoLat * 1E6), (int) (geoLng * 1E6));
 
@@ -160,6 +159,7 @@ public class BaseListFragment extends ListFragment implements
             return;
         }
 
+        getActivity().stopManagingCursor(mCursor);
         mCursor = cursor;
         getActivity().startManagingCursor(mCursor);
         mAdapter.changeCursor(mCursor);

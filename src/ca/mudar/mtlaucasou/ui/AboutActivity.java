@@ -25,6 +25,7 @@ package ca.mudar.mtlaucasou.ui;
 
 import ca.mudar.mtlaucasou.R;
 import ca.mudar.mtlaucasou.utils.ActivityHelper;
+import ca.mudar.mtlaucasou.utils.AppHelper;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -44,6 +45,8 @@ public class AboutActivity extends FragmentActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ((AppHelper) getApplicationContext()).updateUiLanguage();
 
         FragmentManager fm = getSupportFragmentManager();
 
@@ -83,14 +86,35 @@ public class AboutActivity extends FragmentActivity {
                 return null;
             }
 
+            /**
+             * Handle UI language changes.
+             */
+            getSupportActivity().getSupportActionBar().setTitle(R.string.app_label_about);
+
+            /**
+             * Inflate XML layout.
+             */
             View root = inflater.inflate(R.layout.fragment_about, container, false);
+
+            /**
+             * Display version number in the About header.
+             */
+            ((TextView) root.findViewById(R.id.about_links_contents_project_version))
+                    .setText(String.format(
+                            getResources().getString(R.string.about_contents_project_version),
+                            getResources()
+                                    .getString(R.string.app_version)));
+
+            /**
+             * Handle web links.
+             */
             MovementMethod method = LinkMovementMethod.getInstance();
-            ((TextView) root.findViewById(R.id.about_links_1)).setMovementMethod(method);
-            ((TextView) root.findViewById(R.id.about_links_2)).setMovementMethod(method);
-            ((TextView) root.findViewById(R.id.about_links_3)).setMovementMethod(method);
-            ((TextView) root.findViewById(R.id.about_links_4)).setMovementMethod(method);
-            ((TextView) root.findViewById(R.id.about_links_5)).setMovementMethod(method);
-            ((TextView) root.findViewById(R.id.about_links_credits)).setMovementMethod(method);
+            ((TextView) root.findViewById(R.id.about_links_contents_project_url))
+                    .setMovementMethod(method);
+            ((TextView) root.findViewById(R.id.about_links_contents_credits))
+                    .setMovementMethod(method);
+            ((TextView) root.findViewById(R.id.about_links_contents_open_data))
+                    .setMovementMethod(method);
 
             return root;
         }

@@ -24,108 +24,165 @@
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/bodyPaddingLarge"
+        android:paddingLeft="@dimen/bodyPaddingLarge"
+        android:paddingRight="@dimen/bodyPaddingLarge" >
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/paddingMedium"
-            android:text="@string/about_contents_1" />
+            android:layout_marginBottom="@dimen/textSizeSmall"
+            android:layout_marginTop="@dimen/textSizeXLarge"
+            android:gravity="center"
+            android:text="@string/app_name"
+            android:textColor="@color/actionbar_text"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/about_links_contents_project_url"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/about_contents_project_url"
+            android:textSize="@dimen/textSizeSmall" />
+
+        <TextView
+            android:id="@+id/about_links_contents_project_version"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/about_contents_project_version"
+            android:textColor="@color/actionbar_text"
+            android:textSize="@dimen/textSizeSmall" />
+
+        <LinearLayout
+            style="@style/AboutSeparator"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" >
+        </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/paddingMedium"
-            android:text="@string/about_contents_2" />
+            android:text="@string/about_contents_intro" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/paddingMedium"
-            android:text="@string/about_contents_2_1" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/paddingMedium"
-            android:text="@string/about_contents_2_2" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/paddingMedium"
-            android:text="@string/about_contents_2_3" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/paddingMedium"
-            android:text="@string/about_contents_2_4" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/paddingMedium"
-            android:text="@string/about_contents_3" />
-
-        <TextView
-            android:id="@+id/about_links_1"
-            style="@style/AboutLinks"
+        <TableLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/paddingMedium"
-            android:text="@string/about_contents_3_1" />
+            android:layout_height="wrap_content" >
 
-        <TextView
-            android:id="@+id/about_links_2"
-            style="@style/AboutLinks"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/paddingMedium"
-            android:text="@string/about_contents_3_2" />
+            <TableRow >
 
-        <TextView
-            android:id="@+id/about_links_3"
-            style="@style/AboutLinks"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/paddingMedium"
-            android:text="@string/about_contents_3_3" />
+                <TextView
+                    android:layout_column="1"
+                    android:text="– " >
+                </TextView>
 
-        <TextView
-            android:id="@+id/about_links_4"
-            style="@style/AboutLinks"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/paddingMedium"
-            android:text="@string/about_contents_3_4" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_column="2"
+                    android:text="@string/about_contents_2_1" >
+                </TextView>
+            </TableRow>
 
-        <TextView
-            android:id="@+id/about_links_5"
-            style="@style/AboutLinks"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/paddingMedium"
-            android:text="@string/about_contents_3_5" />
+            <TableRow >
 
-        <TextView
-            android:id="@+id/about_links_credits"
+                <TextView
+                    android:layout_column="1"
+                    android:text="– " >
+                </TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_column="2"
+                    android:text="@string/about_contents_2_2" >
+                </TextView>
+            </TableRow>
+
+            <TableRow >
+
+                <TextView
+                    android:layout_column="1"
+                    android:text="– " >
+                </TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_column="2"
+                    android:text="@string/about_contents_2_3" >
+                </TextView>
+            </TableRow>
+
+            <TableRow >
+
+                <TextView
+                    android:layout_column="1"
+                    android:text="– " >
+                </TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_column="2"
+                    android:text="@string/about_contents_2_4" >
+                </TextView>
+            </TableRow>
+        </TableLayout>
+
+        <LinearLayout
+            style="@style/AboutSeparator"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" >
+        </LinearLayout>
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:linksClickable="true"
-            android:padding="@dimen/paddingMedium"
-            android:text="@string/about_contents_credits" />
+            android:orientation="horizontal" >
 
-        <ImageView
-            android:layout_width="fill_parent"
+            <ImageView
+                android:id="@+id/about_logo_open_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:padding="@dimen/paddingMedium"
+                android:src="@string/logo_open_data" />
+
+            <TextView
+                android:id="@+id/about_links_contents_credits"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toLeftOf="@+id/about_logo_open_data"
+                android:linksClickable="true"
+                android:text="@string/about_contents_credits" />
+
+            <TextView
+                android:id="@+id/about_links_contents_open_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/about_links_contents_credits"
+                android:layout_toLeftOf="@+id/about_logo_open_data"
+                android:text="@string/about_contents_open_data" />
+        </RelativeLayout>
+
+        <LinearLayout
+            style="@style/AboutSeparator"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" >
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scaleType="centerInside"
-            android:src="@string/logo_open_data" />
+            android:text="@string/about_contents_note"
+            android:textSize="@dimen/textSizeSmall" />
     </LinearLayout>
 
 </ScrollView>

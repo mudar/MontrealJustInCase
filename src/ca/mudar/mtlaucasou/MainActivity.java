@@ -44,9 +44,9 @@ import android.support.v4.view.Menu;
 import android.support.v4.view.MenuInflater;
 import android.support.v4.view.MenuItem;
 import android.support.v4.view.Window;
-//import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity {
@@ -62,7 +62,8 @@ public class MainActivity extends FragmentActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-
+        requestWindowFeature(Window.FEATURE_PROGRESS);
+        
         /**
          * SharedPreferences are used to verify determine if syncService is
          * required for initial launch or on database upgrade.
@@ -96,6 +97,7 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_home);
 
         setProgressBarIndeterminateVisibility(Boolean.FALSE);
+        setProgressBarVisibility(false);
 
         /**
          * Android ICS has support for setHomeButtonEnabled() to disable tap on
@@ -245,17 +247,28 @@ public class MainActivity extends FragmentActivity {
                 return;
             }
             activity.setProgressBarIndeterminateVisibility(Boolean.TRUE);
+            activity.setProgressBarVisibility(true);
 
+            final ProgressBar progressHorizontal = (ProgressBar) getSupportActivity().findViewById(R.id.progress_horizontal);
+            progressHorizontal.setVisibility(View.VISIBLE);
+            
             switch (resultCode) {
                 case SyncService.STATUS_RUNNING: {
-                    // Log.v(TAG, "SyncService.STATUS_RUNNING");
                     activity.setProgressBarIndeterminateVisibility(Boolean.TRUE);
+                    
+                    progressHorizontal.incrementProgressBy(resultData.getInt(Const.KEY_BUNDLE_PROGRESS_INCREMENT, 0));
+                    /** 
+                     * Title progress is in range 0..100
+                     */
+                    getSupportActivity().setProgress(100 * progressHorizontal.getProgress());
+                    
                     // mSyncing = true;
                     break;
                 }
                 case SyncService.STATUS_FINISHED: {
-                    // Log.v(TAG, "SyncService.STATUS_FINISHED");
                     activity.setProgressBarIndeterminateVisibility(Boolean.FALSE);
+                    activity.setProgressBarVisibility(false);
+                    progressHorizontal.setVisibility(View.INVISIBLE);
                     // mSyncing = false;
                     // TODO put this in an activity listener
                     if (EulaHelper.hasAcceptedEula(getSupportActivity().getApplicationContext()))
@@ -267,8 +280,9 @@ public class MainActivity extends FragmentActivity {
                     break;
                 }
                 case SyncService.STATUS_ERROR: {
-                    // Log.v(TAG, "SyncService.STATUS_ERROR");
                     activity.setProgressBarIndeterminateVisibility(Boolean.FALSE);
+                    activity.setProgressBarVisibility(false);
+                    progressHorizontal.setVisibility(View.INVISIBLE);
                     /**
                      * Error happened down in SyncService, show as toast.
                      */

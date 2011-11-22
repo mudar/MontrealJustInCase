@@ -32,6 +32,7 @@ import ca.mudar.mtlaucasou.provider.PlacemarkContract.EmergencyHostels;
 import ca.mudar.mtlaucasou.provider.PlacemarkContract.FireHalls;
 import ca.mudar.mtlaucasou.provider.PlacemarkContract.SpvmStations;
 import ca.mudar.mtlaucasou.provider.PlacemarkContract.WaterSupplies;
+import ca.mudar.mtlaucasou.utils.Const;
 
 import org.apache.http.Header;
 import org.apache.http.HeaderElement;
@@ -105,7 +106,7 @@ public class SyncService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-//        Log.d(TAG, "onHandleIntent(intent=" + intent.toString() + ")");
+        // Log.d(TAG, "onHandleIntent(intent=" + intent.toString() + ")");
 
         final ResultReceiver receiver = intent.getParcelableExtra(EXTRA_STATUS_RECEIVER);
         if (receiver != null) {
@@ -120,14 +121,28 @@ public class SyncService extends IntentService {
 
             final long startLocal = System.currentTimeMillis();
 
+            /**
+             * Four assets files to load, so progress goes by 25%.
+             */
+            Bundle bundle = new Bundle();
+            bundle.putInt(Const.KEY_BUNDLE_PROGRESS_INCREMENT, 25);
+
             // Parse values from local cache first, since SecurityServices copy
             // or network might be down.
+
+            receiver.send(STATUS_RUNNING, bundle);
             mLocalExecutor.execute(context, "casernes-pompiers.kml",
                     new RemotePlacemarksHandler(FireHalls.CONTENT_URI, true));
+
+            receiver.send(STATUS_RUNNING, bundle);
             mLocalExecutor.execute(context, "postes-spvm.kml",
                     new RemotePlacemarksHandler(SpvmStations.CONTENT_URI, true));
+
+            receiver.send(STATUS_RUNNING, bundle);
             mLocalExecutor.execute(context, "points-eau.kml", new RemotePlacemarksHandler(
                     WaterSupplies.CONTENT_URI));
+
+            receiver.send(STATUS_RUNNING, bundle);
             mLocalExecutor.execute(context, "centres-hebergement-urgence.kml",
                     new RemotePlacemarksHandler(EmergencyHostels.CONTENT_URI));
 
@@ -145,7 +160,7 @@ public class SyncService extends IntentService {
         } catch (Exception e) {
             Log.e(TAG, "Problem while syncing", e);
 
-            if (receiver != null) { 
+            if (receiver != null) {
                 /**
                  * Pass back error to surface listener
                  */
@@ -160,7 +175,7 @@ public class SyncService extends IntentService {
         }
 
         // Announce success to any surface listener
-//        Log.v(TAG, "sync finished");
+        // Log.v(TAG, "sync finished");
     }
 
     /**

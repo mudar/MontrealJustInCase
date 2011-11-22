@@ -27,6 +27,16 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
+    <ProgressBar
+        android:visibility="invisible"
+        android:id="@+id/progress_horizontal"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:progressDrawable="@drawable/progress_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:max="100"
+        android:progress="0" />
+
     <ca.mudar.mtlaucasou.ui.widgets.DashboardLayout
         android:id="@+id/dashboard_layout"
         android:layout_width="fill_parent"

@@ -44,7 +44,10 @@
     <string name="menu_preferences">Settings</string>
     <string name="menu_help">Help</string>
     <string name="menu_about">About</string>
-    <string name="menu_link_kml">Open in GMaps</string>
+    <string name="menu_link_kml">Directions</string>
+    <string name="menu_map_mylocation">My Location</string>
+    <string name="menu_map_find_from_name">Postal Code</string>
+    <string name="menu_list_sort_order">Sort by</string>
     <string name="placemarks_empty_list">List is empty…</string>
     <string name="placemark_distance_iso">%.1f km</string>
     <string name="placemark_distance_iso_min">&lt; 100 m</string>
@@ -53,6 +56,10 @@
     <string name="placemark_distance_imp_min">&lt; 200 ft</string>
     <string name="logo_open_data">@drawable/logo_open_data_en</string>
     <string name="toast_sync_error">Sync error: <xliff:g id="error">%1$s</xliff:g></string>
+    <string name="toast_search_error">Location %1$s not found</string>
+    <string name="toast_postal_code_processing">Processing…</string>
+    <string name="toast_network_connection_error">Network connection is unavailable…</string>
+    <string name="toast_sync_finished">Loading completed successfully!</string>
     <string name="eula_assets_filename">gpl-3.0-standalone.html</string>
     <string name="eula_title">GNU General Public License v3.0</string>
     <string name="dialog_btn_ok">Ok</string>
@@ -60,11 +67,13 @@
     <string name="dialog_title_maps_chooser">Display Map using…</string>
     <string name="dialog_btn_eula_accept">Accept</string>
     <string name="dialog_btn_eula_decline">Decline</string>
-    <string name="toast_network_connection_error">Network connection is unavailable…</string>
+
     <!-- <string name="dialog_network_connection_message">The application needs a network connection. Please turn on mobile network or Wi-Fi in Settings&#8230;</string> -->
-    <string name="toast_sync_finished">Loading completed successfully!</string>
-    <string name="dialog_remote_kml_title">Open in GMaps</string>
-    <string name="dialog_remote_kml_summary">Do you want to download the remote KML file? It will be opened using your Google Maps app…</string>
+
+    <string name="dialog_remote_kml_title">Directions with GMaps</string>
+    <string name="dialog_remote_kml_summary">This will download the remote KML file and open it with Google Maps app, allowing you to display Directions and Street View (if installed). Continue with download?</string>
+    <string name="dialog_postal_code_title">Postal Code</string>
+    <string name="dialog_postal_code_summary">Please enter postal code to locate on map:</string>
     <string name="about_contents_note">In case of emergency, please contact the City\'s security services directly. Do not rely on information provided here as it will not contain the updated security measures.</string>
     <string name="about_contents_project_url"><a href="http://www.montrealjustincase.com/">montrealjustincase.com</a></string>
     <string name="about_contents_project_version">Version %s</string>

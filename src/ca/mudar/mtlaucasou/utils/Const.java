@@ -34,7 +34,7 @@ public class Const {
         final String UNITS_SYSTEM = "prefs_units_system";
         final String LIST_SORT = "prefs_list_sort";
     }
-    
+
     public static interface PrefsValues {
         final String LANG_FR = "fr";
         final String LANG_EN = "en";
@@ -44,11 +44,23 @@ public class Const {
         final String LIST_SORT_DISTANCE = "distance";
     }
 
-    public static final String MAPS_DEFAULT_COORDINATES[] = {
-            "45.5", "-73.666667"
+    public static final Double MAPS_DEFAULT_COORDINATES[] = {
+            45.5, -73.666667
     };
-    public static final int MAPS_MIN_DISTANCE = 25; // Distance in KM
-    
+
+    public static final Double MAPS_GEOCODER_LIMITS[] = {
+            45.380127, // lowerLeftLat
+            -73.982620, // lowerLeftLng
+            45.720444, // upperRightLat
+            -73.466087
+    };
+
+    /**
+     * Minimum distance to center map on user location, otherwise center on
+     * downtown. Units are meters.
+     */
+    public static final int MAPS_MIN_DISTANCE = 25000;
+
     public static interface UnitsDisplay {
         final float FEET_PER_MILE = 5280;
         final float METER_PER_MILE = 1609.344f;
@@ -58,12 +70,8 @@ public class Const {
         final int MIN_METERS = 100;
     }
 
-    // public static final String INTENT_EXTRA_NAME_SECTION = "section";
     public static final String INTENT_EXTRA_GEO_LAT = "geo_lat";
     public static final String INTENT_EXTRA_GEO_LNG = "geo_lng";
-
-    public static final int MENU_ITEM_GROUP_ID = 0x1;
-    public static final int MENU_ITEM_ORDER = 0x1;
 
     public static final int INDEX_ACTIVITY_FIRE_HALLS = 0x1;
     public static final int INDEX_ACTIVITY_SPVM_STATIONS = 0x2;
@@ -78,8 +86,15 @@ public class Const {
     public static final String KEY_INSTANCE_LIST_IS_HIDDEN = "list_is_hidden";
     public static final String KEY_BUNDLE_PROGRESS_INCREMENT = "bundle_progress_increment";
 
-    // public static final String KEY_INSTANCE_IS_VISIBLE_MAP =
-    // "is_visible_map";
+    public static final String KEY_BUNDLE_SEARCH_ADDRESS = "bundle_search_address";
+
+    public static final int BUNDLE_SEARCH_ADDRESS_SUCCESS = 1;
+    public static final int BUNDLE_SEARCH_ADDRESS_ERROR = 0;
+
+    public static final String KEY_BUNDLE_ADDRESS_LAT = "bundle_address_lat";
+    public static final String KEY_BUNDLE_ADDRESS_LNG = "bundle_address_lng";
+
+    public static final String LOCATION_PROVIDER = "default";
 
     public static interface KmlRemoteUrls {
         final String FIRE_HALLS = "http://depot.ville.montreal.qc.ca/casernes-pompiers/data.kml";

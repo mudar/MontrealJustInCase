@@ -44,7 +44,10 @@
     <string name="menu_preferences">Réglages</string>
     <string name="menu_help">Aide</string>
     <string name="menu_about">À propos</string>
-    <string name="menu_link_kml">Ouvrir dans GMaps</string>
+    <string name="menu_link_kml">Itinéraire</string>
+    <string name="menu_map_mylocation">Ma position</string>
+    <string name="menu_map_find_from_name">Code postal</string>
+    <string name="menu_list_sort_order">Trier par</string>
     <string name="placemarks_empty_list">La liste est vide…</string>
     <string name="placemark_distance_iso">%.1f km</string>
     <string name="placemark_distance_iso_min">&lt; 100 m</string>
@@ -53,6 +56,10 @@
     <string name="placemark_distance_imp_min">&lt; 200 pi</string>
     <string name="logo_open_data">@drawable/logo_open_data_fr</string>
     <string name="toast_sync_error">Erreur de syntaxe : <xliff:g id="error">%1$s</xliff:g></string>
+    <string name="toast_search_error">Incapable de trouver %1$s</string>
+    <string name="toast_postal_code_processing">Recherche en cours…</string>
+    <string name="toast_network_connection_error">Pas de connexion réseau…</string>
+    <string name="toast_sync_finished">Chargement terminé</string>
     <string name="eula_assets_filename">gpl-3.0-standalone.html</string>
     <string name="eula_title">GNU General Public License v3.0</string>
     <string name="dialog_btn_ok">Ok</string>
@@ -60,11 +67,13 @@
     <string name="dialog_title_maps_chooser">Afficher la carte avec…</string>
     <string name="dialog_btn_eula_accept">Accepter</string>
     <string name="dialog_btn_eula_decline">Refuser</string>
-    <string name="toast_network_connection_error">Pas de connexion réseau…</string>
+
     <!-- <string name="dialog_network_connection_message">The application needs a network connection. Please turn on mobile network or Wi-Fi in Settings&#8230;</string> -->
-    <string name="toast_sync_finished">Chargement terminé</string>
-    <string name="dialog_remote_kml_title">Ouvrir dans GMaps</string>
-    <string name="dialog_remote_kml_summary">Voulez-vous télécharger le fichier KML ? Il sera affiché dans l\'application Google Maps…</string>
+
+    <string name="dialog_remote_kml_title">Itinéraire avec GMaps</string>
+    <string name="dialog_remote_kml_summary">Voulez-vous télécharger le fichier KML ? Il sera affiché dans l\'application Google Maps ce qui vous permet d\'afficher l\'itinéraire et Street View (si installé)…</string>
+    <string name="dialog_postal_code_title">Code postal</string>
+    <string name="dialog_postal_code_summary">Veuillez saisir le code postal à localiser sur la carte :</string>
     <string name="about_contents_note">En cas d\'urgence, veuillez contacter le Service de la sécurité publique. Ne vous fiez pas aux informations présentées dans cette application car elle ne contiendra pas les dernirères mesures d\'urgence.</string>
     <string name="about_contents_project_url"><a href="http://www.montrealaucasou.com/">montrealaucasou.com</a></string>
     <string name="about_contents_project_version">Version %s</string>

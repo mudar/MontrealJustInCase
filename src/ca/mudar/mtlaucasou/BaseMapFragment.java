@@ -26,7 +26,7 @@ package ca.mudar.mtlaucasou;
 import ca.mudar.mtlaucasou.provider.PlacemarkContract.PlacemarkColumns;
 import ca.mudar.mtlaucasou.ui.widgets.MyItemizedOverlay;
 import ca.mudar.mtlaucasou.utils.ActivityHelper;
-import ca.mudar.mtlaucasou.utils.AppHelper;
+import ca.mudar.mtlaucasou.utils.Helper;
 import ca.mudar.mtlaucasou.utils.Const;
 
 import com.google.android.maps.GeoPoint;
@@ -45,10 +45,12 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.BaseColumns;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.SupportActivity;
 import android.support.v4.view.MenuItem;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,12 +63,12 @@ public abstract class BaseMapFragment extends Fragment implements LocationListen
     protected static int ZOOM_DEFAULT = 14;
     protected static int ZOOM_NEAR = 17;
 
-    protected AppHelper mAppHelper;
     protected ActivityHelper mActivityHelper;
     protected MapView mMapView;
     protected MyLocationOverlay mLocationOverlay;
     protected MapController mMapController;
     protected LocationManager mLocationManager;
+    protected OnMyLocationChangedListener mListener;
 
     protected GeoPoint mMapCenter = null;
 
@@ -74,12 +76,6 @@ public abstract class BaseMapFragment extends Fragment implements LocationListen
      * Must be initialized by constructor
      */
     protected int indexSection;
-
-    /**
-     * Fragment display of list side view
-     */
-    // protected int mCurrentSelectedItemIndex = 0;
-    // protected boolean mIsTablet = false;
 
     /**
      * BaseMapActivity Constructor
@@ -92,11 +88,19 @@ public abstract class BaseMapFragment extends Fragment implements LocationListen
     }
 
     /**
+     * Container Activity must implement this interface to receive the list item
+     * clicks.
+     */
+    public interface OnMyLocationChangedListener {
+        public void OnMyLocationChanged(GeoPoint geoPoint);
+    }
+
+    /**
      * Create the map view and restore saved instance (if any). {@inheritDoc}
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-//        Log.v(TAG, "onCreateView");
+        // Log.v(TAG, "onCreateView");
 
         /**
          * Restore map center and zoom
@@ -113,8 +117,6 @@ public abstract class BaseMapFragment extends Fragment implements LocationListen
         }
 
         View root = inflater.inflate(R.layout.fragment_map, container, false);
-
-        mAppHelper = (AppHelper) getActivity().getApplicationContext();
 
         mActivityHelper = ActivityHelper.createInstance(getActivity());
 
@@ -151,7 +153,6 @@ public abstract class BaseMapFragment extends Fragment implements LocationListen
                 mMapView);
 
         if (arMapMarker.size() > 0) {
-//            Log.v(TAG, "Adding markers to map");
             for (MapMarker marker : arMapMarker) {
                 OverlayItem overlayitem = new OverlayItem(marker.geoPoint, marker.name,
                         marker.address);
@@ -164,7 +165,7 @@ public abstract class BaseMapFragment extends Fragment implements LocationListen
     }
 
     /**
-     * Set new map center
+     * Set new map center.
      * 
      * @param mapCenter
      */
@@ -181,33 +182,35 @@ public abstract class BaseMapFragment extends Fragment implements LocationListen
      * defines the zoom.
      */
     protected void initialAnimateToPoint() {
-
         List<String> enabledProviders = mLocationManager.getProviders(true);
 
-        String coordinates[] = Const.MAPS_DEFAULT_COORDINATES;
-        final double lat = Double.parseDouble(coordinates[0]);
-        final double lng = Double.parseDouble(coordinates[1]);
+        Double coordinates[] = Const.MAPS_DEFAULT_COORDINATES;
+        final double lat = coordinates[0];
+        final double lng = coordinates[1];
 
         if ((mMapCenter == null) && enabledProviders.contains(LocationManager.NETWORK_PROVIDER)) {
-            // Display user current location
+            /**
+             * Get user current location then display on map.
+             */
             mLocationOverlay.runOnFirstFix(new Runnable() {
                 public void run() {
 
                     GeoPoint userLocation = mLocationOverlay.getMyLocation();
 
-                    Location loc = new Location(LocationManager.NETWORK_PROVIDER);
-                    loc.setLatitude(userLocation.getLatitudeE6() / 1E6);
-                    loc.setLongitude(userLocation.getLongitudeE6() / 1E6);
-                    mAppHelper.setLocation(loc);
+                    if (mListener != null) {
+                        mListener.OnMyLocationChanged(userLocation);
+                    }
 
-                    float[] results = new float[1];
+                    /**
+                     * If user is very far from Montreal (> 25km) we center the
+                     * map on Downtown.
+                     */
+                    float[] resultDistance = new float[1];
                     android.location.Location.distanceBetween(lat, lng,
                             (userLocation.getLatitudeE6() / 1E6),
-                            (userLocation.getLongitudeE6() / 1E6), results);
+                            (userLocation.getLongitudeE6() / 1E6), resultDistance);
 
-                    int distance = (int) (Math.round(results[0] / 1000));
-
-                    if (distance > Const.MAPS_MIN_DISTANCE) {
+                    if (resultDistance[0] > Const.MAPS_MIN_DISTANCE) {
                         userLocation = new GeoPoint((int) (lat * 1E6), (int) (lng * 1E6));
                     }
 
@@ -217,10 +220,17 @@ public abstract class BaseMapFragment extends Fragment implements LocationListen
             });
         }
         else if (mMapCenter != null) {
+            /**
+             * The AppHelper knows the user location from a previous query, so
+             * use the saved value.
+             */
             mMapController.setCenter(mMapCenter);
         }
         else {
-            // Center on Downtown
+            /**
+             * Center on Downtown. No provider and AppHelper doesn't have a
+             * previous knowledge of the location.
+             */
             GeoPoint cityCenter = new GeoPoint((int) (lat * 1E6), (int) (lng * 1E6));
             mMapController.setCenter(cityCenter);
         }
@@ -251,9 +261,6 @@ public abstract class BaseMapFragment extends Fragment implements LocationListen
                 .query(mActivityHelper.getContentUri(indexSection),
                         MAP_MARKER_PROJECTION, null,
                         null, null);
-        // TODO: verify cursor close vs manage
-//        getActivity().startManagingCursor(cur);
-
         if (cur.moveToFirst()) {
             final int columnId = cur.getColumnIndex(BaseColumns._ID);
             final int columnName = cur.getColumnIndex(PlacemarkColumns.PLACEMARK_NAME);
@@ -269,6 +276,11 @@ public abstract class BaseMapFragment extends Fragment implements LocationListen
 
             } while (cur.moveToNext());
         }
+        /**
+         * Note: using startManagingCursor() crashed the application when
+         * running on Honeycomb! So we don't manage the cursor and close it
+         * manually here.
+         */
         cur.close();
 
         return alLocations;
@@ -287,7 +299,6 @@ public abstract class BaseMapFragment extends Fragment implements LocationListen
      */
     @Override
     public void onResume() {
-//        Log.v(TAG, "onResume");
         mLocationOverlay.enableMyLocation();
 
         super.onResume();
@@ -329,16 +340,33 @@ public abstract class BaseMapFragment extends Fragment implements LocationListen
 
         outState.putIntArray(Const.KEY_INSTANCE_COORDS, coords);
         outState.putInt(Const.KEY_INSTANCE_ZOOM, mMapView.getZoomLevel());
-        // outState.putBoolean(Const.KEY_INSTANCE_IS_VISIBLE_MAP, isVisible());
 
         super.onSaveInstanceState(outState);
+    }
+
+    /**
+     * Attach a listener.
+     */
+    @Override
+    public void onAttach(SupportActivity activity) {
+        super.onAttach(activity);
+        try {
+            // TODO Verify if listener should be released onHide or onPause
+            mListener = (OnMyLocationChangedListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnMyLocationChangedListener");
+        }
     }
 
     @Override
     public void onLocationChanged(Location location) {
         // TODO Auto-generated method stub
-//        Log.e(TAG, "onLocationChanged");
-        mAppHelper.setLocation(location);
+        // Log.v(TAG, "onLocationChanged");
+        // mAppHelper.setLocation(location);
+        if (mListener != null) {
+            mListener.OnMyLocationChanged(Helper.locationToGeoPoint(location));
+        }
     }
 
     @Override
@@ -392,11 +420,25 @@ public abstract class BaseMapFragment extends Fragment implements LocationListen
      * @param mapCenter The new location
      */
     public void setMapCenter(GeoPoint mapCenter) {
-//        Log.v(TAG, "Geo = " + mapCenter.getLatitudeE6() + "," + mapCenter.getLongitudeE6());
+        // Log.v(TAG, "Geo = " + mapCenter.getLatitudeE6() + "," +
+        // mapCenter.getLongitudeE6());
         animateToPoint(mapCenter);
 
         Overlay overlayPlacemarks = mMapView.getOverlays().get(INDEX_OVERLAY_PLACEMARKS);
         overlayPlacemarks.onTap(mapCenter, mMapView);
+    }
+
+    /**
+     * Used for menu's "My Location" and for Postal Code search. Sets the map
+     * center on the location with a near zoom.
+     */
+    public void setMapCenterOnLocation(Location mapCenter) {
+
+        GeoPoint geoPoint = new GeoPoint((int) (mapCenter.getLatitude() * 1E6),
+                (int) (mapCenter.getLongitude() * 1E6));
+
+        mMapController.setZoom(ZOOM_NEAR);
+        setMapCenter(geoPoint);
     }
 
 }

@@ -26,6 +26,7 @@ package ca.mudar.mtlaucasou;
 import ca.mudar.mtlaucasou.provider.PlacemarkContract.PlacemarkColumns;
 import ca.mudar.mtlaucasou.ui.widgets.MyItemizedOverlay;
 import ca.mudar.mtlaucasou.utils.ActivityHelper;
+import ca.mudar.mtlaucasou.utils.AppHelper;
 import ca.mudar.mtlaucasou.utils.Helper;
 import ca.mudar.mtlaucasou.utils.Const;
 
@@ -42,12 +43,15 @@ import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.BaseColumns;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.SupportActivity;
+import android.support.v4.view.Menu;
 import android.support.v4.view.MenuItem;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -93,6 +97,13 @@ public abstract class BaseMapFragment extends Fragment implements LocationListen
      */
     public interface OnMyLocationChangedListener {
         public void OnMyLocationChanged(GeoPoint geoPoint);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        // Log.v(TAG, "onCreate");
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     /**
@@ -284,6 +295,41 @@ public abstract class BaseMapFragment extends Fragment implements LocationListen
         cur.close();
 
         return alLocations;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        /**
+         * Manual detection of Android version: This is because of a
+         * ActionBarSherlock/compatibility package issue with the MenuInflater.
+         * Also, versions earlier than Honeycomb don't manage SHOW_AS_ACTION_*
+         * options other than ALWAYS.
+         */
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+            inflater.inflate(R.menu.menu_fragment_map, menu);
+        }
+        else {
+            /**
+             * Honeycomb drawables are different (white instead of grey) because
+             * the items are in the actionbar. Order is: toggle (1), kml (2),
+             * list sort (3), postal code (4), my position (5).
+             */
+            menu.add(Menu.NONE, R.id.menu_map_find_from_name, 4,
+                    R.string.menu_map_find_from_name)
+                    .setIcon(getResources().getDrawable(R.drawable.ic_actionbar_search));
+
+            menu.add(Menu.NONE, R.id.menu_map_mylocation, 5,
+                    R.string.menu_map_mylocation)
+                    .setIcon(getResources().getDrawable(R.drawable.ic_actionbar_mylocation));
+        }
+
+        /**
+         * Disable the My Location button if the user location is not known yet.
+         */
+        if (((AppHelper) getSupportActivity().getApplicationContext()).getLocation() == null) {
+
+            menu.findItem(R.id.menu_map_mylocation).setEnabled(false);
+        }
     }
 
     /**

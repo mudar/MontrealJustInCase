@@ -33,11 +33,14 @@ import ca.mudar.mtlaucasou.utils.NotifyingAsyncQueryHandler;
 
 import android.database.ContentObserver;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.BaseColumns;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.SupportActivity;
+import android.support.v4.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ListView;
 
@@ -85,7 +88,7 @@ public class BaseListFragment extends ListFragment implements
     public void onCreate(Bundle savedInstanceState) {
         // Log.v(TAG, "onCreate");
         super.onCreate(savedInstanceState);
-
+        setHasOptionsMenu(true);
         mActivityHelper = ActivityHelper.createInstance(getActivity());
 
         mHandler = new NotifyingAsyncQueryHandler(getActivity().getContentResolver(), this);
@@ -123,6 +126,31 @@ public class BaseListFragment extends ListFragment implements
                 mActivityHelper.getContentUri(indexSection),
                 PLACEMARKS_SUMMARY_PROJECTION, select, null,
                 PlacemarkColumns.PLACEMARK_NAME);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        /**
+         * Manual detection of Android version: This is because of a
+         * ActionBarSherlock/compatibility package issue with the MenuInflater.
+         * Also, versions earlier than Honeycomb don't manage SHOW_AS_ACTION_*
+         * options other than ALWAYS.
+         */
+
+        // if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+        // inflater.inflate(R.menu.menu_fragment_list, menu);
+        // }
+        // else {
+        // /**
+        // * Honeycomb drawables are different (white instead of grey) because
+        // * the items are in the actionbar. Order is: toggle (1), kml (2),
+        // * list sort (3), postal code (4), my position (5).
+        // */
+        // menu.add(Menu.NONE, R.id.menu_list_sort_order, 3,
+        // R.string.menu_list_sort_order)
+        // .setIcon(getResources().getDrawable(R.drawable.ic_actionbar_list_sort));
+        // }
+
     }
 
     /**

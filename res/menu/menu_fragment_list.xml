@@ -25,29 +25,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:id="@+id/actionbar_toggle_list"
-        android:icon="@drawable/ic_actionbar_view_list"
-        android:showAsAction="always"
-        android:title="@string/menu_view_list"/>
-
-    <item
-        android:id="@+id/menu_link_kml"
-        android:icon="@drawable/ic_menu_directions"
-        android:title="@string/menu_link_kml"/>
-
-    <item
-        android:id="@+id/menu_map_find_from_name"
-        android:icon="@drawable/ic_menu_search"
-        android:title="@string/menu_map_find_from_name"/>
-
-    <item
-        android:id="@+id/menu_map_mylocation"
-        android:icon="@drawable/ic_menu_mylocation"
-        android:title="@string/menu_map_mylocation"/>
-
-    <!-- <item -->
-    <!-- android:id="@+id/menu_list_sort_order" -->
-    <!-- android:icon="@drawable/ic_menu_preferences" -->
-    <!-- android:title="@string/menu_list_sort_order"/> -->
+    android:id="@+id/menu_list_sort_order"
+    android:icon="@drawable/ic_menu_list_sort"
+    android:title="@string/menu_list_sort_order"/>
 
 </menu>

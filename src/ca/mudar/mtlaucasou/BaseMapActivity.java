@@ -50,6 +50,7 @@ import android.support.v4.view.Menu;
 import android.support.v4.view.MenuInflater;
 import android.support.v4.view.MenuItem;
 import android.text.InputType;
+//import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -177,40 +178,40 @@ public class BaseMapActivity extends FragmentMapActivity implements OnPlacemarkS
         return false;
     }
 
+    /**
+     * Creates the activity's options menu. It contains items common to both
+     * fragments which will also load their own items.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+//        Log.v(TAG, "onCreateOptionsMenu");
         /**
-         * This is because of a ActionBarSherlock/compatibility package issue
-         * with the MenuInflater. Also, versions earlier than Honeycomb
-         * understand only SHOW_AS_ACTION_ALWAYS.
+         * Manual detection of Android version: This is because of a
+         * ActionBarSherlock/compatibility package issue with the MenuInflater.
+         * Also, versions earlier than Honeycomb don't manage SHOW_AS_ACTION_*
+         * options other than ALWAYS.
          */
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
             MenuInflater inflater = (MenuInflater) getMenuInflater();
-            inflater.inflate(R.menu.menu_map, menu);
+            inflater.inflate(R.menu.menu_activity_map, menu);
         }
         else {
+            /**
+             * Honeycomb drawables are different (white instead of grey) because
+             * the items are in the actionbar. Order is: toggle (1), kml (2),
+             * list sort (3), postal code (4), my position (5).
+             */
             menu.add(Menu.NONE, R.id.actionbar_toggle_list, 1,
                     R.string.menu_view_list)
                     .setIcon(getResources().getDrawable(R.drawable.ic_actionbar_view_list))
                     .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-            /**
-             * The Honeycomb drawables are different (white instead of grey)
-             * because the items are in the actionbar.
-             */
-            // TODO: verify menu_item_order!
+
             menu.add(Menu.NONE, R.id.menu_link_kml, 2,
                     R.string.menu_link_kml)
                     .setIcon(getResources().getDrawable(R.drawable.ic_actionbar_directions));
 
-            menu.add(Menu.NONE, R.id.menu_map_find_from_name, 3,
-                    R.string.menu_map_find_from_name)
-                    .setIcon(getResources().getDrawable(R.drawable.ic_actionbar_search));
-
-            menu.add(Menu.NONE, R.id.menu_map_mylocation, 4,
-                    R.string.menu_map_mylocation)
-                    .setIcon(getResources().getDrawable(R.drawable.ic_actionbar_mylocation));
         }
-        btnActionbarToggleList = menu.getItem(0);
+        btnActionbarToggleList = menu.findItem(R.id.actionbar_toggle_list);
 
         if (!isHiddenList) {
             // TODO Remove this and rely on invalidateOptionsMenu() when
@@ -224,14 +225,6 @@ public class BaseMapActivity extends FragmentMapActivity implements OnPlacemarkS
                 btnActionbarToggleList.setIcon(getResources().getDrawable(
                         R.drawable.ic_actionbar_view_map));
             }
-        }
-
-        if (((AppHelper) getApplicationContext()).getLocation() == null) {
-            /**
-             * Disable the My Location button since user location was not found
-             * yet.
-             */
-            menu.findItem(R.id.menu_map_mylocation).setEnabled(false);
         }
 
         return true;
@@ -368,6 +361,8 @@ public class BaseMapActivity extends FragmentMapActivity implements OnPlacemarkS
             ft.show(fragmentMap);
             ft.commit();
 
+            // TODO Remove this and rely on invalidateOptionsMenu(), probably
+            // with executePendingTransactions()
             if (btnActionbarToggleList != null) {
                 btnActionbarToggleList.setIcon(getResources().getDrawable(
                         R.drawable.ic_actionbar_view_list));

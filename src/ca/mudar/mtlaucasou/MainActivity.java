@@ -165,7 +165,7 @@ public class MainActivity extends FragmentActivity {
          */
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
             MenuInflater inflater = (MenuInflater) getMenuInflater();
-            inflater.inflate(R.menu.menu_main, menu);
+            inflater.inflate(R.menu.menu_activity_main, menu);
         }
         else {
             menu.add(Menu.NONE, R.id.menu_about, 1, R.string.menu_about)

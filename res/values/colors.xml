@@ -56,4 +56,8 @@
     <color name="separator_map_list">#e5e5e5</color>
     <color name="separator_about">#606060</color>
 
+    <color name="progressbar_background">#aaaaaa</color>
+    <color name="progressbar_primary">#ffaa00</color>
+    <color name="progressbar_secondary">#ff8000</color>    
+        
 </resources>

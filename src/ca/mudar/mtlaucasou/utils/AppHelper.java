@@ -52,8 +52,8 @@ public class AppHelper extends Application {
     }
 
     public void setLocation(Location location) {
-        // Log.v(TAG,"setLocation. Lat = " + location.getLatitude() +
-        // ". Lng = "+ location.getLongitude());
+        // Log.v(TAG, "setLocation. Lat = " + location.getLatitude() +
+        // ". Lng = " + location.getLongitude());
         this.mLocation = location;
     }
 
@@ -118,7 +118,7 @@ public class AppHelper extends Application {
     }
 
     public void setListSort(String sort) {
-//        Log.v(TAG, "setListSort = " + sort);
+        // Log.v(TAG, "setListSort = " + sort);
         this.mListSort = sort;
     }
 

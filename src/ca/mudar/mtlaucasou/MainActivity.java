@@ -63,7 +63,7 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         requestWindowFeature(Window.FEATURE_PROGRESS);
-        
+
         /**
          * SharedPreferences are used to verify determine if syncService is
          * required for initial launch or on database upgrade.
@@ -159,27 +159,23 @@ public class MainActivity extends FragmentActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         /**
-         * This is because of a ActionBarSherlock/compatibility package with the
-         * MenuInflater. Also, versions earlier than Honeycomb can only handle
-         * SHOW_AS_ACTION_ALWAYS
+         * This is because of a ActionBarSherlock/compatibility package issue
+         * with the MenuInflater. Also, versions earlier than Honeycomb can only
+         * handle SHOW_AS_ACTION_ALWAYS
          */
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
             MenuInflater inflater = (MenuInflater) getMenuInflater();
             inflater.inflate(R.menu.menu_main, menu);
         }
         else {
-            menu.add(Const.MENU_ITEM_GROUP_ID, R.id.menu_about,
-                    Const.MENU_ITEM_ORDER,
-                    R.string.menu_about)
+            menu.add(Menu.NONE, R.id.menu_about, 1, R.string.menu_about)
                     .setIcon(getResources().getDrawable(R.drawable.ic_actionbar_info_details))
                     .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 
             /**
              * We also use a different icon for >= Honeycomb
              */
-            menu.add(Const.MENU_ITEM_GROUP_ID, R.id.menu_preferences,
-                    Const.MENU_ITEM_ORDER,
-                    R.string.menu_preferences)
+            menu.add(Menu.NONE, R.id.menu_preferences, 2, R.string.menu_preferences)
                     .setIcon(getResources().getDrawable(R.drawable.ic_actionbar_preferences))
                     .setShowAsAction(MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
         }
@@ -221,15 +217,10 @@ public class MainActivity extends FragmentActivity {
     // window.setFormat(PixelFormat.RGBA_8888);
     // }
 
-    // private void updateRefreshStatus(boolean refreshing) {
-    // mActivityHelper.setRefreshActionButtonState(refreshing);
-    // }
-
     public static class SyncStatusUpdaterFragment extends Fragment implements
             DetachableResultReceiver.Receiver {
         public static final String TAG = SyncStatusUpdaterFragment.class.getName();
 
-        // private boolean mSyncing = false;
         private DetachableResultReceiver mReceiver;
 
         @Override
@@ -249,27 +240,28 @@ public class MainActivity extends FragmentActivity {
             activity.setProgressBarIndeterminateVisibility(Boolean.TRUE);
             activity.setProgressBarVisibility(true);
 
-            final ProgressBar progressHorizontal = (ProgressBar) getSupportActivity().findViewById(R.id.progress_horizontal);
+            final ProgressBar progressHorizontal = (ProgressBar) getSupportActivity().findViewById(
+                    R.id.progress_horizontal);
             progressHorizontal.setVisibility(View.VISIBLE);
-            
+
             switch (resultCode) {
                 case SyncService.STATUS_RUNNING: {
                     activity.setProgressBarIndeterminateVisibility(Boolean.TRUE);
-                    
-                    progressHorizontal.incrementProgressBy(resultData.getInt(Const.KEY_BUNDLE_PROGRESS_INCREMENT, 0));
-                    /** 
+
+                    progressHorizontal.incrementProgressBy(resultData.getInt(
+                            Const.KEY_BUNDLE_PROGRESS_INCREMENT, 0));
+                    /**
                      * Title progress is in range 0..100
                      */
                     getSupportActivity().setProgress(100 * progressHorizontal.getProgress());
-                    
-                    // mSyncing = true;
+
                     break;
                 }
                 case SyncService.STATUS_FINISHED: {
                     activity.setProgressBarIndeterminateVisibility(Boolean.FALSE);
                     activity.setProgressBarVisibility(false);
                     progressHorizontal.setVisibility(View.INVISIBLE);
-                    // mSyncing = false;
+
                     // TODO put this in an activity listener
                     if (EulaHelper.hasAcceptedEula(getSupportActivity().getApplicationContext()))
                     {
@@ -280,13 +272,14 @@ public class MainActivity extends FragmentActivity {
                     break;
                 }
                 case SyncService.STATUS_ERROR: {
+                    /**
+                     * Error happened down in SyncService: hide progressbars and
+                     * show Toast error message.
+                     */
                     activity.setProgressBarIndeterminateVisibility(Boolean.FALSE);
                     activity.setProgressBarVisibility(false);
                     progressHorizontal.setVisibility(View.INVISIBLE);
-                    /**
-                     * Error happened down in SyncService, show as toast.
-                     */
-                    // mSyncing = false;
+
                     final String errorText = getString(R.string.toast_sync_error,
                             resultData.getString(Intent.EXTRA_TEXT));
                     Toast.makeText(activity, errorText, Toast.LENGTH_LONG).show();
@@ -294,12 +287,5 @@ public class MainActivity extends FragmentActivity {
                 }
             }
         }
-
-        // @Override
-        // public void onActivityCreated(Bundle savedInstanceState) {
-        // super.onActivityCreated(savedInstanceState);
-        // ((MainActivity) getSupportActivity()).updateRefreshStatus(mSyncing);
-        // }
     }
-
 }

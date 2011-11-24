@@ -31,19 +31,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingBottom="@dimen/bodyPaddingLarge"
-        android:paddingLeft="@dimen/bodyPaddingLarge"
-        android:paddingRight="@dimen/bodyPaddingLarge" >
+        android:paddingBottom="@dimen/bodyPaddingSmall"
+        android:paddingLeft="@dimen/bodyPaddingSmall"
+        android:paddingRight="@dimen/bodyPaddingSmall" >
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/textSizeSmall"
-            android:layout_marginTop="@dimen/textSizeXLarge"
+            android:layout_marginBottom="@dimen/paddingLarge"
+            android:layout_marginTop="@dimen/bodyPaddingLarge"
             android:gravity="center"
             android:text="@string/app_name"
             android:textColor="@color/actionbar_text"
-            android:textSize="30sp" />
+            android:textSize="@dimen/textSizeXLarge" />
 
         <TextView
             android:id="@+id/about_links_contents_project_url"

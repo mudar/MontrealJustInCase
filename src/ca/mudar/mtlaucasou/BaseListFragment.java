@@ -78,13 +78,12 @@ public class BaseListFragment extends ListFragment implements
      */
     public BaseListFragment(int indexSection, String defaultSort) {
         this.indexSection = indexSection;
-        // this.mapActivity = mapActivity;
         this.defaultSort = defaultSort;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-//        Log.v(TAG, "onCreate");
+        // Log.v(TAG, "onCreate");
         super.onCreate(savedInstanceState);
 
         mActivityHelper = ActivityHelper.createInstance(getActivity());
@@ -134,6 +133,10 @@ public class BaseListFragment extends ListFragment implements
         public void onPlacemarkSelected(GeoPoint geoPoint);
     }
 
+    /**
+     * When item is selected, send geocoordinates to the listener which is
+     * implemented by the Activity. The Activity deals with the MapFragment.
+     */
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
 
@@ -143,8 +146,6 @@ public class BaseListFragment extends ListFragment implements
                 .getColumnIndexOrThrow(PlacemarkColumns.PLACEMARK_GEO_LAT));
         double geoLng = cursor.getDouble(cursor
                 .getColumnIndexOrThrow(PlacemarkColumns.PLACEMARK_GEO_LNG));
-
-//        Log.v(TAG, "onListItemClick. id = " + id + ". Geo = " + geoLat + "," + geoLng);
 
         GeoPoint geoPoint = new GeoPoint((int) (geoLat * 1E6), (int) (geoLng * 1E6));
 

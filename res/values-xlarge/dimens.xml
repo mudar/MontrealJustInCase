@@ -22,17 +22,17 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<resources>
 
-    <item
-        android:id="@+id/actionbar_toggle_list"
-        android:icon="@drawable/ic_actionbar_view_list"
-        android:showAsAction="always"
-        android:title="@string/menu_view_list"/>
+    <dimen name="paddingSmall">3dp</dimen>
+    <dimen name="paddingMedium">6dp</dimen>
+    <dimen name="paddingLarge">9dp</dimen>
+    <dimen name="bodyPaddingSmall">15dp</dimen>
+    <dimen name="bodyPaddingMedium">30dp</dimen>
+    <dimen name="bodyPaddingLarge">45dp</dimen>
+    <dimen name="textSizeSmall">18sp</dimen>
+    <dimen name="textSizeMedium">21sp</dimen>
+    <dimen name="textSizeLarge">27sp</dimen>
+    <dimen name="textSizeXLarge">45sp</dimen>
 
-    <item
-        android:id="@+id/menu_link_kml"
-        android:icon="@drawable/ic_menu_attachment"
-        android:title="@string/menu_link_kml"/>
-
-</menu>
+</resources>

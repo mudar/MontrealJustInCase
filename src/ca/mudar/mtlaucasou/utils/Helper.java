@@ -23,17 +23,24 @@
 
 package ca.mudar.mtlaucasou.utils;
 
+import com.google.android.maps.GeoPoint;
+
 import ca.mudar.mtlaucasou.R;
 import ca.mudar.mtlaucasou.utils.Const.UnitsDisplay;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.List;
 
+// TODO Refactor this into geohelper and iohelper
 public class Helper {
     private static final String TAG = "Helper";
 
@@ -54,6 +61,36 @@ public class Helper {
         return resultString;
     }
 
+    public static Location findLocatioFromName(Context c, String name) throws IOException {
+        Geocoder geocoder = new Geocoder(c);
+        List<Address> adr;
+
+        adr = geocoder.getFromLocationName(name, 10, Const.MAPS_GEOCODER_LIMITS[0],
+                Const.MAPS_GEOCODER_LIMITS[1], Const.MAPS_GEOCODER_LIMITS[2],
+                Const.MAPS_GEOCODER_LIMITS[3]);
+        if (!adr.isEmpty()) {
+            Address address = adr.get(0);
+            if (((int) address.getLatitude() != 0) && ((int) address.getLongitude() != 0)) {
+                Location location = new Location("mylocation");
+                location.setLatitude(address.getLatitude());
+                location.setLongitude(address.getLongitude());
+
+                return location;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Get distance in Metric or Imperial units. Display changes depending on
+     * the value: different approximationss in ft when > 1000. Very short
+     * distances are not displayed to avoid problems with Location accuracy.
+     * 
+     * @param c 
+     * @param fDistanceM The distance in Meters.
+     * @return String Display the distance.
+     */
     public static String getDistanceDisplay(Context c, float fDistanceM) {
         String sDistance;
 
@@ -132,4 +169,31 @@ public class Helper {
         return sDistance;
     }
 
+    /**
+     * Convert Location to GeoPoint
+     * 
+     * @param Location
+     * @return GeoPoint
+     */
+    public static GeoPoint locationToGeoPoint(Location location) {
+        GeoPoint geoPoint = new GeoPoint((int) (location.getLatitude() * 1E6),
+                (int) (location.getLongitude() * 1E6));
+
+        return geoPoint;
+    }
+
+    /**
+     * Convert GeoPoint to Location
+     * 
+     * @param GeoPoint
+     * @return Location
+     */
+    public static Location geoPointToLocation(GeoPoint geoPoint) {
+        Location location = new Location(Const.LOCATION_PROVIDER);
+
+        location.setLatitude(geoPoint.getLatitudeE6() / 1E6);
+        location.setLongitude(geoPoint.getLongitudeE6() / 1E6);
+
+        return location;
+    }
 }

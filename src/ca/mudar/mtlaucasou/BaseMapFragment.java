@@ -189,7 +189,7 @@ public abstract class BaseMapFragment extends Fragment {
     protected void initialAnimateToPoint() {
         List<String> enabledProviders = mLocationManager.getProviders(true);
 
-        Double coordinates[] = Const.MAPS_DEFAULT_COORDINATES;
+        double coordinates[] = Const.MAPS_DEFAULT_COORDINATES;
         final double lat = coordinates[0];
         final double lng = coordinates[1];
 
@@ -199,7 +199,6 @@ public abstract class BaseMapFragment extends Fragment {
              */
             mLocationOverlay.runOnFirstFix(new Runnable() {
                 public void run() {
-//                    Log.v(TAG, "getMyLocation");
                     GeoPoint userLocation = mLocationOverlay.getMyLocation();
 
                     if (mListener != null) {
@@ -249,12 +248,7 @@ public abstract class BaseMapFragment extends Fragment {
             PlacemarkColumns.PLACEMARK_NAME,
             PlacemarkColumns.PLACEMARK_ADDRESS,
             PlacemarkColumns.PLACEMARK_GEO_LAT,
-            PlacemarkColumns.PLACEMARK_GEO_LNG,
-//            PlacemarkColumns.PLACEMARK_DISTANCE,
-//            PlacemarkColumns.SIN_LAT_RAD,
-//            PlacemarkColumns.COS_LAT_RAD,
-//            PlacemarkColumns.SIN_LNG_RAD,
-//            PlacemarkColumns.COS_LNG_RAD
+            PlacemarkColumns.PLACEMARK_GEO_LNG
     };
 
     /**
@@ -272,11 +266,11 @@ public abstract class BaseMapFragment extends Fragment {
                         MAP_MARKER_PROJECTION, null,
                         null, null);
         if (cur.moveToFirst()) {
-            final int columnId = cur.getColumnIndex(BaseColumns._ID);
-            final int columnName = cur.getColumnIndex(PlacemarkColumns.PLACEMARK_NAME);
-            final int columnAddress = cur.getColumnIndex(PlacemarkColumns.PLACEMARK_ADDRESS);
-            final int columnGeoLat = cur.getColumnIndex(PlacemarkColumns.PLACEMARK_GEO_LAT);
-            final int columnGeoLng = cur.getColumnIndex(PlacemarkColumns.PLACEMARK_GEO_LNG);
+            final int columnId = cur.getColumnIndexOrThrow(BaseColumns._ID);
+            final int columnName = cur.getColumnIndexOrThrow(PlacemarkColumns.PLACEMARK_NAME);
+            final int columnAddress = cur.getColumnIndexOrThrow(PlacemarkColumns.PLACEMARK_ADDRESS);
+            final int columnGeoLat = cur.getColumnIndexOrThrow(PlacemarkColumns.PLACEMARK_GEO_LAT);
+            final int columnGeoLng = cur.getColumnIndexOrThrow(PlacemarkColumns.PLACEMARK_GEO_LNG);
 
             do {
                 mMapMarker = new MapMarker(cur.getInt(columnId), cur.getString(columnName),
@@ -397,7 +391,6 @@ public abstract class BaseMapFragment extends Fragment {
     public void onAttach(SupportActivity activity) {
         super.onAttach(activity);
         try {
-            // TODO Verify if listener should be released onHide or onPause
             mListener = (OnMyLocationChangedListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
@@ -414,14 +407,13 @@ public abstract class BaseMapFragment extends Fragment {
         public final String address;
         public final GeoPoint geoPoint;
 
-        public MapMarker(int id, String name, String address, Double geoLat, Double geoLng) {
+        public MapMarker(int id, String name, String address, double geoLat, double geoLng) {
             this.id = id;
             this.name = name;
             this.address = address;
             this.geoPoint = new GeoPoint((int) (geoLat * 1E6), (int) (geoLng * 1E6));
         }
     }
-
 
     /**
      * Setter for the MapCenter GeoPoint. Centers map on the new location and

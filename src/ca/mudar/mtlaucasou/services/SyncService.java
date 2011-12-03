@@ -23,7 +23,7 @@
  * - Removed the ResultReceiver
  */
 
-package ca.mudar.mtlaucasou.service;
+package ca.mudar.mtlaucasou.services;
 
 import ca.mudar.mtlaucasou.io.LocalExecutor;
 import ca.mudar.mtlaucasou.io.RemoteExecutor;

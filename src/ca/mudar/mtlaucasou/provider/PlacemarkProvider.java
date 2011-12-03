@@ -30,7 +30,7 @@ import ca.mudar.mtlaucasou.provider.PlacemarkContract.FireHalls;
 import ca.mudar.mtlaucasou.provider.PlacemarkContract.SpvmStations;
 import ca.mudar.mtlaucasou.provider.PlacemarkContract.WaterSupplies;
 import ca.mudar.mtlaucasou.provider.PlacemarkDatabase.Tables;
-import ca.mudar.mtlaucasou.service.SyncService;
+import ca.mudar.mtlaucasou.services.SyncService;
 import ca.mudar.mtlaucasou.utils.SelectionBuilder;
 
 import android.app.Activity;

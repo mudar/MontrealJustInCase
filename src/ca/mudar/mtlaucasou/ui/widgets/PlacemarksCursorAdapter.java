@@ -23,14 +23,12 @@
 
 package ca.mudar.mtlaucasou.ui.widgets;
 
+import ca.mudar.mtlaucasou.R;
 import ca.mudar.mtlaucasou.provider.PlacemarkContract.PlacemarkColumns;
 import ca.mudar.mtlaucasou.utils.Helper;
-import ca.mudar.mtlaucasou.R;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.location.Location;
-
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SimpleCursorAdapter;
@@ -38,8 +36,6 @@ import android.widget.TextView;
 
 public class PlacemarksCursorAdapter extends SimpleCursorAdapter {
     protected static final String TAG = "PlacemarksCursorAdapter";
-
-    private Location mLocation;
 
     public PlacemarksCursorAdapter(Context context, int layout, Cursor c, String[] from,
             int[] to, int flags) {
@@ -56,33 +52,9 @@ public class PlacemarksCursorAdapter extends SimpleCursorAdapter {
     public void bindView(View view, Context context, Cursor cursor) {
         super.bindView(view, context, cursor);
 
-        /**
-         * Can't calculate the distance if we don't know the current location
-         */
-        if (mLocation == null) {
-            return;
-        }
+        int distance = cursor.getInt(cursor.getColumnIndexOrThrow(PlacemarkColumns.PLACEMARK_DISTANCE));
+        String sDistance = (distance > 0 ? Helper.getDistanceDisplay(context, distance) : "");
 
-        // Resources res = context.getResources();
-        TextView vDistance = (TextView) view.findViewById(R.id.placemark_distance);
-
-        Double geoLat = cursor.getDouble(cursor.getColumnIndex(PlacemarkColumns.PLACEMARK_GEO_LAT));
-        Double geoLng = cursor.getDouble(cursor.getColumnIndex(PlacemarkColumns.PLACEMARK_GEO_LNG));
-
-        float[] results = new float[1];
-        android.location.Location.distanceBetween(geoLat, geoLng,
-                (mLocation.getLatitude()),
-                (mLocation.getLongitude()), results);
-
-        float fDistance = (results[0]);
-
-        // Log.v(TAG, "geoLat = "+ geoLat + "geoLng = "+ geoLng );
-        String sDistance = Helper.getDistanceDisplay(context, fDistance);
-
-        vDistance.setText(sDistance);
-    }
-
-    public void setLocation(Location mLocation) {
-        this.mLocation = mLocation;
+        ((TextView) view.findViewById(R.id.placemark_distance)).setText(sDistance);
     }
 }

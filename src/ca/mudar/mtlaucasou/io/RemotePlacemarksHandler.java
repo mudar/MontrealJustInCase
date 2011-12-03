@@ -24,7 +24,7 @@
 package ca.mudar.mtlaucasou.io;
 
 import ca.mudar.mtlaucasou.provider.PlacemarkContract;
-import ca.mudar.mtlaucasou.provider.PlacemarkContract.FireHalls;
+import ca.mudar.mtlaucasou.provider.PlacemarkContract.PlacemarkColumns;
 import ca.mudar.mtlaucasou.provider.PlacemarkContract.SyncColumns;
 import ca.mudar.mtlaucasou.utils.Lists;
 
@@ -72,9 +72,7 @@ public class RemotePlacemarksHandler extends XmlHandler {
         String mTag = null;
         HashMap<String, String> locationInfo = new HashMap<String, String>();
         ContentProviderOperation.Builder builder = ContentProviderOperation
-                .newInsert(FireHalls.CONTENT_URI);
-
-        // Log.d(TAG, "CONTENT_URI = " + contentUri);
+                .newInsert(contentUri);
 
         int eventType = parser.getEventType();
 
@@ -110,18 +108,17 @@ public class RemotePlacemarksHandler extends XmlHandler {
                     }
 
                     // Log.v(TAG, fakeId + " " + name);
-                    // TODO: handle remote/local timestamp
                     builder.withValue(SyncColumns.UPDATED, System.currentTimeMillis());
-                    builder.withValue(FireHalls.PLACEMARK_ID, fakeId++);
-                    builder.withValue(FireHalls.PLACEMARK_NAME, name);
+                    builder.withValue(PlacemarkColumns.PLACEMARK_ID, fakeId++);
+                    builder.withValue(PlacemarkColumns.PLACEMARK_NAME, name);
                     // TODO: The description is not used currently
-                    // builder.withValue(FireHalls.PLACEMARK_DESCRIPTION,
+                    // builder.withValue(PlacemarkColumns.PLACEMARK_DESCRIPTION,
                     // locationInfo.get(RemoteTags.DESCRIPTION));
-                    builder.withValue(FireHalls.PLACEMARK_ADDRESS,
+                    builder.withValue(PlacemarkColumns.PLACEMARK_ADDRESS,
                             locationInfo.get(RemoteTags.ADDRESS));
-                    builder.withValue(FireHalls.PLACEMARK_GEO_LAT,
+                    builder.withValue(PlacemarkColumns.PLACEMARK_GEO_LAT,
                             Double.parseDouble(coords[1]));
-                    builder.withValue(FireHalls.PLACEMARK_GEO_LNG,
+                    builder.withValue(PlacemarkColumns.PLACEMARK_GEO_LNG,
                             Double.parseDouble(coords[0]));
 
                     batch.add(builder.build());
@@ -140,7 +137,7 @@ public class RemotePlacemarksHandler extends XmlHandler {
         // String FIRE_HALL_ID = "id";
         String ITEM = "Placemark";
         String NAME = "name";
-        String DESCRIPTION = "description";
+        // String DESCRIPTION = "description";
         String ADDRESS = "info_side_bar";
         // String GEO_POINT = "Point";
         String COORDINATES = "coordinates";

@@ -28,6 +28,7 @@ import ca.mudar.mtlaucasou.provider.PlacemarkContract.EmergencyHostels;
 import ca.mudar.mtlaucasou.provider.PlacemarkContract.FireHalls;
 import ca.mudar.mtlaucasou.provider.PlacemarkContract.SpvmStations;
 import ca.mudar.mtlaucasou.provider.PlacemarkContract.WaterSupplies;
+import ca.mudar.mtlaucasou.services.DistanceUpdateService;
 import ca.mudar.mtlaucasou.ui.AboutActivity;
 import ca.mudar.mtlaucasou.ui.widgets.MyPreferenceActivity;
 import ca.mudar.mtlaucasou.utils.Const.KmlRemoteUrls;
@@ -37,6 +38,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Location;
 import android.net.Uri;
 import android.view.MenuItem;
 
@@ -75,10 +77,9 @@ public class ActivityHelper {
         }
 
         final Intent intent = new Intent(mActivity, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         mActivity.startActivity(intent);
 
-        // TODO: sdk4
         if (!(mActivity instanceof MainActivity)) {
             mActivity.overridePendingTransition(R.anim.home_enter, R.anim.home_exit);
         }
@@ -251,11 +252,21 @@ public class ActivityHelper {
                 uri = EmergencyHostels.CONTENT_URI;
                 break;
             default:
-                // Log.v(TAG, "empty URI parsed");
                 uri = Uri.parse("");
                 break;
         }
         return uri;
+    }
+
+    public boolean updateDistances(Location location) {
+        // Log.v(TAG, "start background service!");
+        
+        Intent intent = new Intent(mActivity, DistanceUpdateService.class);
+        intent.putExtra(Const.INTENT_EXTRA_GEO_LAT, location.getLatitude());
+        intent.putExtra(Const.INTENT_EXTRA_GEO_LNG, location.getLongitude());
+        mActivity.startService(intent);
+
+        return true;
     }
 
 }

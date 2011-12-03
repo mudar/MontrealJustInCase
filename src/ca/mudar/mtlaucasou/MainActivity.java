@@ -24,21 +24,19 @@
 package ca.mudar.mtlaucasou;
 
 import ca.mudar.mtlaucasou.provider.PlacemarkDatabase;
-import ca.mudar.mtlaucasou.service.SyncService;
+import ca.mudar.mtlaucasou.services.SyncService;
 import ca.mudar.mtlaucasou.utils.ActivityHelper;
 import ca.mudar.mtlaucasou.utils.AppHelper;
 import ca.mudar.mtlaucasou.utils.Const;
 import ca.mudar.mtlaucasou.utils.DetachableResultReceiver;
 import ca.mudar.mtlaucasou.utils.EulaHelper;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.Menu;
 import android.support.v4.view.MenuInflater;
@@ -49,15 +47,21 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends LocationFragmentActivity {
     private static final String TAG = "MainActivity";
 
-    private ActivityHelper mActivityHelper;
-    private AppHelper mAppHelper;
+    // TODO Cleaner handling of extension (refactor into implement)
+    // protected AppHelper mAppHelper;
+    // protected ActivityHelper mActivityHelper;
+    // protected SharedPreferences prefs;
+    // protected SharedPreferences.Editor prefsEditor;
+
     private SyncStatusUpdaterFragment mSyncStatusUpdaterFragment;
     private boolean hasLoadedData;
     private String lang;
 
+    // TODO Cleanup code, order functions by overrides following activity
+    // lifecycle
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,8 +72,6 @@ public class MainActivity extends FragmentActivity {
          * SharedPreferences are used to verify determine if syncService is
          * required for initial launch or on database upgrade.
          */
-        SharedPreferences prefs = getSharedPreferences(Const.APP_PREFS_NAME,
-                Context.MODE_PRIVATE);
         hasLoadedData = prefs.getBoolean(Const.PrefsNames.HAS_LOADED_DATA, false);
         int dbVersionPrefs = prefs.getInt(Const.PrefsNames.VERSION_DATABASE, -1);
 
@@ -126,20 +128,17 @@ public class MainActivity extends FragmentActivity {
          * SyncStatusUpdaterFragment to be ready. Otherwise, we send an empty
          * receiver to the service.
          */
+        // TODO Move this to a sync service listener.
         if (!hasLoadedData && (mSyncStatusUpdaterFragment != null)) {
             Intent intent = new Intent(Intent.ACTION_SYNC, null, getApplicationContext(),
                     SyncService.class);
             intent.putExtra(SyncService.EXTRA_STATUS_RECEIVER, mSyncStatusUpdaterFragment.mReceiver);
             startService(intent);
 
-            // TODO Move this to a sync service listener.
-            SharedPreferences prefs = getSharedPreferences(Const.APP_PREFS_NAME,
-                    Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = prefs.edit();
-
-            editor.putBoolean(Const.PrefsNames.HAS_LOADED_DATA, true);
-            editor.putInt(Const.PrefsNames.VERSION_DATABASE, PlacemarkDatabase.getDatabaseVersion());
-            editor.commit();
+            prefsEditor.putBoolean(Const.PrefsNames.HAS_LOADED_DATA, true);
+            prefsEditor.putInt(Const.PrefsNames.VERSION_DATABASE,
+                    PlacemarkDatabase.getDatabaseVersion());
+            prefsEditor.commit();
             hasLoadedData = true;
         }
     }
@@ -159,25 +158,28 @@ public class MainActivity extends FragmentActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         /**
-         * This is because of a ActionBarSherlock/compatibility package issue
-         * with the MenuInflater. Also, versions earlier than Honeycomb can only
-         * handle SHOW_AS_ACTION_ALWAYS
+         * Manual detection of Android version: This is because of a
+         * ActionBarSherlock/compatibility package issue with the MenuInflater.
+         * Also, versions earlier than Honeycomb don't manage SHOW_AS_ACTION_*
+         * options other than ALWAYS.
          */
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-            MenuInflater inflater = (MenuInflater) getMenuInflater();
-            inflater.inflate(R.menu.menu_activity_main, menu);
-        }
-        else {
+        if (Const.SUPPORTS_HONEYCOMB) {
+            /**
+             * Honeycomb drawables are different (white instead of grey) because
+             * the items are in the actionbar.
+             */
+
             menu.add(Menu.NONE, R.id.menu_about, 1, R.string.menu_about)
                     .setIcon(getResources().getDrawable(R.drawable.ic_actionbar_info_details))
                     .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 
-            /**
-             * We also use a different icon for >= Honeycomb
-             */
             menu.add(Menu.NONE, R.id.menu_preferences, 2, R.string.menu_preferences)
                     .setIcon(getResources().getDrawable(R.drawable.ic_actionbar_preferences))
                     .setShowAsAction(MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
+        }
+        else {
+            MenuInflater inflater = (MenuInflater) getMenuInflater();
+            inflater.inflate(R.menu.menu_activity_main, menu);
         }
 
         return true;
@@ -207,15 +209,6 @@ public class MainActivity extends FragmentActivity {
 
         invalidateOptionsMenu();
     }
-
-    // @Override
-    // public void onAttachedToWindow() {
-    // // TODO: verify if this does any difference since it uses
-    // android.view.Window
-    // super.onAttachedToWindow();
-    // android.view.Window window = (android.view.Window) getWindow();
-    // window.setFormat(PixelFormat.RGBA_8888);
-    // }
 
     public static class SyncStatusUpdaterFragment extends Fragment implements
             DetachableResultReceiver.Receiver {
@@ -288,4 +281,5 @@ public class MainActivity extends FragmentActivity {
             }
         }
     }
+
 }

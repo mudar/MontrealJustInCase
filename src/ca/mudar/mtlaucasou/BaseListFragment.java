@@ -23,24 +23,23 @@
 
 package ca.mudar.mtlaucasou;
 
-import com.google.android.maps.GeoPoint;
-
 import ca.mudar.mtlaucasou.provider.PlacemarkContract.PlacemarkColumns;
 import ca.mudar.mtlaucasou.ui.widgets.PlacemarksCursorAdapter;
 import ca.mudar.mtlaucasou.utils.ActivityHelper;
 import ca.mudar.mtlaucasou.utils.AppHelper;
+import ca.mudar.mtlaucasou.utils.Const.PrefsValues;
 import ca.mudar.mtlaucasou.utils.NotifyingAsyncQueryHandler;
+
+import com.google.android.maps.GeoPoint;
 
 import android.database.ContentObserver;
 import android.database.Cursor;
-import android.os.Build;
+import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.BaseColumns;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.SupportActivity;
-import android.support.v4.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ListView;
 
@@ -49,6 +48,7 @@ public class BaseListFragment extends ListFragment implements
     protected static final String TAG = "BaseListFragment";
 
     protected ActivityHelper mActivityHelper;
+    protected AppHelper mAppHelper;
 
     protected static final int QUERY_TOKEN = 0x1;
 
@@ -62,7 +62,8 @@ public class BaseListFragment extends ListFragment implements
             PlacemarkColumns.PLACEMARK_NAME,
             PlacemarkColumns.PLACEMARK_ADDRESS,
             PlacemarkColumns.PLACEMARK_GEO_LAT,
-            PlacemarkColumns.PLACEMARK_GEO_LNG
+            PlacemarkColumns.PLACEMARK_GEO_LNG,
+            PlacemarkColumns.PLACEMARK_DISTANCE,
     };
 
     /**
@@ -86,10 +87,12 @@ public class BaseListFragment extends ListFragment implements
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        // Log.v(TAG, "onCreate");
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
+        
         mActivityHelper = ActivityHelper.createInstance(getActivity());
+        mAppHelper = ((AppHelper) getActivity().getApplicationContext());
+        
+        Location myLocation = mAppHelper.getLocation();
 
         mHandler = new NotifyingAsyncQueryHandler(getActivity().getContentResolver(), this);
 
@@ -101,9 +104,21 @@ public class BaseListFragment extends ListFragment implements
         setListAdapter(null);
         mHandler.cancelOperation(QUERY_TOKEN);
 
+        /**
+         * Update the projection alias to calculate the distance based on the
+         * current Location.
+         */
+        String mSort;
+        if (mAppHelper.getListSort().equals(PrefsValues.LIST_SORT_DISTANCE) && myLocation != null) {
+            mSort = PlacemarkColumns.PLACEMARK_DISTANCE + " ASC ";
+        }
+        else {
+            mSort = defaultSort;
+        }
+
         mCursor = getActivity().getContentResolver().query(
                 mActivityHelper.getContentUri(indexSection),
-                PLACEMARKS_SUMMARY_PROJECTION, null, null, defaultSort);
+                PLACEMARKS_SUMMARY_PROJECTION, null, null, mSort);
         getActivity().startManagingCursor(mCursor);
 
         mAdapter = new PlacemarksCursorAdapter(getActivity(),
@@ -111,47 +126,43 @@ public class BaseListFragment extends ListFragment implements
                 mCursor,
                 new String[] {
                         PlacemarkColumns.PLACEMARK_NAME,
-                        PlacemarkColumns.PLACEMARK_ADDRESS,
-                        PlacemarkColumns.PLACEMARK_GEO_LAT,
-                        PlacemarkColumns.PLACEMARK_GEO_LNG
+                        PlacemarkColumns.PLACEMARK_ADDRESS
                 }, new int[] {
                         R.id.placemark_name, R.id.placemark_address
                 }, 0);
-        mAdapter.setLocation(((AppHelper) getActivity().getApplicationContext()).getLocation());
 
         setListAdapter(mAdapter);
 
-        String select = "";
         mHandler.startQuery(QUERY_TOKEN, null,
                 mActivityHelper.getContentUri(indexSection),
-                PLACEMARKS_SUMMARY_PROJECTION, select, null,
-                PlacemarkColumns.PLACEMARK_NAME);
+                PLACEMARKS_SUMMARY_PROJECTION, null, null,
+                mSort);
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        /**
-         * Manual detection of Android version: This is because of a
-         * ActionBarSherlock/compatibility package issue with the MenuInflater.
-         * Also, versions earlier than Honeycomb don't manage SHOW_AS_ACTION_*
-         * options other than ALWAYS.
-         */
-
-        // if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-        // inflater.inflate(R.menu.menu_fragment_list, menu);
-        // }
-        // else {
-        // /**
-        // * Honeycomb drawables are different (white instead of grey) because
-        // * the items are in the actionbar. Order is: toggle (1), kml (2),
-        // * list sort (3), postal code (4), my position (5).
-        // */
-        // menu.add(Menu.NONE, R.id.menu_list_sort_order, 3,
-        // R.string.menu_list_sort_order)
-        // .setIcon(getResources().getDrawable(R.drawable.ic_actionbar_list_sort));
-        // }
-
-    }
+    // TODO: add Refresh (distances) button 
+    // @Override
+    // public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    // /**
+    // * Manual detection of Android version: This is because of a
+    // * ActionBarSherlock/compatibility package issue with the MenuInflater.
+    // * Also, versions earlier than Honeycomb don't manage SHOW_AS_ACTION_*
+    // * options other than ALWAYS.
+    // */
+    //
+    // if (Const.SUPPORTS_HONEYCOMB) {
+    // /**
+    // * Honeycomb drawables are different (white instead of grey) because
+    // * the items are in the actionbar. Order is: toggle (1), kml (2),
+    // * list sort (3), postal code (4), my position (5).
+    // */
+    // menu.add(Menu.NONE, R.id.menu_list_sort_order, 3,
+    // R.string.menu_list_sort_order)
+    // .setIcon(getResources().getDrawable(R.drawable.ic_actionbar_list_sort));
+    // }
+    // else {
+    // inflater.inflate(R.menu.menu_fragment_list, menu);
+    // }
+    // }
 
     /**
      * Container Activity must implement this interface to receive the list item
@@ -219,7 +230,6 @@ public class BaseListFragment extends ListFragment implements
     public void onAttach(SupportActivity activity) {
         super.onAttach(activity);
         try {
-            // TODO Verify if listener should be released onHide or onPause
             mListener = (OnPlacemarkSelectedListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
@@ -236,5 +246,4 @@ public class BaseListFragment extends ListFragment implements
             }
         }
     };
-
 }

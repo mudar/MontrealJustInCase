@@ -36,13 +36,14 @@ public class PlacemarkDatabase extends SQLiteOpenHelper {
     private static final String TAG = "SecurityDatabase";
 
     private static final String DATABASE_NAME = "mtlaucasou.db";
-    private static final int DATABASE_VERSION = 10;
+    private static final int DATABASE_VERSION = 11;
 
     interface Tables {
         String FIRE_HALLS = "fire_halls";
         String SPVM_STATIONS = "spvm_stations";
         String WATER_SUPPLIES = "water_supplies";
         String EMERGENCY_HOSTELS = "emergency_hostels";
+        String CONDITIONED_PLACES = "conditioned_places";
     }
     
     public PlacemarkDatabase(Context context) {
@@ -57,7 +58,7 @@ public class PlacemarkDatabase extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         Log.v(TAG, "Creating database tables. DB name: " + DATABASE_NAME);
-        Log.v(TAG, "Creating database tables: " + Tables.FIRE_HALLS + ", " + Tables.SPVM_STATIONS + ", " + Tables.WATER_SUPPLIES + ", " + Tables.EMERGENCY_HOSTELS );
+        Log.v(TAG, "Creating database tables: " + Tables.FIRE_HALLS + ", " + Tables.SPVM_STATIONS + ", " + Tables.WATER_SUPPLIES + ", " + Tables.EMERGENCY_HOSTELS + ", " + Tables.CONDITIONED_PLACES );
         
         db.execSQL( "CREATE TABLE " + Tables.FIRE_HALLS + " ( " 
                 + BaseColumns._ID                        + " INTEGER PRIMARY KEY , "
@@ -68,6 +69,7 @@ public class PlacemarkDatabase extends SQLiteOpenHelper {
                 + PlacemarkColumns.PLACEMARK_ADDRESS     + " TEXT NULL, "
                 + PlacemarkColumns.PLACEMARK_GEO_LAT     + " DECIMAL(5,8) NOT NULL, "
                 + PlacemarkColumns.PLACEMARK_GEO_LNG     + " DECIMAL(5,8) NOT NULL, "
+                + PlacemarkColumns.PLACEMARK_DISTANCE    + " INTEGER DEFAULT 0, "
                 + "UNIQUE (" + PlacemarkColumns.PLACEMARK_ID + ") ON CONFLICT REPLACE)");
 
         db.execSQL( "CREATE TABLE " + Tables.SPVM_STATIONS + " ( " 
@@ -79,6 +81,7 @@ public class PlacemarkDatabase extends SQLiteOpenHelper {
                 + PlacemarkColumns.PLACEMARK_ADDRESS     + " TEXT NULL, "
                 + PlacemarkColumns.PLACEMARK_GEO_LAT     + " DECIMAL(5,8) NOT NULL, "
                 + PlacemarkColumns.PLACEMARK_GEO_LNG     + " DECIMAL(5,8) NOT NULL, "
+                + PlacemarkColumns.PLACEMARK_DISTANCE    + " INTEGER DEFAULT 0, "
                 + "UNIQUE (" + PlacemarkColumns.PLACEMARK_ID + ") ON CONFLICT REPLACE)");
         
         db.execSQL( "CREATE TABLE " + Tables.WATER_SUPPLIES + " ( " 
@@ -90,6 +93,7 @@ public class PlacemarkDatabase extends SQLiteOpenHelper {
                 + PlacemarkColumns.PLACEMARK_ADDRESS     + " TEXT NULL, "
                 + PlacemarkColumns.PLACEMARK_GEO_LAT     + " DECIMAL(5,8) NOT NULL, "
                 + PlacemarkColumns.PLACEMARK_GEO_LNG     + " DECIMAL(5,8) NOT NULL, "
+                + PlacemarkColumns.PLACEMARK_DISTANCE    + " INTEGER DEFAULT 0, "
                 + "UNIQUE (" + PlacemarkColumns.PLACEMARK_ID + ") ON CONFLICT REPLACE)");
 
         db.execSQL( "CREATE TABLE " + Tables.EMERGENCY_HOSTELS + " ( " 
@@ -101,6 +105,19 @@ public class PlacemarkDatabase extends SQLiteOpenHelper {
                 + PlacemarkColumns.PLACEMARK_ADDRESS     + " TEXT NULL, "
                 + PlacemarkColumns.PLACEMARK_GEO_LAT     + " DECIMAL(5,8) NOT NULL, "
                 + PlacemarkColumns.PLACEMARK_GEO_LNG     + " DECIMAL(5,8) NOT NULL, "
+                + PlacemarkColumns.PLACEMARK_DISTANCE    + " INTEGER DEFAULT 0, "
+                + "UNIQUE (" + PlacemarkColumns.PLACEMARK_ID + ") ON CONFLICT REPLACE)");
+        
+        db.execSQL( "CREATE TABLE " + Tables.CONDITIONED_PLACES + " ( " 
+                + BaseColumns._ID                        + " INTEGER PRIMARY KEY , "
+                + SyncColumns.UPDATED                    + " INTEGER NOT NULL ,"
+                + PlacemarkColumns.PLACEMARK_ID          + " INTEGER NOT NULL , "
+                + PlacemarkColumns.PLACEMARK_NAME        + " TEXT NOT NULL DEFAULT '' COLLATE UNICODE, "
+                + PlacemarkColumns.PLACEMARK_DESCRIPTION + " TEXT NULL, "
+                + PlacemarkColumns.PLACEMARK_ADDRESS     + " TEXT NULL, "
+                + PlacemarkColumns.PLACEMARK_GEO_LAT     + " DECIMAL(5,8) NOT NULL, "
+                + PlacemarkColumns.PLACEMARK_GEO_LNG     + " DECIMAL(5,8) NOT NULL, "
+                + PlacemarkColumns.PLACEMARK_DISTANCE    + " INTEGER DEFAULT 0, "
                 + "UNIQUE (" + PlacemarkColumns.PLACEMARK_ID + ") ON CONFLICT REPLACE)");
     }
     
@@ -113,6 +130,7 @@ public class PlacemarkDatabase extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + Tables.SPVM_STATIONS);
         db.execSQL("DROP TABLE IF EXISTS " + Tables.WATER_SUPPLIES);
         db.execSQL("DROP TABLE IF EXISTS " + Tables.EMERGENCY_HOSTELS);
+        db.execSQL("DROP TABLE IF EXISTS " + Tables.CONDITIONED_PLACES);
 
         onCreate(db);
     }

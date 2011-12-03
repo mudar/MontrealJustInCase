@@ -50,7 +50,7 @@ import android.support.v4.view.Menu;
 import android.support.v4.view.MenuInflater;
 import android.support.v4.view.MenuItem;
 import android.text.InputType;
-//import android.util.Log;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -70,7 +70,7 @@ public class BaseMapActivity extends FragmentMapActivity implements OnPlacemarkS
      */
     protected boolean isHiddenList;
 
-    protected MenuItem btnActionbarToggleList;
+    // protected MenuItem btnActionbarToggleList;
     private String postalCode;
     private ProgressDialog pd;
 
@@ -184,18 +184,15 @@ public class BaseMapActivity extends FragmentMapActivity implements OnPlacemarkS
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-//        Log.v(TAG, "onCreateOptionsMenu");
+        // Log.v(TAG, "onCreateOptionsMenu");
         /**
          * Manual detection of Android version: This is because of a
          * ActionBarSherlock/compatibility package issue with the MenuInflater.
          * Also, versions earlier than Honeycomb don't manage SHOW_AS_ACTION_*
          * options other than ALWAYS.
          */
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-            MenuInflater inflater = (MenuInflater) getMenuInflater();
-            inflater.inflate(R.menu.menu_activity_map, menu);
-        }
-        else {
+
+        if (Const.SUPPORTS_HONEYCOMB) {
             /**
              * Honeycomb drawables are different (white instead of grey) because
              * the items are in the actionbar. Order is: toggle (1), kml (2),
@@ -209,13 +206,15 @@ public class BaseMapActivity extends FragmentMapActivity implements OnPlacemarkS
             menu.add(Menu.NONE, R.id.menu_link_kml, 2,
                     R.string.menu_link_kml)
                     .setIcon(getResources().getDrawable(R.drawable.ic_actionbar_directions));
-
         }
-        btnActionbarToggleList = menu.findItem(R.id.actionbar_toggle_list);
+        else {
+            MenuInflater inflater = (MenuInflater) getMenuInflater();
+            inflater.inflate(R.menu.menu_activity_map, menu);
+        }
+
+        MenuItem btnActionbarToggleList = menu.findItem(R.id.actionbar_toggle_list);
 
         if (!isHiddenList) {
-            // TODO Remove this and rely on invalidateOptionsMenu() when
-            // supported by Compatibility library.
             /**
              * Activity/Fragments Lifecycle issues. The clean solution would be
              * to detect orientation and fragmentList.isVisible() here to decide
@@ -359,15 +358,8 @@ public class BaseMapActivity extends FragmentMapActivity implements OnPlacemarkS
              */
             ft.hide(fragmentList);
             ft.show(fragmentMap);
+            isHiddenList = true;
             ft.commit();
-
-            // TODO Remove this and rely on invalidateOptionsMenu(), probably
-            // with executePendingTransactions()
-            if (btnActionbarToggleList != null) {
-                btnActionbarToggleList.setIcon(getResources().getDrawable(
-                        R.drawable.ic_actionbar_view_list));
-            }
-
         }
 
         fragmentMap.setMapCenter(geoPoint);
@@ -404,6 +396,7 @@ public class BaseMapActivity extends FragmentMapActivity implements OnPlacemarkS
 
         final EditText input = new EditText(this);
         input.setInputType(InputType.TYPE_CLASS_TEXT);
+        input.setHint(R.string.input_hint_postal_code);
         alert.setView(input);
 
         alert.setPositiveButton(R.string.dialog_btn_ok, new DialogInterface.OnClickListener() {
@@ -450,8 +443,7 @@ public class BaseMapActivity extends FragmentMapActivity implements OnPlacemarkS
              */
             loc = Helper.findLocatioFromName(getApplicationContext(), postalCode);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            Log.e(TAG, e.getMessage());
         }
 
         Message msg = handler.obtainMessage();

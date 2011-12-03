@@ -74,6 +74,7 @@
     <string name="dialog_remote_kml_summary">Voulez-vous télécharger le fichier KML ? Il sera affiché dans l\'application Google Maps ce qui vous permet d\'afficher l\'itinéraire et Street View (si installé)…</string>
     <string name="dialog_postal_code_title">Code postal</string>
     <string name="dialog_postal_code_summary">Veuillez saisir le code postal à localiser sur la carte :</string>
+    <string name="input_hint_postal_code">Code postal</string>
     <string name="about_contents_note">En cas d\'urgence, veuillez contacter le Service de la sécurité publique. Ne vous fiez pas aux informations présentées dans cette application car elle ne contiendra pas les dernirères mesures d\'urgence.</string>
     <string name="about_contents_project_url"><a href="http://www.montrealaucasou.com/">montrealaucasou.com</a></string>
     <string name="about_contents_project_version">Version %s</string>

@@ -23,16 +23,17 @@
 
 package ca.mudar.mtlaucasou.utils;
 
-import com.google.android.maps.GeoPoint;
-
 import ca.mudar.mtlaucasou.R;
 import ca.mudar.mtlaucasou.utils.Const.UnitsDisplay;
+
+import com.google.android.maps.GeoPoint;
 
 import android.content.Context;
 import android.content.res.Resources;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -56,7 +57,7 @@ public class Helper {
             }
             resultString = total.toString();
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.e(TAG, e.getMessage());
         }
         return resultString;
     }
@@ -87,7 +88,7 @@ public class Helper {
      * the value: different approximationss in ft when > 1000. Very short
      * distances are not displayed to avoid problems with Location accuracy.
      * 
-     * @param c 
+     * @param c
      * @param fDistanceM The distance in Meters.
      * @return String Display the distance.
      */
@@ -196,4 +197,5 @@ public class Helper {
 
         return location;
     }
+
 }

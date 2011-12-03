@@ -24,6 +24,7 @@
 
 package ca.mudar.mtlaucasou.provider;
 
+import ca.mudar.mtlaucasou.provider.PlacemarkContract.ConditionedPlaces;
 import ca.mudar.mtlaucasou.provider.PlacemarkContract.EmergencyHostels;
 import ca.mudar.mtlaucasou.provider.PlacemarkContract.FireHalls;
 import ca.mudar.mtlaucasou.provider.PlacemarkContract.SpvmStations;
@@ -70,6 +71,9 @@ public class PlacemarkProvider extends ContentProvider {
     private static final int EMERGENCY_HOSTELS = 140;
     private static final int EMERGENCY_HOSTELS_ID = 141;
 
+    private static final int CONDITIONED_PLACES = 150;
+    private static final int CONDITIONED_PLACES_ID = 151;
+
     private static UriMatcher buildUriMatcher() {
         final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
         final String authority = PlacemarkContract.CONTENT_AUTHORITY;
@@ -85,6 +89,9 @@ public class PlacemarkProvider extends ContentProvider {
 
         matcher.addURI(authority, "emergency_hostels", EMERGENCY_HOSTELS);
         matcher.addURI(authority, "emergency_hostels/*", EMERGENCY_HOSTELS_ID);
+
+        matcher.addURI(authority, "conditioned_places", CONDITIONED_PLACES);
+        matcher.addURI(authority, "conditioned_places/*", CONDITIONED_PLACES_ID);
 
         return matcher;
     }
@@ -118,6 +125,10 @@ public class PlacemarkProvider extends ContentProvider {
                 return EmergencyHostels.CONTENT_TYPE;
             case EMERGENCY_HOSTELS_ID:
                 return EmergencyHostels.CONTENT_ITEM_TYPE;
+            case CONDITIONED_PLACES:
+                return ConditionedPlaces.CONTENT_TYPE;
+            case CONDITIONED_PLACES_ID:
+                return ConditionedPlaces.CONTENT_ITEM_TYPE;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
@@ -152,6 +163,12 @@ public class PlacemarkProvider extends ContentProvider {
                 getContext().getContentResolver().notifyChange(uri, null);
                 return EmergencyHostels.buildEmergencyHostelUri(values
                         .getAsString(EmergencyHostels.PLACEMARK_ID));
+            }
+            case CONDITIONED_PLACES: {
+                db.insertOrThrow(Tables.CONDITIONED_PLACES, null, values);
+                getContext().getContentResolver().notifyChange(uri, null);
+                return ConditionedPlaces.buildConditionedPlaceUri(values
+                        .getAsString(ConditionedPlaces.PLACEMARK_ID));
             }
             default: {
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
@@ -246,6 +263,14 @@ public class PlacemarkProvider extends ContentProvider {
                 final String emergencyHostelId = EmergencyHostels.getEmergencyHostelId(uri);
                 return builder.table(Tables.EMERGENCY_HOSTELS).where(
                         EmergencyHostels.PLACEMARK_ID + "=?", emergencyHostelId);
+            }
+            case CONDITIONED_PLACES: {
+                return builder.table(Tables.CONDITIONED_PLACES);
+            }
+            case CONDITIONED_PLACES_ID: {
+                final String conditionedPlaceId = ConditionedPlaces.getConditionedPlaceId(uri);
+                return builder.table(Tables.CONDITIONED_PLACES).where(
+                        ConditionedPlaces.PLACEMARK_ID + "=?", conditionedPlaceId);
             }
             default: {
                 throw new UnsupportedOperationException("Unknown uri: " + uri);

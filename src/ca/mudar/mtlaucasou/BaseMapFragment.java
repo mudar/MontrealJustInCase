@@ -27,7 +27,6 @@ import ca.mudar.mtlaucasou.provider.PlacemarkContract.PlacemarkColumns;
 import ca.mudar.mtlaucasou.ui.widgets.MyItemizedOverlay;
 import ca.mudar.mtlaucasou.utils.ActivityHelper;
 import ca.mudar.mtlaucasou.utils.AppHelper;
-import ca.mudar.mtlaucasou.utils.Helper;
 import ca.mudar.mtlaucasou.utils.Const;
 
 import com.google.android.maps.GeoPoint;
@@ -41,9 +40,7 @@ import com.google.android.maps.OverlayItem;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.BaseColumns;
 import android.support.v4.app.Fragment;
@@ -58,7 +55,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class BaseMapFragment extends Fragment implements LocationListener {
+public abstract class BaseMapFragment extends Fragment {
     protected static final String TAG = "BaseMapFragment";
 
     protected static int INDEX_OVERLAY_MY_LOCATION = 0;
@@ -101,7 +98,6 @@ public abstract class BaseMapFragment extends Fragment implements LocationListen
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        // Log.v(TAG, "onCreate");
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
     }
@@ -111,8 +107,6 @@ public abstract class BaseMapFragment extends Fragment implements LocationListen
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Log.v(TAG, "onCreateView");
-
         /**
          * Restore map center and zoom
          */
@@ -205,7 +199,7 @@ public abstract class BaseMapFragment extends Fragment implements LocationListen
              */
             mLocationOverlay.runOnFirstFix(new Runnable() {
                 public void run() {
-
+//                    Log.v(TAG, "getMyLocation");
                     GeoPoint userLocation = mLocationOverlay.getMyLocation();
 
                     if (mListener != null) {
@@ -255,7 +249,12 @@ public abstract class BaseMapFragment extends Fragment implements LocationListen
             PlacemarkColumns.PLACEMARK_NAME,
             PlacemarkColumns.PLACEMARK_ADDRESS,
             PlacemarkColumns.PLACEMARK_GEO_LAT,
-            PlacemarkColumns.PLACEMARK_GEO_LNG
+            PlacemarkColumns.PLACEMARK_GEO_LNG,
+//            PlacemarkColumns.PLACEMARK_DISTANCE,
+//            PlacemarkColumns.SIN_LAT_RAD,
+//            PlacemarkColumns.COS_LAT_RAD,
+//            PlacemarkColumns.SIN_LNG_RAD,
+//            PlacemarkColumns.COS_LNG_RAD
     };
 
     /**
@@ -305,10 +304,8 @@ public abstract class BaseMapFragment extends Fragment implements LocationListen
          * Also, versions earlier than Honeycomb don't manage SHOW_AS_ACTION_*
          * options other than ALWAYS.
          */
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-            inflater.inflate(R.menu.menu_fragment_map, menu);
-        }
-        else {
+
+        if (Const.SUPPORTS_HONEYCOMB) {
             /**
              * Honeycomb drawables are different (white instead of grey) because
              * the items are in the actionbar. Order is: toggle (1), kml (2),
@@ -321,6 +318,9 @@ public abstract class BaseMapFragment extends Fragment implements LocationListen
             menu.add(Menu.NONE, R.id.menu_map_mylocation, 5,
                     R.string.menu_map_mylocation)
                     .setIcon(getResources().getDrawable(R.drawable.ic_actionbar_mylocation));
+        }
+        else {
+            inflater.inflate(R.menu.menu_fragment_map, menu);
         }
 
         /**
@@ -405,34 +405,6 @@ public abstract class BaseMapFragment extends Fragment implements LocationListen
         }
     }
 
-    @Override
-    public void onLocationChanged(Location location) {
-        // TODO Auto-generated method stub
-        // Log.v(TAG, "onLocationChanged");
-        // mAppHelper.setLocation(location);
-        if (mListener != null) {
-            mListener.OnMyLocationChanged(Helper.locationToGeoPoint(location));
-        }
-    }
-
-    @Override
-    public void onProviderDisabled(String arg0) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void onProviderEnabled(String arg0) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
-        // TODO Auto-generated method stub
-
-    }
-
     /**
      * Data structure of a Placemark/MapMarker/OverlayItem
      */
@@ -450,14 +422,6 @@ public abstract class BaseMapFragment extends Fragment implements LocationListen
         }
     }
 
-    /**
-     * Getter for the MapCenter GeoPoint.
-     * 
-     * @return coordinates of the map center
-     */
-    public GeoPoint getMapCenter() {
-        return mMapCenter;
-    }
 
     /**
      * Setter for the MapCenter GeoPoint. Centers map on the new location and
@@ -466,8 +430,6 @@ public abstract class BaseMapFragment extends Fragment implements LocationListen
      * @param mapCenter The new location
      */
     public void setMapCenter(GeoPoint mapCenter) {
-        // Log.v(TAG, "Geo = " + mapCenter.getLatitudeE6() + "," +
-        // mapCenter.getLongitudeE6());
         animateToPoint(mapCenter);
 
         Overlay overlayPlacemarks = mMapView.getOverlays().get(INDEX_OVERLAY_PLACEMARKS);
@@ -479,7 +441,6 @@ public abstract class BaseMapFragment extends Fragment implements LocationListen
      * center on the location with a near zoom.
      */
     public void setMapCenterOnLocation(Location mapCenter) {
-
         GeoPoint geoPoint = new GeoPoint((int) (mapCenter.getLatitude() * 1E6),
                 (int) (mapCenter.getLongitude() * 1E6));
 

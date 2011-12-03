@@ -38,6 +38,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -48,6 +49,8 @@ import android.widget.LinearLayout;
  * indicating whether the user has accepted.
  */
 public class EulaHelper {
+    protected static String TAG = "EulaHelper";
+    
     public static boolean hasAcceptedEula(final Context context) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         return sp.getBoolean("accepted_eula", false);
@@ -82,7 +85,7 @@ public class EulaHelper {
         try {
             helpHtml = Helper.inputStreamToString(activity.getAssets().open(filename));
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.e(TAG, e.getMessage());
         }
 
         /**

@@ -74,6 +74,7 @@
     <string name="dialog_remote_kml_summary">This will download the remote KML file and open it with Google Maps app, allowing you to display Directions and Street View (if installed). Continue with download?</string>
     <string name="dialog_postal_code_title">Postal Code</string>
     <string name="dialog_postal_code_summary">Please enter postal code to locate on map:</string>
+    <string name="input_hint_postal_code">Postal Code</string>
     <string name="about_contents_note">In case of emergency, please contact the City\'s security services directly. Do not rely on information provided here as it will not contain the updated security measures.</string>
     <string name="about_contents_project_url"><a href="http://www.montrealjustincase.com/">montrealjustincase.com</a></string>
     <string name="about_contents_project_version">Version %s</string>

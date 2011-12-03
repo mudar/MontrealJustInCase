@@ -28,11 +28,13 @@ package ca.mudar.mtlaucasou.service;
 import ca.mudar.mtlaucasou.io.LocalExecutor;
 import ca.mudar.mtlaucasou.io.RemoteExecutor;
 import ca.mudar.mtlaucasou.io.RemotePlacemarksHandler;
+import ca.mudar.mtlaucasou.provider.PlacemarkContract.ConditionedPlaces;
 import ca.mudar.mtlaucasou.provider.PlacemarkContract.EmergencyHostels;
 import ca.mudar.mtlaucasou.provider.PlacemarkContract.FireHalls;
 import ca.mudar.mtlaucasou.provider.PlacemarkContract.SpvmStations;
 import ca.mudar.mtlaucasou.provider.PlacemarkContract.WaterSupplies;
 import ca.mudar.mtlaucasou.utils.Const;
+import ca.mudar.mtlaucasou.utils.Const.KmlLocalAssets;
 
 import org.apache.http.Header;
 import org.apache.http.HeaderElement;
@@ -106,8 +108,6 @@ public class SyncService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        // Log.d(TAG, "onHandleIntent(intent=" + intent.toString() + ")");
-
         final ResultReceiver receiver = intent.getParcelableExtra(EXTRA_STATUS_RECEIVER);
         if (receiver != null) {
             receiver.send(STATUS_RUNNING, Bundle.EMPTY);
@@ -122,29 +122,34 @@ public class SyncService extends IntentService {
             final long startLocal = System.currentTimeMillis();
 
             /**
-             * Four assets files to load, so progress goes by 25%.
+             * Five Assets files to load, so progress goes by 20%.
              */
             Bundle bundle = new Bundle();
-            bundle.putInt(Const.KEY_BUNDLE_PROGRESS_INCREMENT, 25);
+            bundle.putInt(Const.KEY_BUNDLE_PROGRESS_INCREMENT, 20);
 
             // Parse values from local cache first, since SecurityServices copy
             // or network might be down.
 
             receiver.send(STATUS_RUNNING, bundle);
-            mLocalExecutor.execute(context, "casernes-pompiers.kml",
+            mLocalExecutor.execute(context, KmlLocalAssets.FIRE_HALLS,
                     new RemotePlacemarksHandler(FireHalls.CONTENT_URI, true));
 
             receiver.send(STATUS_RUNNING, bundle);
-            mLocalExecutor.execute(context, "postes-spvm.kml",
+            mLocalExecutor.execute(context, KmlLocalAssets.SPVM_STATIONS,
                     new RemotePlacemarksHandler(SpvmStations.CONTENT_URI, true));
 
             receiver.send(STATUS_RUNNING, bundle);
-            mLocalExecutor.execute(context, "points-eau.kml", new RemotePlacemarksHandler(
-                    WaterSupplies.CONTENT_URI));
+            mLocalExecutor.execute(context, KmlLocalAssets.WATER_SUPPLIES,
+                    new RemotePlacemarksHandler(
+                            WaterSupplies.CONTENT_URI));
 
             receiver.send(STATUS_RUNNING, bundle);
-            mLocalExecutor.execute(context, "centres-hebergement-urgence.kml",
+            mLocalExecutor.execute(context, KmlLocalAssets.EMERGENCY_HOSTELS,
                     new RemotePlacemarksHandler(EmergencyHostels.CONTENT_URI));
+
+            receiver.send(STATUS_RUNNING, bundle);
+            mLocalExecutor.execute(context, KmlLocalAssets.CONDITIONED_PLACES,
+                    new RemotePlacemarksHandler(ConditionedPlaces.CONTENT_URI));
 
             Log.v(TAG, "Sync duration: " + (System.currentTimeMillis() - startLocal) + " ms");
 
@@ -158,7 +163,7 @@ public class SyncService extends IntentService {
             // startRemote) + "ms");
 
         } catch (Exception e) {
-            Log.e(TAG, "Problem while syncing", e);
+            Log.e(TAG, e.getMessage());
 
             if (receiver != null) {
                 /**
@@ -173,9 +178,6 @@ public class SyncService extends IntentService {
         if (receiver != null) {
             receiver.send(STATUS_FINISHED, Bundle.EMPTY);
         }
-
-        // Announce success to any surface listener
-        // Log.v(TAG, "sync finished");
     }
 
     /**
@@ -235,6 +237,7 @@ public class SyncService extends IntentService {
             return info.packageName + "/" + info.versionName
                     + " (" + info.versionCode + ") (gzip)";
         } catch (NameNotFoundException e) {
+            Log.e(TAG, e.getMessage());
             return null;
         }
     }

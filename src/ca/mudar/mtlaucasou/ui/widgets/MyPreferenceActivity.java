@@ -80,11 +80,8 @@ public class MyPreferenceActivity extends PreferenceActivity implements
         /**
          * Default sort list order is by name
          */
-        // TODO Enable when sort list by distance is possible
-
-        tListSort.setSummary(R.string.prefs_list_sort_summary_todo);
-        // tListSort.setSummary(getSummaryByValue(mSharedPrefs.getString(PrefsNames.LIST_SORT,
-        // PrefsValues.LIST_SORT_NAME)));
+        tListSort.setSummary(getSummaryByValue(mSharedPrefs.getString(PrefsNames.LIST_SORT,
+                PrefsValues.LIST_SORT_DISTANCE)));
 
         /**
          * The app's Default language is the phone's language. If not supported,
@@ -125,7 +122,7 @@ public class MyPreferenceActivity extends PreferenceActivity implements
             mAppHelper.setUnits(units);
         }
         else if (key.equals(PrefsNames.LIST_SORT)) {
-            String sort = prefs.getString(key, PrefsValues.LIST_SORT_NAME);
+            String sort = prefs.getString(key, PrefsValues.LIST_SORT_DISTANCE);
             tListSort.setSummary(getSummaryByValue(sort));
             mAppHelper.setListSort(sort);
         }

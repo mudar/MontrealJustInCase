@@ -31,6 +31,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.location.Location;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.Locale;
@@ -52,8 +53,6 @@ public class AppHelper extends Application {
     }
 
     public void setLocation(Location location) {
-        // Log.v(TAG, "setLocation. Lat = " + location.getLatitude() +
-        // ". Lng = " + location.getLongitude());
         this.mLocation = location;
     }
 
@@ -101,7 +100,7 @@ public class AppHelper extends Application {
          */
         mUnits = prefs.getString(PrefsNames.UNITS_SYSTEM, PrefsValues.UNITS_ISO);
 
-        mListSort = prefs.getString(PrefsNames.LIST_SORT, PrefsValues.LIST_SORT_NAME);
+        mListSort = prefs.getString(PrefsNames.LIST_SORT, PrefsValues.LIST_SORT_DISTANCE);
 
         mLanguage = prefs.getString(Const.PrefsNames.LANGUAGE, Locale.getDefault().getLanguage());
         if (!mLanguage.equals(PrefsValues.LANG_EN) && !mLanguage.equals(PrefsValues.LANG_FR)) {

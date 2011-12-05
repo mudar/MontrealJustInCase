@@ -26,7 +26,7 @@
 
     <string name="hello">Hello World, Montréal Just in Case!</string>
     <string name="app_name">MTL Just in Case</string>
-    <string name="app_version">0.9.2</string>
+    <string name="app_version">1.0</string>
     <string name="google_map_api_key" _YOUR_GOOGLE_MAP_API_KEY_></string>
     <string name="google_map_api_key_debug" _YOUR_GOOGLE_MAP_API_KEY_DEBUG_></string>
     <string name="app_label_fire_halls">Fire Stations</string>
@@ -85,7 +85,8 @@
     <string name="about_contents_2_4">Emergency accommodation centres and air conditioned public places.</string>
     <string name="about_contents_credits">Android app developed by <a href="http://www.mudar.ca/">Mudar Noufal</a>. Source code is released under the GPLv3 license from the Free Software Foundation.</string>
     <string name="about_contents_open_data">Project done in collaboration with <a href="http://montrealouvert.net/donnees-ouvertes-questions-frequemment-demandees/?lang=en">Montréal ouvert</a>. This app is powered by The City of Montréal Open Data <a href="http://donnees.ville.montreal.qc.ca/">Portal</a>, in compliance with its Open Data <a href="http://donnees.ville.montreal.qc.ca/licence-texte-complet">license</a>.</string>
-    <string name="prefs_general_preferences">General Preferences</string>
+    <string name="prefs_category_general">General Preferences</string>
+    <string name="prefs_category_performance">Performance</string>
     <string name="prefs_language_title">Language</string>
     <string name="prefs_language_summary">Change the interface language</string>
     <string name="prefs_language_dialog_title">Set language</string>
@@ -102,5 +103,7 @@
     <string name="prefs_list_sort_dialog_title">Sort lists by</string>
     <string name="prefs_list_sort_name">Alphabetical order</string>
     <string name="prefs_list_sort_distance">Distance</string>
+    <string name="prefs_follow_location_title">Enhanced measurements</string>
+    <string name="prefs_follow_location_summary">Experimental: Background location updates. Useful if on the move.</string>
 
 </resources>

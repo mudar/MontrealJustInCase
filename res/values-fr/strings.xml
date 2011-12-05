@@ -26,7 +26,7 @@
 
     <string name="hello">Hello World, Montréal au cas où!</string>
     <string name="app_name">MTL au cas où</string>
-    <string name="app_version">0.9.2</string>
+    <string name="app_version">1.0</string>
     <string name="google_map_api_key" _YOUR_GOOGLE_MAP_API_KEY_></string>
     <string name="google_map_api_key_debug" _YOUR_GOOGLE_MAP_API_KEY_DEBUG_></string>
     <string name="app_label_fire_halls">Casernes de pompiers</string>
@@ -34,14 +34,14 @@
     <string name="app_label_water_supplies">Points d\'eau</string>
     <string name="app_label_emergency_hostels">Hébergements d\'urgence</string>
     <string name="app_label_about">À propos</string>
-    <string name="app_label_preferences">Réglages</string>
+    <string name="app_label_preferences">Paramètres</string>
     <string name="btn_fire_halls">Casernes\nde pompiers</string>
     <string name="btn_spvm_stations">Postes\nde la SPVM</string>
     <string name="btn_water_supplies">Points\nd\'eau</string>
     <string name="btn_emergency_hostels">Hébergements\nd\'urgence</string>
     <string name="menu_view_list">Liste</string>
     <string name="menu_view_map">Carte</string>
-    <string name="menu_preferences">Réglages</string>
+    <string name="menu_preferences">Paramètres</string>
     <string name="menu_help">Aide</string>
     <string name="menu_about">À propos</string>
     <string name="menu_link_kml">Itinéraire</string>
@@ -75,7 +75,7 @@
     <string name="dialog_postal_code_title">Code postal</string>
     <string name="dialog_postal_code_summary">Veuillez saisir le code postal à localiser sur la carte :</string>
     <string name="input_hint_postal_code">Code postal</string>
-    <string name="about_contents_note">En cas d\'urgence, veuillez contacter le Service de la sécurité publique. Ne vous fiez pas aux informations présentées dans cette application car elle ne contiendra pas les dernirères mesures d\'urgence.</string>
+    <string name="about_contents_note">En cas d\'urgence, veuillez contacter le Service de la sécurité publique. Ne vous fiez pas aux informations présentées dans cette application car elle ne contiendra pas les dernières mesures d\'urgence.</string>
     <string name="about_contents_project_url"><a href="http://www.montrealaucasou.com/">montrealaucasou.com</a></string>
     <string name="about_contents_project_version">Version %s</string>
     <string name="about_contents_intro">Montréal au cas où vous donne accès aux localisations géographiques et aux adresses civiques associées à quatre services de sécurité publique :</string>
@@ -85,7 +85,8 @@
     <string name="about_contents_2_4">centres d\'hébergement d\'urgence et lieux publics climatisés.</string>
     <string name="about_contents_credits">Application Android réalisée par <a href="http://www.mudar.ca/">Mudar Noufal</a>. Le code source est publié sous la licence GPLv3 de la Free Software Foundation.</string>
     <string name="about_contents_open_data">Projet réalisé en collaboration avec <a href="http://montrealouvert.net/donnees-ouvertes-questions-frequemment-demandees/?lang=fr">Montréal ouvert</a>. Cette application est propulsée par le <a href="http://donnees.ville.montreal.qc.ca/">Portail</a> données ouvertes de la Ville de Montréal en conformité avec sa <a href="http://donnees.ville.montreal.qc.ca/licence-texte-complet">licence</a> d\'utilisation des données ouvertes.</string>
-    <string name="prefs_general_preferences">Réglages</string>
+    <string name="prefs_category_general">Paramètres généraux</string>
+    <string name="prefs_category_performance">Performance</string>
     <string name="prefs_language_title">Langue</string>
     <string name="prefs_language_summary">Changer la langue de l\'interface</string>
     <string name="prefs_language_dialog_title">Choix de langue</string>
@@ -100,7 +101,7 @@
     <string name="prefs_list_sort_summary">Modifier l\'ordre d\'affichage des listes</string>
     <string name="prefs_list_sort_summary_todo">Ordre alphabétique ou distance. À venir…</string>
     <string name="prefs_list_sort_dialog_title">Trier par</string>
-    <string name="prefs_list_sort_name">Ordre alphabétique</string>
-    <string name="prefs_list_sort_distance">Distance</string>
+    <string name="prefs_follow_location_title">Optimiser les mesures</string>
+    <string name="prefs_follow_location_summary">Expérimental : actualisation en arrière-plan de la position géographique. Utile en déplacement.</string>
 
 </resources>

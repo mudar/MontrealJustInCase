@@ -31,8 +31,10 @@ import ca.mudar.mtlaucasou.utils.Const;
 import ca.mudar.mtlaucasou.utils.DetachableResultReceiver;
 import ca.mudar.mtlaucasou.utils.EulaHelper;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -57,7 +59,7 @@ public class MainActivity extends LocationFragmentActivity {
     // protected SharedPreferences.Editor prefsEditor;
 
     private SyncStatusUpdaterFragment mSyncStatusUpdaterFragment;
-    private boolean hasLoadedData;
+    private static boolean hasLoadedData;
     private String lang;
 
     // TODO Cleanup code, order functions by overrides following activity
@@ -135,23 +137,6 @@ public class MainActivity extends LocationFragmentActivity {
             intent.putExtra(SyncService.EXTRA_STATUS_RECEIVER, mSyncStatusUpdaterFragment.mReceiver);
             startService(intent);
 
-            prefsEditor.putBoolean(Const.PrefsNames.HAS_LOADED_DATA, true);
-            prefsEditor.putInt(Const.PrefsNames.VERSION_DATABASE,
-                    PlacemarkDatabase.getDatabaseVersion());
-            prefsEditor.commit();
-            hasLoadedData = true;
-        }
-    }
-
-    private void createServiceFragment() {
-        FragmentManager fm = getSupportFragmentManager();
-
-        mSyncStatusUpdaterFragment = (SyncStatusUpdaterFragment) fm
-                .findFragmentByTag(SyncStatusUpdaterFragment.TAG);
-        if (mSyncStatusUpdaterFragment == null) {
-            mSyncStatusUpdaterFragment = new SyncStatusUpdaterFragment();
-            fm.beginTransaction().add(mSyncStatusUpdaterFragment, SyncStatusUpdaterFragment.TAG)
-                    .commit();
         }
     }
 
@@ -210,6 +195,18 @@ public class MainActivity extends LocationFragmentActivity {
         invalidateOptionsMenu();
     }
 
+    private void createServiceFragment() {
+        FragmentManager fm = getSupportFragmentManager();
+
+        mSyncStatusUpdaterFragment = (SyncStatusUpdaterFragment) fm
+                .findFragmentByTag(SyncStatusUpdaterFragment.TAG);
+        if (mSyncStatusUpdaterFragment == null) {
+            mSyncStatusUpdaterFragment = new SyncStatusUpdaterFragment();
+            fm.beginTransaction().add(mSyncStatusUpdaterFragment, SyncStatusUpdaterFragment.TAG)
+                    .commit();
+        }
+    }
+
     public static class SyncStatusUpdaterFragment extends Fragment implements
             DetachableResultReceiver.Receiver {
         public static final String TAG = SyncStatusUpdaterFragment.class.getName();
@@ -261,6 +258,7 @@ public class MainActivity extends LocationFragmentActivity {
                         Toast.makeText(activity, R.string.toast_sync_finished, Toast.LENGTH_SHORT)
                                 .show();
                     }
+                    finalizeLoadingData(getSupportActivity().getApplicationContext());
 
                     break;
                 }
@@ -280,6 +278,27 @@ public class MainActivity extends LocationFragmentActivity {
                 }
             }
         }
+    }
+
+    public static void finalizeLoadingData(Context context) {
+
+        SharedPreferences prefs = context.getSharedPreferences(Const.APP_PREFS_NAME,
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        AppHelper appHelper = (AppHelper) context;
+
+        prefsEditor.putBoolean(Const.PrefsNames.HAS_LOADED_DATA, true);
+        prefsEditor.putInt(Const.PrefsNames.VERSION_DATABASE,
+                PlacemarkDatabase.getDatabaseVersion());
+        prefsEditor.commit();
+        hasLoadedData = true;
+
+        /**
+         * Make sure the distance is updated on first load!
+         */
+        Location l = appHelper.getLocation();
+        appHelper.setLocation(null);
+        appHelper.setLocation(l);
     }
 
 }

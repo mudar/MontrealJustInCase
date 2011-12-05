@@ -17,6 +17,8 @@
  * Modifications:
  * - Copied from radioactiveyak.location_best_practices
  * - Renamed package
+ * - Change type from long to float for lastLat and lastLng
+ * - Verify value type, lines 81-83
  */
 
 package ca.mudar.mtlaucasou.receivers;
@@ -73,8 +75,13 @@ public class PassiveLocationChangedReceiver extends BroadcastReceiver {
 
             // Get the last location we used to get a listing.
             long lastTime = prefs.getLong(Const.PrefsNames.LAST_UPDATE_TIME, Long.MIN_VALUE);
-            long lastLat = prefs.getLong(Const.PrefsNames.LAST_UPDATE_LAT, Long.MIN_VALUE);
-            long lastLng = prefs.getLong(Const.PrefsNames.LAST_UPDATE_LNG, Long.MIN_VALUE);
+            float lastLat = prefs.getFloat(Const.PrefsNames.LAST_UPDATE_LAT, Float.NaN);
+            float lastLng = prefs.getFloat(Const.PrefsNames.LAST_UPDATE_LNG, Float.NaN);
+
+            if ((lastLat == Float.NaN) || (lastLng == Float.NaN)) {
+                return;
+            }
+
             Location lastLocation = new Location(Const.LOCATION_PROVIDER);
             lastLocation.setLatitude(lastLat);
             lastLocation.setLongitude(lastLng);
@@ -86,9 +93,8 @@ public class PassiveLocationChangedReceiver extends BroadcastReceiver {
             // data transfers).
             if ((lastTime > System.currentTimeMillis() - Const.MAX_TIME) ||
                     (lastLocation.distanceTo(location) < Const.MAX_DISTANCE)) {
-                // Log.d(TAG,"TODO mtl: location set to null:  too soon, or too close to the last value. we should update. ref ignores");
+                location = null;
             }
-            location = null;
         }
 
         // Start the Service used to find nearby points of interest based on the

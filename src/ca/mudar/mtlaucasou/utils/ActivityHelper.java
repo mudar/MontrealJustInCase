@@ -24,21 +24,19 @@
 package ca.mudar.mtlaucasou.utils;
 
 import ca.mudar.mtlaucasou.MainActivity;
+import ca.mudar.mtlaucasou.R;
 import ca.mudar.mtlaucasou.provider.PlacemarkContract.EmergencyHostels;
 import ca.mudar.mtlaucasou.provider.PlacemarkContract.FireHalls;
 import ca.mudar.mtlaucasou.provider.PlacemarkContract.SpvmStations;
 import ca.mudar.mtlaucasou.provider.PlacemarkContract.WaterSupplies;
-import ca.mudar.mtlaucasou.services.DistanceUpdateService;
 import ca.mudar.mtlaucasou.ui.AboutActivity;
 import ca.mudar.mtlaucasou.ui.widgets.MyPreferenceActivity;
 import ca.mudar.mtlaucasou.utils.Const.KmlRemoteUrls;
-import ca.mudar.mtlaucasou.R;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.location.Location;
 import android.net.Uri;
 import android.view.MenuItem;
 
@@ -257,16 +255,4 @@ public class ActivityHelper {
         }
         return uri;
     }
-
-    public boolean updateDistances(Location location) {
-        // Log.v(TAG, "start background service!");
-        
-        Intent intent = new Intent(mActivity, DistanceUpdateService.class);
-        intent.putExtra(Const.INTENT_EXTRA_GEO_LAT, location.getLatitude());
-        intent.putExtra(Const.INTENT_EXTRA_GEO_LNG, location.getLongitude());
-        mActivity.startService(intent);
-
-        return true;
-    }
-
 }

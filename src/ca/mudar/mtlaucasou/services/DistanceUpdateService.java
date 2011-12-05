@@ -80,18 +80,18 @@ public class DistanceUpdateService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
 
-        // final long startLocal = System.currentTimeMillis();
+        final long startLocal = System.currentTimeMillis();
 
         double latitude = intent.getDoubleExtra(Const.INTENT_EXTRA_GEO_LAT, Double.NaN);
         double longitude = intent.getDoubleExtra(Const.INTENT_EXTRA_GEO_LNG, Double.NaN);
 
         if (latitude == Double.NaN || longitude == Double.NaN) {
-            // Log.v(TAG, "Location error, no updates.");
             return;
         }
 
         /**
-         * Check to see if this is a forced update
+         * Check to see if this is a forced update. Currently not in use in the
+         * UI.
          */
         boolean doUpdate = intent.getBooleanExtra(Const.INTENT_EXTRA_FORCE_UPDATE, false);
 
@@ -105,16 +105,25 @@ public class DistanceUpdateService extends IntentService {
             newLocation.setLatitude(latitude);
             newLocation.setLongitude(longitude);
 
-            // Retrieve the last update time and place.
+            /**
+             * Retrieve the last update time and place.
+             */
             long lastTime = prefs.getLong(PrefsNames.LAST_UPDATE_TIME, Long.MIN_VALUE);
-            long lastLat = prefs.getLong(PrefsNames.LAST_UPDATE_LAT, Long.MIN_VALUE);
-            long lastLng = prefs.getLong(PrefsNames.LAST_UPDATE_LNG, Long.MIN_VALUE);
+            float lastLat = prefs.getFloat(PrefsNames.LAST_UPDATE_LAT, Float.NaN);
+            float lastLng = prefs.getFloat(PrefsNames.LAST_UPDATE_LNG, Float.NaN);
+
+            if ((lastLat == Float.NaN) || (lastLng == Float.NaN)) {
+                return;
+            }
+
             Location lastLocation = new Location(Const.LOCATION_PROVIDER);
             lastLocation.setLatitude(lastLat);
             lastLocation.setLongitude(lastLng);
 
-            // If update time and distance bounds have been passed, do an
-            // update.
+            /**
+             * If update time and distance bounds have been passed, do an
+             * update.
+             */
             if ((lastTime < System.currentTimeMillis() - Const.MAX_TIME)
                     || (lastLocation.distanceTo(newLocation) > Const.MAX_DISTANCE)) {
                 doUpdate = true;
@@ -138,18 +147,28 @@ public class DistanceUpdateService extends IntentService {
             } catch (OperationApplicationException e) {
                 Log.e(TAG, e.getMessage());
             }
-            
+
             /**
              * Save the last update time and place to the Shared Preferences.
              */
-            prefsEditor.putLong(PrefsNames.LAST_UPDATE_LAT, (long) latitude);
-            prefsEditor.putLong(PrefsNames.LAST_UPDATE_LNG, (long) longitude);
-            prefsEditor.putLong(PrefsNames.LAST_UPDATE_TIME, System.currentTimeMillis());      
+            prefsEditor.putFloat(PrefsNames.LAST_UPDATE_LAT, (float) latitude);
+            prefsEditor.putFloat(PrefsNames.LAST_UPDATE_LNG, (float) longitude);
+            prefsEditor.putLong(PrefsNames.LAST_UPDATE_TIME, System.currentTimeMillis());
             prefsEditor.commit();
         }
-        // Log.v(TAG, "Distance calculation took " + (System.currentTimeMillis()
-        // - startLocal) + " ms");
+        Log.v(TAG, "Distance calculation took " + (System.currentTimeMillis()
+                - startLocal) + " ms");
     }
+
+    /**
+     * The cursor columns projection.
+     */
+    static final String[] PLACEMARKS_SUMMARY_PROJECTION = new String[] {
+            BaseColumns._ID,
+            PlacemarkColumns.PLACEMARK_GEO_LAT,
+            PlacemarkColumns.PLACEMARK_GEO_LNG,
+            PlacemarkColumns.PLACEMARK_DISTANCE
+    };
 
     protected ArrayList<ContentProviderOperation> updateDistance(Uri contentUri,
             double startLatitude, double startLongitude) {
@@ -158,7 +177,8 @@ public class DistanceUpdateService extends IntentService {
         ContentProviderOperation.Builder builder = ContentProviderOperation
                 .newUpdate(contentUri);
 
-        Cursor queuedPlacemarks = contentResolver.query(contentUri, null, null, null, null);
+        Cursor queuedPlacemarks = contentResolver.query(contentUri, PLACEMARKS_SUMMARY_PROJECTION,
+                null, null, PlacemarkColumns.PLACEMARK_DISTANCE);
 
         try {
             final int indexId = queuedPlacemarks.getColumnIndexOrThrow(BaseColumns._ID);
@@ -166,6 +186,8 @@ public class DistanceUpdateService extends IntentService {
                     .getColumnIndexOrThrow(PlacemarkColumns.PLACEMARK_GEO_LAT);
             final int indexLng = queuedPlacemarks
                     .getColumnIndexOrThrow(PlacemarkColumns.PLACEMARK_GEO_LNG);
+            final int indexDistance = queuedPlacemarks
+                    .getColumnIndexOrThrow(PlacemarkColumns.PLACEMARK_DISTANCE);
             final String selection = BaseColumns._ID + " = ? ";
 
             while (queuedPlacemarks.moveToNext()) {
@@ -174,17 +196,28 @@ public class DistanceUpdateService extends IntentService {
                 };
                 double endLat = queuedPlacemarks.getDouble(indexLat);
                 double endLng = queuedPlacemarks.getDouble(indexLng);
+                int oldDistance = queuedPlacemarks.getInt(indexDistance);
 
+                /**
+                 * Calculate the new distance.
+                 */
                 float[] results = new float[1];
                 Location.distanceBetween(startLatitude, startLongitude, endLat, endLng, results);
                 int distance = (int) results[0];
 
-                builder = ContentProviderOperation.newUpdate(contentUri);
-                builder.withValue(PlacemarkColumns.PLACEMARK_DISTANCE, distance);
-                builder.withSelection(selection, queuedId);
+                /**
+                 * Compare the new distance to the old one, to avoid the db
+                 * write operation if not necessary.
+                 */
+                if (Math.abs(oldDistance - distance) > Const.DB_MAX_DISTANCE) {
+                    builder = ContentProviderOperation.newUpdate(contentUri);
+                    builder.withValue(PlacemarkColumns.PLACEMARK_DISTANCE, distance);
+                    builder.withSelection(selection, queuedId);
 
-                batch.add(builder.build());
+                    batch.add(builder.build());
+                }
             }
+
         } finally {
             queuedPlacemarks.close();
         }

@@ -27,19 +27,26 @@ import ca.mudar.mtlaucasou.provider.PlacemarkContract.PlacemarkColumns;
 import ca.mudar.mtlaucasou.ui.widgets.PlacemarksCursorAdapter;
 import ca.mudar.mtlaucasou.utils.ActivityHelper;
 import ca.mudar.mtlaucasou.utils.AppHelper;
+import ca.mudar.mtlaucasou.utils.Const;
 import ca.mudar.mtlaucasou.utils.Const.PrefsValues;
 import ca.mudar.mtlaucasou.utils.NotifyingAsyncQueryHandler;
 
 import com.google.android.maps.GeoPoint;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.ContentObserver;
 import android.database.Cursor;
+import android.location.Criteria;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.BaseColumns;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.SupportActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
@@ -67,6 +74,14 @@ public class BaseListFragment extends ListFragment implements
     };
 
     /**
+     * Location listener.
+     */
+    protected LocationManager locationManager;
+    protected LocationListener locationListener;
+    protected Criteria criteria;
+    boolean hasFollowLocationChanges = false;
+
+    /**
      * Initialized by constructor
      */
     protected int indexSection;
@@ -85,13 +100,38 @@ public class BaseListFragment extends ListFragment implements
         this.defaultSort = defaultSort;
     }
 
+    /**
+     * Attach a listener
+     */
+    @Override
+    public void onAttach(SupportActivity activity) {
+        super.onAttach(activity);
+        try {
+            mListener = (OnPlacemarkSelectedListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnPlacemarkSelectedListener");
+        }
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+
         mActivityHelper = ActivityHelper.createInstance(getActivity());
         mAppHelper = ((AppHelper) getActivity().getApplicationContext());
-        
+
+        locationManager = (LocationManager) getSupportActivity().getSystemService(
+                Context.LOCATION_SERVICE);
+        locationListener = new MyLocationListener();
+        criteria = new Criteria();
+        criteria.setAccuracy(Criteria.ACCURACY_COARSE);
+
+        SharedPreferences prefs = getSupportActivity().getSharedPreferences(Const.APP_PREFS_NAME,
+                Context.MODE_PRIVATE);
+        hasFollowLocationChanges = prefs
+                .getBoolean(Const.PrefsNames.FOLLOW_LOCATION_CHANGES, false);
+
         Location myLocation = mAppHelper.getLocation();
 
         mHandler = new NotifyingAsyncQueryHandler(getActivity().getContentResolver(), this);
@@ -139,7 +179,32 @@ public class BaseListFragment extends ListFragment implements
                 mSort);
     }
 
-    // TODO: add Refresh (distances) button 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        toggleUpdatesWhenLocationChanges(true);
+
+        getActivity().getContentResolver().registerContentObserver(
+                mActivityHelper.getContentUri(indexSection),
+                true, mTransactionsChangesObserver);
+        if (mCursor != null) {
+            mCursor.requery();
+        }
+
+        getListView().setFastScrollEnabled(true);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        toggleUpdatesWhenLocationChanges(false);
+
+        getActivity().getContentResolver().unregisterContentObserver(mTransactionsChangesObserver);
+    }
+
+    // TODO: add Refresh (distances) button
     // @Override
     // public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
     // /**
@@ -164,12 +229,16 @@ public class BaseListFragment extends ListFragment implements
     // }
     // }
 
-    /**
-     * Container Activity must implement this interface to receive the list item
-     * clicks.
-     */
-    public interface OnPlacemarkSelectedListener {
-        public void onPlacemarkSelected(GeoPoint geoPoint);
+    @Override
+    public void onQueryComplete(int token, Object cookie, Cursor cursor) {
+        if (this == null) {
+            return;
+        }
+
+        getActivity().stopManagingCursor(mCursor);
+        mCursor = cursor;
+        getActivity().startManagingCursor(mCursor);
+        mAdapter.changeCursor(mCursor);
     }
 
     /**
@@ -193,50 +262,67 @@ public class BaseListFragment extends ListFragment implements
         }
     }
 
-    @Override
-    public void onQueryComplete(int token, Object cookie, Cursor cursor) {
-        if (this == null) {
-            return;
-        }
-
-        getActivity().stopManagingCursor(mCursor);
-        mCursor = cursor;
-        getActivity().startManagingCursor(mCursor);
-        mAdapter.changeCursor(mCursor);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        getActivity().getContentResolver().registerContentObserver(
-                mActivityHelper.getContentUri(indexSection),
-                true, mTransactionsChangesObserver);
-        if (mCursor != null) {
-            mCursor.requery();
-        }
-        getListView().setFastScrollEnabled(true);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        getActivity().getContentResolver().unregisterContentObserver(mTransactionsChangesObserver);
+    /**
+     * Container Activity must implement this interface to receive the list item
+     * clicks.
+     */
+    public interface OnPlacemarkSelectedListener {
+        public void onPlacemarkSelected(GeoPoint geoPoint);
     }
 
     /**
-     * Attach a listener
+     * Choose if we should receive location updates, to trigger the app's
+     * passive listeners. Does nothing if the passive listener is disabled in
+     * the Preferences.
+     * 
+     * @param updateWhenLocationChanges Request location updates
      */
-    @Override
-    public void onAttach(SupportActivity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (OnPlacemarkSelectedListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnPlacemarkSelectedListener");
+    public void toggleUpdatesWhenLocationChanges(boolean updateWhenLocationChanges) {
+        if (!hasFollowLocationChanges) {
+            return;
+        }
+
+        if (updateWhenLocationChanges) {
+            String provider = locationManager.getBestProvider(criteria, true);
+            try {
+                locationManager.requestLocationUpdates(provider, 0, Const.MAX_DISTANCE,
+                        locationListener);
+            } catch (IllegalArgumentException e) {
+                Log.v(TAG, e.getMessage());
+            }
+        }
+        else {
+            locationManager.removeUpdates(locationListener);
         }
     }
 
+    /**
+     * The location listener. Doesn't do anything but listening, DB updates are
+     * handled by the app's passive listener.
+     */
+    protected class MyLocationListener implements LocationListener {
+
+        @Override
+        public void onLocationChanged(Location location) {
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+        }
+
+    }
+
+    /**
+     * Content observer, update cursor on changes.
+     */
     protected ContentObserver mTransactionsChangesObserver = new ContentObserver(new Handler()) {
         @Override
         public void onChange(boolean selfChange) {

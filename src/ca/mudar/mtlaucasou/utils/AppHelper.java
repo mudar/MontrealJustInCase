@@ -23,37 +23,69 @@
 
 package ca.mudar.mtlaucasou.utils;
 
+import ca.mudar.mtlaucasou.services.DistanceUpdateService;
 import ca.mudar.mtlaucasou.utils.Const.PrefsNames;
 import ca.mudar.mtlaucasou.utils.Const.PrefsValues;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.location.Location;
-import android.util.Log;
 import android.widget.Toast;
 
 import java.util.Locale;
 
-//AppHelper mAppHelper = (AppHelper) getApplicationContext();
-//Activity: ((AppHelper)getApplication()).setBalance(9.99);
-
 public class AppHelper extends Application {
     protected static final String TAG = "AppHelper";
 
+    // TODO Verify need for a global variable for mLocation since it's mainly in
+    // the preferences.
     private Location mLocation;
     private String mUnits;
     private String mListSort;
     private String mLanguage;
     private Toast mToast;
+    private SharedPreferences prefs;
 
     public Location getLocation() {
+        /**
+         * Background services save a passively set location in the Preferences.
+         */
+        float lastLat = prefs.getFloat(PrefsNames.LAST_UPDATE_LAT, Float.NaN);
+        float lastLng = prefs.getFloat(PrefsNames.LAST_UPDATE_LNG, Float.NaN);
+
+        if ((lastLat == Float.NaN) || (lastLng == Float.NaN)) {
+            return mLocation;
+        }
+
+        mLocation = new Location(Const.LOCATION_PROVIDER);
+        mLocation.setLatitude(lastLat);
+        mLocation.setLongitude(lastLng);
+
         return mLocation;
     }
 
     public void setLocation(Location location) {
-        this.mLocation = location;
+        if (location == null) {
+            mLocation = null;
+        }
+        else {
+            if ((mLocation == null) || (this.mLocation.distanceTo(location) > Const.MAX_DISTANCE)) {
+                Intent intent = new Intent(this.getApplicationContext(),
+                        DistanceUpdateService.class);
+                intent.putExtra(Const.INTENT_EXTRA_GEO_LAT, location.getLatitude());
+                intent.putExtra(Const.INTENT_EXTRA_GEO_LNG, location.getLongitude());
+                startService(intent);
+            }
+            /**
+             * No need to save location in Preferences because it's done in the
+             * background services.
+             */
+
+            mLocation = location;
+        }
     }
 
     public String getLanguage() {
@@ -65,8 +97,10 @@ public class AppHelper extends Application {
         updateUiLanguage();
     }
 
+    /**
+     * Force the configuration change to a locale different that the phone's.
+     */
     public void updateUiLanguage() {
-
         Locale locale = new Locale(mLanguage);
 
         Configuration config = new Configuration();
@@ -93,7 +127,7 @@ public class AppHelper extends Application {
         super.onCreate();
         instance = this;
 
-        SharedPreferences prefs = getSharedPreferences(Const.APP_PREFS_NAME, Context.MODE_PRIVATE);
+        prefs = getSharedPreferences(Const.APP_PREFS_NAME, Context.MODE_PRIVATE);
 
         /**
          * Initialize UI settings based on preferences.
@@ -107,7 +141,12 @@ public class AppHelper extends Application {
             mLanguage = PrefsValues.LANG_EN;
         }
 
+        /**
+         * Having a single Toast instance allows overriding (replacing) the
+         * messages and avoiding Toast stack delays.
+         */
         mToast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
+        mLocation = null;
 
         updateUiLanguage();
     }
@@ -117,7 +156,6 @@ public class AppHelper extends Application {
     }
 
     public void setListSort(String sort) {
-        // Log.v(TAG, "setListSort = " + sort);
         this.mListSort = sort;
     }
 

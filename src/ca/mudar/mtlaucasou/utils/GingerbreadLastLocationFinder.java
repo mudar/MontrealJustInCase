@@ -16,7 +16,8 @@
 /* Modifications:
  * - Copied from radioactiveyak.location_best_practices
  * - Renamed package
- * - Criteria.ACCURACY_COARSE instead of Criteria.ACCURACY_LOW   
+ * - Criteria.ACCURACY_COARSE instead of Criteria.ACCURACY_LOW
+ * - try/catch around requestSingleUpdate()   
  */
 
 package ca.mudar.mtlaucasou.utils;
@@ -123,7 +124,11 @@ public class GingerbreadLastLocationFinder implements ILastLocationFinder {
         if (locationListener != null && (bestTime < minTime || bestAccuracy > minDistance)) {
             IntentFilter locIntentFilter = new IntentFilter(SINGLE_LOCATION_UPDATE_ACTION);
             context.registerReceiver(singleUpdateReceiver, locIntentFilter);
-            locationManager.requestSingleUpdate(criteria, singleUpatePI);
+            try {
+                locationManager.requestSingleUpdate(criteria, singleUpatePI);
+            } catch (IllegalArgumentException e) {
+                Log.v(TAG, e.getMessage());
+            }
         }
 
         return bestResult;

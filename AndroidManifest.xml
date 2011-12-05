@@ -2,14 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     android:installLocation="auto"
     package="ca.mudar.mtlaucasou"
-    android:versionCode="12"
+    android:versionCode="13"
     android:versionName="@string/app_version" >
 
     <uses-sdk
         android:minSdkVersion="7"
         android:targetSdkVersion="14" />
 
-    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+    <!-- <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" /> -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -59,7 +59,24 @@
 
         <uses-library android:name="com.google.android.maps" />
 
-        <service android:name=".service.SyncService" />
+        <service android:name=".services.SyncService" />
+        <service android:name=".services.DistanceUpdateService" />
+
+        <receiver android:name=".receivers.LocationChangedReceiver" />
+        <receiver android:name=".receivers.PassiveLocationChangedReceiver" />
+        <receiver
+            enabled="false"
+            android:name=".receivers.ConnectivityChangedReceiver" >
+            <intent-filter >
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".receivers.PowerStateChangedReceiver" >
+            <intent-filter >
+                <action android:name="android.intent.action.BATTERY_LOW" />
+                <action android:name="android.intent.action.BATTERY_OKAY" />
+            </intent-filter>
+        </receiver>
 
         <provider
             android:authorities="ca.mudar.mtlaucasou.data"

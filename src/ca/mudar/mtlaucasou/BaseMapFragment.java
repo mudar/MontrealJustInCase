@@ -28,6 +28,7 @@ import ca.mudar.mtlaucasou.ui.widgets.MyItemizedOverlay;
 import ca.mudar.mtlaucasou.utils.ActivityHelper;
 import ca.mudar.mtlaucasou.utils.AppHelper;
 import ca.mudar.mtlaucasou.utils.Const;
+import ca.mudar.mtlaucasou.utils.Helper;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
@@ -46,7 +47,7 @@ import android.provider.BaseColumns;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.SupportActivity;
 import android.support.v4.view.Menu;
-import android.support.v4.view.MenuItem;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.View;
@@ -64,7 +65,9 @@ public abstract class BaseMapFragment extends Fragment {
     protected static int ZOOM_DEFAULT = 14;
     protected static int ZOOM_NEAR = 17;
 
+    protected AppHelper mAppHelper;
     protected ActivityHelper mActivityHelper;
+
     protected MapView mMapView;
     protected MyLocationOverlay mLocationOverlay;
     protected MapController mMapController;
@@ -96,10 +99,29 @@ public abstract class BaseMapFragment extends Fragment {
         public void OnMyLocationChanged(GeoPoint geoPoint);
     }
 
+    /**
+     * Attach a listener.
+     */
+    @Override
+    public void onAttach(SupportActivity activity) {
+        super.onAttach(activity);
+        try {
+            mListener = (OnMyLocationChangedListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnMyLocationChangedListener");
+        }
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
+        mActivityHelper = ActivityHelper.createInstance(getActivity());
+        mAppHelper = ((AppHelper) getSupportActivity().getApplicationContext());
+        mAppHelper.getLocation();
+        Log.v(TAG, "aaa");
     }
 
     /**
@@ -123,8 +145,6 @@ public abstract class BaseMapFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_map, container, false);
 
-        mActivityHelper = ActivityHelper.createInstance(getActivity());
-
         mMapView = (MapView) root.findViewById(R.id.map_view);
 
         mMapView.setBuiltInZoomControls(true);
@@ -138,6 +158,91 @@ public abstract class BaseMapFragment extends Fragment {
         initMap();
 
         return root;
+    }
+
+    /**
+     * Enable user location (GPS) updates on map display. {@inheritDoc}
+     */
+    @Override
+    public void onResume() {
+        mLocationOverlay.enableMyLocation();
+
+        super.onResume();
+    }
+
+    /**
+     * Disable user location (GPS) updates on map hide. {@inheritDoc}
+     */
+    @Override
+    public void onPause() {
+        mLocationOverlay.disableMyLocation();
+        super.onPause();
+    }
+
+    /**
+     * Save map center and zoom. {@inheritDoc}
+     */
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        GeoPoint center = mMapView.getMapCenter();
+        int[] coords = {
+                center.getLatitudeE6(), center.getLongitudeE6()
+        };
+
+        outState.putIntArray(Const.KEY_INSTANCE_COORDS, coords);
+        outState.putInt(Const.KEY_INSTANCE_ZOOM, mMapView.getZoomLevel());
+
+        super.onSaveInstanceState(outState);
+    }
+
+    /**
+     * Disable/Enable user location (GPS) updates on map hide/display.
+     * {@inheritDoc}
+     */
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        if (hidden) {
+            mLocationOverlay.disableMyLocation();
+        }
+        else {
+            mLocationOverlay.enableMyLocation();
+        }
+        super.onHiddenChanged(hidden);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        /**
+         * Manual detection of Android version: This is because of a
+         * ActionBarSherlock/compatibility package issue with the MenuInflater.
+         * Also, versions earlier than Honeycomb don't manage SHOW_AS_ACTION_*
+         * options other than ALWAYS.
+         */
+
+        if (Const.SUPPORTS_HONEYCOMB) {
+            /**
+             * Honeycomb drawables are different (white instead of grey) because
+             * the items are in the actionbar. Order is: toggle (1), kml (2),
+             * list sort (3), postal code (4), my position (5).
+             */
+            menu.add(Menu.NONE, R.id.menu_map_find_from_name, 4,
+                    R.string.menu_map_find_from_name)
+                    .setIcon(getResources().getDrawable(R.drawable.ic_actionbar_search));
+
+            menu.add(Menu.NONE, R.id.menu_map_mylocation, 5,
+                    R.string.menu_map_mylocation)
+                    .setIcon(getResources().getDrawable(R.drawable.ic_actionbar_mylocation));
+        }
+        else {
+            inflater.inflate(R.menu.menu_fragment_map, menu);
+        }
+
+        /**
+         * Disable the My Location button if the user location is not known yet.
+         */
+        if (((AppHelper) getSupportActivity().getApplicationContext()).getLocation() == null) {
+            menu.findItem(R.id.menu_map_mylocation).setEnabled(false);
+        }
     }
 
     /**
@@ -193,16 +298,32 @@ public abstract class BaseMapFragment extends Fragment {
         final double lat = coordinates[0];
         final double lng = coordinates[1];
 
+        Location userLocation = mAppHelper.getLocation();
+        if (userLocation != null) {
+            /**
+             * Center on app's user location.
+             */
+            GeoPoint appGeoPoint = Helper.locationToGeoPoint(userLocation);
+            mMapController.setCenter(appGeoPoint);
+        }
+        else {
+            /**
+             * Center on Downtown.
+             */
+            GeoPoint cityCenter = new GeoPoint((int) (lat * 1E6), (int) (lng * 1E6));
+            mMapController.setCenter(cityCenter);
+        }
+
         if ((mMapCenter == null) && enabledProviders.contains(LocationManager.NETWORK_PROVIDER)) {
             /**
              * Get user current location then display on map.
              */
             mLocationOverlay.runOnFirstFix(new Runnable() {
                 public void run() {
-                    GeoPoint userLocation = mLocationOverlay.getMyLocation();
+                    GeoPoint userGeoPoint = mLocationOverlay.getMyLocation();
 
                     if (mListener != null) {
-                        mListener.OnMyLocationChanged(userLocation);
+                        mListener.OnMyLocationChanged(userGeoPoint);
                     }
 
                     /**
@@ -211,15 +332,15 @@ public abstract class BaseMapFragment extends Fragment {
                      */
                     float[] resultDistance = new float[1];
                     android.location.Location.distanceBetween(lat, lng,
-                            (userLocation.getLatitudeE6() / 1E6),
-                            (userLocation.getLongitudeE6() / 1E6), resultDistance);
+                            (userGeoPoint.getLatitudeE6() / 1E6),
+                            (userGeoPoint.getLongitudeE6() / 1E6), resultDistance);
 
                     if (resultDistance[0] > Const.MAPS_MIN_DISTANCE) {
-                        userLocation = new GeoPoint((int) (lat * 1E6), (int) (lng * 1E6));
+                        userGeoPoint = new GeoPoint((int) (lat * 1E6), (int) (lng * 1E6));
                     }
 
-                    mMapCenter = userLocation;
-                    mMapController.animateTo(userLocation);
+                    mMapCenter = userGeoPoint;
+                    mMapController.animateTo(userGeoPoint);
                 }
             });
         }
@@ -229,14 +350,6 @@ public abstract class BaseMapFragment extends Fragment {
              * use the saved value.
              */
             mMapController.setCenter(mMapCenter);
-        }
-        else {
-            /**
-             * Center on Downtown. No provider and AppHelper doesn't have a
-             * previous knowledge of the location.
-             */
-            GeoPoint cityCenter = new GeoPoint((int) (lat * 1E6), (int) (lng * 1E6));
-            mMapController.setCenter(cityCenter);
         }
     }
 
@@ -288,114 +401,6 @@ public abstract class BaseMapFragment extends Fragment {
         cur.close();
 
         return alLocations;
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        /**
-         * Manual detection of Android version: This is because of a
-         * ActionBarSherlock/compatibility package issue with the MenuInflater.
-         * Also, versions earlier than Honeycomb don't manage SHOW_AS_ACTION_*
-         * options other than ALWAYS.
-         */
-
-        if (Const.SUPPORTS_HONEYCOMB) {
-            /**
-             * Honeycomb drawables are different (white instead of grey) because
-             * the items are in the actionbar. Order is: toggle (1), kml (2),
-             * list sort (3), postal code (4), my position (5).
-             */
-            menu.add(Menu.NONE, R.id.menu_map_find_from_name, 4,
-                    R.string.menu_map_find_from_name)
-                    .setIcon(getResources().getDrawable(R.drawable.ic_actionbar_search));
-
-            menu.add(Menu.NONE, R.id.menu_map_mylocation, 5,
-                    R.string.menu_map_mylocation)
-                    .setIcon(getResources().getDrawable(R.drawable.ic_actionbar_mylocation));
-        }
-        else {
-            inflater.inflate(R.menu.menu_fragment_map, menu);
-        }
-
-        /**
-         * Disable the My Location button if the user location is not known yet.
-         */
-        if (((AppHelper) getSupportActivity().getApplicationContext()).getLocation() == null) {
-
-            menu.findItem(R.id.menu_map_mylocation).setEnabled(false);
-        }
-    }
-
-    /**
-     * Handle ActionBar and menu buttons. {@inheritDoc}
-     */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return mActivityHelper.onOptionsItemSelected(item, indexSection);
-    }
-
-    /**
-     * Enable user location (GPS) updates on map display. {@inheritDoc}
-     */
-    @Override
-    public void onResume() {
-        mLocationOverlay.enableMyLocation();
-
-        super.onResume();
-    }
-
-    /**
-     * Disable user location (GPS) updates on map hide. {@inheritDoc}
-     */
-    @Override
-    public void onPause() {
-        mLocationOverlay.disableMyLocation();
-        super.onPause();
-    }
-
-    /**
-     * Disable/Enable user location (GPS) updates on map hide/display.
-     * {@inheritDoc}
-     */
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        if (hidden) {
-            mLocationOverlay.disableMyLocation();
-        }
-        else {
-            mLocationOverlay.enableMyLocation();
-        }
-        super.onHiddenChanged(hidden);
-    }
-
-    /**
-     * Save map center and zoom. {@inheritDoc}
-     */
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        GeoPoint center = mMapView.getMapCenter();
-        int[] coords = {
-                center.getLatitudeE6(), center.getLongitudeE6()
-        };
-
-        outState.putIntArray(Const.KEY_INSTANCE_COORDS, coords);
-        outState.putInt(Const.KEY_INSTANCE_ZOOM, mMapView.getZoomLevel());
-
-        super.onSaveInstanceState(outState);
-    }
-
-    /**
-     * Attach a listener.
-     */
-    @Override
-    public void onAttach(SupportActivity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (OnMyLocationChangedListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnMyLocationChangedListener");
-        }
     }
 
     /**

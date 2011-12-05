@@ -71,12 +71,13 @@ Data sources are KML files provided by the City of Montréal:
 
 This GPLv3 project includes (thanks!) libraries and derivative work of the following projects:
 
-* [Action Bar Sherlock][link_lib_actionbarsherlock] (c) Jake Wharton.
-* [Android MapView Balloons][link_lib_mapviewballoons] (c) readyState Software Ltd.
-* [Google I/O App][link_lib_iosched] iosched (c) Google Inc.
-* [AOSP][link_lib_aosp] (c) The Android Open Source Project.
+* [Action Bar Sherlock][link_lib_actionbarsherlock] &copy; Jake Wharton.
+* [Android MapView Balloons][link_lib_mapviewballoons] &copy; readyState Software Ltd.
+* [Google I/O App][link_lib_iosched] iosched &copy; Google Inc.
+* [Android Protips Location][link_lib_radioactiveyak] &copy; Reto Meier
+* [AOSP][link_lib_aosp] &copy; The Android Open Source Project.
 
-These four projects are all released under the [Apache License v2.0][link_apache].
+These five projects are all released under the [Apache License v2.0][link_apache].
 
 
 [link_market]: http://market.android.com/details?id=ca.mudar.mtlaucasou
@@ -96,6 +97,7 @@ These four projects are all released under the [Apache License v2.0][link_apache
 [link_lib_actionbarsherlock]: https://github.com/JakeWharton/ActionBarSherlock
 [link_lib_mapviewballoons]: https://github.com/JakeWharton/ActionBarSherlock
 [link_lib_iosched]: http://code.google.com/p/iosched/
+[link_lib_radioactiveyak]: http://code.google.com/p/android-protips-location/
 [link_lib_aosp]: http://source.android.com/
 [link_apache]: http://www.apache.org/licenses/LICENSE-2.0
 [img_mtl_ouvert]: http://montrealouvert.net/wp-content/themes/montrealouvert/images/horizontal-logo-francais.png

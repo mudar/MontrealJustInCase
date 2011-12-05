@@ -52,7 +52,8 @@ public class PlacemarksCursorAdapter extends SimpleCursorAdapter {
     public void bindView(View view, Context context, Cursor cursor) {
         super.bindView(view, context, cursor);
 
-        int distance = cursor.getInt(cursor.getColumnIndexOrThrow(PlacemarkColumns.PLACEMARK_DISTANCE));
+        int distance = cursor.getInt(cursor
+                .getColumnIndexOrThrow(PlacemarkColumns.PLACEMARK_DISTANCE));
         String sDistance = (distance > 0 ? Helper.getDistanceDisplay(context, distance) : "");
 
         ((TextView) view.findViewById(R.id.placemark_distance)).setText(sDistance);

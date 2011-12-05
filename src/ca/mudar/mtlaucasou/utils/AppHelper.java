@@ -31,6 +31,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
 import android.location.Location;
 import android.widget.Toast;
@@ -53,23 +54,23 @@ public class AppHelper extends Application {
         /**
          * Background services save a passively set location in the Preferences.
          */
-        float lastLat = prefs.getFloat(PrefsNames.LAST_UPDATE_LAT, Float.NaN);
-        float lastLng = prefs.getFloat(PrefsNames.LAST_UPDATE_LNG, Float.NaN);
+        Float lastLat = prefs.getFloat(PrefsNames.LAST_UPDATE_LAT, Float.NaN);
+        Float lastLng = prefs.getFloat(PrefsNames.LAST_UPDATE_LNG, Float.NaN);
 
-        if ((lastLat == Float.NaN) || (lastLng == Float.NaN)) {
+        if (lastLat.equals(Float.NaN) || lastLng.equals(Float.NaN)) {
             return mLocation;
         }
 
         mLocation = new Location(Const.LOCATION_PROVIDER);
-        mLocation.setLatitude(lastLat);
-        mLocation.setLongitude(lastLng);
+        mLocation.setLatitude(lastLat.doubleValue());
+        mLocation.setLongitude(lastLng.doubleValue());
 
         return mLocation;
     }
 
     public void setLocation(Location location) {
         if (location == null) {
-            mLocation = null;
+            return;
         }
         else {
             if ((mLocation == null) || (this.mLocation.distanceTo(location) > Const.MAX_DISTANCE)) {
@@ -86,6 +87,24 @@ public class AppHelper extends Application {
 
             mLocation = location;
         }
+    }
+
+    /**
+     * Used to force distance calculations. Mainly on first launch where an
+     * empty or partial DB cursor receives the location update, ends up doing
+     * partial distance updates.
+     */
+    public void initializeLocation() {
+        // TODO replace this by a listener or synch tasks
+        mLocation = null;
+
+        SharedPreferences prefs = getSharedPreferences(Const.APP_PREFS_NAME, Context.MODE_PRIVATE);
+        Editor prefsEditor = prefs.edit();
+
+        prefsEditor.putFloat(PrefsNames.LAST_UPDATE_LAT, Float.NaN);
+        prefsEditor.putFloat(PrefsNames.LAST_UPDATE_LNG, Float.NaN);
+        prefsEditor.putLong(PrefsNames.LAST_UPDATE_TIME, System.currentTimeMillis());
+        prefsEditor.commit();
     }
 
     public String getLanguage() {

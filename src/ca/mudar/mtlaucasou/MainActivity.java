@@ -297,7 +297,7 @@ public class MainActivity extends LocationFragmentActivity {
          * Make sure the distance is updated on first load!
          */
         Location l = appHelper.getLocation();
-        appHelper.setLocation(null);
+        appHelper.initializeLocation();
         appHelper.setLocation(l);
     }
 

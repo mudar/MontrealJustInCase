@@ -79,13 +79,12 @@ public class DistanceUpdateService extends IntentService {
      */
     @Override
     protected void onHandleIntent(Intent intent) {
-
         final long startLocal = System.currentTimeMillis();
 
-        double latitude = intent.getDoubleExtra(Const.INTENT_EXTRA_GEO_LAT, Double.NaN);
-        double longitude = intent.getDoubleExtra(Const.INTENT_EXTRA_GEO_LNG, Double.NaN);
+        Double latitude = intent.getDoubleExtra(Const.INTENT_EXTRA_GEO_LAT, Double.NaN);
+        Double longitude = intent.getDoubleExtra(Const.INTENT_EXTRA_GEO_LNG, Double.NaN);
 
-        if (latitude == Double.NaN || longitude == Double.NaN) {
+        if (latitude.equals(Double.NaN) || longitude.equals(Double.NaN)) {
             return;
         }
 
@@ -109,24 +108,25 @@ public class DistanceUpdateService extends IntentService {
              * Retrieve the last update time and place.
              */
             long lastTime = prefs.getLong(PrefsNames.LAST_UPDATE_TIME, Long.MIN_VALUE);
-            float lastLat = prefs.getFloat(PrefsNames.LAST_UPDATE_LAT, Float.NaN);
-            float lastLng = prefs.getFloat(PrefsNames.LAST_UPDATE_LNG, Float.NaN);
+            Float lastLat = prefs.getFloat(PrefsNames.LAST_UPDATE_LAT, Float.NaN);
+            Float lastLng = prefs.getFloat(PrefsNames.LAST_UPDATE_LNG, Float.NaN);
 
-            if ((lastLat == Float.NaN) || (lastLng == Float.NaN)) {
-                return;
-            }
-
-            Location lastLocation = new Location(Const.LOCATION_PROVIDER);
-            lastLocation.setLatitude(lastLat);
-            lastLocation.setLongitude(lastLng);
-
-            /**
-             * If update time and distance bounds have been passed, do an
-             * update.
-             */
-            if ((lastTime < System.currentTimeMillis() - Const.MAX_TIME)
-                    || (lastLocation.distanceTo(newLocation) > Const.MAX_DISTANCE)) {
+            if (lastLat.equals(Float.NaN) || lastLng.equals(Float.NaN)) {
                 doUpdate = true;
+            }
+            else {
+                Location lastLocation = new Location(Const.LOCATION_PROVIDER);
+                lastLocation.setLatitude(lastLat.doubleValue());
+                lastLocation.setLongitude(lastLng.doubleValue());
+
+                /**
+                 * If update time and distance bounds have been passed, do an
+                 * update.
+                 */
+                if ((lastTime < System.currentTimeMillis() - Const.MAX_TIME)
+                        || (lastLocation.distanceTo(newLocation) > Const.MAX_DISTANCE)) {
+                    doUpdate = true;
+                }
             }
         }
 
@@ -151,8 +151,8 @@ public class DistanceUpdateService extends IntentService {
             /**
              * Save the last update time and place to the Shared Preferences.
              */
-            prefsEditor.putFloat(PrefsNames.LAST_UPDATE_LAT, (float) latitude);
-            prefsEditor.putFloat(PrefsNames.LAST_UPDATE_LNG, (float) longitude);
+            prefsEditor.putFloat(PrefsNames.LAST_UPDATE_LAT, latitude.floatValue());
+            prefsEditor.putFloat(PrefsNames.LAST_UPDATE_LNG, longitude.floatValue());
             prefsEditor.putLong(PrefsNames.LAST_UPDATE_TIME, System.currentTimeMillis());
             prefsEditor.commit();
         }

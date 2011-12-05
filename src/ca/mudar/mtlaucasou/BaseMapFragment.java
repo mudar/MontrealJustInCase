@@ -47,7 +47,6 @@ import android.provider.BaseColumns;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.SupportActivity;
 import android.support.v4.view.Menu;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.View;
@@ -120,8 +119,6 @@ public abstract class BaseMapFragment extends Fragment {
 
         mActivityHelper = ActivityHelper.createInstance(getActivity());
         mAppHelper = ((AppHelper) getSupportActivity().getApplicationContext());
-        mAppHelper.getLocation();
-        Log.v(TAG, "aaa");
     }
 
     /**

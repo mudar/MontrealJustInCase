@@ -75,16 +75,16 @@ public class PassiveLocationChangedReceiver extends BroadcastReceiver {
 
             // Get the last location we used to get a listing.
             long lastTime = prefs.getLong(Const.PrefsNames.LAST_UPDATE_TIME, Long.MIN_VALUE);
-            float lastLat = prefs.getFloat(Const.PrefsNames.LAST_UPDATE_LAT, Float.NaN);
-            float lastLng = prefs.getFloat(Const.PrefsNames.LAST_UPDATE_LNG, Float.NaN);
+            Float lastLat = prefs.getFloat(Const.PrefsNames.LAST_UPDATE_LAT, Float.NaN);
+            Float lastLng = prefs.getFloat(Const.PrefsNames.LAST_UPDATE_LNG, Float.NaN);
 
-            if ((lastLat == Float.NaN) || (lastLng == Float.NaN)) {
+            if (lastLat.equals(Float.NaN) || lastLng.equals(Float.NaN)) {
                 return;
             }
 
             Location lastLocation = new Location(Const.LOCATION_PROVIDER);
-            lastLocation.setLatitude(lastLat);
-            lastLocation.setLongitude(lastLng);
+            lastLocation.setLatitude(lastLat.doubleValue());
+            lastLocation.setLongitude(lastLng.doubleValue());
 
             // Check if the last location detected from the providers is either
             // too soon, or too close to the last value we used. If it is within

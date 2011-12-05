@@ -100,8 +100,6 @@ public class ActivityHelper {
      * @return boolean
      */
     public boolean onOptionsItemSelected(MenuItem item, int indexSection) {
-        // Log.v(TAG, "onOptionsItemSelected. item = " + item.toString());
-
         Intent intent = new Intent();
         switch (item.getItemId()) {
             case android.R.id.home:

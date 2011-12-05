@@ -123,7 +123,7 @@ public class LocationFragmentActivity extends FragmentActivity {
          * platform version. This will be used to request location updates.
          */
         locationUpdateRequester = PlatformSpecificImplementationFactory
-                .getLocationUpdateRequester(locationManager);
+                .getLocationUpdateRequester(this.getApplicationContext(), locationManager);
 
         super.onCreate(savedInstanceState);
     }

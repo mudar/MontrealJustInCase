@@ -24,6 +24,7 @@ package ca.mudar.mtlaucasou.utils;
 import ca.mudar.mtlaucasou.utils.base.ILastLocationFinder;
 import ca.mudar.mtlaucasou.utils.base.LocationUpdateRequester;
 
+import android.app.AlarmManager;
 import android.content.Context;
 import android.location.LocationManager;
 
@@ -47,12 +48,18 @@ public class PlatformSpecificImplementationFactory {
     /**
      * Create a new LocationUpdateRequester
      * 
+     * @param context Context
      * @param locationManager Location Manager
      * @return LocationUpdateRequester
      */
-    public static LocationUpdateRequester getLocationUpdateRequester(LocationManager locationManager) {
+
+    public static LocationUpdateRequester getLocationUpdateRequester(Context context,
+            LocationManager locationManager) {
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
         return Const.SUPPORTS_GINGERBREAD ? new GingerbreadLocationUpdateRequester(locationManager)
-                : new FroyoLocationUpdateRequester(locationManager);
+                : (Const.SUPPORTS_FROYO ? new FroyoLocationUpdateRequester(locationManager)
+                        : new LegacyLocationUpdateRequester(locationManager, alarmManager));
     }
 
 }

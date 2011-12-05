@@ -17,6 +17,7 @@
  * Modifications:
  * - Copied from radioactiveyak.location_best_practices
  * - Renamed package
+ * - Added an implementation for requestLocationUpdates() 
  */
 
 package ca.mudar.mtlaucasou.utils;
@@ -24,7 +25,9 @@ package ca.mudar.mtlaucasou.utils;
 import ca.mudar.mtlaucasou.utils.base.LocationUpdateRequester;
 
 import android.app.PendingIntent;
+import android.location.Criteria;
 import android.location.LocationManager;
+import android.util.Log;
 
 /**
  * Provides support for initiating active and passive location updates optimized
@@ -32,9 +35,28 @@ import android.location.LocationManager;
  * broadcast Intents to notify the app of location changes.
  */
 public class FroyoLocationUpdateRequester extends LocationUpdateRequester {
+    protected static final String TAG = "FroyoLocationUpdateRequester";
 
     public FroyoLocationUpdateRequester(LocationManager locationManager) {
         super(locationManager);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void requestLocationUpdates(long minTime, long minDistance, Criteria criteria,
+            PendingIntent pendingIntent) {
+        String bestAvailableProvider = locationManager.getBestProvider(criteria, true);
+
+        if (bestAvailableProvider != null) {
+            try {
+                locationManager.requestLocationUpdates(bestAvailableProvider, minTime, minDistance,
+                        pendingIntent);
+            } catch (IllegalArgumentException e) {
+                Log.v(TAG, e.getMessage());
+            }
+        }
     }
 
     /**
@@ -52,4 +74,17 @@ public class FroyoLocationUpdateRequester extends LocationUpdateRequester {
         locationManager.requestLocationUpdates(LocationManager.PASSIVE_PROVIDER, Const.MAX_TIME,
                 Const.MAX_DISTANCE, pendingIntent);
     }
+
+
+//    @Override
+//    public void removeLocationUpdates(PendingIntent pendingIntent) {
+//        if (pendingIntent != null) {
+//            try {
+//                locationManager.removeUpdates(pendingIntent);
+//            } catch (IllegalArgumentException e) {
+//                Log.e(TAG, e.getMessage());
+//            }
+//        }
+//    }
+
 }

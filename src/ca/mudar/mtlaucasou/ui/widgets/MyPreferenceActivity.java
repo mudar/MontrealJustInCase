@@ -29,14 +29,14 @@ import ca.mudar.mtlaucasou.utils.Const;
 import ca.mudar.mtlaucasou.utils.Const.PrefsNames;
 import ca.mudar.mtlaucasou.utils.Const.PrefsValues;
 
-import java.util.Locale;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.DialogPreference;
 import android.preference.PreferenceActivity;
+
+import java.util.Locale;
 
 public class MyPreferenceActivity extends PreferenceActivity implements
         OnSharedPreferenceChangeListener {
@@ -58,7 +58,12 @@ public class MyPreferenceActivity extends PreferenceActivity implements
         mAppHelper = (AppHelper) getApplicationContext();
         mAppHelper.updateUiLanguage();
 
-        addPreferencesFromResource(R.xml.preferences);
+        if (Const.SUPPORTS_FROYO) {
+            addPreferencesFromResource(R.xml.preferences);
+        }
+        else {
+            addPreferencesFromResource(R.xml.preferences_eclair);
+        }
 
         mSharedPrefs = getSharedPreferences(Const.APP_PREFS_NAME, MODE_PRIVATE);
 

@@ -71,4 +71,9 @@ public abstract class LocationUpdateRequester {
     public void requestPassiveLocationUpdates(long minTime, long minDistance,
             PendingIntent pendingIntent) {
     }
+
+
+//    public void removeLocationUpdates(PendingIntent pendingIntent) {
+//    }
+
 }

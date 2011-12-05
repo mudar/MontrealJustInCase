@@ -34,7 +34,7 @@ public class Const {
         final String VERSION_DATABASE = "prefs_version_database";
         final String LANGUAGE = "prefs_language";
         final String UNITS_SYSTEM = "prefs_units_system";
-        final String LIST_SORT = "prefs_list_sort";
+        final String LIST_SORT = "prefs_list_sort_by";
         final String FOLLOW_LOCATION_CHANGES = "prefs_follow_location_changes";
         final String LAST_UPDATE_TIME = "prefs_last_update_time";
         final String LAST_UPDATE_LAT = "prefs_last_update_lat";

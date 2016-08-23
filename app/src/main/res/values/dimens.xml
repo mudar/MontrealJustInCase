@@ -23,16 +23,14 @@
 -->
 
 <resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <!-- Base application theme. -->
-    <style name="BaseAppTheme" parent="Theme.AppCompat">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
+    <dimen name="keyline_1">16dp</dimen>
+    <dimen name="keyline_2">48dp</dimen>
+    <dimen name="keyline_3">72dp</dimen>
 
-    <style name="AppTheme" parent="@style/BaseAppTheme">
-    </style>
-
+    <dimen name="bottombar_height">60dp</dimen>
+    <dimen name="bottombar_top_margin">-5dp</dimen>
 </resources>

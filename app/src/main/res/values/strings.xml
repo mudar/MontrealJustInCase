@@ -1,4 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Montreal Just in Case
+    Copyright (C) 2011  Mudar Noufal <mn@mudar.ca>
+
+    Geographic locations of public safety services. A Montreal Open Data
+    project.
+
+    This file is part of Montreal Just in Case.
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
 <resources>
-    <string name="app_name">Montreal Just in Case</string>
+
+    <string name="app_name">MTL Just in Case</string>
     <string name="title_activity_main">Map</string>
+
+    <!--BottomBar tabs-->
+    <string name="btn_fire_halls">Fire Stations</string>
+    <string name="btn_spvm_stations">Police Stations</string>
+    <string name="btn_water_supplies">Water Supplies</string>
+    <string name="btn_emergency_hostels">Emgcy Hostels</string>
+
+    <!--Units-->
+    <string name="placemark_distance_iso">%.1f km</string>
+    <string name="placemark_distance_iso_min">&lt; 100 m</string>
+    <string name="placemark_distance_imp">%.1f mi</string>
+    <string name="placemark_distance_imp_feet">%s ft</string>
+    <string name="placemark_distance_imp_min">&lt; 200 ft</string>
+
+    <!--Snackbar messages-->
+    <string name="snackbar_api_error_code">Server error: code %d</string>
+    <string name="snackbar_api_error_message">Server error: %1$s [%2$d]</string>
+    <string name="snackbar_host_unknown_error_message">Server connection error [%1$d]</string>
 </resources>

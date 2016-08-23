@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        barColorWhenSelected="@color/color_fire_halls"
+        icon="@drawable/ic_fire_hall"
+        id="@+id/tab_fire_halls"
+        title="@string/btn_fire_halls" />
+    <tab
+        barColorWhenSelected="@color/color_svpm"
+        icon="@drawable/ic_spvm"
+        id="@+id/tab_spvm"
+        title="@string/btn_spvm_stations" />
+
+    <tab
+        barColorWhenSelected="@color/color_water_supplies"
+        icon="@drawable/ic_water_supplies"
+        id="@+id/tab_water_supplies"
+        title="@string/btn_water_supplies" />
+
+    <tab
+        barColorWhenSelected="@color/color_emergency_hostels"
+        icon="@drawable/ic_emergency_hostels"
+        id="@+id/tab_emergency_hostels"
+        title="@string/btn_emergency_hostels" />
+</tabs>

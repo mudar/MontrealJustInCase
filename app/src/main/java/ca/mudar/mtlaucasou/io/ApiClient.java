@@ -29,8 +29,10 @@ import com.google.gson.GsonBuilder;
 import java.util.concurrent.TimeUnit;
 
 import ca.mudar.mtlaucasou.BuildConfig;
+import ca.mudar.mtlaucasou.model.geojson.PointsFeatureCollection;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -63,7 +65,6 @@ public class ApiClient {
                 .build();
 
         final Gson gson = new GsonBuilder()
-//                .registerTypeAdapter(GeoJSON.class, new GeoJsonTypeAdapter())
                 .create();
 
         final Retrofit retrofit = new Retrofit.Builder()
@@ -72,5 +73,25 @@ public class ApiClient {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         return retrofit.create(GeoApiService.class);
+    }
+
+    public static void getFireHalls(GeoApiService service, Callback<PointsFeatureCollection> cb) {
+        service.getFireHalls()
+                .enqueue(cb);
+    }
+
+    public static void getSpvmStations(GeoApiService service, Callback<PointsFeatureCollection> cb) {
+        service.getSpvmStations()
+                .enqueue(cb);
+    }
+
+    public static void getWaterSupplies(GeoApiService service, Callback<PointsFeatureCollection> cb) {
+        service.getWaterSupplies()
+                .enqueue(cb);
+    }
+
+    public static void getEmergencyHostels(GeoApiService service, Callback<PointsFeatureCollection> cb) {
+        service.getEmergencyHostels()
+                .enqueue(cb);
     }
 }

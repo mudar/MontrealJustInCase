@@ -24,6 +24,8 @@
 package ca.mudar.mtlaucasou.io;
 
 import ca.mudar.mtlaucasou.Const;
+import ca.mudar.mtlaucasou.model.geojson.PointsFeature;
+import ca.mudar.mtlaucasou.model.geojson.PointsFeatureCollection;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
@@ -33,17 +35,17 @@ public interface GeoApiService {
 
     @Headers({CONTENT_TYPE})
     @GET(Const.ApiPaths.GET_FIRE_HALLS)
-    Call<Object> getFireHalls();
+    Call<PointsFeatureCollection> getFireHalls();
 
     @Headers({CONTENT_TYPE})
     @GET(Const.ApiPaths.GET_SPVM_STATIONS)
-    Call<Object> getSpvmStations();
+    Call<PointsFeatureCollection> getSpvmStations();
 
     @Headers({CONTENT_TYPE})
     @GET(Const.ApiPaths.GET_WATER_SUPPLIES)
-    Call<Object> getWaterSupplies();
+    Call<PointsFeatureCollection> getWaterSupplies();
 
     @Headers({CONTENT_TYPE})
     @GET(Const.ApiPaths.GET_EMERGENCY_HOSTELS)
-    Call<Object> getEmergencyHostels();
+    Call<PointsFeatureCollection> getEmergencyHostels();
 }

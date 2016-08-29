@@ -23,7 +23,10 @@
 
 package ca.mudar.mtlaucasou.model.geojson;
 
+import com.google.gson.annotations.SerializedName;
+
 public class FeatureProperties {
+    @SerializedName("Name")
     private String name;
     private String address;
 

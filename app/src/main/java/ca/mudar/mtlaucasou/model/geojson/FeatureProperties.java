@@ -28,13 +28,14 @@ import com.google.gson.annotations.SerializedName;
 public class FeatureProperties {
     @SerializedName("Name")
     private String name;
-    private String address;
+    @SerializedName("Description")
+    private String description;
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getDescription() {
+        return description;
     }
 }

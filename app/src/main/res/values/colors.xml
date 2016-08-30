@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
     Montreal Just in Case
     Copyright (C) 2011  Mudar Noufal <mn@mudar.ca>
 
@@ -39,6 +38,8 @@
     <color name="blue_grey_400">#78909C</color>
     <color name="blue_grey_500">#607D8B</color>
     <color name="light_green_500">#8BC34A</color>
+    <color name="grey_600">#757575</color>
+    <color name="grey_900">#212121</color>
 
     <!--App custom colors-->
     <color name="color_fire_halls">@color/red_700</color>
@@ -46,5 +47,8 @@
     <color name="color_water_supplies">@color/blue_grey_400</color>
     <color name="color_emergency_hostels">@color/light_green_500</color>
 
+    <!--Map InfoWindow-->
+    <color name="map_info_title">@color/grey_900</color>
+    <color name="map_info_snippet">@color/grey_600</color>
 
 </resources>

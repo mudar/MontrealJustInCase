@@ -33,9 +33,6 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import ca.mudar.mtlaucasou.Const;
 import ca.mudar.mtlaucasou.R;
 
-/**
- * Created by mudar on 26/08/16.
- */
 public class MapUtils {
     public static BitmapDescriptor getMarkerIcon(Const.MapTypes type) {
         switch (type) {

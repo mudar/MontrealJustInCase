@@ -29,6 +29,8 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -37,6 +39,16 @@ import ca.mudar.mtlaucasou.Const;
 import ca.mudar.mtlaucasou.R;
 
 public class GeoUtils {
+    public static LatLng getCoordsLatLng(List<Double> coordinates) {
+        try {
+            return new LatLng(coordinates.get(1), coordinates.get(0));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
     public static Location findLocatioFromName(Context c, String name) throws IOException {
         Geocoder geocoder = new Geocoder(c);
         List<Address> adr;
@@ -139,32 +151,5 @@ public class GeoUtils {
 
         return sDistance;
     }
-//
-//    /**
-//     * Convert Location to Point
-//     *
-//     * @param Location
-//     * @return Point
-//     */
-//    public static Point locationToPoint(Location location) {
-//        Point Point = new Point((int) (location.getLatitude() * 1E6),
-//                (int) (location.getLongitude() * 1E6));
-//
-//        return Point;
-//    }
-//
-//    /**
-//     * Convert Point to Location
-//     *
-//     * @param Point
-//     * @return Location
-//     */
-//    public static Location PointToLocation(Point Point) {
-//        Location location = new Location(Const.LOCATION_PROVIDER);
-//
-//        location.setLatitude(Point.getLatitudeE6() / 1E6);
-//        location.setLongitude(Point.getLongitudeE6() / 1E6);
-//
-//        return location;
-//    }
+
 }

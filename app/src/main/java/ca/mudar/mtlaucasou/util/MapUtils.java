@@ -38,11 +38,12 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ca.mudar.mtlaucasou.Const;
 import ca.mudar.mtlaucasou.R;
-import ca.mudar.mtlaucasou.model.geojson.PointsFeature;
-import ca.mudar.mtlaucasou.model.geojson.PointsFeatureCollection;
-import ca.mudar.mtlaucasou.model.geojson.base.GeometryFeatureCollection;
+import ca.mudar.mtlaucasou.model.Placemark;
 
 public class MapUtils {
 
@@ -81,32 +82,43 @@ public class MapUtils {
                 .trim();
     }
 
-    public static int addFeatureCollectionMarkers(GoogleMap map, Const.MapTypes type, GeometryFeatureCollection collection) {
-        final PointsFeatureCollection featureCollection = (PointsFeatureCollection) collection;
+    /**
+     * Add the Realm Placemarks to the map
+     *
+     * @param map        the Map object
+     * @param type       mapType to get the right marker icon
+     * @param placemarks list of Placemarks
+     * @return Number of markers added to the visible region
+     */
+    public static int addPlacemarsToMap(GoogleMap map, Const.MapTypes type, List<Placemark> placemarks) {
+        if (map == null || placemarks == null) {
+            return 0;
+        }
 
-        int total = 0;
-        if (featureCollection.getFeatures() != null) {
+        final List<MarkerOptions> markers = new ArrayList<>();
+        for (Placemark placemark : placemarks) {
+            final LatLng latLng = placemark.getCoordinates().getLatLng();
+            final String title = placemark.getProperties().getName();
+            final String desc = MapUtils.getCleanDescription(placemark.getProperties().getDescription(), title);
 
-            for (PointsFeature feature : featureCollection.getFeatures()) {
-                final LatLng latLng = GeoUtils.getCoordsLatLng(feature.getGeometry().getCoordinates());
-                final String title = feature.getProperties().getName();
-                final String desc = MapUtils.getCleanDescription(feature.getProperties().getDescription(), title);
-
-                if (latLng != null && !TextUtils.isEmpty(title)) {
-                    final MarkerOptions markerOptions = new MarkerOptions()
-                            .position(latLng)
-                            .icon(MapUtils.getMarkerIcon(type))
-                            .title(title);
-                    if (!TextUtils.isEmpty(desc)) {
-                        markerOptions.snippet(desc);
-                    }
-                    map.addMarker(markerOptions);
-                    total++;
+            if (latLng != null && !TextUtils.isEmpty(title)) {
+                final MarkerOptions markerOptions = new MarkerOptions()
+                        .position(latLng)
+                        .icon(MapUtils.getMarkerIcon(type))
+                        .title(title);
+                if (!TextUtils.isEmpty(desc)) {
+                    markerOptions.snippet(desc);
                 }
+                markers.add(markerOptions);
             }
         }
 
-        return total;
+        // Add markers once all are ready
+        for (MarkerOptions markerOptions : markers) {
+            map.addMarker(markerOptions);
+        }
+
+        return markers.size();
     }
 
     public static LatLngBounds getDefaultBounds() {

@@ -34,8 +34,8 @@ import com.google.android.gms.maps.model.LatLng;
 import java.io.IOException;
 import java.util.List;
 
-import ca.mudar.mtlaucasou.MtlAuCasOuApp;
 import ca.mudar.mtlaucasou.Const;
+import ca.mudar.mtlaucasou.MtlAuCasOuApp;
 import ca.mudar.mtlaucasou.R;
 
 public class GeoUtils {

@@ -32,6 +32,11 @@
     <string name="btn_water_supplies">Water Supplies</string>
     <string name="btn_emergency_hostels">Emgcy Hostels</string>
 
+    <!--Menus-->
+    <string name="action_search">Search</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_about">About</string>
+
     <!--Units-->
     <string name="placemark_distance_iso">%.1f km</string>
     <string name="placemark_distance_iso_min">&lt; 100 m</string>

@@ -30,6 +30,7 @@ import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -89,6 +90,13 @@ public class MainActivity extends AppCompatActivity implements
         setupBottomBar();
 
         setMapType(MapTypes.FIRE_HALLs, 0);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        return true;
     }
 
     @Override

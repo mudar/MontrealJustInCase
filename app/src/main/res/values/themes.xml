@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
     Montreal Just in Case
     Copyright (C) 2011  Mudar Noufal <mn@mudar.ca>
 
@@ -23,5 +25,25 @@
 
 <resources>
 
+    <!-- Base application theme. -->
+    <style name="BaseAppTheme" parent="Theme.AppCompat">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="colorAccent">@color/color_accent</item>
+    </style>
+
+    <style name="AppTheme" parent="@style/BaseAppTheme"></style>
+
+    <style name="AppTheme.Toolbar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.Main" parent="@style/AppTheme.Toolbar">
+        <item name="android:windowBackground">@drawable/window_background</item>
+    </style>
+
+    <style name="MenusTheme" parent="@style/ThemeOverlay.AppCompat.Light" />
 
 </resources>

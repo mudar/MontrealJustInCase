@@ -29,9 +29,11 @@ import android.os.Handler;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewTreeObserver;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -72,9 +74,10 @@ public class MainActivity extends AppCompatActivity implements
     private static final String TAG = makeLogTag("MainActivity");
     private static final long BOTTOM_BAR_ANIM_DURATION = 200;
 
-    private GoogleMap mMap;
+    private GoogleMap vMap;
+    private View vMarkerInfoWindow;
+    private Toolbar vToolbar;
     private MapTypes mMapType;
-    private View viewMarkerInfoWindow;
     private Realm realm;
     private Handler mHandler = new Handler(); // Waits for the BottomBar anim
 
@@ -86,6 +89,7 @@ public class MainActivity extends AppCompatActivity implements
 
         realm = Realm.getDefaultInstance();
 
+        setupToolbar();
         setupMap();
         setupBottomBar();
 
@@ -116,10 +120,15 @@ public class MainActivity extends AppCompatActivity implements
         if (PermissionUtils.isPermissionGranted(permissions, grantResults,
                 Manifest.permission.ACCESS_FINE_LOCATION)) {
             // Enable the my location layer if the permission has been granted.
-            MapUtils.enableMyLocation(this, mMap);
+            MapUtils.enableMyLocation(this, vMap);
         } else {
             // Display the missing permission error dialog when the fragments resume.
         }
+    }
+
+    private void setupToolbar() {
+        vToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(vToolbar);
     }
 
     /**
@@ -146,8 +155,8 @@ public class MainActivity extends AppCompatActivity implements
         bottomBar.setOnTabReselectListener(new OnTabReselectListener() {
             @Override
             public void onTabReSelected(@IdRes int tabId) {
-                if (mMap != null) {
-                    mMap.animateCamera(CameraUpdateFactory.zoomTo(Const.ZOOM_OUT));
+                if (vMap != null) {
+                    vMap.animateCamera(CameraUpdateFactory.zoomTo(Const.ZOOM_OUT));
                 }
             }
         });
@@ -161,7 +170,7 @@ public class MainActivity extends AppCompatActivity implements
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        viewMarkerInfoWindow = getLayoutInflater().inflate(R.layout.custom_info_window, null, false);
+        vMarkerInfoWindow = getLayoutInflater().inflate(R.layout.custom_info_window, null, false);
     }
 
     /**
@@ -171,9 +180,9 @@ public class MainActivity extends AppCompatActivity implements
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
+        vMap = googleMap;
 
-        mMap.moveCamera(CameraUpdateFactory.newCameraPosition(
+        vMap.moveCamera(CameraUpdateFactory.newCameraPosition(
                 new CameraPosition.Builder()
                         .target(Const.MONTREAL_GEO_LAT_LNG)
                         .bearing(Const.MONTREAL_NATURAL_NORTH_ROTATION)
@@ -181,18 +190,18 @@ public class MainActivity extends AppCompatActivity implements
                         .build()
                 )
         );
-        mMap.setLatLngBoundsForCameraTarget(MapUtils.getDefaultBounds());
+        vMap.setLatLngBoundsForCameraTarget(MapUtils.getDefaultBounds());
 
-        mMap.setInfoWindowAdapter(new PlacemarkInfoWindowAdapter(viewMarkerInfoWindow));
+        vMap.setInfoWindowAdapter(new PlacemarkInfoWindowAdapter(vMarkerInfoWindow));
 
-        mMap.setOnCameraIdleListener(new GoogleMap.OnCameraIdleListener() {
+        vMap.setOnCameraIdleListener(new GoogleMap.OnCameraIdleListener() {
             @Override
             public void onCameraIdle() {
                 Log.v(TAG, "onCameraIdle");
             }
         });
 
-        MapUtils.enableMyLocation(this, mMap);
+        MapUtils.enableMyLocation(this, vMap);
 
         loadMapData(mMapType);
     }
@@ -201,9 +210,9 @@ public class MainActivity extends AppCompatActivity implements
     public void setMapType(final MapTypes type, long delay) {
         mMapType = type;
 
-        if (mMap != null) {
+        if (vMap != null) {
             // Remove previous markers
-            mMap.clear();
+            vMap.clear();
 
             mHandler.removeCallbacksAndMessages(null);
             // Wait for the BottomBar animation to end before loading data
@@ -223,12 +232,12 @@ public class MainActivity extends AppCompatActivity implements
      */
     private void loadMapData(MapTypes type) {
         Log.v(TAG, "loadMapData");
-        if (mMap == null) {
+        if (vMap == null) {
             return;
         }
 
         // First, query the Realm db for the current mapType
-        final LatLngBounds bounds = mMap.getProjection().getVisibleRegion().latLngBounds;
+        final LatLngBounds bounds = vMap.getProjection().getVisibleRegion().latLngBounds;
         final RealmQuery<Placemark> query = realm
                 .where(Placemark.class)
                 .equalTo(Placemark.FIELD_MAP_TYPE, mMapType.toString());
@@ -243,7 +252,7 @@ public class MainActivity extends AppCompatActivity implements
                     .findAll();
 
             final long startTime = System.currentTimeMillis();
-            final int count = MapUtils.addPlacemarsToMap(mMap, mMapType, placemarks);
+            final int count = MapUtils.addPlacemarsToMap(vMap, mMapType, placemarks);
 
             Log.v(TAG, String.format("Added %1$d markers. Duration: %2$dms",
                     count,

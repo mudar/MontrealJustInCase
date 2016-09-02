@@ -24,7 +24,7 @@
 <resources>
 
     <string name="app_name">MTL Just in Case</string>
-    <string name="title_activity_main">Map</string>
+    <string name="title_activity_main">@string/app_name</string>
 
     <!--BottomBar tabs-->
     <string name="btn_fire_halls">Fire Stations</string>

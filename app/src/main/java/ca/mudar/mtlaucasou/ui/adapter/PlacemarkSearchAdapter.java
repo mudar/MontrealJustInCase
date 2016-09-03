@@ -41,8 +41,10 @@ import java.util.Collections;
 import java.util.List;
 
 import ca.mudar.mtlaucasou.R;
+import ca.mudar.mtlaucasou.model.MapType;
 import ca.mudar.mtlaucasou.model.Placemark;
 import ca.mudar.mtlaucasou.util.LogUtils;
+import ca.mudar.mtlaucasou.util.MapUtils;
 import io.realm.Case;
 import io.realm.Realm;
 import io.realm.RealmQuery;
@@ -56,13 +58,13 @@ public class PlacemarkSearchAdapter extends CursorAdapter implements
 
     public static final int THRESHOLD = 2;
 
-    private static final String[] CURSOR_COLUMNS = new String[]{"_id", "term"};
-    private static final int TERM_CURSOR_COLUMN_POSITION = 1;
+    private static final String[] CURSOR_COLUMNS = new String[]{"_id", "title", "type"};
+    private static final int CURSOR_COLUMN_TITLE = 1;
+    private static final int CURSOR_COLUMN_MAP_TYPE = 2;
 
     private final ResultsFilter filter;
     private final LayoutInflater inflater;
     private final ArrayList<PlaceSuggestion> mDataset;
-    private Realm realm;
 
     public PlacemarkSearchAdapter(Context context) {
         super(context, null, true);
@@ -86,7 +88,7 @@ public class PlacemarkSearchAdapter extends CursorAdapter implements
     public String getSuggestion(int position) {
         try {
             if (getCursor().moveToPosition(position)) {
-                return getCursor().getString(TERM_CURSOR_COLUMN_POSITION);
+                return getCursor().getString(CURSOR_COLUMN_TITLE);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -130,7 +132,7 @@ public class PlacemarkSearchAdapter extends CursorAdapter implements
 
         int i = 0;
         for (PlaceSuggestion place : data) {
-            matrixCursor.addRow(new Object[]{i++, place.getName()});
+            matrixCursor.addRow(new Object[]{i++, place.getName(), place.getMapType()});
         }
         return matrixCursor;
     }
@@ -149,6 +151,8 @@ public class PlacemarkSearchAdapter extends CursorAdapter implements
         public void setValue(PlaceSuggestion placemark) {
             this.item = placemark;
             this.vTitle.setText(placemark.getName());
+            this.vTitle.setCompoundDrawablesWithIntrinsicBounds(
+                    MapUtils.getMapTypeIcon(placemark.getMapType()), 0, 0, 0);
         }
     }
 
@@ -202,7 +206,7 @@ public class PlacemarkSearchAdapter extends CursorAdapter implements
         public CharSequence convertResultToString(Object resultValue) {
             if (resultValue instanceof MatrixCursor) {
                 MatrixCursor cursor = (MatrixCursor) resultValue;
-                return cursor.getString(TERM_CURSOR_COLUMN_POSITION);
+                return cursor.getString(CURSOR_COLUMN_TITLE);
             }
 
             return super.convertResultToString(resultValue);
@@ -218,7 +222,7 @@ public class PlacemarkSearchAdapter extends CursorAdapter implements
     private static class PlaceSuggestion implements Comparable<PlaceSuggestion> {
         String name;
         LatLng latLng;
-        String mapType;
+        @MapType String mapType;
 
         public PlaceSuggestion() {
             // Empty constructor
@@ -232,6 +236,7 @@ public class PlacemarkSearchAdapter extends CursorAdapter implements
             return latLng;
         }
 
+        @MapType
         public String getMapType() {
             return mapType;
         }
@@ -250,7 +255,7 @@ public class PlacemarkSearchAdapter extends CursorAdapter implements
         public static class Builder {
             String name;
             LatLng latLng;
-            String mapType;
+            @MapType String mapType;
 
             public Builder(Placemark placemark) {
                 this.name = placemark.getProperties().getName();

@@ -43,6 +43,7 @@ import java.util.List;
 
 import ca.mudar.mtlaucasou.Const;
 import ca.mudar.mtlaucasou.R;
+import ca.mudar.mtlaucasou.model.MapType;
 import ca.mudar.mtlaucasou.model.Placemark;
 
 public class MapUtils {
@@ -59,15 +60,15 @@ public class MapUtils {
         }
     }
 
-    public static BitmapDescriptor getMarkerIcon(Const.MapTypes type) {
+    public static BitmapDescriptor getMarkerIcon(@MapType String type) {
         switch (type) {
-            case FIRE_HALLs:
+            case Const.MapTypes.FIRE_HALLS:
                 return BitmapDescriptorFactory.fromResource(R.drawable.ic_maps_fire_halls);
-            case SVPM_STATIONS:
+            case Const.MapTypes.SVPM_STATIONS:
                 return BitmapDescriptorFactory.fromResource(R.drawable.ic_maps_spvm);
-            case WATER_SUPPLIES:
+            case Const.MapTypes.WATER_SUPPLIES:
                 return BitmapDescriptorFactory.fromResource(R.drawable.ic_maps_water_supplies);
-            case EMERGENCY_HOSTELS:
+            case Const.MapTypes.EMERGENCY_HOSTELS:
                 return BitmapDescriptorFactory.fromResource(R.drawable.ic_maps_emergency_hostels);
         }
         return null;
@@ -90,7 +91,7 @@ public class MapUtils {
      * @param placemarks list of Placemarks
      * @return Number of markers added to the visible region
      */
-    public static int addPlacemarsToMap(GoogleMap map, Const.MapTypes type, List<Placemark> placemarks) {
+    public static int addPlacemarsToMap(GoogleMap map, @MapType String type, List<Placemark> placemarks) {
         if (map == null || placemarks == null) {
             return 0;
         }

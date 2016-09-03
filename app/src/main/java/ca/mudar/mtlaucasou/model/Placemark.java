@@ -23,7 +23,6 @@
 
 package ca.mudar.mtlaucasou.model;
 
-import ca.mudar.mtlaucasou.Const;
 import ca.mudar.mtlaucasou.model.geojson.PointsFeature;
 import io.realm.RealmModel;
 import io.realm.annotations.Ignore;
@@ -44,6 +43,7 @@ public class Placemark implements RealmModel {
     public static final String FIELD_PROPERTIES_NAME = "properties.name";
 
     private String id;
+    @MapType
     @Index
     private String mapType;
     private PlacemarkProperties properties;
@@ -102,13 +102,14 @@ public class Placemark implements RealmModel {
      */
     public static class Builder {
         private String id;
+        @MapType
         private String mapType;
         private PlacemarkProperties properties;
         private LongitudeLatitude coordinates;
 
-        public Builder(PointsFeature pointsFeature, Const.MapTypes mapType) {
+        public Builder(PointsFeature pointsFeature, @MapType String mapType) {
             this.id = pointsFeature.getId();
-            this.mapType = mapType.toString();
+            this.mapType = mapType;
 
             this.properties = new PlacemarkProperties.Builder(pointsFeature.getProperties())
                     .build();

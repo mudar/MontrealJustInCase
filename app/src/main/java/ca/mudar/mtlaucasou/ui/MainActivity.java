@@ -28,12 +28,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewTreeObserver;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -51,10 +53,12 @@ import ca.mudar.mtlaucasou.Const;
 import ca.mudar.mtlaucasou.R;
 import ca.mudar.mtlaucasou.io.ApiClient;
 import ca.mudar.mtlaucasou.io.GeoApiService;
+import ca.mudar.mtlaucasou.model.MapType;
 import ca.mudar.mtlaucasou.model.Placemark;
 import ca.mudar.mtlaucasou.model.geojson.PointsFeature;
 import ca.mudar.mtlaucasou.model.geojson.PointsFeatureCollection;
 import ca.mudar.mtlaucasou.ui.adapter.PlacemarkInfoWindowAdapter;
+import ca.mudar.mtlaucasou.ui.adapter.PlacemarkSearchAdapter;
 import ca.mudar.mtlaucasou.util.MapUtils;
 import ca.mudar.mtlaucasou.util.PermissionUtils;
 import io.realm.Realm;
@@ -64,7 +68,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static ca.mudar.mtlaucasou.Const.MapTypes;
 import static ca.mudar.mtlaucasou.util.LogUtils.makeLogTag;
 
 public class MainActivity extends AppCompatActivity implements
@@ -77,7 +80,10 @@ public class MainActivity extends AppCompatActivity implements
     private GoogleMap vMap;
     private View vMarkerInfoWindow;
     private Toolbar vToolbar;
-    private MapTypes mMapType;
+    private SearchView vSearchView;
+    private PlacemarkSearchAdapter mSearchAdapter;
+    @MapType
+    private String mMapType;
     private Realm realm;
     private Handler mHandler = new Handler(); // Waits for the BottomBar anim
 
@@ -93,13 +99,14 @@ public class MainActivity extends AppCompatActivity implements
         setupMap();
         setupBottomBar();
 
-        setMapType(MapTypes.FIRE_HALLs, 0);
+        setMapType(Const.MapTypes.FIRE_HALLS, 0);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
+        setupSearchView(menu);
         return true;
     }
 
@@ -131,6 +138,43 @@ public class MainActivity extends AppCompatActivity implements
         setSupportActionBar(vToolbar);
     }
 
+    private void setupSearchView(final Menu menu) {
+        // Get the toolbar menu SearchView
+        final MenuItem searchMenuItem = menu.findItem(R.id.action_search);
+        vSearchView = (SearchView) MenuItemCompat.getActionView(searchMenuItem);
+
+        mSearchAdapter = new PlacemarkSearchAdapter(this);
+        vSearchView.setSuggestionsAdapter(mSearchAdapter);
+
+        vSearchView.setOnSuggestionListener(new SearchView.OnSuggestionListener() {
+            @Override
+            public boolean onSuggestionSelect(int position) {
+                return false;
+            }
+
+            @Override
+            public boolean onSuggestionClick(int position) {
+                // Submit query for selected auto-complete suggestion
+                vSearchView.setQuery(mSearchAdapter.getSuggestion(position), true);
+                return true;
+            }
+        });
+        vSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                MenuItemCompat.collapseActionView(searchMenuItem);
+                // User pressed submit button or clicked suggestion
+//                mListener.onSearchQuerySubmitted(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+    }
+
     /**
      * Show the bottom bar navigation items
      */
@@ -141,13 +185,13 @@ public class MainActivity extends AppCompatActivity implements
             @Override
             public void onTabSelected(@IdRes final int tabId) {
                 if (tabId == R.id.tab_fire_halls) {
-                    setMapType(MapTypes.FIRE_HALLs, BOTTOM_BAR_ANIM_DURATION);
+                    setMapType(Const.MapTypes.FIRE_HALLS, BOTTOM_BAR_ANIM_DURATION);
                 } else if (tabId == R.id.tab_spvm) {
-                    setMapType(MapTypes.SVPM_STATIONS, BOTTOM_BAR_ANIM_DURATION);
+                    setMapType(Const.MapTypes.SVPM_STATIONS, BOTTOM_BAR_ANIM_DURATION);
                 } else if (tabId == R.id.tab_water_supplies) {
-                    setMapType(MapTypes.WATER_SUPPLIES, BOTTOM_BAR_ANIM_DURATION);
+                    setMapType(Const.MapTypes.WATER_SUPPLIES, BOTTOM_BAR_ANIM_DURATION);
                 } else if (tabId == R.id.tab_emergency_hostels) {
-                    setMapType(MapTypes.EMERGENCY_HOSTELS, BOTTOM_BAR_ANIM_DURATION);
+                    setMapType(Const.MapTypes.EMERGENCY_HOSTELS, BOTTOM_BAR_ANIM_DURATION);
                 }
             }
         });
@@ -204,10 +248,25 @@ public class MainActivity extends AppCompatActivity implements
         MapUtils.enableMyLocation(this, vMap);
 
         loadMapData(mMapType);
+
+//        final ViewTreeObserver observer = vToolbar.getViewTreeObserver();
+//        observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+//            @Override
+//            public void onGlobalLayout() {
+//                Log.v(TAG, "onGlobalLayout");
+//
+//                vMap.setPadding(0, vToolbar.getHeight(), 0, 0);
+//                try {
+//                    observer.removeOnGlobalLayoutListener(this);
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
     }
 
 
-    public void setMapType(final MapTypes type, long delay) {
+    public void setMapType(final @MapType String type, long delay) {
         mMapType = type;
 
         if (vMap != null) {
@@ -230,7 +289,7 @@ public class MainActivity extends AppCompatActivity implements
      *
      * @param type the current MapType
      */
-    private void loadMapData(MapTypes type) {
+    private void loadMapData(@MapType String type) {
         Log.v(TAG, "loadMapData");
         if (vMap == null) {
             return;
@@ -240,7 +299,7 @@ public class MainActivity extends AppCompatActivity implements
         final LatLngBounds bounds = vMap.getProjection().getVisibleRegion().latLngBounds;
         final RealmQuery<Placemark> query = realm
                 .where(Placemark.class)
-                .equalTo(Placemark.FIELD_MAP_TYPE, mMapType.toString());
+                .equalTo(Placemark.FIELD_MAP_TYPE, mMapType);
 
         if (query.count() > 0) {
             // Has cached data
@@ -268,22 +327,22 @@ public class MainActivity extends AppCompatActivity implements
      *
      * @param type
      */
-    private void downloadApiData(MapTypes type) {
+    private void downloadApiData(@MapType String type) {
         Log.v(TAG, "downloadApiData "
                 + String.format("type = %s", type));
 
         GeoApiService apiService = ApiClient.getService();
         switch (type) {
-            case FIRE_HALLs:
+            case Const.MapTypes.FIRE_HALLS:
                 ApiClient.getFireHalls(apiService, this);
                 break;
-            case SVPM_STATIONS:
+            case Const.MapTypes.SVPM_STATIONS:
                 ApiClient.getSpvmStations(apiService, this);
                 break;
-            case WATER_SUPPLIES:
+            case Const.MapTypes.WATER_SUPPLIES:
                 ApiClient.getWaterSupplies(apiService, this);
                 break;
-            case EMERGENCY_HOSTELS:
+            case Const.MapTypes.EMERGENCY_HOSTELS:
                 ApiClient.getEmergencyHostels(apiService, this);
                 break;
         }
@@ -320,7 +379,7 @@ public class MainActivity extends AppCompatActivity implements
      * @param pointsFeatures
      * @param mapType
      */
-    private void cacheMapData(List<PointsFeature> pointsFeatures, MapTypes mapType) {
+    private void cacheMapData(List<PointsFeature> pointsFeatures, @MapType String mapType) {
         realm.beginTransaction();
         // Loop over results, convert GeoJSON to Realm then add to db
         for (PointsFeature feature : pointsFeatures) {

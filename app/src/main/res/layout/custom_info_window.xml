@@ -43,7 +43,7 @@
         android:id="@+id/snippet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/padding_small"
         android:textColor="@color/map_info_snippet"
         android:textSize="13sp" />
 

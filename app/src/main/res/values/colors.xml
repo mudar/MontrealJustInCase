@@ -40,6 +40,7 @@
     <color name="blue_grey_400">#78909C</color>
     <color name="blue_grey_500">#607D8B</color>
     <color name="light_green_500">#8BC34A</color>
+    <color name="grey_100">#F5F5F5</color>
     <color name="grey_600">#757575</color>
     <color name="grey_900">#212121</color>
     <color name="yellow_500">#FFEB3B</color>
@@ -59,5 +60,8 @@
     <!--Map InfoWindow-->
     <color name="map_info_title">@color/grey_900</color>
     <color name="map_info_snippet">@color/grey_600</color>
+
+    <!--Search Suggestions-->
+    <color name="search_suggestion_title">@color/grey_100</color>
 
 </resources>

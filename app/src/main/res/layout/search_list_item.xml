@@ -22,20 +22,16 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@id/title"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
-    android:foreground="?attr/selectableItemBackground">
-
-    <TextView
-        android:id="@id/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:minHeight="?attr/listPreferredItemHeightSmall"
-        android:paddingEnd="?attr/listPreferredItemPaddingRight"
-        android:paddingStart="?attr/listPreferredItemPaddingLeft"
-        android:textColor="@color/grey_900"
-        android:textSize="13sp" />
-</FrameLayout>
+    android:background="?attr/selectableItemBackground"
+    android:drawablePadding="@dimen/padding_normal"
+    android:gravity="center_vertical"
+    android:minHeight="?attr/listPreferredItemHeightSmall"
+    android:paddingEnd="?attr/listPreferredItemPaddingRight"
+    android:paddingStart="?attr/listPreferredItemPaddingLeft"
+    android:textColor="@color/search_suggestion_title"
+    android:textSize="@dimen/search_suggestion_text_size" />

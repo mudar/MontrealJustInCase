@@ -73,11 +73,12 @@ public class Placemark implements RealmModel {
         this.id = id;
     }
 
+    @MapType
     public String getMapType() {
         return mapType;
     }
 
-    public void setMapType(String mapType) {
+    public void setMapType(@MapType String mapType) {
         this.mapType = mapType;
     }
 

@@ -25,11 +25,13 @@ package ca.mudar.mtlaucasou.model;
 
 import ca.mudar.mtlaucasou.Const;
 import ca.mudar.mtlaucasou.model.geojson.PointsFeature;
-import io.realm.RealmObject;
+import io.realm.RealmModel;
 import io.realm.annotations.Ignore;
 import io.realm.annotations.Index;
+import io.realm.annotations.RealmClass;
 
-public class Placemark extends RealmObject {
+@RealmClass
+public class Placemark implements RealmModel {
     @Ignore
     public static final String FIELD_MAP_TYPE = "mapType";
     @Ignore
@@ -38,6 +40,8 @@ public class Placemark extends RealmObject {
     public static final String FIELD_COORDINATES_LAT = "coordinates.lat";
     @Ignore
     public static final String FIELD_COORDINATES_LNG = "coordinates.lng";
+    @Ignore
+    public static final String FIELD_PROPERTIES_NAME = "properties.name";
 
     private String id;
     @Index

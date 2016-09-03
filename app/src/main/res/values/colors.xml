@@ -27,6 +27,7 @@
     <color name="color_accent">@color/cyan_500</color>
 
     <!--Material Colors-->
+    <color name="white">#ffffff</color>
     <color name="deep_orange_900">#BF360C</color>
     <color name="orange_500">#FF9800</color>
     <color name="orange_700">#F57C00</color>
@@ -48,7 +49,7 @@
     <color name="yellow_900">#F57F17</color>
 
     <!--App custom colors-->
-    <color name="color_background">@color/grey_900</color>
+    <color name="color_background">@color/yellow_700</color>
     <color name="color_fire_halls">@color/red_700</color>
     <color name="color_svpm">@color/blue_500</color>
     <color name="color_water_supplies">@color/blue_grey_400</color>

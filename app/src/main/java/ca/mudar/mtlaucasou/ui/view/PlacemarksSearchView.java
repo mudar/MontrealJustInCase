@@ -4,8 +4,11 @@ import android.content.Context;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.SearchView;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MenuItem;
+
+import ca.mudar.mtlaucasou.R;
+import ca.mudar.mtlaucasou.data.SuggestionsCursorHelper;
+import ca.mudar.mtlaucasou.model.Placemark;
 
 import static ca.mudar.mtlaucasou.util.LogUtils.makeLogTag;
 
@@ -31,6 +34,7 @@ public class PlacemarksSearchView extends android.support.v7.widget.SearchView i
         super(context, attrs, defStyleAttr);
 
         setupListeners();
+        setQueryHint(context.getString(R.string.search_hint));
     }
 
     public void setMenuItem(MenuItem searchMenuItem) {
@@ -61,10 +65,14 @@ public class PlacemarksSearchView extends android.support.v7.widget.SearchView i
      */
     @Override
     public boolean onSuggestionClick(int position) {
-        final String name = getSuggestionsAdapter().getItem(position).toString();
-        Log.v(TAG, "onSuggestionClick " 
-                + String.format("position = %s, name = %s", position, name));
-        setQuery(name, true);
+        final Placemark place = SuggestionsCursorHelper
+                .cursorObjectToPlace(getSuggestionsAdapter().getCursor(), position);
+
+        if (place != null) {
+            setQuery(place.getName(), false);
+            MenuItemCompat.collapseActionView(mSearchMenuItem);
+//                mListener.onSearchQuerySubmitted(query);
+        }
         return true;
     }
 

@@ -37,6 +37,9 @@
     <string name="action_settings">Settings</string>
     <string name="action_about">About</string>
 
+    <!--Search-->
+    <string name="search_hint">Postal code or place name</string>
+
     <!--Units-->
     <string name="placemark_distance_iso">%.1f km</string>
     <string name="placemark_distance_iso_min">&lt; 100 m</string>

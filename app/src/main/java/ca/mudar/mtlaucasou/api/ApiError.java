@@ -21,7 +21,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package ca.mudar.mtlaucasou.io;
+package ca.mudar.mtlaucasou.api;
 
 import android.content.res.Resources;
 import android.support.design.widget.Snackbar;

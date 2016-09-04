@@ -21,10 +21,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package ca.mudar.mtlaucasou.io;
+package ca.mudar.mtlaucasou.api;
 
 import ca.mudar.mtlaucasou.Const;
-import ca.mudar.mtlaucasou.model.geojson.PointsFeature;
 import ca.mudar.mtlaucasou.model.geojson.PointsFeatureCollection;
 import retrofit2.Call;
 import retrofit2.http.GET;

@@ -51,8 +51,8 @@ import java.util.List;
 
 import ca.mudar.mtlaucasou.Const;
 import ca.mudar.mtlaucasou.R;
-import ca.mudar.mtlaucasou.io.ApiClient;
-import ca.mudar.mtlaucasou.io.GeoApiService;
+import ca.mudar.mtlaucasou.api.ApiClient;
+import ca.mudar.mtlaucasou.api.GeoApiService;
 import ca.mudar.mtlaucasou.model.MapType;
 import ca.mudar.mtlaucasou.model.Placemark;
 import ca.mudar.mtlaucasou.model.geojson.PointsFeature;

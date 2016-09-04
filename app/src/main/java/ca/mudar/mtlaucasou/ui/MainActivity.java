@@ -52,7 +52,7 @@ import ca.mudar.mtlaucasou.api.ApiClient;
 import ca.mudar.mtlaucasou.api.GeoApiService;
 import ca.mudar.mtlaucasou.data.RealmQueries;
 import ca.mudar.mtlaucasou.model.MapType;
-import ca.mudar.mtlaucasou.model.Placemark;
+import ca.mudar.mtlaucasou.model.RealmPlacemark;
 import ca.mudar.mtlaucasou.model.geojson.PointsFeatureCollection;
 import ca.mudar.mtlaucasou.ui.adapter.PlacemarkInfoWindowAdapter;
 import ca.mudar.mtlaucasou.ui.adapter.PlacemarkSearchAdapter;
@@ -249,15 +249,15 @@ public class MainActivity extends AppCompatActivity implements
         }
 
         // First, query the Realm db for the current mapType
-        final RealmQuery<Placemark> query = RealmQueries.queryMapTypePlacemarks(mRealm, mMapType);
+        final RealmQuery<RealmPlacemark> query = RealmQueries.queryPlacemarksByMapType(mRealm, mMapType);
 
         if (query.count() > 0) {
             // Has cached data
             final LatLngBounds bounds = vMap.getProjection().getVisibleRegion().latLngBounds;
-            final RealmResults<Placemark> placemarks = RealmQueries.filterPlacemarksQueryByBounds(
+            final RealmResults<RealmPlacemark> realmPlacemarks = RealmQueries.filterPlacemarksQueryByBounds(
                     query, bounds);
 
-            MapUtils.addPlacemarksToMap(vMap, mMapType, placemarks);
+            MapUtils.addPlacemarksToMap(vMap, mMapType, realmPlacemarks);
         } else {
             // Need to download remote API data
             downloadApiData(type);

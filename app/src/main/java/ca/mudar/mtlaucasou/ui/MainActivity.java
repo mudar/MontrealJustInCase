@@ -311,7 +311,7 @@ public class MainActivity extends AppCompatActivity implements
                     .findAll();
 
             final long startTime = System.currentTimeMillis();
-            final int count = MapUtils.addPlacemarsToMap(vMap, mMapType, placemarks);
+            final int count = MapUtils.addPlacemarksToMap(vMap, mMapType, placemarks);
 
             Log.v(TAG, String.format("Added %1$d markers. Duration: %2$dms",
                     count,

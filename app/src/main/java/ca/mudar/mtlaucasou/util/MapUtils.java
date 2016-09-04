@@ -107,7 +107,7 @@ public class MapUtils {
      * @param placemarks list of Placemarks
      * @return Number of markers added to the visible region
      */
-    public static int addPlacemarsToMap(GoogleMap map, @MapType String type, List<Placemark> placemarks) {
+    public static int addPlacemarksToMap(GoogleMap map, @MapType String type, List<Placemark> placemarks) {
         if (map == null || placemarks == null) {
             return 0;
         }

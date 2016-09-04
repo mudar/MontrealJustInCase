@@ -21,6 +21,7 @@ public class PlacemarksSearchView extends android.support.v7.widget.SearchView i
     private static final String TAG = makeLogTag("PlacemarksSearchView");
 
     private MenuItem mSearchMenuItem;
+    private SearchViewListener mListener;
 
     public PlacemarksSearchView(Context context) {
         this(context, null);
@@ -33,7 +34,6 @@ public class PlacemarksSearchView extends android.support.v7.widget.SearchView i
     public PlacemarksSearchView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        setupListeners();
         setQueryHint(context.getString(R.string.search_hint));
     }
 
@@ -46,7 +46,10 @@ public class PlacemarksSearchView extends android.support.v7.widget.SearchView i
         this.mSearchMenuItem = searchMenuItem;
     }
 
-    private void setupListeners() {
+    public void setListener(SearchViewListener listener) {
+        this.mListener = listener;
+
+        // Also set the other listeners
         setOnSuggestionListener(this);
         setOnQueryTextListener(this);
     }
@@ -64,6 +67,7 @@ public class PlacemarksSearchView extends android.support.v7.widget.SearchView i
 
     /**
      * Implements SearchView.OnSuggestionListener
+     * Handles the click on an auto-complete Placemark
      *
      * @param position
      * @return always true, to skip Intent lookup
@@ -76,13 +80,14 @@ public class PlacemarksSearchView extends android.support.v7.widget.SearchView i
         if (place != null) {
             setQuery(place.getName(), false);
             collapseActionView();
-//                mListener.onSearchQuerySubmitted(query);
+            mListener.onPlacemarkSuggestionClick(place);
         }
         return true;
     }
 
     /**
      * Implements SearchView.OnQueryTextListener
+     * Handles the submit button for a word search
      *
      * @param query
      * @return
@@ -90,8 +95,7 @@ public class PlacemarksSearchView extends android.support.v7.widget.SearchView i
     @Override
     public boolean onQueryTextSubmit(String query) {
         collapseActionView();
-        // User pressed submit button or clicked suggestion
-//                mListener.onSearchQuerySubmitted(query);
+        mListener.onAddressSearchSubmit(query);
         return false;
     }
 
@@ -110,5 +114,11 @@ public class PlacemarksSearchView extends android.support.v7.widget.SearchView i
         if (mSearchMenuItem != null) {
             MenuItemCompat.collapseActionView(mSearchMenuItem);
         }
+    }
+
+    public interface SearchViewListener {
+        public void onAddressSearchSubmit(String query);
+
+        public void onPlacemarkSuggestionClick(Placemark placemark);
     }
 }

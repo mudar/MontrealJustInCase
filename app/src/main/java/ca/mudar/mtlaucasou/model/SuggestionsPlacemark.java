@@ -85,10 +85,10 @@ public class SuggestionsPlacemark implements
         @MapType
         String mapType;
 
-        public Builder(Placemark realmPlacemark) {
-            this.name = realmPlacemark.getName();
-            this.latLng = realmPlacemark.getLatLng();
-            this.mapType = realmPlacemark.getMapType();
+        public Builder(Placemark placemark) {
+            this.name = placemark.getName();
+            this.latLng = placemark.getLatLng();
+            this.mapType = placemark.getMapType();
         }
 
         public SuggestionsPlacemark build() {

@@ -30,7 +30,6 @@ import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -47,18 +46,17 @@ import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabReselectListener;
 import com.roughike.bottombar.OnTabSelectListener;
 
-import java.util.List;
-
 import ca.mudar.mtlaucasou.Const;
 import ca.mudar.mtlaucasou.R;
 import ca.mudar.mtlaucasou.api.ApiClient;
 import ca.mudar.mtlaucasou.api.GeoApiService;
+import ca.mudar.mtlaucasou.data.RealmQueries;
 import ca.mudar.mtlaucasou.model.MapType;
 import ca.mudar.mtlaucasou.model.Placemark;
-import ca.mudar.mtlaucasou.model.geojson.PointsFeature;
 import ca.mudar.mtlaucasou.model.geojson.PointsFeatureCollection;
 import ca.mudar.mtlaucasou.ui.adapter.PlacemarkInfoWindowAdapter;
 import ca.mudar.mtlaucasou.ui.adapter.PlacemarkSearchAdapter;
+import ca.mudar.mtlaucasou.ui.view.PlacemarksSearchView;
 import ca.mudar.mtlaucasou.util.MapUtils;
 import ca.mudar.mtlaucasou.util.PermissionUtils;
 import io.realm.Realm;
@@ -80,11 +78,9 @@ public class MainActivity extends AppCompatActivity implements
     private GoogleMap vMap;
     private View vMarkerInfoWindow;
     private Toolbar vToolbar;
-    private SearchView vSearchView;
-    private PlacemarkSearchAdapter mSearchAdapter;
     @MapType
     private String mMapType;
-    private Realm realm;
+    private Realm mRealm;
     private Handler mHandler = new Handler(); // Waits for the BottomBar anim
 
     @Override
@@ -93,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements
 
         setContentView(R.layout.activity_main);
 
-        realm = Realm.getDefaultInstance();
+        mRealm = Realm.getDefaultInstance();
 
         setupToolbar();
         setupMap();
@@ -114,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements
     protected void onDestroy() {
         super.onDestroy();
 
-        realm.close();
+        mRealm.close();
     }
 
     @Override
@@ -141,38 +137,10 @@ public class MainActivity extends AppCompatActivity implements
     private void setupSearchView(final Menu menu) {
         // Get the toolbar menu SearchView
         final MenuItem searchMenuItem = menu.findItem(R.id.action_search);
-        vSearchView = (SearchView) MenuItemCompat.getActionView(searchMenuItem);
+        final PlacemarksSearchView vSearchView = (PlacemarksSearchView) MenuItemCompat.getActionView(searchMenuItem);
 
-        mSearchAdapter = new PlacemarkSearchAdapter(this);
-        vSearchView.setSuggestionsAdapter(mSearchAdapter);
-
-        vSearchView.setOnSuggestionListener(new SearchView.OnSuggestionListener() {
-            @Override
-            public boolean onSuggestionSelect(int position) {
-                return false;
-            }
-
-            @Override
-            public boolean onSuggestionClick(int position) {
-                // Submit query for selected auto-complete suggestion
-                vSearchView.setQuery(mSearchAdapter.getSuggestion(position), true);
-                return true;
-            }
-        });
-        vSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                MenuItemCompat.collapseActionView(searchMenuItem);
-                // User pressed submit button or clicked suggestion
-//                mListener.onSearchQuerySubmitted(query);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
+        vSearchView.setSuggestionsAdapter(new PlacemarkSearchAdapter(this));
+        vSearchView.setMenuItem(searchMenuItem);
     }
 
     /**
@@ -248,21 +216,6 @@ public class MainActivity extends AppCompatActivity implements
         MapUtils.enableMyLocation(this, vMap);
 
         loadMapData(mMapType);
-
-//        final ViewTreeObserver observer = vToolbar.getViewTreeObserver();
-//        observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-//            @Override
-//            public void onGlobalLayout() {
-//                Log.v(TAG, "onGlobalLayout");
-//
-//                vMap.setPadding(0, vToolbar.getHeight(), 0, 0);
-//                try {
-//                    observer.removeOnGlobalLayoutListener(this);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
     }
 
 
@@ -296,26 +249,15 @@ public class MainActivity extends AppCompatActivity implements
         }
 
         // First, query the Realm db for the current mapType
-        final LatLngBounds bounds = vMap.getProjection().getVisibleRegion().latLngBounds;
-        final RealmQuery<Placemark> query = realm
-                .where(Placemark.class)
-                .equalTo(Placemark.FIELD_MAP_TYPE, mMapType);
+        final RealmQuery<Placemark> query = RealmQueries.queryMapTypePlacemarks(mRealm, mMapType);
 
         if (query.count() > 0) {
             // Has cached data
-            final RealmResults<Placemark> placemarks = query
-                    .greaterThan(Placemark.FIELD_COORDINATES_LAT, bounds.southwest.latitude)
-                    .greaterThan(Placemark.FIELD_COORDINATES_LNG, bounds.southwest.longitude)
-                    .lessThan(Placemark.FIELD_COORDINATES_LAT, bounds.northeast.latitude)
-                    .lessThan(Placemark.FIELD_COORDINATES_LNG, bounds.northeast.longitude)
-                    .findAll();
+            final LatLngBounds bounds = vMap.getProjection().getVisibleRegion().latLngBounds;
+            final RealmResults<Placemark> placemarks = RealmQueries.filterPlacemarksQueryByBounds(
+                    query, bounds);
 
-            final long startTime = System.currentTimeMillis();
-            final int count = MapUtils.addPlacemarksToMap(vMap, mMapType, placemarks);
-
-            Log.v(TAG, String.format("Added %1$d markers. Duration: %2$dms",
-                    count,
-                    System.currentTimeMillis() - startTime));
+            MapUtils.addPlacemarksToMap(vMap, mMapType, placemarks);
         } else {
             // Need to download remote API data
             downloadApiData(type);
@@ -357,7 +299,7 @@ public class MainActivity extends AppCompatActivity implements
      */
     @Override
     public void onResponse(Call<PointsFeatureCollection> call, Response<PointsFeatureCollection> response) {
-        cacheMapData(response.body().getFeatures(), mMapType);
+        RealmQueries.cacheMapData(mRealm, response.body().getFeatures(), mMapType);
         loadMapData(mMapType);
     }
 
@@ -371,20 +313,5 @@ public class MainActivity extends AppCompatActivity implements
     public void onFailure(Call<PointsFeatureCollection> call, Throwable t) {
         Log.e(TAG, "onFailure");
         t.printStackTrace();
-    }
-
-    /**
-     * Save the downloaded data to the Realm db
-     *
-     * @param pointsFeatures
-     * @param mapType
-     */
-    private void cacheMapData(List<PointsFeature> pointsFeatures, @MapType String mapType) {
-        realm.beginTransaction();
-        // Loop over results, convert GeoJSON to Realm then add to db
-        for (PointsFeature feature : pointsFeatures) {
-            realm.copyToRealm(new Placemark.Builder(feature, mapType).build());
-        }
-        realm.commitTransaction();
     }
 }

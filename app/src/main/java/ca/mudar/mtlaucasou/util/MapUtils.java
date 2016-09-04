@@ -31,6 +31,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
@@ -47,7 +48,10 @@ import ca.mudar.mtlaucasou.R;
 import ca.mudar.mtlaucasou.model.MapType;
 import ca.mudar.mtlaucasou.model.Placemark;
 
+import static ca.mudar.mtlaucasou.util.LogUtils.makeLogTag;
+
 public class MapUtils {
+    private static final String TAG = makeLogTag("MapUtils");
 
     public static void enableMyLocation(AppCompatActivity activity, GoogleMap map) {
         if (ContextCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -108,6 +112,7 @@ public class MapUtils {
      * @return Number of markers added to the visible region
      */
     public static int addPlacemarksToMap(GoogleMap map, @MapType String type, List<Placemark> placemarks) {
+        final long startTime = System.currentTimeMillis();
         if (map == null || placemarks == null) {
             return 0;
         }
@@ -134,6 +139,10 @@ public class MapUtils {
         for (MarkerOptions markerOptions : markers) {
             map.addMarker(markerOptions);
         }
+
+        Log.v(TAG, String.format("Added %1$d markers. Duration: %2$dms",
+                markers.size(),
+                System.currentTimeMillis() - startTime));
 
         return markers.size();
     }

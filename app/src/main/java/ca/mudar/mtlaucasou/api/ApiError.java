@@ -38,8 +38,8 @@ public class ApiError extends IOException {
     private final static String TAG = "ApiError";
     private final static int HOST_NOT_FOUND = 4040;
 
-    private int code;
-    private String message;
+    private int mCode;
+    private String mMessage;
 
     public static ApiError getInstance(IOException e) {
         if (e instanceof UnknownHostException) {
@@ -52,25 +52,25 @@ public class ApiError extends IOException {
     }
 
     public ApiError(int code, String message) {
-        this.code = code;
-        this.message = message;
+        this.mCode = code;
+        this.mMessage = message;
     }
 
     public void showSnackbar(View v) {
         try {
             final Resources res = v.getResources();
             String msg;
-            if (message != null && !message.isEmpty()) {
+            if (mMessage != null && !mMessage.isEmpty()) {
                 msg = String.format(res.getString(R.string.snackbar_api_error_message),
-                        message.toLowerCase(),
-                        code);
+                        mMessage.toLowerCase(),
+                        mCode);
             } else {
                 if (isHostNotFound()) {
                     msg = String.format(res.getString(R.string.snackbar_host_unknown_error_message),
-                            code);
+                            mCode);
                 } else {
                     msg = String.format(res.getString(R.string.snackbar_api_error_code),
-                            code);
+                            mCode);
                 }
             }
             Snackbar.make(v,
@@ -83,18 +83,18 @@ public class ApiError extends IOException {
     }
 
     public boolean isUnauthorized() {
-        return this.code == HttpURLConnection.HTTP_UNAUTHORIZED;
+        return this.mCode == HttpURLConnection.HTTP_UNAUTHORIZED;
     }
 
     public boolean isNotFound() {
-        return this.code == HttpURLConnection.HTTP_NOT_FOUND;
+        return this.mCode == HttpURLConnection.HTTP_NOT_FOUND;
     }
 
     public boolean isConflict() {
-        return this.code == HttpURLConnection.HTTP_CONFLICT;
+        return this.mCode == HttpURLConnection.HTTP_CONFLICT;
     }
 
     public boolean isHostNotFound() {
-        return this.code == HOST_NOT_FOUND;
+        return this.mCode == HOST_NOT_FOUND;
     }
 }

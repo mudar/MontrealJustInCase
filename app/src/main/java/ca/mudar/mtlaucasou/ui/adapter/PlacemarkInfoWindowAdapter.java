@@ -34,18 +34,18 @@ import ca.mudar.mtlaucasou.R;
 
 public class PlacemarkInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
 
-    private final View view;
+    private final View mView;
 
     public PlacemarkInfoWindowAdapter(View view) {
-        this.view = view;
+        this.mView = view;
     }
 
     @Override
     public View getInfoContents(Marker marker) {
         final String title = marker.getTitle();
         final String snippet = marker.getSnippet();
-        final TextView vTitle = (TextView) view.findViewById(R.id.title);
-        final TextView vSnippet = ((TextView) view.findViewById(R.id.snippet));
+        final TextView vTitle = (TextView) mView.findViewById(R.id.title);
+        final TextView vSnippet = ((TextView) mView.findViewById(R.id.snippet));
 
         if (title != null) {
             vTitle.setText(title);
@@ -58,7 +58,7 @@ public class PlacemarkInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
         } else {
             vSnippet.setVisibility(View.GONE);
         }
-        return view;
+        return mView;
     }
 
     @Override

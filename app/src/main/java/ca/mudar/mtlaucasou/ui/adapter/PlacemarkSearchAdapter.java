@@ -62,15 +62,15 @@ public class PlacemarkSearchAdapter extends CursorAdapter implements
     private static final int CURSOR_COLUMN_TITLE = 1;
     private static final int CURSOR_COLUMN_MAP_TYPE = 2;
 
-    private final ResultsFilter filter;
-    private final LayoutInflater inflater;
+    private final ResultsFilter mFilter;
+    private final LayoutInflater mInflater;
     private final ArrayList<PlaceSuggestion> mDataset;
 
     public PlacemarkSearchAdapter(Context context) {
         super(context, null, true);
 
-        this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.filter = new ResultsFilter();
+        this.mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.mFilter = new ResultsFilter();
 
         this.mDataset = new ArrayList<>();
     }
@@ -99,7 +99,7 @@ public class PlacemarkSearchAdapter extends CursorAdapter implements
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
-        return inflater.inflate(R.layout.search_list_item, parent, false);
+        return mInflater.inflate(R.layout.search_list_item, parent, false);
     }
 
     @Override
@@ -114,7 +114,7 @@ public class PlacemarkSearchAdapter extends CursorAdapter implements
 
     @Override
     public Filter getFilter() {
-        return filter;
+        return mFilter;
     }
 
     /**

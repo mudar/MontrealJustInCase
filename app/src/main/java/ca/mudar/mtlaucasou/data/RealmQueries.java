@@ -28,8 +28,9 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import java.util.List;
 
 import ca.mudar.mtlaucasou.model.MapType;
-import ca.mudar.mtlaucasou.model.Placemark;
+import ca.mudar.mtlaucasou.model.RealmPlacemark;
 import ca.mudar.mtlaucasou.model.geojson.PointsFeature;
+import io.realm.Case;
 import io.realm.Realm;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
@@ -46,7 +47,7 @@ public class RealmQueries {
         realm.beginTransaction();
         // Loop over results, convert GeoJSON to Realm then add to db
         for (PointsFeature feature : pointsFeatures) {
-            realm.copyToRealm(new Placemark.Builder(feature, mapType).build());
+            realm.copyToRealm(new RealmPlacemark.Builder(feature, mapType).build());
         }
         realm.commitTransaction();
     }
@@ -58,10 +59,10 @@ public class RealmQueries {
      * @param mapType
      * @return
      */
-    public static RealmQuery<Placemark> queryMapTypePlacemarks(Realm realm, @MapType String mapType) {
+    public static RealmQuery<RealmPlacemark> queryPlacemarksByMapType(Realm realm, @MapType String mapType) {
         return realm
-                .where(Placemark.class)
-                .equalTo(Placemark.FIELD_MAP_TYPE, mapType);
+                .where(RealmPlacemark.class)
+                .equalTo(RealmPlacemark.FIELD_MAP_TYPE, mapType);
     }
 
     /**
@@ -71,12 +72,25 @@ public class RealmQueries {
      * @param bounds
      * @return
      */
-    public static RealmResults<Placemark> filterPlacemarksQueryByBounds(RealmQuery<Placemark> query, LatLngBounds bounds) {
+    public static RealmResults<RealmPlacemark> filterPlacemarksQueryByBounds(RealmQuery<RealmPlacemark> query, LatLngBounds bounds) {
         return query
-                .greaterThan(Placemark.FIELD_COORDINATES_LAT, bounds.southwest.latitude)
-                .greaterThan(Placemark.FIELD_COORDINATES_LNG, bounds.southwest.longitude)
-                .lessThan(Placemark.FIELD_COORDINATES_LAT, bounds.northeast.latitude)
-                .lessThan(Placemark.FIELD_COORDINATES_LNG, bounds.northeast.longitude)
+                .greaterThan(RealmPlacemark.FIELD_COORDINATES_LAT, bounds.southwest.latitude)
+                .greaterThan(RealmPlacemark.FIELD_COORDINATES_LNG, bounds.southwest.longitude)
+                .lessThan(RealmPlacemark.FIELD_COORDINATES_LAT, bounds.northeast.latitude)
+                .lessThan(RealmPlacemark.FIELD_COORDINATES_LNG, bounds.northeast.longitude)
                 .findAll();
+    }
+
+    /**
+     * Get all Placemarks with name containing the search-word
+     *
+     * @param realm
+     * @param name
+     * @return
+     */
+    public static RealmQuery<RealmPlacemark> queryPlacemarksByName(Realm realm, String name) {
+        return realm
+                .where(RealmPlacemark.class)
+                .contains(RealmPlacemark.FIELD_PROPERTIES_NAME, String.valueOf(name), Case.INSENSITIVE);
     }
 }

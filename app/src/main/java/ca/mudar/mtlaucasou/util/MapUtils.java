@@ -111,7 +111,7 @@ public class MapUtils {
      * @param placemarks list of Placemarks
      * @return Number of markers added to the visible region
      */
-    public static int addPlacemarksToMap(GoogleMap map, @MapType String type, List<Placemark> placemarks) {
+    public static int addPlacemarksToMap(GoogleMap map, @MapType String type, List<? extends Placemark> placemarks) {
         final long startTime = System.currentTimeMillis();
         if (map == null || placemarks == null) {
             return 0;
@@ -119,9 +119,9 @@ public class MapUtils {
 
         final List<MarkerOptions> markers = new ArrayList<>();
         for (Placemark placemark : placemarks) {
-            final LatLng latLng = placemark.getCoordinates().getLatLng();
-            final String title = placemark.getProperties().getName();
-            final String desc = MapUtils.getCleanDescription(placemark.getProperties().getDescription(), title);
+            final LatLng latLng = placemark.getLatLng();
+            final String title = placemark.getName();
+            final String desc = MapUtils.getCleanDescription(placemark.getDescription(), title);
 
             if (latLng != null && !TextUtils.isEmpty(title)) {
                 final MarkerOptions markerOptions = new MarkerOptions()

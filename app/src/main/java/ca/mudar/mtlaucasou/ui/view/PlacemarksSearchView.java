@@ -37,6 +37,11 @@ public class PlacemarksSearchView extends android.support.v7.widget.SearchView i
         setQueryHint(context.getString(R.string.search_hint));
     }
 
+    /**
+     * Required for the SearchView to collapse the ActionView
+     *
+     * @param searchMenuItem
+     */
     public void setMenuItem(MenuItem searchMenuItem) {
         this.mSearchMenuItem = searchMenuItem;
     }
@@ -70,7 +75,7 @@ public class PlacemarksSearchView extends android.support.v7.widget.SearchView i
 
         if (place != null) {
             setQuery(place.getName(), false);
-            MenuItemCompat.collapseActionView(mSearchMenuItem);
+            collapseActionView();
 //                mListener.onSearchQuerySubmitted(query);
         }
         return true;
@@ -84,7 +89,7 @@ public class PlacemarksSearchView extends android.support.v7.widget.SearchView i
      */
     @Override
     public boolean onQueryTextSubmit(String query) {
-        MenuItemCompat.collapseActionView(mSearchMenuItem);
+        collapseActionView();
         // User pressed submit button or clicked suggestion
 //                mListener.onSearchQuerySubmitted(query);
         return false;
@@ -99,5 +104,11 @@ public class PlacemarksSearchView extends android.support.v7.widget.SearchView i
     @Override
     public boolean onQueryTextChange(String newText) {
         return false;
+    }
+
+    private void collapseActionView() {
+        if (mSearchMenuItem != null) {
+            MenuItemCompat.collapseActionView(mSearchMenuItem);
+        }
     }
 }

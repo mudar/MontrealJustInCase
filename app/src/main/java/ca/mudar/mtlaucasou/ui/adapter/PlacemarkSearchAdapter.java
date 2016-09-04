@@ -34,18 +34,18 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 
-import com.google.android.gms.maps.model.LatLng;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import ca.mudar.mtlaucasou.R;
-import ca.mudar.mtlaucasou.model.MapType;
+import ca.mudar.mtlaucasou.data.RealmQueries;
+import ca.mudar.mtlaucasou.data.SuggestionsCursorHelper;
 import ca.mudar.mtlaucasou.model.Placemark;
+import ca.mudar.mtlaucasou.model.RealmPlacemark;
+import ca.mudar.mtlaucasou.model.SuggestionsPlacemark;
 import ca.mudar.mtlaucasou.util.LogUtils;
 import ca.mudar.mtlaucasou.util.MapUtils;
-import io.realm.Case;
 import io.realm.Realm;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
@@ -58,13 +58,8 @@ public class PlacemarkSearchAdapter extends CursorAdapter implements
 
     public static final int THRESHOLD = 2;
 
-    private static final String[] CURSOR_COLUMNS = new String[]{"_id", "title", "type"};
-    private static final int CURSOR_COLUMN_TITLE = 1;
-    private static final int CURSOR_COLUMN_MAP_TYPE = 2;
-
     private final ResultsFilter mFilter;
     private final LayoutInflater mInflater;
-    private final ArrayList<PlaceSuggestion> mDataset;
 
     public PlacemarkSearchAdapter(Context context) {
         super(context, null, true);
@@ -72,29 +67,6 @@ public class PlacemarkSearchAdapter extends CursorAdapter implements
         this.mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.mFilter = new ResultsFilter();
 
-        this.mDataset = new ArrayList<>();
-    }
-
-    public void setDataset(List<PlaceSuggestion> data) {
-        mDataset.clear();
-        if (data != null) {
-            mDataset.addAll(data);
-        }
-
-        final MatrixCursor matrixCursor = getCursor(mDataset);
-        swapCursor(matrixCursor);
-    }
-
-    public String getSuggestion(int position) {
-        try {
-            if (getCursor().moveToPosition(position)) {
-                return getCursor().getString(CURSOR_COLUMN_TITLE);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return null;
     }
 
     @Override
@@ -104,12 +76,8 @@ public class PlacemarkSearchAdapter extends CursorAdapter implements
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-        final int position = cursor.getPosition();
-
-        if (position < mDataset.size()) {
-            final SuggestionViewHolder holder = new SuggestionViewHolder(view);
-            holder.setValue(mDataset.get(position));
-        }
+        final SuggestionViewHolder holder = new SuggestionViewHolder(view);
+        holder.bind(cursor);
     }
 
     @Override
@@ -117,42 +85,27 @@ public class PlacemarkSearchAdapter extends CursorAdapter implements
         return mFilter;
     }
 
-    /**
-     * Convert ArrayList into a MatrixCursor. Needed for the SearchView which supports Cursors only.
-     *
-     * @param data
-     * @return
-     */
-    private MatrixCursor getCursor(ArrayList<PlaceSuggestion> data) {
-        if (data == null || data.size() == 0) {
-            return null;
-        }
-
-        final MatrixCursor matrixCursor = new MatrixCursor(CURSOR_COLUMNS);
-
-        int i = 0;
-        for (PlaceSuggestion place : data) {
-            matrixCursor.addRow(new Object[]{i++, place.getName(), place.getMapType()});
-        }
-        return matrixCursor;
+    private void setDataset(List<SuggestionsPlacemark> data) {
+        final MatrixCursor matrixCursor = SuggestionsCursorHelper.initCursor(data);
+        swapCursor(matrixCursor);
     }
 
     /**
      * The auto-complete ViewHolder
      */
     private class SuggestionViewHolder {
-        PlaceSuggestion item;
         TextView vTitle;
 
         public SuggestionViewHolder(View view) {
             this.vTitle = (TextView) view.findViewById(R.id.title);
         }
 
-        public void setValue(PlaceSuggestion placemark) {
-            this.item = placemark;
-            this.vTitle.setText(placemark.getName());
+        public void bind(Cursor cursor) {
+            final Placemark place = SuggestionsCursorHelper.cursorObjectToPlace(cursor);
+
+            this.vTitle.setText(place.getName());
             this.vTitle.setCompoundDrawablesWithIntrinsicBounds(
-                    MapUtils.getMapTypeIcon(placemark.getMapType()), 0, 0, 0);
+                    MapUtils.getMapTypeIcon(place.getMapType()), 0, 0, 0);
         }
     }
 
@@ -160,6 +113,7 @@ public class PlacemarkSearchAdapter extends CursorAdapter implements
      * The search suggestions filter
      */
     public class ResultsFilter extends Filter {
+
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             FilterResults results = new FilterResults();
@@ -168,17 +122,25 @@ public class PlacemarkSearchAdapter extends CursorAdapter implements
                 final Realm realm = Realm.getDefaultInstance();
 
                 if (constraint != null && constraint.length() >= THRESHOLD) {
-                    final RealmQuery<Placemark> query = realm
-                            .where(Placemark.class)
-                            .contains(Placemark.FIELD_PROPERTIES_NAME, String.valueOf(constraint), Case.INSENSITIVE);
+                    /**
+                     * Query the database for filtered RealmPlacemarks,
+                     * then convert results to SuggestionsPlacemark.
+                     * Realm doesn't allow mixed use by Worker/UI threads, and this allows for
+                     * safer calls to realm.close()
+                     */
+                    final RealmQuery<RealmPlacemark> query = RealmQueries
+                            .queryPlacemarksByName(realm, String.valueOf(constraint));
 
                     results.count = (int) query.count();
                     if (query.count() > 0) {
-                        final RealmResults<Placemark> placemarks = query
+                        final RealmResults<RealmPlacemark> realmPlacemarks = query
                                 .findAll();
-                        final List<PlaceSuggestion> suggestions = new ArrayList<>();
-                        for (Placemark placemark : placemarks) {
-                            suggestions.add(new PlaceSuggestion.Builder(placemark).build());
+                        // The SuggestionsPlacemark list
+                        final List<SuggestionsPlacemark> suggestions = new ArrayList<>();
+                        for (RealmPlacemark realmPlacemark : realmPlacemarks) {
+                            // Convert each RealmPlacemark then add it to the results list
+                            suggestions.add(
+                                    new SuggestionsPlacemark.Builder(realmPlacemark).build());
                         }
                         Collections.sort(suggestions);
                         results.values = suggestions;
@@ -187,6 +149,8 @@ public class PlacemarkSearchAdapter extends CursorAdapter implements
                     }
                 }
 
+                // Safe to close Realm now, the adapter will be using SuggestionsPlacemarks
+                // to fill the MatrixCursor and bind the views.
                 realm.close();
 
             } catch (Exception e) {
@@ -199,73 +163,17 @@ public class PlacemarkSearchAdapter extends CursorAdapter implements
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            setDataset((List<PlaceSuggestion>) results.values);
+            //noinspection unchecked
+            setDataset((List<SuggestionsPlacemark>) results.values);
         }
 
         @Override
         public CharSequence convertResultToString(Object resultValue) {
             if (resultValue instanceof MatrixCursor) {
-                MatrixCursor cursor = (MatrixCursor) resultValue;
-                return cursor.getString(CURSOR_COLUMN_TITLE);
+                return SuggestionsCursorHelper.getPlacemarkName((MatrixCursor) resultValue);
             }
 
             return super.convertResultToString(resultValue);
-        }
-    }
-
-    /**
-     * Realm doesn't allow access to objects on Worker/UI threads, so we need to convert
-     * to non-realm objects.
-     * This allows handling realm calls in performFiltering() and then accessing data onBindView().
-     * And cleaner calls to realm.close()
-     */
-    private static class PlaceSuggestion implements Comparable<PlaceSuggestion> {
-        String name;
-        LatLng latLng;
-        @MapType String mapType;
-
-        public PlaceSuggestion() {
-            // Empty constructor
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public LatLng getLatLng() {
-            return latLng;
-        }
-
-        @MapType
-        public String getMapType() {
-            return mapType;
-        }
-
-        private PlaceSuggestion(Builder builder) {
-            this.name = builder.name;
-            this.latLng = builder.latLng;
-            this.mapType = builder.mapType;
-        }
-
-        @Override
-        public int compareTo(PlaceSuggestion other) {
-            return name.compareTo(other.name);
-        }
-
-        public static class Builder {
-            String name;
-            LatLng latLng;
-            @MapType String mapType;
-
-            public Builder(Placemark placemark) {
-                this.name = placemark.getProperties().getName();
-                this.latLng = placemark.getCoordinates().getLatLng();
-                this.mapType = placemark.getMapType();
-            }
-
-            public PlaceSuggestion build() {
-                return new PlaceSuggestion(this);
-            }
         }
     }
 }

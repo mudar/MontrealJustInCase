@@ -36,9 +36,6 @@ import ca.mudar.mtlaucasou.ui.adapter.PlacemarkSearchAdapter;
 
 import static ca.mudar.mtlaucasou.util.LogUtils.makeLogTag;
 
-/**
- * Created by mudar on 04/09/16.
- */
 public class PlacemarksSearchView extends android.support.v7.widget.SearchView implements
         SearchView.OnSuggestionListener,
         SearchView.OnQueryTextListener {

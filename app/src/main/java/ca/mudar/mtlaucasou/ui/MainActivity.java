@@ -24,6 +24,7 @@
 package ca.mudar.mtlaucasou.ui;
 
 import android.Manifest;
+import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.IdRes;
@@ -52,10 +53,11 @@ import ca.mudar.mtlaucasou.api.ApiClient;
 import ca.mudar.mtlaucasou.api.GeoApiService;
 import ca.mudar.mtlaucasou.data.RealmQueries;
 import ca.mudar.mtlaucasou.model.MapType;
+import ca.mudar.mtlaucasou.model.Placemark;
 import ca.mudar.mtlaucasou.model.RealmPlacemark;
 import ca.mudar.mtlaucasou.model.geojson.PointsFeatureCollection;
 import ca.mudar.mtlaucasou.ui.adapter.PlacemarkInfoWindowAdapter;
-import ca.mudar.mtlaucasou.ui.adapter.PlacemarkSearchAdapter;
+import ca.mudar.mtlaucasou.ui.listener.SearchResultsManager;
 import ca.mudar.mtlaucasou.ui.view.PlacemarksSearchView;
 import ca.mudar.mtlaucasou.util.MapUtils;
 import ca.mudar.mtlaucasou.util.PermissionUtils;
@@ -70,6 +72,8 @@ import static ca.mudar.mtlaucasou.util.LogUtils.makeLogTag;
 
 public class MainActivity extends AppCompatActivity implements
         OnMapReadyCallback,
+        GoogleMap.OnCameraIdleListener,
+        SearchResultsManager.MapUpdatesListener,
         Callback<PointsFeatureCollection> {
 
     private static final String TAG = makeLogTag("MainActivity");
@@ -77,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements
 
     private GoogleMap vMap;
     private View vMarkerInfoWindow;
-    private Toolbar vToolbar;
+    private BottomBar mBottomBar;
     @MapType
     private String mMapType;
     private Realm mRealm;
@@ -130,26 +134,26 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     private void setupToolbar() {
-        vToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(vToolbar);
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
     }
 
     private void setupSearchView(final Menu menu) {
         // Get the toolbar menu SearchView
         final MenuItem searchMenuItem = menu.findItem(R.id.action_search);
-        final PlacemarksSearchView vSearchView = (PlacemarksSearchView) MenuItemCompat.getActionView(searchMenuItem);
 
-        vSearchView.setSuggestionsAdapter(new PlacemarkSearchAdapter(this));
-        vSearchView.setMenuItem(searchMenuItem);
+        final PlacemarksSearchView searchView = (PlacemarksSearchView) MenuItemCompat.getActionView(searchMenuItem);
+        searchView.setSearchMenuItem(searchMenuItem);
+        searchView.setListener(new SearchResultsManager(MainActivity.this, this));
     }
 
     /**
      * Show the bottom bar navigation items
      */
     private void setupBottomBar() {
-        final BottomBar bottomBar = (BottomBar) findViewById(R.id.bottom_bar);
-        assert bottomBar != null;
-        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+        mBottomBar = (BottomBar) findViewById(R.id.bottom_bar);
+        assert mBottomBar != null;
+        mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes final int tabId) {
                 if (tabId == R.id.tab_fire_halls) {
@@ -164,7 +168,7 @@ public class MainActivity extends AppCompatActivity implements
             }
         });
 
-        bottomBar.setOnTabReselectListener(new OnTabReselectListener() {
+        mBottomBar.setOnTabReselectListener(new OnTabReselectListener() {
             @Override
             public void onTabReSelected(@IdRes int tabId) {
                 if (vMap != null) {
@@ -206,32 +210,37 @@ public class MainActivity extends AppCompatActivity implements
 
         vMap.setInfoWindowAdapter(new PlacemarkInfoWindowAdapter(vMarkerInfoWindow));
 
-        vMap.setOnCameraIdleListener(new GoogleMap.OnCameraIdleListener() {
-            @Override
-            public void onCameraIdle() {
-                Log.v(TAG, "onCameraIdle");
-            }
-        });
+        vMap.setOnCameraIdleListener(this);
 
         MapUtils.enableMyLocation(this, vMap);
 
-        loadMapData(mMapType);
+        loadMapData(mMapType, true);
     }
 
+    /**
+     * Implements GoogleMap.OnCameraIdleListener
+     */
+    @Override
+    public void onCameraIdle() {
+        Log.v(TAG, "onCameraIdle");
 
-    public void setMapType(final @MapType String type, long delay) {
+        loadMapData(mMapType, true);
+    }
+
+    private void setMapType(final @MapType String type, long delay) {
         mMapType = type;
 
         if (vMap != null) {
             // Remove previous markers
-            vMap.clear();
+            MapUtils.clearMap(vMap, type);
 
             mHandler.removeCallbacksAndMessages(null);
             // Wait for the BottomBar animation to end before loading data
             mHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    loadMapData(type);
+                    // Map was already cleared, to show user something is happening!
+                    loadMapData(type, false);
                 }
             }, delay);
         }
@@ -240,12 +249,20 @@ public class MainActivity extends AppCompatActivity implements
     /**
      * Load the cached data, or request download
      *
-     * @param type the current MapType
+     * @param type     the current MapType
+     * @param clearMap
      */
-    private void loadMapData(@MapType String type) {
-        Log.v(TAG, "loadMapData");
+    private void loadMapData(@MapType String type, boolean clearMap) {
+        Log.v(TAG, "loadMapData "
+                + String.format("type = %s, clearMap = %s", type, clearMap));
+
         if (vMap == null) {
             return;
+        }
+
+        if (clearMap) {
+            // Remove previous markers
+            MapUtils.clearMap(vMap, type);
         }
 
         // First, query the Realm db for the current mapType
@@ -257,7 +274,7 @@ public class MainActivity extends AppCompatActivity implements
             final RealmResults<RealmPlacemark> realmPlacemarks = RealmQueries.filterPlacemarksQueryByBounds(
                     query, bounds);
 
-            MapUtils.addPlacemarksToMap(vMap, mMapType, realmPlacemarks);
+            MapUtils.addPlacemarksToMap(vMap, realmPlacemarks);
         } else {
             // Need to download remote API data
             downloadApiData(type);
@@ -270,10 +287,7 @@ public class MainActivity extends AppCompatActivity implements
      * @param type
      */
     private void downloadApiData(@MapType String type) {
-        Log.v(TAG, "downloadApiData "
-                + String.format("type = %s", type));
-
-        GeoApiService apiService = ApiClient.getService();
+        final GeoApiService apiService = ApiClient.getService();
         switch (type) {
             case Const.MapTypes.FIRE_HALLS:
                 ApiClient.getFireHalls(apiService, this);
@@ -300,7 +314,7 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onResponse(Call<PointsFeatureCollection> call, Response<PointsFeatureCollection> response) {
         RealmQueries.cacheMapData(mRealm, response.body().getFeatures(), mMapType);
-        loadMapData(mMapType);
+        loadMapData(mMapType, true);
     }
 
     /**
@@ -314,4 +328,36 @@ public class MainActivity extends AppCompatActivity implements
         Log.e(TAG, "onFailure");
         t.printStackTrace();
     }
+
+    @Override
+    public void moveCameraToPlacemark(Placemark placemark) {
+        GoogleMap.OnCameraIdleListener cameraIdleListener;
+        if (mMapType.equals(placemark.getMapType())) {
+            // Selected placemark is of current type, data will be loaded in the activity's
+            // onCameraIdle()
+            cameraIdleListener = this;
+        } else {
+            // We need to switch mapType. Selecting the tab triggers a call to setMapType()
+            // which clears map and loads data
+            cameraIdleListener = new GoogleMap.OnCameraIdleListener() {
+                @Override
+                public void onCameraIdle() {
+                    mBottomBar.selectTabWithId(R.id.tab_spvm);
+                    if (mHandler != null) {
+                        // Switching tabs sets delayed call to loadMapData()
+                        // We remove it here to avoid duplicate data loading onCameraIdle()
+                        mHandler.removeCallbacksAndMessages(null);
+                    }
+                }
+            };
+        }
+
+        MapUtils.moveCameraToPlacemark(vMap, placemark, true, cameraIdleListener);
+    }
+
+    @Override
+    public void moveCameraToLocation(Location location) {
+        MapUtils.moveCameraToLocation(vMap, location, true, this);
+    }
+
 }

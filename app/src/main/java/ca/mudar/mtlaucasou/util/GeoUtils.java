@@ -28,6 +28,7 @@ import android.content.res.Resources;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.os.Bundle;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -38,7 +39,34 @@ import ca.mudar.mtlaucasou.Const;
 import ca.mudar.mtlaucasou.MtlAuCasOuApp;
 import ca.mudar.mtlaucasou.R;
 
+import static ca.mudar.mtlaucasou.util.LogUtils.makeLogTag;
+
 public class GeoUtils {
+    private static final String TAG = makeLogTag("GeoUtils");
+
+    public static Location findLocationByName(Context context, String name) throws IOException {
+        final List<Address> results = new Geocoder(context).getFromLocationName(name, 1,
+                Const.MAPS_GEOCODER_LIMITS[0], Const.MAPS_GEOCODER_LIMITS[1],
+                Const.MAPS_GEOCODER_LIMITS[2], Const.MAPS_GEOCODER_LIMITS[3]);
+
+        if (!results.isEmpty()) {
+            final Address address = results.get(0);
+            if (((int) address.getLatitude() != 0) && ((int) address.getLongitude() != 0)) {
+                final Location location = new Location(Const.CUSTOM_LOCATION_PROVIDER);
+                location.setLatitude(address.getLatitude());
+                location.setLongitude(address.getLongitude());
+
+                final Bundle extras = new Bundle();
+                extras.putString(Const.BundleKeys.NAME, address.getFeatureName());
+                location.setExtras(extras);
+
+                return location;
+            }
+        }
+
+        return null;
+    }
+
     public static LatLng getCoordsLatLng(List<Double> coordinates) {
         try {
             return new LatLng(coordinates.get(1), coordinates.get(0));
@@ -49,30 +77,9 @@ public class GeoUtils {
         return null;
     }
 
-    public static Location findLocatioFromName(Context c, String name) throws IOException {
-        Geocoder geocoder = new Geocoder(c);
-        List<Address> adr;
-
-        adr = geocoder.getFromLocationName(name, 10, Const.MAPS_GEOCODER_LIMITS[0],
-                Const.MAPS_GEOCODER_LIMITS[1], Const.MAPS_GEOCODER_LIMITS[2],
-                Const.MAPS_GEOCODER_LIMITS[3]);
-        if (!adr.isEmpty()) {
-            Address address = adr.get(0);
-            if (((int) address.getLatitude() != 0) && ((int) address.getLongitude() != 0)) {
-                Location location = new Location("mylocation");
-                location.setLatitude(address.getLatitude());
-                location.setLongitude(address.getLongitude());
-
-                return location;
-            }
-        }
-
-        return null;
-    }
-
     /**
      * Get distance in Metric or Imperial units. Display changes depending on
-     * the value: different approximationss in ft when > 1000. Very short
+     * the value: different approximations in ft when > 1000. Very short
      * distances are not displayed to avoid problems with Location accuracy.
      *
      * @param c

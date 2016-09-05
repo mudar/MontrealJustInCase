@@ -23,13 +23,16 @@
 
 package ca.mudar.mtlaucasou.util;
 
+import android.support.annotation.IdRes;
+
 import ca.mudar.mtlaucasou.Const;
 import ca.mudar.mtlaucasou.R;
 import ca.mudar.mtlaucasou.model.MapType;
 
 public class NavigUtils {
 
-    public static int getTabId(@MapType String type) {
+    @IdRes
+    public static int getTabIdByMapType(@MapType String type) {
         switch (type) {
             case Const.MapTypes.FIRE_HALLS:
                 return R.id.tab_fire_halls;
@@ -42,5 +45,21 @@ public class NavigUtils {
         }
 
         return 0;
+    }
+
+    @MapType
+    public static String getMapTypeByTabId(int tabId) {
+        switch (tabId) {
+            case R.id.tab_fire_halls:
+                return Const.MapTypes.FIRE_HALLS;
+            case R.id.tab_spvm:
+                return Const.MapTypes.SVPM_STATIONS;
+            case R.id.tab_water_supplies:
+                return Const.MapTypes.WATER_SUPPLIES;
+            case R.id.tab_emergency_hostels:
+                return Const.MapTypes.EMERGENCY_HOSTELS;
+        }
+
+        return null;
     }
 }

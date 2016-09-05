@@ -157,15 +157,7 @@ public class MainActivity extends AppCompatActivity implements
         mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes final int tabId) {
-                if (tabId == R.id.tab_fire_halls) {
-                    setMapType(Const.MapTypes.FIRE_HALLS, BOTTOM_BAR_ANIM_DURATION);
-                } else if (tabId == R.id.tab_spvm) {
-                    setMapType(Const.MapTypes.SVPM_STATIONS, BOTTOM_BAR_ANIM_DURATION);
-                } else if (tabId == R.id.tab_water_supplies) {
-                    setMapType(Const.MapTypes.WATER_SUPPLIES, BOTTOM_BAR_ANIM_DURATION);
-                } else if (tabId == R.id.tab_emergency_hostels) {
-                    setMapType(Const.MapTypes.EMERGENCY_HOSTELS, BOTTOM_BAR_ANIM_DURATION);
-                }
+                setMapType(NavigUtils.getMapTypeByTabId(tabId), BOTTOM_BAR_ANIM_DURATION);
             }
         });
 
@@ -340,7 +332,7 @@ public class MainActivity extends AppCompatActivity implements
         } else {
             // We need to switch mapType. Selecting the tab triggers a call to setMapType()
             // which clears map and loads data
-            final int tabId = NavigUtils.getTabId(placemark.getMapType());
+            final int tabId = NavigUtils.getTabIdByMapType(placemark.getMapType());
 
             cameraIdleListener = new GoogleMap.OnCameraIdleListener() {
                 @Override

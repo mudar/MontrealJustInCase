@@ -60,6 +60,7 @@ import ca.mudar.mtlaucasou.ui.adapter.PlacemarkInfoWindowAdapter;
 import ca.mudar.mtlaucasou.ui.listener.SearchResultsManager;
 import ca.mudar.mtlaucasou.ui.view.PlacemarksSearchView;
 import ca.mudar.mtlaucasou.util.MapUtils;
+import ca.mudar.mtlaucasou.util.NavigUtils;
 import ca.mudar.mtlaucasou.util.PermissionUtils;
 import io.realm.Realm;
 import io.realm.RealmQuery;
@@ -339,10 +340,12 @@ public class MainActivity extends AppCompatActivity implements
         } else {
             // We need to switch mapType. Selecting the tab triggers a call to setMapType()
             // which clears map and loads data
+            final int tabId = NavigUtils.getTabId(placemark.getMapType());
+
             cameraIdleListener = new GoogleMap.OnCameraIdleListener() {
                 @Override
                 public void onCameraIdle() {
-                    mBottomBar.selectTabWithId(R.id.tab_spvm);
+                    mBottomBar.selectTabWithId(tabId);
                     if (mHandler != null) {
                         // Switching tabs sets delayed call to loadMapData()
                         // We remove it here to avoid duplicate data loading onCameraIdle()

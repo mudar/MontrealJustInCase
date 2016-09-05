@@ -1,3 +1,26 @@
+/*
+    Montréal Just in Case
+    Copyright (C) 2011  Mudar Noufal <mn@mudar.ca>
+
+    Geographic locations of public safety services. A Montréal Open Data
+    project.
+
+    This file is part of Montréal Just in Case.
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package ca.mudar.mtlaucasou.ui.view;
 
 import android.content.Context;
@@ -9,6 +32,7 @@ import android.view.MenuItem;
 import ca.mudar.mtlaucasou.R;
 import ca.mudar.mtlaucasou.data.SuggestionsCursorHelper;
 import ca.mudar.mtlaucasou.model.Placemark;
+import ca.mudar.mtlaucasou.ui.adapter.PlacemarkSearchAdapter;
 
 import static ca.mudar.mtlaucasou.util.LogUtils.makeLogTag;
 
@@ -35,15 +59,16 @@ public class PlacemarksSearchView extends android.support.v7.widget.SearchView i
         super(context, attrs, defStyleAttr);
 
         setQueryHint(context.getString(R.string.search_hint));
+        setSuggestionsAdapter(new PlacemarkSearchAdapter(context));
     }
 
     /**
      * Required for the SearchView to collapse the ActionView
      *
-     * @param searchMenuItem
+     * @param menuItem
      */
-    public void setMenuItem(MenuItem searchMenuItem) {
-        this.mSearchMenuItem = searchMenuItem;
+    public void setSearchMenuItem(MenuItem menuItem) {
+        this.mSearchMenuItem = menuItem;
     }
 
     public void setListener(SearchViewListener listener) {
@@ -117,8 +142,8 @@ public class PlacemarksSearchView extends android.support.v7.widget.SearchView i
     }
 
     public interface SearchViewListener {
-        public void onAddressSearchSubmit(String query);
+        void onAddressSearchSubmit(String query);
 
-        public void onPlacemarkSuggestionClick(Placemark placemark);
+        void onPlacemarkSuggestionClick(Placemark placemark);
     }
 }

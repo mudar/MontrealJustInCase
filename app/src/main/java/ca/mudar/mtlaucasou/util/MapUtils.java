@@ -25,6 +25,7 @@ package ca.mudar.mtlaucasou.util;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
@@ -33,9 +34,12 @@ import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -107,11 +111,10 @@ public class MapUtils {
      * Add the Realm Placemarks to the map
      *
      * @param map        the Map object
-     * @param type       mapType to get the right marker icon
      * @param placemarks list of Placemarks
      * @return Number of markers added to the visible region
      */
-    public static int addPlacemarksToMap(GoogleMap map, @MapType String type, List<? extends Placemark> placemarks) {
+    public static int addPlacemarksToMap(GoogleMap map, List<? extends Placemark> placemarks) {
         final long startTime = System.currentTimeMillis();
         if (map == null || placemarks == null) {
             return 0;
@@ -126,7 +129,7 @@ public class MapUtils {
             if (latLng != null && !TextUtils.isEmpty(title)) {
                 final MarkerOptions markerOptions = new MarkerOptions()
                         .position(latLng)
-                        .icon(MapUtils.getMarkerIcon(type))
+                        .icon(MapUtils.getMarkerIcon(placemark.getMapType()))
                         .title(title);
                 if (!TextUtils.isEmpty(desc)) {
                     markerOptions.snippet(desc);
@@ -152,5 +155,78 @@ public class MapUtils {
                 new LatLng(Const.MAPS_GEOCODER_LIMITS[0], Const.MAPS_GEOCODER_LIMITS[1]), // LowerLeft
                 new LatLng(Const.MAPS_GEOCODER_LIMITS[2], Const.MAPS_GEOCODER_LIMITS[3])  // UpperRight
         );
+    }
+
+    public static void moveCameraToLocation(GoogleMap map, Location location, boolean animate, final GoogleMap.OnCameraIdleListener cameraIdleListener) {
+        if (map == null || location == null) {
+            return;
+        }
+        final LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        final CameraUpdate camera = CameraUpdateFactory.newCameraPosition(
+                new CameraPosition.Builder()
+                        .target(latLng)
+                        .zoom(Const.ZOOM_IN)
+                        .bearing(map.getCameraPosition().bearing)
+                        .build());
+
+        final MarkerOptions markerOptions = new MarkerOptions()
+                .title(location.getExtras().getString(Const.BundleKeys.NAME))
+                .position(latLng);
+        map.addMarker(markerOptions);
+
+        if (animate) {
+            map.animateCamera(camera, new GoogleMap.CancelableCallback() {
+                @Override
+                public void onFinish() {
+                    cameraIdleListener.onCameraIdle();
+                }
+
+                @Override
+                public void onCancel() {
+                    cameraIdleListener.onCameraIdle();
+                }
+            });
+        } else {
+            map.moveCamera(camera);
+            cameraIdleListener.onCameraIdle();
+        }
+    }
+
+    public static void moveCameraToPlacemark(GoogleMap map, final Placemark placemark, boolean animate, final GoogleMap.OnCameraIdleListener cameraIdleListener) {
+        if (map == null || placemark == null) {
+            return;
+        }
+        final CameraUpdate camera = CameraUpdateFactory.newCameraPosition(
+                new CameraPosition.Builder()
+                        .target(placemark.getLatLng())
+                        .zoom(Const.ZOOM_IN)
+                        .bearing(map.getCameraPosition().bearing)
+                        .build());
+        if (animate) {
+            map.animateCamera(camera, new GoogleMap.CancelableCallback() {
+                @Override
+                public void onFinish() {
+                    cameraIdleListener.onCameraIdle();
+                }
+
+                @Override
+                public void onCancel() {
+                    cameraIdleListener.onCameraIdle();
+                }
+            });
+        } else {
+            map.moveCamera(camera);
+            cameraIdleListener.onCameraIdle();
+        }
+    }
+
+    /**
+     * Clear previous markers, restoring selected ones (with InfoWindow) and search markers
+     *
+     * @param map
+     * @param newMapType
+     */
+    public static void clearMap(GoogleMap map, @MapType String newMapType) {
+        map.clear();
     }
 }

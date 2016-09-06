@@ -63,7 +63,6 @@ import ca.mudar.mtlaucasou.util.MapUtils;
 import ca.mudar.mtlaucasou.util.NavigUtils;
 import ca.mudar.mtlaucasou.util.PermissionUtils;
 import io.realm.Realm;
-import io.realm.RealmQuery;
 import io.realm.RealmResults;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -255,18 +254,15 @@ public class MainActivity extends AppCompatActivity implements
 
         if (clearMap) {
             // Remove previous markers
-            MapUtils.clearMap(vMap, type);
+//            MapUtils.clearMap(vMap, type);
         }
 
         // First, query the Realm db for the current mapType
-        final RealmQuery<RealmPlacemark> query = RealmQueries.queryPlacemarksByMapType(mRealm, mMapType);
+        final RealmResults<RealmPlacemark> realmPlacemarks = RealmQueries.queryPlacemarksByMapType(mRealm, mMapType)
+                .findAll();
 
-        if (query.count() > 0) {
+        if (realmPlacemarks.size() > 0) {
             // Has cached data
-            final LatLngBounds bounds = vMap.getProjection().getVisibleRegion().latLngBounds;
-            final RealmResults<RealmPlacemark> realmPlacemarks = RealmQueries.filterPlacemarksQueryByBounds(
-                    query, bounds);
-
             MapUtils.addPlacemarksToMap(vMap, realmPlacemarks);
         } else {
             // Need to download remote API data

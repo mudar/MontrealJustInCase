@@ -67,11 +67,14 @@ public class RealmQueries {
 
     /**
      * Filter RealmResults by the visibleRegion bounding box
+     * Deprecated: not used anymore to allow adding all markers immediately. Limiting the results
+     * to the bounds means adding multiple markers repeatedly, which blocks the UI thread.
      *
      * @param query
      * @param bounds
      * @return
      */
+    @Deprecated
     public static RealmResults<RealmPlacemark> filterPlacemarksQueryByBounds(RealmQuery<RealmPlacemark> query, LatLngBounds bounds) {
         return query
                 .greaterThan(RealmPlacemark.FIELD_COORDINATES_LAT, bounds.southwest.latitude)

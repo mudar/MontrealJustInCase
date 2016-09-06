@@ -42,7 +42,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.LatLngBounds;
+import com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabReselectListener;
 import com.roughike.bottombar.OnTabSelectListener;
@@ -72,15 +72,16 @@ import static ca.mudar.mtlaucasou.util.LogUtils.makeLogTag;
 
 public class MainActivity extends AppCompatActivity implements
         OnMapReadyCallback,
-        GoogleMap.OnCameraIdleListener,
         SearchResultsManager.MapUpdatesListener,
         Callback<PointsFeatureCollection> {
 
     private static final String TAG = makeLogTag("MainActivity");
-    private static final long BOTTOM_BAR_ANIM_DURATION = 200;
+    private static final long BOTTOM_BAR_ANIM_DURATION = 200L; // 200ms
+    private static final long PROGRESS_BAR_ANIM_DURATION = 750L; // 750ms
 
     private GoogleMap vMap;
     private View vMarkerInfoWindow;
+    private CircleProgressBar vProgressBar;
     private BottomBar mBottomBar;
     @MapType
     private String mMapType;
@@ -92,6 +93,8 @@ public class MainActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+
+        vProgressBar = (CircleProgressBar) findViewById(R.id.progressBar);
 
         mRealm = Realm.getDefaultInstance();
 
@@ -202,25 +205,15 @@ public class MainActivity extends AppCompatActivity implements
 
         vMap.setInfoWindowAdapter(new PlacemarkInfoWindowAdapter(vMarkerInfoWindow));
 
-        vMap.setOnCameraIdleListener(this);
-
         MapUtils.enableMyLocation(this, vMap);
 
-        loadMapData(mMapType, true);
-    }
-
-    /**
-     * Implements GoogleMap.OnCameraIdleListener
-     */
-    @Override
-    public void onCameraIdle() {
-        Log.v(TAG, "onCameraIdle");
-
-        loadMapData(mMapType, true);
+        loadMapData(mMapType);
     }
 
     private void setMapType(final @MapType String type, long delay) {
         mMapType = type;
+
+        toggleProgressBar(true);
 
         if (vMap != null) {
             // Remove previous markers
@@ -232,7 +225,7 @@ public class MainActivity extends AppCompatActivity implements
                 @Override
                 public void run() {
                     // Map was already cleared, to show user something is happening!
-                    loadMapData(type, false);
+                    loadMapData(type);
                 }
             }, delay);
         }
@@ -241,20 +234,13 @@ public class MainActivity extends AppCompatActivity implements
     /**
      * Load the cached data, or request download
      *
-     * @param type     the current MapType
-     * @param clearMap
+     * @param type
      */
-    private void loadMapData(@MapType String type, boolean clearMap) {
-        Log.v(TAG, "loadMapData "
-                + String.format("type = %s, clearMap = %s", type, clearMap));
+    private void loadMapData(@MapType String type) {
+        Log.v(TAG, "loadMapData");
 
         if (vMap == null) {
             return;
-        }
-
-        if (clearMap) {
-            // Remove previous markers
-//            MapUtils.clearMap(vMap, type);
         }
 
         // First, query the Realm db for the current mapType
@@ -264,6 +250,16 @@ public class MainActivity extends AppCompatActivity implements
         if (realmPlacemarks.size() > 0) {
             // Has cached data
             MapUtils.addPlacemarksToMap(vMap, realmPlacemarks);
+
+            new Handler().postDelayed(new Runnable() {
+                /**
+                 * Delay hiding the progressbar for 750ms, avoids blink-effect on fast operations
+                 */
+                @Override
+                public void run() {
+                    toggleProgressBar(false);
+                }
+            }, PROGRESS_BAR_ANIM_DURATION);
         } else {
             // Need to download remote API data
             downloadApiData(type);
@@ -303,7 +299,7 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onResponse(Call<PointsFeatureCollection> call, Response<PointsFeatureCollection> response) {
         RealmQueries.cacheMapData(mRealm, response.body().getFeatures(), mMapType);
-        loadMapData(mMapType, true);
+        loadMapData(mMapType);
     }
 
     /**
@@ -321,26 +317,22 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void moveCameraToPlacemark(Placemark placemark) {
         GoogleMap.OnCameraIdleListener cameraIdleListener;
-        if (mMapType.equals(placemark.getMapType())) {
-            // Selected placemark is of current type, data will be loaded in the activity's
-            // onCameraIdle()
-            cameraIdleListener = this;
-        } else {
-            // We need to switch mapType. Selecting the tab triggers a call to setMapType()
-            // which clears map and loads data
+        if (!mMapType.equals(placemark.getMapType())) {
             final int tabId = NavigUtils.getTabIdByMapType(placemark.getMapType());
 
             cameraIdleListener = new GoogleMap.OnCameraIdleListener() {
+                /**
+                 * We need to switch mapType after the camera animation. Selecting the tab
+                 * triggers a call to setMapType() which clears map and loads data
+                 */
                 @Override
                 public void onCameraIdle() {
                     mBottomBar.selectTabWithId(tabId);
-                    if (mHandler != null) {
-                        // Switching tabs sets delayed call to loadMapData()
-                        // We remove it here to avoid duplicate data loading onCameraIdle()
-                        mHandler.removeCallbacksAndMessages(null);
-                    }
                 }
             };
+        } else {
+            // Selected placemark is of current type: ignore
+            cameraIdleListener = null;
         }
 
         MapUtils.moveCameraToPlacemark(vMap, placemark, true, cameraIdleListener);
@@ -348,7 +340,16 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void moveCameraToLocation(Location location) {
-        MapUtils.moveCameraToLocation(vMap, location, true, this);
+        MapUtils.moveCameraToLocation(vMap, location, true, null);
+    }
+
+    private void toggleProgressBar(boolean visible) {
+        if (visible) {
+            vProgressBar.setColorSchemeColors(MapUtils.getMapTypeColor(this, mMapType));
+            vProgressBar.setVisibility(View.VISIBLE);
+        } else {
+            vProgressBar.setVisibility(View.GONE);
+        }
     }
 
 }

@@ -45,6 +45,7 @@ dependencies {
     // UI
     compile 'com.google.android.gms:play-services-maps:9.4.0'
     compile 'com.roughike:bottom-bar:+'
+    compile('com.lsjwzh:materialloadingprogressbar:0.5.8-RELEASE')
     compile('com.mikepenz:aboutlibraries:5.8.0@aar') {
         transitive = true
     }

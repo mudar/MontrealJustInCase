@@ -24,9 +24,11 @@
 package ca.mudar.mtlaucasou.util;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.support.annotation.DrawableRes;
+import android.support.annotation.ColorInt;
+import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -69,6 +71,12 @@ public class MapUtils {
         }
     }
 
+    /**
+     * Get the map marker icon (round buttons)
+     *
+     * @param type
+     * @return bitmap for MarkerOptions
+     */
     public static BitmapDescriptor getMarkerIcon(@MapType String type) {
         switch (type) {
             case Const.MapTypes.FIRE_HALLS:
@@ -83,21 +91,42 @@ public class MapUtils {
         return null;
     }
 
-    @DrawableRes
-    public static int getMapTypeIcon(@MapType String type) {
+    /**
+     * Get the app's colors for each section. Used for ProgressBar
+     *
+     * @param context
+     * @param type
+     * @return
+     */
+    @ColorInt
+    public static int getMapTypeColor(Context context, @MapType String type) {
+        @ColorRes int color;
         switch (type) {
             case Const.MapTypes.FIRE_HALLS:
-                return R.drawable.ic_fire_hall;
+                color = R.color.color_fire_halls;
+                break;
             case Const.MapTypes.SVPM_STATIONS:
-                return R.drawable.ic_spvm;
+                color = R.color.color_svpm;
+                break;
             case Const.MapTypes.WATER_SUPPLIES:
-                return R.drawable.ic_water_supplies;
+                color = R.color.color_water_supplies;
+                break;
             case Const.MapTypes.EMERGENCY_HOSTELS:
-                return R.drawable.ic_emergency_hostels;
+                color = R.color.color_emergency_hostels;
+                break;
+            default:
+                color = R.color.color_accent;
         }
-        return 0;
+        return ContextCompat.getColor(context, color);
     }
 
+    /**
+     * Clean the HTML description provided by the city's data. Also removes duplicate title.
+     *
+     * @param descHtml
+     * @param name
+     * @return
+     */
     public static String getCleanDescription(@NonNull String descHtml, @NonNull String name) {
         if (TextUtils.isEmpty(descHtml)) {
             return null;
@@ -150,6 +179,11 @@ public class MapUtils {
         return markers.size();
     }
 
+    /**
+     * Get Montreal's LatLngBounds, to limit the mapview
+     *
+     * @return
+     */
     public static LatLngBounds getDefaultBounds() {
         return new LatLngBounds(
                 new LatLng(Const.MAPS_GEOCODER_LIMITS[0], Const.MAPS_GEOCODER_LIMITS[1]), // LowerLeft
@@ -157,76 +191,92 @@ public class MapUtils {
         );
     }
 
+    /**
+     * Move the camera to a Location obtained from the GeoLocater for a user search query.
+     * Also adds a default Marker (pin) at the requested location.
+     *
+     * @param map
+     * @param location
+     * @param animate
+     * @param cameraIdleListener
+     */
     public static void moveCameraToLocation(GoogleMap map, Location location, boolean animate, final GoogleMap.OnCameraIdleListener cameraIdleListener) {
         if (map == null || location == null) {
             return;
         }
         final LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-        final CameraUpdate camera = CameraUpdateFactory.newCameraPosition(
-                new CameraPosition.Builder()
-                        .target(latLng)
-                        .zoom(Const.ZOOM_IN)
-                        .bearing(map.getCameraPosition().bearing)
-                        .build());
 
         final MarkerOptions markerOptions = new MarkerOptions()
                 .title(location.getExtras().getString(Const.BundleKeys.NAME))
                 .position(latLng);
         map.addMarker(markerOptions);
 
-        if (animate) {
-            map.animateCamera(camera, new GoogleMap.CancelableCallback() {
-                @Override
-                public void onFinish() {
-                    cameraIdleListener.onCameraIdle();
-                }
-
-                @Override
-                public void onCancel() {
-                    cameraIdleListener.onCameraIdle();
-                }
-            });
-        } else {
-            map.moveCamera(camera);
-            cameraIdleListener.onCameraIdle();
-        }
+        moveCameraToTarget(map, latLng, animate, cameraIdleListener);
     }
 
+    /**
+     * Move the camera to a Placemark. Mainly for SuggestionsPlacemarks selected by the user
+     * from search auto-complete
+     *
+     * @param map
+     * @param placemark
+     * @param animate
+     * @param cameraIdleListener
+     */
     public static void moveCameraToPlacemark(GoogleMap map, final Placemark placemark, boolean animate, final GoogleMap.OnCameraIdleListener cameraIdleListener) {
         if (map == null || placemark == null) {
             return;
         }
+
+        moveCameraToTarget(map, placemark.getLatLng(), animate, cameraIdleListener);
+    }
+
+    /**
+     * Move camera to LatLng.
+     *
+     * @param map
+     * @param target
+     * @param animate
+     * @param cameraIdleListener
+     */
+    private static void moveCameraToTarget(@NonNull GoogleMap map, @NonNull LatLng target, boolean animate, final GoogleMap.OnCameraIdleListener cameraIdleListener) {
         final CameraUpdate camera = CameraUpdateFactory.newCameraPosition(
                 new CameraPosition.Builder()
-                        .target(placemark.getLatLng())
+                        .target(target)
                         .zoom(Const.ZOOM_IN)
                         .bearing(map.getCameraPosition().bearing)
                         .build());
-        if (animate) {
-            map.animateCamera(camera, new GoogleMap.CancelableCallback() {
-                @Override
-                public void onFinish() {
-                    cameraIdleListener.onCameraIdle();
-                }
 
-                @Override
-                public void onCancel() {
-                    cameraIdleListener.onCameraIdle();
-                }
-            });
+        if (animate) {
+            if (cameraIdleListener != null) {
+                map.animateCamera(camera, new GoogleMap.CancelableCallback() {
+                    @Override
+                    public void onFinish() {
+                        cameraIdleListener.onCameraIdle();
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        cameraIdleListener.onCameraIdle();
+                    }
+                });
+            } else {
+                map.animateCamera(camera);
+            }
         } else {
             map.moveCamera(camera);
-            cameraIdleListener.onCameraIdle();
+            if (cameraIdleListener != null) {
+                cameraIdleListener.onCameraIdle();
+            }
         }
     }
 
     /**
-     * Clear previous markers, restoring selected ones (with InfoWindow) and search markers
+     * Clear previous markers, restoring the user's search Markers
      *
      * @param map
-     * @param newMapType
      */
-    public static void clearMap(GoogleMap map, @MapType String newMapType) {
+    public static void clearMap(GoogleMap map) {
         map.clear();
     }
 }

@@ -217,7 +217,7 @@ public class MainActivity extends AppCompatActivity implements
 
         if (vMap != null) {
             // Remove previous markers
-            MapUtils.clearMap(vMap, type);
+            MapUtils.clearMap(vMap);
 
             mHandler.removeCallbacksAndMessages(null);
             // Wait for the BottomBar animation to end before loading data

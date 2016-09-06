@@ -23,6 +23,7 @@
 
 package ca.mudar.mtlaucasou.util;
 
+import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;
 
 import ca.mudar.mtlaucasou.Const;
@@ -61,5 +62,26 @@ public class NavigUtils {
         }
 
         return null;
+    }
+
+    /**
+     * Get the BottomBar and SearchSuggestions icon (logos)
+     *
+     * @param type
+     * @return
+     */
+    @DrawableRes
+    public static int getMapTypeIcon(@MapType String type) {
+        switch (type) {
+            case Const.MapTypes.FIRE_HALLS:
+                return R.drawable.ic_fire_hall;
+            case Const.MapTypes.SVPM_STATIONS:
+                return R.drawable.ic_spvm;
+            case Const.MapTypes.WATER_SUPPLIES:
+                return R.drawable.ic_water_supplies;
+            case Const.MapTypes.EMERGENCY_HOSTELS:
+                return R.drawable.ic_emergency_hostels;
+        }
+        return 0;
     }
 }

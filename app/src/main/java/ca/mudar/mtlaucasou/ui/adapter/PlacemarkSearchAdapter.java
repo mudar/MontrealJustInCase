@@ -45,7 +45,7 @@ import ca.mudar.mtlaucasou.model.Placemark;
 import ca.mudar.mtlaucasou.model.RealmPlacemark;
 import ca.mudar.mtlaucasou.model.SuggestionsPlacemark;
 import ca.mudar.mtlaucasou.util.LogUtils;
-import ca.mudar.mtlaucasou.util.MapUtils;
+import ca.mudar.mtlaucasou.util.NavigUtils;
 import io.realm.Realm;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
@@ -105,7 +105,7 @@ public class PlacemarkSearchAdapter extends CursorAdapter implements
 
             this.vTitle.setText(place.getName());
             this.vTitle.setCompoundDrawablesWithIntrinsicBounds(
-                    MapUtils.getMapTypeIcon(place.getMapType()), 0, 0, 0);
+                    NavigUtils.getMapTypeIcon(place.getMapType()), 0, 0, 0);
         }
     }
 

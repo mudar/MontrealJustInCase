@@ -26,10 +26,10 @@
     <item>
         <color android:color="@color/color_background" />
     </item>
-    <item>
+    <item android:gravity="center">
         <bitmap
             android:gravity="center"
-            android:src="@mipmap/ic_launcher"
+            android:src="@drawable/logo_big"
             android:tileMode="disabled" />
     </item>
 </layer-list>

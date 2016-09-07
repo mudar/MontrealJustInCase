@@ -191,6 +191,23 @@ public class MapUtils {
         );
     }
 
+
+    /**
+     * Move the camer to Montreal center, and limit camera bounds
+     * @param map
+     */
+    public static void moveCameraToInitialTarget(GoogleMap map) {
+        map.moveCamera(CameraUpdateFactory.newCameraPosition(
+                new CameraPosition.Builder()
+                        .target(Const.MONTREAL_GEO_LAT_LNG)
+                        .bearing(Const.MONTREAL_NATURAL_NORTH_ROTATION)
+                        .zoom(Const.ZOOM_DEFAULT)
+                        .build()
+                )
+        );
+        map.setLatLngBoundsForCameraTarget(MapUtils.getDefaultBounds());
+    }
+
     /**
      * Move the camera to a Location obtained from the GeoLocater for a user search query.
      * Also adds a default Marker (pin) at the requested location.

@@ -41,7 +41,6 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabReselectListener;
@@ -193,15 +192,7 @@ public class MainActivity extends AppCompatActivity implements
     public void onMapReady(GoogleMap googleMap) {
         vMap = googleMap;
 
-        vMap.moveCamera(CameraUpdateFactory.newCameraPosition(
-                new CameraPosition.Builder()
-                        .target(Const.MONTREAL_GEO_LAT_LNG)
-                        .bearing(Const.MONTREAL_NATURAL_NORTH_ROTATION)
-                        .zoom(Const.ZOOM_DEFAULT)
-                        .build()
-                )
-        );
-        vMap.setLatLngBoundsForCameraTarget(MapUtils.getDefaultBounds());
+        MapUtils.moveCameraToInitialTarget(vMap);
 
         vMap.setInfoWindowAdapter(new PlacemarkInfoWindowAdapter(vMarkerInfoWindow));
 

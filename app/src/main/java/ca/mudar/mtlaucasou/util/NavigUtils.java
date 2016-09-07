@@ -32,6 +32,13 @@ import ca.mudar.mtlaucasou.model.MapType;
 
 public class NavigUtils {
 
+    /**
+     * Get the bottomBar tabId for the selected SuggestionPlacemark, allowing to switch tabs
+     * when showing the placemark.
+     *
+     * @param type Selected map type {fire_halls|svpm_stations|water_supplies|emergency_hostels}
+     * @return tabId
+     */
     @IdRes
     public static int getTabIdByMapType(@MapType String type) {
         switch (type) {
@@ -48,6 +55,12 @@ public class NavigUtils {
         return 0;
     }
 
+    /**
+     * Get the map type when user switches tabs in the bottomBar
+     *
+     * @param tabId the selected bottomBar tabId
+     * @return Selected map type {fire_halls|svpm_stations|water_supplies|emergency_hostels}
+     */
     @MapType
     public static String getMapTypeByTabId(int tabId) {
         switch (tabId) {
@@ -67,8 +80,8 @@ public class NavigUtils {
     /**
      * Get the BottomBar and SearchSuggestions icon (logos)
      *
-     * @param type
-     * @return
+     * @param type Selected map type {fire_halls|svpm_stations|water_supplies|emergency_hostels}
+     * @return map type resource icon
      */
     @DrawableRes
     public static int getMapTypeIcon(@MapType String type) {

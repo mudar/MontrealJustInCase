@@ -192,11 +192,11 @@ public class MapUtils {
         );
     }
 
-
     /**
-     * When first showing the map, move the camera to Montreal coordinates, or the user's location
+     * When first showing the map, move the camera to the user's location or to Montreal coordinates
      *
-     * @param map The GoogleMap
+     * @param map      The GoogleMap
+     * @param location User location. Null value defaults to Montreal coordinates
      */
     public static void moveCameraToInitialLocation(GoogleMap map, @Nullable Location location) {
         final LatLng latLng = (location == null) ? Const.MONTREAL_GEO_LAT_LNG :

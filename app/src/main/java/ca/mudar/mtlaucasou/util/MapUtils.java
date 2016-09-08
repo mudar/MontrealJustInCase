@@ -44,6 +44,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
@@ -141,15 +142,15 @@ public class MapUtils {
      *
      * @param map        the Map object
      * @param placemarks list of Placemarks
-     * @return Number of markers added to the visible region
+     * @return List of markers added to the map
      */
-    public static int addPlacemarksToMap(GoogleMap map, List<? extends Placemark> placemarks) {
+    public static List<Marker> addPlacemarksToMap(GoogleMap map, List<? extends Placemark> placemarks) {
         final long startTime = System.currentTimeMillis();
         if (map == null || placemarks == null) {
-            return 0;
+            return null;
         }
 
-        final List<MarkerOptions> markers = new ArrayList<>();
+        final List<MarkerOptions> markerOptionsList = new ArrayList<>();
         for (Placemark placemark : placemarks) {
             final LatLng latLng = placemark.getLatLng();
             final String title = placemark.getName();
@@ -163,20 +164,45 @@ public class MapUtils {
                 if (!TextUtils.isEmpty(desc)) {
                     markerOptions.snippet(desc);
                 }
-                markers.add(markerOptions);
+                markerOptionsList.add(markerOptions);
             }
         }
 
         // Add markers once all are ready
-        for (MarkerOptions markerOptions : markers) {
-            map.addMarker(markerOptions);
+        final List<Marker> results = new ArrayList<>();
+        for (MarkerOptions markerOptions : markerOptionsList) {
+            results.add(map.addMarker(markerOptions));
         }
 
         Log.v(TAG, String.format("Added %1$d markers. Duration: %2$dms",
-                markers.size(),
+                markerOptionsList.size(),
                 System.currentTimeMillis() - startTime));
 
-        return markers.size();
+        return results;
+    }
+
+    /**
+     * Get the marker nearest to map center
+     *
+     * @param map     The GoogleMap
+     * @param markers List of markers contained by the map
+     * @return Marker nearest to map center
+     */
+    public static Marker findNearestMarker(GoogleMap map, List<Marker> markers) {
+        final LatLng mapCenter = map.getCameraPosition().target;
+
+        Marker nearestMarker = null;
+        float shortestDistance = 0f; // Compute distance of each marker once only
+        for (Marker marker : markers) {
+            final float distance = GeoUtils.distanceBetween(marker.getPosition(), mapCenter);
+
+            if ((nearestMarker == null) || (Float.compare(distance, shortestDistance) < 0)) {
+                nearestMarker = marker;
+                shortestDistance = distance;
+            }
+        }
+
+        return nearestMarker;
     }
 
     /**

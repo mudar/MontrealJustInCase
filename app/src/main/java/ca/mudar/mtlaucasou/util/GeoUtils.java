@@ -67,6 +67,14 @@ public class GeoUtils {
         return null;
     }
 
+    public static float distanceBetween(LatLng position, LatLng destination) {
+        float[] results = new float[3];
+        Location.distanceBetween(position.latitude, position.longitude,
+                destination.latitude, destination.longitude, results);
+
+        return results[0];
+    }
+
     public static LatLng getLocationLatLng(Location location) {
         if (location != null) {
             return new LatLng(location.getLatitude(), location.getLongitude());

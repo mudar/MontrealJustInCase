@@ -24,6 +24,8 @@
 package ca.mudar.mtlaucasou.ui;
 
 import android.Manifest;
+import android.content.Intent;
+import android.content.IntentSender;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
@@ -37,6 +39,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -56,6 +59,7 @@ import ca.mudar.mtlaucasou.model.Placemark;
 import ca.mudar.mtlaucasou.model.RealmPlacemark;
 import ca.mudar.mtlaucasou.model.geojson.PointsFeatureCollection;
 import ca.mudar.mtlaucasou.ui.adapter.PlacemarkInfoWindowAdapter;
+import ca.mudar.mtlaucasou.ui.listener.LocationUpdatesManager;
 import ca.mudar.mtlaucasou.ui.listener.SearchResultsManager;
 import ca.mudar.mtlaucasou.ui.view.PlacemarksSearchView;
 import ca.mudar.mtlaucasou.util.MapUtils;
@@ -72,7 +76,8 @@ import static ca.mudar.mtlaucasou.util.LogUtils.makeLogTag;
 public class MainActivity extends AppCompatActivity implements
         OnMapReadyCallback,
         SearchResultsManager.MapUpdatesListener,
-        Callback<PointsFeatureCollection> {
+        Callback<PointsFeatureCollection>,
+        LocationUpdatesManager.LocationUpdatesCallbacks {
 
     private static final String TAG = makeLogTag("MainActivity");
     private static final long BOTTOM_BAR_ANIM_DURATION = 200L; // 200ms
@@ -86,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements
     private String mMapType;
     private Realm mRealm;
     private Handler mHandler = new Handler(); // Waits for the BottomBar anim
+    private LocationUpdatesManager mLocationManger;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +110,12 @@ public class MainActivity extends AppCompatActivity implements
         setMapType(Const.MapTypes.FIRE_HALLS, 0);
     }
 
+    protected void onStart() {
+        mLocationManger.onStart();
+
+        super.onStart();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -113,10 +125,26 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
+    protected void onStop() {
+        mLocationManger.onStop();
+
+        super.onStop();
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
 
         mRealm.close();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (Const.RequestCodes.LOCATION_SETTINGS_CHANGE_REQUEST_CODE == requestCode) {
+            onLocationSettingsActivityResult(resultCode, data);
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     @Override
@@ -176,6 +204,8 @@ public class MainActivity extends AppCompatActivity implements
      * Obtain the SupportMapFragment and get notified when the map is ready to be used.
      */
     private void setupMap() {
+        mLocationManger = new LocationUpdatesManager(MainActivity.this, this);
+
         final SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -192,11 +222,12 @@ public class MainActivity extends AppCompatActivity implements
     public void onMapReady(GoogleMap googleMap) {
         vMap = googleMap;
 
-        MapUtils.moveCameraToInitialTarget(vMap);
-
         vMap.setInfoWindowAdapter(new PlacemarkInfoWindowAdapter(vMarkerInfoWindow));
 
+        MapUtils.moveCameraToInitialLocation(vMap, null);
         MapUtils.enableMyLocation(this, vMap);
+
+        mLocationManger.setGoogleMap(vMap);
 
         loadMapData(mMapType);
     }
@@ -343,4 +374,24 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
+    /**
+     * Implements LocationUpdatesManager.LocationUpdatesCallbacks
+     *
+     * @param status
+     * @throws IntentSender.SendIntentException
+     */
+    @Override
+    public void requestLocationSettingsChange(Status status) throws IntentSender.SendIntentException {
+        status.startResolutionForResult(
+                MainActivity.this,
+                Const.RequestCodes.LOCATION_SETTINGS_CHANGE_REQUEST_CODE);
+    }
+
+    /**
+     * Implements LocationUpdatesManager.LocationUpdatesCallbacks
+     */
+    @Override
+    public void onLocationSettingsActivityResult(int resultCode, Intent data) {
+        mLocationManger.onLocationSettingsResult(resultCode, data);
+    }
 }

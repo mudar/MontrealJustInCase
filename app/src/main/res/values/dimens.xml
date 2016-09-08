@@ -40,4 +40,7 @@
 
     <dimen name="search_suggestion_text_size">15sp</dimen>
 
+    <dimen name="circle_progressbar_size">48dp</dimen>
+    <dimen name="circle_progressbar_inner_radius">12dp</dimen>
+
 </resources>

@@ -67,6 +67,13 @@ public class GeoUtils {
         return null;
     }
 
+    public static LatLng getLocationLatLng(Location location) {
+        if (location != null) {
+            return new LatLng(location.getLatitude(), location.getLongitude());
+        }
+        return null;
+    }
+
     public static LatLng getCoordsLatLng(List<Double> coordinates) {
         try {
             return new LatLng(coordinates.get(1), coordinates.get(0));

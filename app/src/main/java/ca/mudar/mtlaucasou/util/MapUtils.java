@@ -30,6 +30,7 @@ import android.location.Location;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
@@ -74,7 +75,7 @@ public class MapUtils {
     /**
      * Get the map marker icon (round buttons)
      *
-     * @param type
+     * @param type Selected map type {fire_halls|svpm_stations|water_supplies|emergency_hostels}
      * @return bitmap for MarkerOptions
      */
     public static BitmapDescriptor getMarkerIcon(@MapType String type) {
@@ -94,9 +95,9 @@ public class MapUtils {
     /**
      * Get the app's colors for each section. Used for ProgressBar
      *
-     * @param context
-     * @param type
-     * @return
+     * @param context Context to resolve resources
+     * @param type    Selected map type {fire_halls|svpm_stations|water_supplies|emergency_hostels}
+     * @return the section's color
      */
     @ColorInt
     public static int getMapTypeColor(Context context, @MapType String type) {
@@ -123,9 +124,9 @@ public class MapUtils {
     /**
      * Clean the HTML description provided by the city's data. Also removes duplicate title.
      *
-     * @param descHtml
-     * @param name
-     * @return
+     * @param descHtml placemark properties description
+     * @param name     the placemark, to remove it from the description
+     * @return Displayable description
      */
     public static String getCleanDescription(@NonNull String descHtml, @NonNull String name) {
         if (TextUtils.isEmpty(descHtml)) {
@@ -182,7 +183,7 @@ public class MapUtils {
     /**
      * Get Montreal's LatLngBounds, to limit the mapview
      *
-     * @return
+     * @return Bounds to limits the camera movement
      */
     public static LatLngBounds getDefaultBounds() {
         return new LatLngBounds(
@@ -193,13 +194,17 @@ public class MapUtils {
 
 
     /**
-     * Move the camer to Montreal center, and limit camera bounds
-     * @param map
+     * When first showing the map, move the camera to Montreal coordinates, or the user's location
+     *
+     * @param map The GoogleMap
      */
-    public static void moveCameraToInitialTarget(GoogleMap map) {
+    public static void moveCameraToInitialLocation(GoogleMap map, @Nullable Location location) {
+        final LatLng latLng = (location == null) ? Const.MONTREAL_GEO_LAT_LNG :
+                GeoUtils.getLocationLatLng(location);
+
         map.moveCamera(CameraUpdateFactory.newCameraPosition(
                 new CameraPosition.Builder()
-                        .target(Const.MONTREAL_GEO_LAT_LNG)
+                        .target(latLng)
                         .bearing(Const.MONTREAL_NATURAL_NORTH_ROTATION)
                         .zoom(Const.ZOOM_DEFAULT)
                         .build()
@@ -212,21 +217,24 @@ public class MapUtils {
      * Move the camera to a Location obtained from the GeoLocater for a user search query.
      * Also adds a default Marker (pin) at the requested location.
      *
-     * @param map
-     * @param location
-     * @param animate
-     * @param cameraIdleListener
+     * @param map                The GoogleMap
+     * @param location           The selection location to show at center
+     * @param animate            With/out animation
+     * @param cameraIdleListener Listener to be called after moving the camera (DEPRECATED)
      */
-    public static void moveCameraToLocation(GoogleMap map, Location location, boolean animate, final GoogleMap.OnCameraIdleListener cameraIdleListener) {
+    public static void moveCameraToLocation(GoogleMap map, Location location, boolean animate, @Deprecated final GoogleMap.OnCameraIdleListener cameraIdleListener) {
         if (map == null || location == null) {
             return;
         }
-        final LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        final LatLng latLng = GeoUtils.getLocationLatLng(location);
 
-        final MarkerOptions markerOptions = new MarkerOptions()
-                .title(location.getExtras().getString(Const.BundleKeys.NAME))
-                .position(latLng);
-        map.addMarker(markerOptions);
+        if (location.getExtras() != null) {
+            // Add a marker only if the location has a title
+            final MarkerOptions markerOptions = new MarkerOptions()
+                    .title(location.getExtras().getString(Const.BundleKeys.NAME))
+                    .position(latLng);
+            map.addMarker(markerOptions);
+        }
 
         moveCameraToTarget(map, latLng, animate, cameraIdleListener);
     }
@@ -235,10 +243,11 @@ public class MapUtils {
      * Move the camera to a Placemark. Mainly for SuggestionsPlacemarks selected by the user
      * from search auto-complete
      *
-     * @param map
-     * @param placemark
-     * @param animate
-     * @param cameraIdleListener
+     * @param map                The GoogleMap
+     * @param placemark          The placemark to show at center
+     * @param animate            With/out animation
+     * @param cameraIdleListener Listener to be called after moving the camera,
+     *                           useful to switch tabs AFTER the anim (to avoid hiccups)
      */
     public static void moveCameraToPlacemark(GoogleMap map, final Placemark placemark, boolean animate, final GoogleMap.OnCameraIdleListener cameraIdleListener) {
         if (map == null || placemark == null) {
@@ -251,10 +260,11 @@ public class MapUtils {
     /**
      * Move camera to LatLng.
      *
-     * @param map
-     * @param target
-     * @param animate
-     * @param cameraIdleListener
+     * @param map                The GoogleMap
+     * @param target             The coordinates of the new center
+     * @param animate            With/out animation
+     * @param cameraIdleListener Listener to be called after moving the camera,
+     *                           useful to switch tabs AFTER the anim (to avoid hiccups)
      */
     private static void moveCameraToTarget(@NonNull GoogleMap map, @NonNull LatLng target, boolean animate, final GoogleMap.OnCameraIdleListener cameraIdleListener) {
         final CameraUpdate camera = CameraUpdateFactory.newCameraPosition(
@@ -291,9 +301,10 @@ public class MapUtils {
     /**
      * Clear previous markers, restoring the user's search Markers
      *
-     * @param map
+     * @param map The GoogleMap
      */
     public static void clearMap(GoogleMap map) {
         map.clear();
     }
+
 }

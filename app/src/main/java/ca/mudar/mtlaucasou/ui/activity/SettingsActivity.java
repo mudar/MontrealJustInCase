@@ -30,9 +30,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import ca.mudar.mtlaucasou.Const;
+import ca.mudar.mtlaucasou.R;
 import ca.mudar.mtlaucasou.ui.fragment.SettingsFragment;
+import ca.mudar.mtlaucasou.util.LangUtils;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends AppCompatActivity implements
+        SettingsFragment.OnConfigChangeListener {
     public static Intent newIntent(Context context) {
         return new Intent(context, SettingsActivity.class);
     }
@@ -41,11 +44,26 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setTitle(R.string.title_activity_settings);
+
         if (savedInstanceState == null) {
             final Fragment fragment = SettingsFragment.newInstance();
             getFragmentManager().beginTransaction()
                     .replace(android.R.id.content, fragment, Const.FragmentTags.SETTINGS)
                     .commit();
         }
+    }
+
+    /**
+     * Update the interface language, independently from the phone's UI
+     * language. This does not override the parent function because the Manifest
+     * does not include configChanges.
+     */
+    public void onConfigurationChanged(String lg) {
+        LangUtils.updateUiLanguage(this);
+
+        finish();
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        startActivity(newIntent(this));
     }
 }

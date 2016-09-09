@@ -40,6 +40,7 @@ public class AboutActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setTitle(R.string.title_activity_about);
         setContentView(R.layout.activity_about);
     }
 

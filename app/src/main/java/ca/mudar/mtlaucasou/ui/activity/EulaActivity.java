@@ -47,6 +47,7 @@ public class EulaActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setTitle(R.string.title_activity_eula);
         setContentView(R.layout.activity_eula);
 
         loadWebView((WebView) findViewById(R.id.webview));

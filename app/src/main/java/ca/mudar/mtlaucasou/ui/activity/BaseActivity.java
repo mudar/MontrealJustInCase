@@ -24,6 +24,7 @@
 package ca.mudar.mtlaucasou.ui.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -34,19 +35,55 @@ import android.view.MenuItem;
 
 import com.mikepenz.aboutlibraries.LibsBuilder;
 
+import ca.mudar.mtlaucasou.Const;
 import ca.mudar.mtlaucasou.R;
+import ca.mudar.mtlaucasou.data.UserPrefs;
+import ca.mudar.mtlaucasou.util.LangUtils;
+import ca.mudar.mtlaucasou.util.LogUtils;
+
+import static ca.mudar.mtlaucasou.util.LogUtils.makeLogTag;
 
 @Deprecated // TODO should be abstract
 public class BaseActivity extends AppCompatActivity implements
-        Toolbar.OnMenuItemClickListener {
+        Toolbar.OnMenuItemClickListener,
+        SharedPreferences.OnSharedPreferenceChangeListener {
+    private static final String TAG = makeLogTag("BaseActivity");
 
     private static final String SEND_INTENT_TYPE = "text/plain";
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        LangUtils.updateUiLanguage(this);
+
+        UserPrefs.getPrefs(this).registerOnSharedPreferenceChangeListener(this);
+    }
 
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
 
         setupToolbar();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        try {
+            UserPrefs.getPrefs(this).unregisterOnSharedPreferenceChangeListener(this);
+        } catch (Exception e) {
+            LogUtils.REMOTE_LOG(e);
+        }
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        if (Const.PrefsNames.LANGUAGE.equals(key)) {
+            LangUtils.updateUiLanguage(this);
+            recreate();
+        }
     }
 
     @Override

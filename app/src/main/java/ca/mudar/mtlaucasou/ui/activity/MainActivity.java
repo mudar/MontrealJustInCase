@@ -99,6 +99,7 @@ public class MainActivity extends BaseActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setTitle(R.string.title_activity_main);
         setContentView(R.layout.activity_main);
 
         vProgressBar = (CircleProgressBar) findViewById(R.id.progressBar);

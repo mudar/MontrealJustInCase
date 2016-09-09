@@ -49,10 +49,21 @@ public class SettingsFragment extends PreferenceFragment implements
     private Preference mPrefUnits;
     private Preference mPrefListSort;
     private Preference mPrefLanguage;
-
+    private OnConfigChangeListener mListener;
 
     public static SettingsFragment newInstance() {
         return new SettingsFragment();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        try {
+            mListener = (OnConfigChangeListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement OnConfigChangeListener");
+        }
     }
 
     @Override
@@ -107,7 +118,7 @@ public class SettingsFragment extends PreferenceFragment implements
         } else if (LANGUAGE.equals(key)) {
             final String lg = prefs.getString(key, Locale.getDefault().getLanguage());
             mPrefLanguage.setSummary(getLanguageSummary(lg));
-            onConfigurationChanged(lg);
+            mListener.onConfigurationChanged(lg);
         }
     }
 
@@ -166,21 +177,7 @@ public class SettingsFragment extends PreferenceFragment implements
         return "";
     }
 
-    /**
-     * Update the interface language, independently from the phone's UI
-     * language. This does not override the parent function because the Manifest
-     * does not include configChanges.
-     */
-    private void onConfigurationChanged(String lg) {
-        Log.v(TAG, "onConfigurationChanged "
-                + String.format("lg = %s", lg));
-
-//        mAppHelper.setLanguage(lg);
-//        mAppHelper.updateUiLanguage();
-//
-//        finish();
-//        Intent intent = new Intent(getApplicationContext(), MyPreferenceActivity.class);
-//        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-//        startActivity(intent);
+    public interface OnConfigChangeListener {
+        void onConfigurationChanged(String lang);
     }
 }

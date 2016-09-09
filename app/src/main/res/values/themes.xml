@@ -33,7 +33,9 @@
         <item name="colorAccent">@color/color_accent</item>
     </style>
 
-    <style name="AppTheme" parent="@style/BaseAppTheme"></style>
+    <style name="AppTheme" parent="@style/BaseAppTheme">
+        <item name="android:windowBackground">@drawable/window_bg_dark</item>
+    </style>
 
     <style name="AppTheme.Toolbar">
         <item name="windowActionBar">false</item>
@@ -44,9 +46,7 @@
         <item name="android:windowBackground">@drawable/window_bg_logo</item>
     </style>
 
-    <style name="AppTheme.Eula">
-        <item name="android:windowBackground">@drawable/window_bg_light</item>
-    </style>
+    <style name="AppTheme.Eula" />
 
     <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 

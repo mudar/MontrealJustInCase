@@ -4,6 +4,11 @@
     <!--TODO: Before you release your application, you need a Google Maps API key.-->
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">YOUR_KEY_HERE</string>
 
+    <string name="app_version" translatable="false">1.5</string>
+    <string name="url_playstore" translatable="false">http://play.google.com/store/apps/details?id=ca.mudar.mtlaucasou</string>
+    <string name="url_mudar_ca" translatable="false">http://www.mudar.ca/</string>
+    <string name="url_github" translatable="false">https://github.com/mudar/MontrealJustInCase</string>
+
     <!--AboutLibraries-->
     <string name="library_AboutLibraries_libraryDescription" translatable="false">AboutLibraries is a library to offer you all the information you need of your libraries.</string>
     <string name="library_GooglePlayServices_libraryDescription" translatable="false">With Google Play services, your app can take advantage of the latest, Google-powered features such as Maps, Google Cloud Messaging (GCM), and more.</string>

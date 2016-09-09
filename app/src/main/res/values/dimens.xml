@@ -43,4 +43,6 @@
     <dimen name="circle_progressbar_size">48dp</dimen>
     <dimen name="circle_progressbar_inner_radius">12dp</dimen>
 
+    <dimen name="map_new_bounds_padding">64dp</dimen>
+
 </resources>

@@ -44,10 +44,13 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.Marker;
 import com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabReselectListener;
 import com.roughike.bottombar.OnTabSelectListener;
+
+import java.util.List;
 
 import ca.mudar.mtlaucasou.Const;
 import ca.mudar.mtlaucasou.R;
@@ -85,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements
 
     private GoogleMap vMap;
     private View vMarkerInfoWindow;
+    private View mWrapperView;
     private CircleProgressBar vProgressBar;
     private BottomBar mBottomBar;
     @MapType
@@ -100,6 +104,7 @@ public class MainActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_main);
 
         vProgressBar = (CircleProgressBar) findViewById(R.id.progressBar);
+        mWrapperView = findViewById(R.id.map_wrapper);
 
         mRealm = Realm.getDefaultInstance();
 
@@ -271,15 +276,18 @@ public class MainActivity extends AppCompatActivity implements
 
         if (realmPlacemarks.size() > 0) {
             // Has cached data
-            MapUtils.addPlacemarksToMap(vMap, realmPlacemarks);
+            final List<Marker> markers = MapUtils.addPlacemarksToMap(vMap, realmPlacemarks);
 
             new Handler().postDelayed(new Runnable() {
                 /**
-                 * Delay hiding the progressbar for 750ms, avoids blink-effect on fast operations
+                 * Delay hiding the progressbar for 750ms, avoids blink-effect on fast operations.
+                 * And allows findAndShowNearestMarker() to wait for the real center in case
+                 * of camera animation.
                  */
                 @Override
                 public void run() {
                     toggleProgressBar(false);
+                    MapUtils.findAndShowNearestMarker(vMap, markers, mWrapperView);
                 }
             }, PROGRESS_BAR_ANIM_DURATION);
         } else {

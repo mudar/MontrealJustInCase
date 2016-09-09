@@ -31,10 +31,12 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -184,13 +186,20 @@ public class MapUtils {
     /**
      * Get the marker nearest to map center
      *
-     * @param map     The GoogleMap
-     * @param markers List of markers contained by the map
-     * @return Marker nearest to map center
+     * @param map          The GoogleMap
+     * @param markers      List of markers contained by the map
+     * @param snackbarView Anchor view used to show the snackbar message
      */
-    public static Marker findNearestMarker(GoogleMap map, List<Marker> markers) {
-        final LatLng mapCenter = map.getCameraPosition().target;
+    public static void findAndShowNearestMarker(final GoogleMap map, List<Marker> markers, @Nullable View snackbarView) {
+        if (map == null || markers == null) {
+            return;
+        }
 
+        final LatLng mapCenter = map.getCameraPosition().target;
+        final LatLngBounds visibleRegion = map.getProjection().getVisibleRegion().latLngBounds;
+
+        // Find the nearest marker
+        boolean hasVisibleMarker = false;
         Marker nearestMarker = null;
         float shortestDistance = 0f; // Compute distance of each marker once only
         for (Marker marker : markers) {
@@ -200,9 +209,34 @@ public class MapUtils {
                 nearestMarker = marker;
                 shortestDistance = distance;
             }
+
+            if (!hasVisibleMarker) {
+                hasVisibleMarker = visibleRegion.contains(marker.getPosition());
+            }
         }
 
-        return nearestMarker;
+        assert nearestMarker != null;
+        if (hasVisibleMarker) {
+            // Show the infoWindow of the nearest maker
+            nearestMarker.showInfoWindow();
+        } else if (snackbarView != null) {
+            // Check if the map shows any markers, Otherwise, show a zoom-out message to show the nearest
+            final LatLngBounds newVisibleRegion = visibleRegion.including(nearestMarker.getPosition());
+
+            Snackbar.make(snackbarView, R.string.snackbar_empty_map_visible_region, Snackbar.LENGTH_LONG)
+                    .setAction(R.string.btn_zoom_out, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            final int padding = view.getResources()
+                                    .getDimensionPixelSize(R.dimen.map_new_bounds_padding);
+
+                            final CameraUpdate camera = CameraUpdateFactory
+                                    .newLatLngBounds(newVisibleRegion, padding);
+                            map.animateCamera(camera);
+                        }
+                    })
+                    .show();
+        }
     }
 
     /**

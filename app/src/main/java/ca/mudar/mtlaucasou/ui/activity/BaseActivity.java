@@ -29,6 +29,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.mikepenz.aboutlibraries.LibsBuilder;
+
 import ca.mudar.mtlaucasou.R;
 
 @Deprecated // TODO should be abstract
@@ -48,6 +50,9 @@ public class BaseActivity extends AppCompatActivity implements
         if (id == R.id.action_eula) {
             startActivity(EulaActivity.newIntent(this));
             return true;
+        } else if (id == R.id.action_about_libs) {
+            onAboutLibsItemSelected();
+            return true;
         }
 
         return false;
@@ -61,4 +66,24 @@ public class BaseActivity extends AppCompatActivity implements
         }
     }
 
+    /**
+     * Show the AboutLibraries acknowledgements activity
+     */
+    private void onAboutLibsItemSelected() {
+        new LibsBuilder()
+                .withActivityTitle(getString(R.string.title_activity_about_libs))
+                .withActivityTheme(R.style.AppTheme_Toolbar)
+                .withAutoDetect(false) // For Proguard
+                .withFields(R.string.class.getFields()) // For Proguard
+                .withLibraries(
+                        "GooglePlayServices", "bottombar", "materialloadingprogressbar"
+                        // Added manually to avoid issues with Proguard
+                        , "AboutLibraries", "Crashlytics", "gson", "OkHttp"
+                        , "Retrofit", "appcompat_v7", "design", "recyclerview_v7"
+                )
+                .withExcludedLibraries(
+                        "AndroidIconics", "fastadapter", "okio", "support_v4"
+                )
+                .start(this);
+    }
 }

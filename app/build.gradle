@@ -42,9 +42,11 @@ dependencies {
     compile 'com.android.support:appcompat-v7:24.2.0'
     compile 'com.android.support:design:24.2.0'
     compile 'com.android.support:recyclerview-v7:24.2.0'
-    // UI
+    // Google Play Services
     compile 'com.google.android.gms:play-services-maps:9.4.0'
-    compile 'com.roughike:bottom-bar:+'
+    compile 'com.google.android.gms:play-services-location:9.4.0'
+    // UI
+    compile 'com.roughike:bottom-bar:2.0.2'
     compile('com.lsjwzh:materialloadingprogressbar:0.5.8-RELEASE')
     compile('com.mikepenz:aboutlibraries:5.8.0@aar') {
         transitive = true

@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
     Montreal Just in Case
     Copyright (C) 2011  Mudar Noufal <mn@mudar.ca>
 
@@ -20,25 +22,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:id="@+id/action_search"
-        android:icon="@drawable/ic_action_search"
-        android:title="@string/action_search"
-        app:actionViewClass="ca.mudar.mtlaucasou.ui.view.PlacemarksSearchView"
-        app:showAsAction="always|collapseActionView" />
-    <item
-        android:id="@+id/action_settings"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_about"
-        android:title="@string/action_about"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_eula"
-        android:title="@string/action_eula"
-        app:showAsAction="never" />
-</menu>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/color_background_light" />
+</shape>

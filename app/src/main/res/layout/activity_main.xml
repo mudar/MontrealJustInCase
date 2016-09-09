@@ -35,7 +35,7 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/bottom_bar"
         android:layout_below="@+id/appbar"
-        android:background="@color/grey_200">
+        android:background="@color/color_background_light">
 
         <fragment
             android:id="@+id/map"

@@ -41,7 +41,11 @@
     </style>
 
     <style name="AppTheme.Main" parent="@style/AppTheme.Toolbar">
-        <item name="android:windowBackground">@drawable/window_background</item>
+        <item name="android:windowBackground">@drawable/window_bg_logo</item>
+    </style>
+
+    <style name="AppTheme.Eula">
+        <item name="android:windowBackground">@drawable/window_bg_light</item>
     </style>
 
     <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />

@@ -46,6 +46,8 @@
         <item name="android:windowBackground">@drawable/window_bg_logo</item>
     </style>
 
+    <style name="AppTheme.Settings" />
+
     <style name="AppTheme.Eula" />
 
     <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />

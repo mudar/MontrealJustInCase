@@ -23,8 +23,11 @@
 
 package ca.mudar.mtlaucasou.ui.activity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -37,6 +40,8 @@ import ca.mudar.mtlaucasou.R;
 public class BaseActivity extends AppCompatActivity implements
         Toolbar.OnMenuItemClickListener {
 
+    private static final String SEND_INTENT_TYPE = "text/plain";
+
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
@@ -47,7 +52,19 @@ public class BaseActivity extends AppCompatActivity implements
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         final int id = item.getItemId();
-        if (id == R.id.action_eula) {
+        if (id == R.id.action_settings) {
+            startActivity(SettingsActivity.newIntent(this));
+            return true;
+        } else if (id == R.id.action_about) {
+            startActivity(AboutActivity.newIntent(this));
+            return true;
+        } else if (id == R.id.action_share) {
+            onShareItemSelected();
+            return true;
+        } else if (id == R.id.action_rate) {
+            showWebsite(R.string.url_playstore);
+            return true;
+        } else if (id == R.id.action_eula) {
             startActivity(EulaActivity.newIntent(this));
             return true;
         } else if (id == R.id.action_about_libs) {
@@ -85,5 +102,26 @@ public class BaseActivity extends AppCompatActivity implements
                         "AndroidIconics", "fastadapter", "okio", "support_v4"
                 )
                 .start(this);
+    }
+
+    /**
+     * Native sharing
+     */
+    private void onShareItemSelected() {
+        final Bundle extras = new Bundle();
+        extras.putString(Intent.EXTRA_SUBJECT, getResources().getString(R.string.share_intent_title));
+        extras.putString(Intent.EXTRA_TEXT, getResources().getString(R.string.url_playstore));
+
+        final Intent sendIntent = new Intent();
+        sendIntent.putExtras(extras);
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.setType(SEND_INTENT_TYPE);
+        startActivity(sendIntent);
+    }
+
+    private void showWebsite(@StringRes int website) {
+        final Intent viewIntent = new Intent(Intent.ACTION_VIEW);
+        viewIntent.setData(Uri.parse(getResources().getString(website)));
+        startActivity(viewIntent);
     }
 }

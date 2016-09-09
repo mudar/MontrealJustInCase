@@ -30,7 +30,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import ca.mudar.mtlaucasou.Const;
-import ca.mudar.mtlaucasou.ui.SettingsFragment;
+import ca.mudar.mtlaucasou.ui.fragment.SettingsFragment;
 
 public class SettingsActivity extends AppCompatActivity {
     public static Intent newIntent(Context context) {

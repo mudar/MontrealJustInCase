@@ -25,6 +25,7 @@ package ca.mudar.mtlaucasou;
 
 import android.app.Application;
 
+import ca.mudar.mtlaucasou.util.LangUtils;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
@@ -37,11 +38,7 @@ public class MtlAuCasOuApp extends Application {
         RealmConfiguration config = new RealmConfiguration.Builder(this).build();
         Realm.setDefaultConfiguration(config);
         Realm.deleteRealm(config);
-    }
 
-    @Deprecated
-    public String getUnits() {
-        // TODO replace by sharedPrefs
-        return Const.PrefsValues.UNITS_ISO;
+        LangUtils.updateUiLanguage(this);
     }
 }

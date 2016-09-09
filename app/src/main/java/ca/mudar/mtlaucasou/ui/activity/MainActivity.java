@@ -32,8 +32,6 @@ import android.os.Handler;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -76,7 +74,7 @@ import retrofit2.Response;
 
 import static ca.mudar.mtlaucasou.util.LogUtils.makeLogTag;
 
-public class MainActivity extends AppCompatActivity implements
+public class MainActivity extends BaseActivity implements
         OnMapReadyCallback,
         SearchResultsManager.MapUpdatesListener,
         Callback<PointsFeatureCollection>,
@@ -108,7 +106,6 @@ public class MainActivity extends AppCompatActivity implements
 
         mRealm = Realm.getDefaultInstance();
 
-        setupToolbar();
         setupMap();
         setupBottomBar();
 
@@ -166,11 +163,6 @@ public class MainActivity extends AppCompatActivity implements
         } else {
             // Display the missing permission error dialog when the fragments resume.
         }
-    }
-
-    private void setupToolbar() {
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
     }
 
     private void setupSearchView(final Menu menu) {

@@ -66,13 +66,31 @@
 
         <activity
             android:name=".ui.activity.MainActivity"
+            android:exported="false"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.Main">
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme.Main" />
+
+        <activity-alias
+            android:name=".MainActivity"
+            android:exported="true"
+            android:targetActivity=".ui.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity-alias>
+
+        <activity
+            android:name=".ui.activity.EulaActivity"
+            android:exported="false"
+            android:label="@string/title_activity_eula"
+            android:parentActivityName=".ui.activity.MainActivity"
+            android:theme="@style/AppTheme.Eula">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.activity.MainActivity" />
         </activity>
     </application>
 

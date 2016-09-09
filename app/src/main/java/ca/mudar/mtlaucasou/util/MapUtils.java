@@ -223,7 +223,7 @@ public class MapUtils {
             // Check if the map shows any markers, Otherwise, show a zoom-out message to show the nearest
             final LatLngBounds newVisibleRegion = visibleRegion.including(nearestMarker.getPosition());
 
-            Snackbar.make(snackbarView, R.string.snackbar_empty_map_visible_region, Snackbar.LENGTH_LONG)
+            AppSnackbar.make(snackbarView, R.string.snackbar_empty_map_visible_region, Snackbar.LENGTH_LONG)
                     .setAction(R.string.btn_zoom_out, new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {

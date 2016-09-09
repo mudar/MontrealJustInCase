@@ -36,8 +36,8 @@ import java.io.IOException;
 import java.util.List;
 
 import ca.mudar.mtlaucasou.Const;
-import ca.mudar.mtlaucasou.MtlAuCasOuApp;
 import ca.mudar.mtlaucasou.R;
+import ca.mudar.mtlaucasou.data.UserPrefs;
 
 import static ca.mudar.mtlaucasou.util.LogUtils.makeLogTag;
 
@@ -97,23 +97,22 @@ public class GeoUtils {
      * the value: different approximations in ft when > 1000. Very short
      * distances are not displayed to avoid problems with Location accuracy.
      *
-     * @param c
-     * @param fDistanceM The distance in Meters.
+     * @param context        A Context
+     * @param metricDistance The distance in Meters.
      * @return String Display the distance.
      */
-    public static String getDistanceDisplay(Context c, float fDistanceM) {
+    public static String getDistanceDisplay(Context context, float metricDistance) {
         String sDistance;
 
-        MtlAuCasOuApp app = (MtlAuCasOuApp) c.getApplicationContext();
-        Resources res = c.getResources();
-        String units = app.getUnits();
+        final String units = UserPrefs.getInstance(context).getUnitsSystem();
+        Resources res = context.getResources();
 
         if (units.equals(Const.PrefsValues.UNITS_IMP)) {
             /**
              * Imperial units system, Miles and Feet.
              */
 
-            float fDistanceMi = fDistanceM / Const.UnitsDisplay.METER_PER_MILE;
+            float fDistanceMi = metricDistance / Const.UnitsDisplay.METER_PER_MILE;
 
             if (fDistanceMi + (Const.UnitsDisplay.ACCURACY_FEET_FAR / Const.UnitsDisplay.FEET_PER_MILE) < 1) {
                 /**
@@ -156,7 +155,7 @@ public class GeoUtils {
              * International Units system, Meters and Km.
              */
 
-            if (fDistanceM <= Const.UnitsDisplay.MIN_METERS) {
+            if (metricDistance <= Const.UnitsDisplay.MIN_METERS) {
                 /**
                  * Display "Less than 100 m".
                  */
@@ -165,7 +164,7 @@ public class GeoUtils {
                 /**
                  * No need to have a constant for 1 Km = 1000 M
                  */
-                float fDistanceKm = (fDistanceM / 1000);
+                float fDistanceKm = (metricDistance / 1000);
                 sDistance = String
                         .format(res.getString(R.string.placemark_distance_iso), fDistanceKm);
             }

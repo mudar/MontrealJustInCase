@@ -136,6 +136,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
      * Show the AboutLibraries acknowledgements activity
      */
     private void onAboutLibsItemSelected() {
+        LangUtils.updateUiLanguage(this);
         new LibsBuilder()
                 .withActivityTitle(getString(R.string.title_activity_about_libs))
                 .withActivityTheme(R.style.AppTheme_AboutLibs)

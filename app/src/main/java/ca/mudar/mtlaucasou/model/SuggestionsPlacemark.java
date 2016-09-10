@@ -23,6 +23,8 @@
 
 package ca.mudar.mtlaucasou.model;
 
+import android.support.annotation.NonNull;
+
 import com.google.android.gms.maps.model.LatLng;
 
 /**
@@ -74,7 +76,7 @@ public class SuggestionsPlacemark implements
     }
 
     @Override
-    public int compareTo(SuggestionsPlacemark other) {
+    public int compareTo(@NonNull SuggestionsPlacemark other) {
         return name.compareTo(other.name);
     }
 

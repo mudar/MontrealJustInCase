@@ -24,7 +24,7 @@
 -->
 
 <resources>
-
+    <!--Titles-->
     <string name="app_name">MTL au cas où</string>
     <string name="title_activity_main">@string/app_name</string>
     <string name="title_activity_settings">Paramètres</string>
@@ -32,6 +32,8 @@
     <string name="title_activity_eula">Licence</string>
     <string name="title_activity_about_libs">Remerciements</string>
 
+    <!--Share-->
+    <string name="share_intent_title">Découvrez Montréal au cas où sur Google Play</string>
 
     <!--BottomBar tabs-->
     <string name="btn_fire_halls">Casernes</string>
@@ -51,12 +53,28 @@
     <!--Buttons-->
     <string name="btn_zoom_out">Zoom arrière</string>
 
-
     <!--Search-->
     <string name="search_hint">Code postal ou emplacement</string>
 
-    <!--About-->
-    <string name="share_intent_title">Découvrez Montréal au cas où sur Google Play</string>
+    <!-- About -->
+    <string name="about_title">Montréal au cas où</string>
+    <string name="about_subtitle">Localisations géographiques des services de sécurité publique</string>
+    <string name="about_intro">En cas d’urgence, veuillez contacter le Service de la sécurité publique. Ne vous fiez pas aux informations présentées dans cette application car elle ne contiendra pas les dernières mesures d’urgence.</string>
+    <string name="about_open_data">Cette application est propulsée par le Portail données ouvertes de la Ville de Montréal en conformité avec sa licence d’utilisation des données ouvertes.</string>
+    <string name="about_source_code">Le code source est publié sous la licence GPLv3 de la Free Software Foundation.</string>
+    <string name="about_credits_dev">Application Android réalisée par Mudar&#160;Noufal.</string>
+    <string name="about_montreal_ouvert">Un projet de données ouvertes réalisé en collaboration avec Montréal&#160;ouvert.</string>
+
+    <!--Settings-->
+    <string name="prefs_language_title">Langue</string>
+    <string name="prefs_language_dialog_title">Choix de langue</string>
+    <string name="prefs_language_french">Français</string>
+    <string name="prefs_language_english">English</string>
+    <string name="prefs_units_title">Unités de mesure</string>
+    <string name="prefs_units_dialog_title">Système des unités de mesure</string>
+    <string name="prefs_units_iso">Métrique (km)</string>
+    <string name="prefs_units_imperial">Impérial (mile)</string>
+    <string name="prefs_version_title">Version</string>
 
     <!--Units-->
     <string name="placemark_distance_iso">%.1f km</string>
@@ -75,5 +93,11 @@
     <string name="permission_rationale_location">Access to the location service is required to demonstrate the \'my location\' feature, which shows your current location on the map.</string>
     <string name="location_permission_denied">This sample requires location permission to enable the \'my location\' layer. Please try again and grant access to use the location.\nIf the permission has been permanently denied, it can be enabled from the System Settings &gt; Apps &gt; \'Google Maps API Demos\'.</string>
     <string name="permission_required_toast">Location permission is required for this demo.</string>
+
+    <!--Accessibility-->
+    <string name="desc_montreal">Ville de Montréal</string>
+    <string name="desc_github">Dépôt GitHub</string>
+    <string name="desc_credits">Générique</string>
+    <string name="desc_montreal_ouvert">Montréal ouvert</string>
 
 </resources>

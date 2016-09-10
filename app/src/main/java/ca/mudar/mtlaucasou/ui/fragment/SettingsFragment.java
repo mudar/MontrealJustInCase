@@ -47,7 +47,6 @@ public class SettingsFragment extends PreferenceFragment implements
 
     private SharedPreferences mSharedPrefs;
     private Preference mPrefUnits;
-    private Preference mPrefListSort;
     private Preference mPrefLanguage;
     private OnConfigChangeListener mListener;
 
@@ -77,7 +76,6 @@ public class SettingsFragment extends PreferenceFragment implements
         addPreferencesFromResource(R.xml.prefs_settings);
 
         mPrefUnits = findPreference(UNITS_SYSTEM);
-        mPrefListSort = findPreference(LIST_SORT);
         mPrefLanguage = findPreference(LANGUAGE);
 
         mSharedPrefs = pm.getSharedPreferences();
@@ -113,8 +111,6 @@ public class SettingsFragment extends PreferenceFragment implements
          */
         if (UNITS_SYSTEM.equals(key)) {
             mPrefUnits.setSummary(getUnitsSummary(prefs.getString(key, UNITS_ISO)));
-        } else if (LIST_SORT.equals(key)) {
-            mPrefListSort.setSummary(getListSortSummary(prefs.getString(key, LIST_SORT_DISTANCE)));
         } else if (LANGUAGE.equals(key)) {
             final String lg = prefs.getString(key, Locale.getDefault().getLanguage());
             mPrefLanguage.setSummary(getLanguageSummary(lg));
@@ -128,12 +124,6 @@ public class SettingsFragment extends PreferenceFragment implements
          */
         mPrefUnits.setSummary(getUnitsSummary(
                 mSharedPrefs.getString(UNITS_SYSTEM, UNITS_ISO)));
-
-        /**
-         * Default sort list order is by distance
-         */
-        mPrefListSort.setSummary(getListSortSummary(
-                mSharedPrefs.getString(LIST_SORT, LIST_SORT_DISTANCE)));
 
         /**
          * The app's Default language is the phone's language. If not supported,
@@ -152,16 +142,6 @@ public class SettingsFragment extends PreferenceFragment implements
             return getResources().getString(R.string.prefs_units_iso);
         } else if (UNITS_IMP.equals(index)) {
             return getResources().getString(R.string.prefs_units_imperial);
-        }
-
-        return "";
-    }
-
-    private String getListSortSummary(String index) {
-        if (LIST_SORT_NAME.equals(index)) {
-            return getResources().getString(R.string.prefs_list_sort_name);
-        } else if (LIST_SORT_DISTANCE.equals(index)) {
-            return getResources().getString(R.string.prefs_list_sort_distance);
         }
 
         return "";

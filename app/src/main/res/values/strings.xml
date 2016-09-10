@@ -24,13 +24,16 @@
 -->
 
 <resources>
-
+    <!--Titles-->
     <string name="app_name">MTL Just in Case</string>
     <string name="title_activity_main">@string/app_name</string>
     <string name="title_activity_settings">Settings</string>
     <string name="title_activity_about">About</string>
     <string name="title_activity_eula">EULA</string>
     <string name="title_activity_about_libs">Acknowledgements</string>
+
+    <!--Share-->
+    <string name="share_intent_title">Discover Montréal Just in Case on Google Play</string>
 
     <!--BottomBar tabs-->
     <string name="btn_fire_halls">Fire Stations</string>
@@ -50,21 +53,28 @@
     <!--Buttons-->
     <string name="btn_zoom_out">Zoom out</string>
 
-
     <!--Search-->
     <string name="search_hint">Postal code or place name</string>
 
     <!-- About -->
     <string name="about_title">Montréal Just in Case</string>
     <string name="about_subtitle">Geographic locations of public safety services</string>
-    <string name="about_intro">In case of emergency, please contact the City’s security services directly. Do not rely on information provided here as it will not contain the updated security measures.</string>
+    <string name="about_intro">In case of emergency, please contact the city’s security services directly. Do not rely on information provided here as it will not contain the updated security measures.</string>
     <string name="about_open_data">This app is powered by the City of&#160;Montréal Open&#160;Data Portal, in compliance with its Open&#160;Data license.</string>
     <string name="about_source_code">Source code is released under the GPLv3 license from the Free Software Foundation.</string>
     <string name="about_credits_dev">Android app developed by Mudar&#160;Noufal.</string>
     <string name="about_montreal_ouvert">An Open Data project done in collaboration with Montréal&#160;ouvert.</string>
 
-    <!--Share app-->
-    <string name="share_intent_title">Discover Montréal Just in Case on Google Play</string>
+    <!--Settings-->
+    <string name="prefs_language_title">Language</string>
+    <string name="prefs_language_dialog_title">Set language</string>
+    <string name="prefs_language_french">Français</string>
+    <string name="prefs_language_english">English</string>
+    <string name="prefs_units_title">Distance Units System</string>
+    <string name="prefs_units_dialog_title">Set units system</string>
+    <string name="prefs_units_iso">Metric (km)</string>
+    <string name="prefs_units_imperial">Imperial (mile)</string>
+    <string name="prefs_version_title">Version</string>
 
     <!--Units-->
     <string name="placemark_distance_iso">%.1f km</string>
@@ -79,7 +89,7 @@
     <string name="snackbar_host_unknown_error_message">Server connection error [%1$d]</string>
     <string name="snackbar_empty_map_visible_region">The map’s visible region does not contain any places.</string>
 
-    <!--    Permissions    -->
+    <!--Permissions-->
     <string name="permission_rationale_location">Access to the location service is required to demonstrate the \'my location\' feature, which shows your current location on the map.</string>
     <string name="location_permission_denied">This sample requires location permission to enable the \'my location\' layer. Please try again and grant access to use the location.\nIf the permission has been permanently denied, it can be enabled from the System Settings &gt; Apps &gt; \'Google Maps API Demos\'.</string>
     <string name="permission_required_toast">Location permission is required for this demo.</string>

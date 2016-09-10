@@ -42,7 +42,7 @@ public class AboutActivity extends BaseActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setTitle(R.string.title_activity_about);
+        // setTitle(R.string.title_activity_about);
         setContentView(R.layout.activity_about);
     }
 
@@ -51,6 +51,11 @@ public class AboutActivity extends BaseActivity implements
         getMenuInflater().inflate(R.menu.menu_about, menu);
 
         return true;
+    }
+
+    @Override
+    protected boolean isShowTitleEnabled() {
+        return false;
     }
 
     @Override

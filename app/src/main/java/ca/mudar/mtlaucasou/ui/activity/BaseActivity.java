@@ -43,13 +43,22 @@ import ca.mudar.mtlaucasou.util.LogUtils;
 
 import static ca.mudar.mtlaucasou.util.LogUtils.makeLogTag;
 
-@Deprecated // TODO should be abstract
-public class BaseActivity extends AppCompatActivity implements
+public abstract class BaseActivity extends AppCompatActivity implements
         Toolbar.OnMenuItemClickListener,
         SharedPreferences.OnSharedPreferenceChangeListener {
     private static final String TAG = makeLogTag("BaseActivity");
 
     private static final String SEND_INTENT_TYPE = "text/plain";
+
+    protected boolean isShowTitleEnabled() {
+        return true;
+    }
+
+    protected void showWebsite(@StringRes int website) {
+        final Intent viewIntent = new Intent(Intent.ACTION_VIEW);
+        viewIntent.setData(Uri.parse(getResources().getString(website)));
+        startActivity(viewIntent);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -112,11 +121,14 @@ public class BaseActivity extends AppCompatActivity implements
         return false;
     }
 
-    protected void setupToolbar() {
+    private void setupToolbar() {
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (toolbar != null) {
             setSupportActionBar(toolbar);
             toolbar.setOnMenuItemClickListener(this);
+
+            //noinspection ConstantConditions
+            getSupportActionBar().setDisplayShowTitleEnabled(isShowTitleEnabled());
         }
     }
 
@@ -154,11 +166,5 @@ public class BaseActivity extends AppCompatActivity implements
         sendIntent.setAction(Intent.ACTION_SEND);
         sendIntent.setType(SEND_INTENT_TYPE);
         startActivity(sendIntent);
-    }
-
-    protected void showWebsite(@StringRes int website) {
-        final Intent viewIntent = new Intent(Intent.ACTION_VIEW);
-        viewIntent.setData(Uri.parse(getResources().getString(website)));
-        startActivity(viewIntent);
     }
 }

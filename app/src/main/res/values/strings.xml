@@ -55,6 +55,7 @@
     <string name="search_hint">Postal code or place name</string>
 
     <!-- About -->
+    <string name="about_title">Montréal Just in Case</string>
     <string name="about_subtitle">Geographic locations of public safety services</string>
     <string name="about_intro">In case of emergency, please contact the City’s security services directly. Do not rely on information provided here as it will not contain the updated security measures.</string>
     <string name="about_open_data">This app is powered by the City of&#160;Montréal Open&#160;Data Portal, in compliance with its Open&#160;Data license.</string>

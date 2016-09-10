@@ -126,7 +126,7 @@ public class BaseActivity extends AppCompatActivity implements
     private void onAboutLibsItemSelected() {
         new LibsBuilder()
                 .withActivityTitle(getString(R.string.title_activity_about_libs))
-                .withActivityTheme(R.style.AppTheme_Toolbar)
+                .withActivityTheme(R.style.AppTheme_AboutLibs)
                 .withAutoDetect(false) // For Proguard
                 .withFields(R.string.class.getFields()) // For Proguard
                 .withLibraries(

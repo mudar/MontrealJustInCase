@@ -87,8 +87,7 @@
             android:name=".ui.activity.SettingsActivity"
             android:exported="false"
             android:label="@string/title_activity_settings"
-            android:parentActivityName=".ui.activity.MainActivity"
-            android:theme="@style/AppTheme.Settings">
+            android:parentActivityName=".ui.activity.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.activity.MainActivity" />
@@ -110,8 +109,7 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="false"
             android:label="@string/title_activity_eula"
-            android:parentActivityName=".ui.activity.MainActivity"
-            android:theme="@style/AppTheme.Eula">
+            android:parentActivityName=".ui.activity.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.activity.MainActivity" />

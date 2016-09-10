@@ -28,6 +28,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import java.util.Locale;
+
 import ca.mudar.mtlaucasou.Const;
 import ca.mudar.mtlaucasou.R;
 
@@ -82,7 +84,7 @@ public class UserPrefs implements
     }
 
     public String getLanguage() {
-        return mPrefs.getString(LANGUAGE, null);
+        return mPrefs.getString(LANGUAGE, Locale.getDefault().getLanguage());
     }
 
     public void setLanguage(String language) {

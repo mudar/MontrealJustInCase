@@ -23,6 +23,7 @@
 
 package ca.mudar.mtlaucasou.data;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -62,6 +63,7 @@ public class UserPrefs implements
         mPrefs = getPrefs(context);
     }
 
+    @SuppressLint("CommitPrefEdits")
     private SharedPreferences.Editor edit() {
         if (mPrefsEditor == null) {
             mPrefsEditor = mPrefs.edit();

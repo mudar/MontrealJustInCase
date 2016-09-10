@@ -64,8 +64,8 @@ public class PlacemarkProperties extends RealmObject {
      * Build a Realm PlacemarkProperties from GeoJSON FeatureProperties
      */
     public static class Builder {
-        private String name;
-        private String description;
+        private final String name;
+        private final String description;
 
         public Builder(FeatureProperties properties) {
             this.name = properties.getName();

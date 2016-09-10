@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!--TODO: Before you release your application, you need a Google Maps API key.-->
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">YOUR_KEY_HERE</string>
@@ -8,7 +8,7 @@
     <string name="url_playstore" translatable="false">http://play.google.com/store/apps/details?id=ca.mudar.mtlaucasou</string>
     <string name="url_mudar_ca" translatable="false">http://www.mudar.ca/</string>
     <string name="url_github" translatable="false">https://github.com/mudar/MontrealJustInCase</string>
-    <string name="url_montreal_ouvert" translatable="true">http://montrealouvert.net/donnees-ouvertes-questions-frequemment-demandees/</string>
+    <string name="url_montreal_ouvert" translatable="false">http://montrealouvert.net/donnees-ouvertes-questions-frequemment-demandees/</string>
     <string name="url_mtl_open_data" translatable="false">http://donnees.ville.montreal.qc.ca/dataset/casernes-pompiers</string>
 
     <!--AboutLibraries-->
@@ -17,5 +17,23 @@
     <string name="library_design_libraryDescription" translatable="false">Adds support for various material design components and patterns, such as floating action buttons (FAB), snackbars, and tabs.</string>
     <string name="library_appcompat_v7_libraryDescription" translatable="false">Adds support for the Action Bar and material design user interface implementations.</string>
     <string name="library_recyclerview_v7_libraryDescription" translatable="false">Adds the RecyclerView class, a view for efficiently displaying large data sets by providing a limited window of data items.</string>
+
+    <!--Prefs/Settings-->
+    <string-array name="prefs_units_entries">
+        <item>@string/prefs_units_iso</item>
+        <item>@string/prefs_units_imperial</item>
+    </string-array>
+    <string-array name="prefs_units_values" tools:ignore="MissingTranslation">
+        <item>iso</item>
+        <item>imp</item>
+    </string-array>
+    <string-array name="prefs_language_entries">
+        <item>@string/prefs_language_english</item>
+        <item>@string/prefs_language_french</item>
+    </string-array>
+    <string-array name="prefs_language_values" tools:ignore="MissingTranslation">
+        <item>en</item>
+        <item>fr</item>
+    </string-array>
 
 </resources>

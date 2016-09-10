@@ -25,7 +25,6 @@ package ca.mudar.mtlaucasou.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -51,11 +50,6 @@ public class EulaActivity extends BaseActivity {
         setContentView(R.layout.activity_eula);
 
         loadWebView((WebView) findViewById(R.id.webview));
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
     }
 
     private void loadWebView(WebView v) {

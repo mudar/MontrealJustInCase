@@ -37,7 +37,7 @@
     <!-- ClassPath for autoDetect section -->
     <string name="library_materialloadingprogressbar_classPath" translatable="false">com.lsjwzh.widget.materialloadingprogressbar</string>
     <!-- License section -->
-    <string name="library_MaterialishProgress_licenseId">apache_2_0</string>
+    <string name="library_MaterialishProgress_licenseId" translatable="false">apache_2_0</string>
     <!-- Custom variables section -->
     <string name="library_materialloadingprogressbar_year" translatable="false">2014</string>
     <string name="library_materialloadingprogressbar_owner" translatable="false">lsjwzh</string>

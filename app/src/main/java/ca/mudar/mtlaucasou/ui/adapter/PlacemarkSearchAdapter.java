@@ -56,7 +56,7 @@ public class PlacemarkSearchAdapter extends CursorAdapter implements
         Filterable {
     private static final String TAG = makeLogTag("SearchAdapter");
 
-    public static final int THRESHOLD = 2;
+    private static final int THRESHOLD = 2;
 
     private final ResultsFilter mFilter;
     private final LayoutInflater mInflater;
@@ -94,7 +94,7 @@ public class PlacemarkSearchAdapter extends CursorAdapter implements
      * The auto-complete ViewHolder
      */
     private class SuggestionViewHolder {
-        TextView vTitle;
+        final TextView vTitle;
 
         public SuggestionViewHolder(View view) {
             this.vTitle = (TextView) view.findViewById(R.id.title);
@@ -112,7 +112,7 @@ public class PlacemarkSearchAdapter extends CursorAdapter implements
     /**
      * The search suggestions filter
      */
-    public class ResultsFilter extends Filter {
+    private class ResultsFilter extends Filter {
 
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {

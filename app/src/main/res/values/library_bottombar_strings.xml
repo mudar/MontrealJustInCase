@@ -37,7 +37,7 @@
     <!-- ClassPath for autoDetect section -->
     <string name="library_bottombar_classPath" translatable="false">com.roughike.bottombar</string>
     <!-- License section -->
-    <string name="library_bottombar_licenseId">apache_2_0</string>
+    <string name="library_bottombar_licenseId" translatable="false">apache_2_0</string>
     <!-- Custom variables section -->
     <string name="library_bottombar_year" translatable="false">2016</string>
     <string name="library_bottombar_owner" translatable="false">Iiro Krankka</string>

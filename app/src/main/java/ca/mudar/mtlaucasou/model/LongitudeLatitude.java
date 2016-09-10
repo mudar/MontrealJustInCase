@@ -74,8 +74,8 @@ public class LongitudeLatitude extends RealmObject {
      * Build a Realm LongitudeLatitude from GeoJSON Point
      */
     public static class Builder {
-        private double lat;
-        private double lng;
+        private final double lat;
+        private final double lng;
 
         public Builder(Point point) {
             this.lng = point.getCoordinates().get(0);

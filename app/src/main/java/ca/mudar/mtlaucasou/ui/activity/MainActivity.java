@@ -162,7 +162,7 @@ public class MainActivity extends BaseActivity implements
             // Enable the my location layer if the permission has been granted.
             MapUtils.enableMyLocation(this, vMap);
         } else {
-            // Display the missing permission error dialog when the fragments resume.
+            // TODO: Display the missing permission error dialog when the fragments resume.
         }
     }
 

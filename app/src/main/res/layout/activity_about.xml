@@ -24,12 +24,11 @@
 -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".ui.activity.MainActivity">
+    tools:context=".ui.activity.AboutActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -40,9 +39,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:theme="@style/ToolbarTheme"
-            app:navigationIcon="@drawable/ic_navigation_arrow_back"
-            app:popupTheme="@style/MenusTheme" />
+            android:theme="@style/ToolbarTheme.About" />
 
         <TextView
             android:id="@+id/about_title"

@@ -46,14 +46,20 @@
         <item name="android:windowBackground">@drawable/window_bg_logo</item>
     </style>
 
+    <style name="AppTheme.About" parent="@style/AppTheme.Toolbar" />
+
     <style name="AppTheme.AboutLibs" parent="AppTheme.Toolbar">
         <item name="navigationIcon">@drawable/ic_navigation_arrow_back</item>
     </style>
 
     <style name="ToolbarTheme" parent="@style/Theme.AppCompat">
         <item name="colorControlNormal">@color/white</item>
+        <item name="popupTheme">@style/MenusTheme</item>
     </style>
 
+    <style name="ToolbarTheme.About">
+        <item name="navigationIcon">@drawable/ic_navigation_arrow_back</item>
+    </style>
 
     <style name="MenusTheme" parent="@style/ThemeOverlay.AppCompat.Dark" />
 

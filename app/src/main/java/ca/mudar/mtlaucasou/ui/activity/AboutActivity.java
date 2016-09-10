@@ -27,10 +27,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 
 import ca.mudar.mtlaucasou.R;
 
-public class AboutActivity extends BaseActivity {
+public class AboutActivity extends BaseActivity implements
+        View.OnClickListener {
 
     public static Intent newIntent(Context context) {
         return new Intent(context, AboutActivity.class);
@@ -49,5 +51,20 @@ public class AboutActivity extends BaseActivity {
         getMenuInflater().inflate(R.menu.menu_about, menu);
 
         return true;
+    }
+
+    @Override
+    public void onClick(View view) {
+        final int id = view.getId();
+
+        if (id == R.id.about_open_data) {
+            showWebsite(R.string.url_mtl_open_data);
+        } else if (id == R.id.about_source_code) {
+            showWebsite(R.string.url_github);
+        } else if (id == R.id.about_credits_dev) {
+            showWebsite(R.string.url_mudar_ca);
+        } else if (id == R.id.about_montreal_ouvert) {
+            showWebsite(R.string.url_montreal_ouvert);
+        }
     }
 }

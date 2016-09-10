@@ -8,6 +8,8 @@
     <string name="url_playstore" translatable="false">http://play.google.com/store/apps/details?id=ca.mudar.mtlaucasou</string>
     <string name="url_mudar_ca" translatable="false">http://www.mudar.ca/</string>
     <string name="url_github" translatable="false">https://github.com/mudar/MontrealJustInCase</string>
+    <string name="url_montreal_ouvert" translatable="true">http://montrealouvert.net/donnees-ouvertes-questions-frequemment-demandees/</string>
+    <string name="url_mtl_open_data" translatable="false">http://donnees.ville.montreal.qc.ca/dataset/casernes-pompiers</string>
 
     <!--AboutLibraries-->
     <string name="library_AboutLibraries_libraryDescription" translatable="false">AboutLibraries is a library to offer you all the information you need of your libraries.</string>

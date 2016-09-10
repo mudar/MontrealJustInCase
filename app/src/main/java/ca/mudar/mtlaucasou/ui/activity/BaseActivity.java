@@ -156,7 +156,7 @@ public class BaseActivity extends AppCompatActivity implements
         startActivity(sendIntent);
     }
 
-    private void showWebsite(@StringRes int website) {
+    protected void showWebsite(@StringRes int website) {
         final Intent viewIntent = new Intent(Intent.ACTION_VIEW);
         viewIntent.setData(Uri.parse(getResources().getString(website)));
         startActivity(viewIntent);

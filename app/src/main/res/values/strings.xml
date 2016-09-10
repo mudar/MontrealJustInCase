@@ -32,7 +32,6 @@
     <string name="title_activity_eula">EULA</string>
     <string name="title_activity_about_libs">Acknowledgements</string>
 
-
     <!--BottomBar tabs-->
     <string name="btn_fire_halls">Fire Stations</string>
     <string name="btn_spvm_stations">Police Stations</string>
@@ -55,7 +54,15 @@
     <!--Search-->
     <string name="search_hint">Postal code or place name</string>
 
-    <!--About-->
+    <!-- About -->
+    <string name="about_subtitle">Geographic locations of public safety services</string>
+    <string name="about_intro">In case of emergency, please contact the City’s security services directly. Do not rely on information provided here as it will not contain the updated security measures.</string>
+    <string name="about_open_data">This app is powered by the City of&#160;Montréal Open&#160;Data Portal, in compliance with its Open&#160;Data license.</string>
+    <string name="about_source_code">Source code is released under the GPLv3 license from the Free Software Foundation.</string>
+    <string name="about_credits_dev">Android app developed by Mudar&#160;Noufal.</string>
+    <string name="about_montreal_ouvert">An Open Data project done in collaboration with Montréal&#160;ouvert.</string>
+
+    <!--Share app-->
     <string name="share_intent_title">Discover Montréal Just in Case on Google Play</string>
 
     <!--Units-->
@@ -75,5 +82,11 @@
     <string name="permission_rationale_location">Access to the location service is required to demonstrate the \'my location\' feature, which shows your current location on the map.</string>
     <string name="location_permission_denied">This sample requires location permission to enable the \'my location\' layer. Please try again and grant access to use the location.\nIf the permission has been permanently denied, it can be enabled from the System Settings &gt; Apps &gt; \'Google Maps API Demos\'.</string>
     <string name="permission_required_toast">Location permission is required for this demo.</string>
+
+    <!--Accessibility-->
+    <string name="desc_montreal">City of Montréal</string>
+    <string name="desc_github">GitHub repository</string>
+    <string name="desc_credits">Credits</string>
+    <string name="desc_montreal_ouvert">Montréal ouvert</string>
 
 </resources>

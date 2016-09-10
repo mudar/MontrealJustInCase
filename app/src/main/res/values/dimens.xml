@@ -40,6 +40,11 @@
 
     <dimen name="search_suggestion_text_size">15sp</dimen>
 
+    <dimen name="about_title_text_size">18sp</dimen>
+    <dimen name="about_body_text_size">16sp</dimen>
+    <dimen name="about_divider_margin">12dp</dimen>
+    <dimen name="about_icon_fix_margin">4dp</dimen>
+
     <dimen name="circle_progressbar_size">48dp</dimen>
     <dimen name="circle_progressbar_inner_radius">12dp</dimen>
 

@@ -23,5 +23,23 @@
 
 <resources>
 
+    <style name="AboutPrimaryText">
+        <item name="android:layout_marginLeft">@dimen/padding_large</item>
+        <item name="android:textSize">@dimen/about_body_text_size</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="AboutRow">
+        <item name="android:gravity">top</item>
+        <item name="android:paddingLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingRight">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingBottom">@dimen/padding_small</item>
+        <item name="android:paddingTop">@dimen/padding_small</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+    </style>
+
+    <style name="AboutIcon">
+        <item name="android:layout_marginTop">@dimen/about_icon_fix_margin</item>
+    </style>
 
 </resources>

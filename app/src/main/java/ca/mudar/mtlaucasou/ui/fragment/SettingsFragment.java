@@ -23,6 +23,7 @@
 
 package ca.mudar.mtlaucasou.ui.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -62,6 +63,24 @@ public class SettingsFragment extends PreferenceFragment implements
             mListener = (OnConfigChangeListener) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString() + " must implement OnConfigChangeListener");
+        }
+    }
+
+    /**
+     * preference-v7 support still has many issues, so this extends android.app.Fragment
+     * Pre-API 24 will call onAttach(Activity) instead of onAttach(Context)
+     *
+     * @param activity The Activity
+     */
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        try {
+            mListener = (OnConfigChangeListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement OnConfigChangeListener");
         }
     }
 

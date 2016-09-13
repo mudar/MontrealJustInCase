@@ -41,7 +41,8 @@
         android:layout_alignParentBottom="true"
         android:layout_marginTop="@dimen/eula_top_margin"
         android:background="@drawable/bg_eula_footer"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingTop="@dimen/eula_top_padding">
 
         <Button
             android:id="@+id/btn_accept_eula"

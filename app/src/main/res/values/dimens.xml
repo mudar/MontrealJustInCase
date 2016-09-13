@@ -51,6 +51,7 @@
 
     <!--Eula-->
     <dimen name="eula_top_margin">-6dp</dimen>
+    <dimen name="eula_top_padding">6dp</dimen>
 
     <!--Map progressbar-->
     <dimen name="circle_progressbar_size">48dp</dimen>

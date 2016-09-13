@@ -77,6 +77,17 @@ public abstract class BaseActivity extends AppCompatActivity implements
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (Const.RequestCodes.EULA_ACCEPTED == requestCode) {
+            if (resultCode != RESULT_OK) {
+                finish();
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
 
@@ -111,7 +122,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
             showWebsite(R.string.url_playstore);
             return true;
         } else if (id == R.id.action_eula) {
-            startActivity(EulaActivity.newIntent(this));
+            startActivity(EulaActivity.newIntent(this, true));
             return true;
         } else if (id == R.id.action_about_libs) {
             onAboutLibsItemSelected();

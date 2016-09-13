@@ -83,6 +83,15 @@ public class UserPrefs implements
                 .commit();
     }
 
+    public boolean hasAcceptedEula() {
+        return mPrefs.getBoolean(HAS_ACCEPTED_EULA, false);
+    }
+
+    public void setHasAcceptedEula() {
+        edit().putBoolean(HAS_ACCEPTED_EULA, true)
+                .commit();
+    }
+
     public String getLanguage() {
         return mPrefs.getString(LANGUAGE, Locale.getDefault().getLanguage());
     }

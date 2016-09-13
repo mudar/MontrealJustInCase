@@ -63,6 +63,7 @@ import ca.mudar.mtlaucasou.ui.adapter.PlacemarkInfoWindowAdapter;
 import ca.mudar.mtlaucasou.ui.listener.LocationUpdatesManager;
 import ca.mudar.mtlaucasou.ui.listener.SearchResultsManager;
 import ca.mudar.mtlaucasou.ui.view.PlacemarksSearchView;
+import ca.mudar.mtlaucasou.util.EulaUtils;
 import ca.mudar.mtlaucasou.util.MapUtils;
 import ca.mudar.mtlaucasou.util.NavigUtils;
 import ca.mudar.mtlaucasou.util.PermissionUtils;
@@ -94,10 +95,15 @@ public class MainActivity extends BaseActivity implements
     private Realm mRealm;
     private Handler mHandler = new Handler(); // Waits for the BottomBar anim
     private LocationUpdatesManager mLocationManger;
+    private boolean mHasStartedEulaActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (!mHasStartedEulaActivity) {
+            mHasStartedEulaActivity = EulaUtils.showEulaIfNecessary(this);
+        }
 
         setTitle(R.string.title_activity_main);
         setContentView(R.layout.activity_main);
@@ -143,7 +149,7 @@ public class MainActivity extends BaseActivity implements
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (Const.RequestCodes.LOCATION_SETTINGS_CHANGE_REQUEST_CODE == requestCode) {
+        if (Const.RequestCodes.LOCATION_SETTINGS_CHANGE == requestCode) {
             onLocationSettingsActivityResult(resultCode, data);
         } else {
             super.onActivityResult(requestCode, resultCode, data);
@@ -153,7 +159,7 @@ public class MainActivity extends BaseActivity implements
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
-        if (requestCode != Const.RequestCodes.LOCATION_PERMISSION_REQUEST_CODE) {
+        if (requestCode != Const.RequestCodes.LOCATION_PERMISSION) {
             return;
         }
 
@@ -385,7 +391,7 @@ public class MainActivity extends BaseActivity implements
     public void requestLocationSettingsChange(Status status) throws IntentSender.SendIntentException {
         status.startResolutionForResult(
                 MainActivity.this,
-                Const.RequestCodes.LOCATION_SETTINGS_CHANGE_REQUEST_CODE);
+                Const.RequestCodes.LOCATION_SETTINGS_CHANGE);
     }
 
     /**

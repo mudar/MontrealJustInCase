@@ -23,8 +23,32 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
-<WebView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/webview"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/color_background_light" />
+    android:layout_height="match_parent">
+
+    <WebView
+        android:id="@+id/webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/footer_buttons"
+        android:background="@color/color_background_light" />
+
+    <LinearLayout
+        android:id="@+id/footer_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/eula_top_margin"
+        android:background="@drawable/bg_eula_footer"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_accept_eula"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_accept_eula" />
+    </LinearLayout>
+
+</RelativeLayout>

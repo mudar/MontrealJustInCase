@@ -29,7 +29,7 @@
     <string name="title_activity_main">@string/app_name</string>
     <string name="title_activity_settings">Paramètres</string>
     <string name="title_activity_about">À propos</string>
-    <string name="title_activity_eula">Licence</string>
+    <string name="title_activity_eula">Licence d’utilisation</string>
     <string name="title_activity_about_libs">Remerciements</string>
 
     <!--Share-->
@@ -52,6 +52,7 @@
 
     <!--Buttons-->
     <string name="btn_zoom_out">Zoom arrière</string>
+    <string name="btn_accept_eula">Accepter et continuer</string>
 
     <!--Search-->
     <string name="search_hint">Code postal ou emplacement</string>

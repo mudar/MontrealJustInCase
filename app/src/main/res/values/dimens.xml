@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <!--
     Montreal Just in Case
     Copyright (C) 2011  Mudar Noufal <mn@mudar.ca>
@@ -23,7 +24,7 @@
 -->
 
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. -->
+    <!-- Default dimensions -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
@@ -35,19 +36,27 @@
     <dimen name="padding_normal">16dp</dimen>
     <dimen name="padding_large">32dp</dimen>
 
+    <!--BottomBar-->
     <dimen name="bottombar_height">60dp</dimen>
     <dimen name="bottombar_top_margin">-5dp</dimen>
 
+    <!--Search suggestions-->
     <dimen name="search_suggestion_text_size">15sp</dimen>
 
+    <!--About-->
     <dimen name="about_title_text_size">18sp</dimen>
     <dimen name="about_body_text_size">16sp</dimen>
     <dimen name="about_divider_margin">12dp</dimen>
     <dimen name="about_icon_fix_margin">4dp</dimen>
 
+    <!--Eula-->
+    <dimen name="eula_top_margin">-6dp</dimen>
+
+    <!--Map progressbar-->
     <dimen name="circle_progressbar_size">48dp</dimen>
     <dimen name="circle_progressbar_inner_radius">12dp</dimen>
 
+    <!--Map-->
     <dimen name="map_new_bounds_padding">64dp</dimen>
 
 </resources>

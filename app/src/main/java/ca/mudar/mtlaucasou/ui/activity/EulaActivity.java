@@ -23,6 +23,7 @@
 
 package ca.mudar.mtlaucasou.ui.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -34,22 +35,51 @@ import android.webkit.WebViewClient;
 
 import ca.mudar.mtlaucasou.Const;
 import ca.mudar.mtlaucasou.R;
+import ca.mudar.mtlaucasou.data.UserPrefs;
 
-public class EulaActivity extends BaseActivity {
+public class EulaActivity extends BaseActivity implements View.OnClickListener {
     private static final String ASSETS_URI = "file:///android_asset/";
 
-    public static Intent newIntent(Context context) {
-        return new Intent(context, EulaActivity.class);
+    public static Intent newIntent(Context context, boolean hasAcceptedEula) {
+        final Intent intent = new Intent(context, EulaActivity.class);
+
+        final Bundle extras = new Bundle();
+        extras.putBoolean(Const.BundleKeys.HAS_ACCEPTED_EULA, hasAcceptedEula);
+        intent.putExtras(extras);
+
+        return intent;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        final boolean hasAcceptedEula = getIntent().getBooleanExtra(Const.BundleKeys.HAS_ACCEPTED_EULA, false);
+
         setTitle(R.string.title_activity_eula);
         setContentView(R.layout.activity_eula);
 
+        toggleEulaButton(hasAcceptedEula);
+
         loadWebView((WebView) findViewById(R.id.webview));
+
+        findViewById(R.id.btn_accept_eula).setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.btn_accept_eula) {
+            UserPrefs.getInstance(this).setHasAcceptedEula();
+            setResult(Activity.RESULT_OK);
+            finish();
+        }
+    }
+
+    private void toggleEulaButton(boolean hasAcceptedEula) {
+        findViewById(R.id.footer_buttons).setVisibility(hasAcceptedEula ? View.GONE : View.VISIBLE);
+
+        //noinspection ConstantConditions
+        getSupportActionBar().setDisplayHomeAsUpEnabled(hasAcceptedEula);
     }
 
     private void loadWebView(WebView v) {

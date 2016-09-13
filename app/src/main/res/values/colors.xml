@@ -24,7 +24,7 @@
 <resources>
     <color name="color_primary">@color/yellow_700</color>
     <color name="color_primary_dark">@color/yellow_800</color>
-    <color name="color_accent">@color/cyan_500</color>
+    <color name="color_accent">@color/blue_grey_400</color>
 
     <!--Material Colors-->
     <color name="white">#ffffff</color>
@@ -33,15 +33,17 @@
     <!--<color name="orange_700">#F57C00</color>-->
     <!--<color name="orange_800">#EF6C00</color>-->
     <!--<color name="orange_900">#E65100</color>-->
-    <color name="cyan_500">#00BCD4</color>
+    <!--<color name="cyan_500">#00BCD4</color>-->
     <!--<color name="red_500">#F44336</color>-->
     <color name="red_700">#D32F2F</color>
+    <color name="blue_400">#78909C</color>
     <color name="blue_500">#2196F3</color>
     <color name="blue_grey_400">#78909C</color>
     <!--<color name="blue_grey_500">#607D8B</color>-->
     <color name="light_green_500">#8BC34A</color>
     <color name="grey_100">#F5F5F5</color>
     <color name="grey_200">#EEEEEE</color>
+    <!--<color name="grey_300">#E0E0E0</color>-->
     <color name="grey_600">#757575</color>
     <color name="grey_800">#424242</color>
     <color name="grey_900">#212121</color>

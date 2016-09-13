@@ -66,7 +66,7 @@ public class MapUtils {
         if (ContextCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             // Permission to access the location is missing.
-            PermissionUtils.requestPermission(activity, Const.RequestCodes.LOCATION_PERMISSION_REQUEST_CODE,
+            PermissionUtils.requestPermission(activity, Const.RequestCodes.LOCATION_PERMISSION,
                     Manifest.permission.ACCESS_FINE_LOCATION, true);
         } else if (map != null) {
             // Access to the location has been granted to the app.

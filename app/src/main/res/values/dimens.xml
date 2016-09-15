@@ -60,4 +60,7 @@
     <!--Map-->
     <dimen name="map_new_bounds_padding">64dp</dimen>
 
+    <!--FloatingActionButton-->
+    <dimen name="fab_margin">0dp</dimen>
+
 </resources>

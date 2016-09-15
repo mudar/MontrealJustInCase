@@ -30,18 +30,21 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 import java.util.Locale;
 
 import ca.mudar.mtlaucasou.Const;
 import ca.mudar.mtlaucasou.R;
 
+import static ca.mudar.mtlaucasou.Const.PrefsNames.LANGUAGE;
+import static ca.mudar.mtlaucasou.Const.PrefsNames.UNITS_SYSTEM;
+import static ca.mudar.mtlaucasou.Const.PrefsValues.LANG_EN;
+import static ca.mudar.mtlaucasou.Const.PrefsValues.LANG_FR;
+import static ca.mudar.mtlaucasou.Const.PrefsValues.UNITS_IMP;
+import static ca.mudar.mtlaucasou.Const.PrefsValues.UNITS_ISO;
 import static ca.mudar.mtlaucasou.util.LogUtils.makeLogTag;
 
 public class SettingsFragment extends PreferenceFragment implements
-        Const.PrefsNames,
-        Const.PrefsValues,
         SharedPreferences.OnSharedPreferenceChangeListener {
 
     private static final String TAG = makeLogTag("SettingsFragment");
@@ -124,7 +127,6 @@ public class SettingsFragment extends PreferenceFragment implements
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
-        Log.v(TAG, "onSharedPreferenceChanged");
         /**
          * onChanged, new preferences values are sent to the AppHelper.
          */

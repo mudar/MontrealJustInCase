@@ -23,9 +23,7 @@
 
 package ca.mudar.mtlaucasou.util;
 
-import android.Manifest;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.location.Location;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
@@ -63,13 +61,7 @@ public class MapUtils {
     private static final String TAG = makeLogTag("MapUtils");
 
     public static void enableMyLocation(AppCompatActivity activity, GoogleMap map) {
-        if (ContextCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            // Permission to access the location is missing.
-            PermissionUtils.requestPermission(activity, Const.RequestCodes.LOCATION_PERMISSION,
-                    Manifest.permission.ACCESS_FINE_LOCATION, true);
-        } else if (map != null) {
-            // Access to the location has been granted to the app.
+        if (map != null && PermissionUtils.checkLocationPermission(activity)) {
             map.setMyLocationEnabled(true);
         }
     }
@@ -118,7 +110,7 @@ public class MapUtils {
                 color = R.color.color_emergency_hostels;
                 break;
             default:
-                color = R.color.color_accent;
+                color = R.color.color_primary;
         }
         return ContextCompat.getColor(context, color);
     }
@@ -223,7 +215,7 @@ public class MapUtils {
             // Check if the map shows any markers, Otherwise, show a zoom-out message to show the nearest
             final LatLngBounds newVisibleRegion = visibleRegion.including(nearestMarker.getPosition());
 
-            AppSnackbar.make(snackbarView, R.string.snackbar_empty_map_visible_region, Snackbar.LENGTH_LONG)
+            Snackbar.make(snackbarView, R.string.snackbar_empty_map_visible_region, Snackbar.LENGTH_LONG)
                     .setAction(R.string.btn_zoom_out, new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -273,7 +265,7 @@ public class MapUtils {
     }
 
     /**
-     * Move the camera to a Location obtained from the GeoLocater for a user search query.
+     * Move the camera to a Location obtained from the GeoLocator for a user search query.
      * Also adds a default Marker (pin) at the requested location.
      *
      * @param map                The GoogleMap

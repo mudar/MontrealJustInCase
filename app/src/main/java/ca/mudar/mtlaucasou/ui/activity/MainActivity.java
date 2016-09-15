@@ -23,7 +23,6 @@
 
 package ca.mudar.mtlaucasou.ui.activity;
 
-import android.Manifest;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.location.Location;
@@ -31,6 +30,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.MenuItemCompat;
 import android.util.Log;
 import android.view.Menu;
@@ -89,6 +89,7 @@ public class MainActivity extends BaseActivity implements
     private View vMarkerInfoWindow;
     private View mWrapperView;
     private CircleProgressBar vProgressBar;
+    private FloatingActionButton mMyLocationFAB;
     private BottomBar mBottomBar;
     @MapType
     private String mMapType;
@@ -114,15 +115,16 @@ public class MainActivity extends BaseActivity implements
         mRealm = Realm.getDefaultInstance();
 
         setupMap();
+        setupFAB();
         setupBottomBar();
 
         setMapType(Const.MapTypes.FIRE_HALLS, 0);
     }
 
     protected void onStart() {
-        mLocationManger.onStart();
-
         super.onStart();
+
+        mLocationManger.onStart();
     }
 
     @Override
@@ -135,9 +137,9 @@ public class MainActivity extends BaseActivity implements
 
     @Override
     protected void onStop() {
-        mLocationManger.onStop();
-
         super.onStop();
+
+        mLocationManger.onStop();
     }
 
     @Override
@@ -149,10 +151,10 @@ public class MainActivity extends BaseActivity implements
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
         if (Const.RequestCodes.LOCATION_SETTINGS_CHANGE == requestCode) {
             onLocationSettingsActivityResult(resultCode, data);
-        } else {
-            super.onActivityResult(requestCode, resultCode, data);
         }
     }
 
@@ -163,12 +165,13 @@ public class MainActivity extends BaseActivity implements
             return;
         }
 
-        if (PermissionUtils.isPermissionGranted(permissions, grantResults,
-                Manifest.permission.ACCESS_FINE_LOCATION)) {
-            // Enable the my location layer if the permission has been granted.
+        if (PermissionUtils.checkLocationPermission(this)) {
             MapUtils.enableMyLocation(this, vMap);
+            mLocationManger.onLocationPermissionGranted();
         } else {
-            // TODO: Display the missing permission error dialog when the fragments resume.
+            // TODO handle this ?
+            Log.e(TAG, "CALLED? probably on denied location. show snackbar about prefs?");
+//            MapUtils.moveCameraToLocation(vMap, mLocationManger.getUserLocation(), true, null);
         }
     }
 
@@ -176,7 +179,9 @@ public class MainActivity extends BaseActivity implements
         // Get the toolbar menu SearchView
         final MenuItem searchMenuItem = menu.findItem(R.id.action_search);
 
-        final PlacemarksSearchView searchView = (PlacemarksSearchView) MenuItemCompat.getActionView(searchMenuItem);
+        final PlacemarksSearchView searchView =
+                (PlacemarksSearchView) MenuItemCompat.getActionView(searchMenuItem);
+
         searchView.setSearchMenuItem(searchMenuItem);
         searchView.setListener(new SearchResultsManager(MainActivity.this, this));
     }
@@ -204,6 +209,20 @@ public class MainActivity extends BaseActivity implements
         });
     }
 
+    private void setupFAB() {
+        mMyLocationFAB = (FloatingActionButton) findViewById(R.id.fab);
+        mMyLocationFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (PermissionUtils.checkLocationPermission(MainActivity.this)) {
+                    MapUtils.moveCameraToLocation(vMap, mLocationManger.getUserLocation(), true, null);
+                } else {
+                    PermissionUtils.requestLocationPermission(MainActivity.this, mWrapperView);
+                }
+            }
+        });
+    }
+
     /**
      * Obtain the SupportMapFragment and get notified when the map is ready to be used.
      */
@@ -225,6 +244,7 @@ public class MainActivity extends BaseActivity implements
     @Override
     public void onMapReady(GoogleMap googleMap) {
         vMap = googleMap;
+        vMap.getUiSettings().setMyLocationButtonEnabled(false);
 
         vMap.setInfoWindowAdapter(new PlacemarkInfoWindowAdapter(vMarkerInfoWindow));
 
@@ -270,7 +290,8 @@ public class MainActivity extends BaseActivity implements
         }
 
         // First, query the Realm db for the current mapType
-        final RealmResults<RealmPlacemark> realmPlacemarks = RealmQueries.queryPlacemarksByMapType(mRealm, mMapType)
+        final RealmResults<RealmPlacemark> realmPlacemarks = RealmQueries
+                .queryPlacemarksByMapType(mRealm, mMapType)
                 .findAll();
 
         if (realmPlacemarks.size() > 0) {
@@ -326,7 +347,8 @@ public class MainActivity extends BaseActivity implements
      * @param response
      */
     @Override
-    public void onResponse(Call<PointsFeatureCollection> call, Response<PointsFeatureCollection> response) {
+    public void onResponse(Call<PointsFeatureCollection> call,
+                           Response<PointsFeatureCollection> response) {
         RealmQueries.cacheMapData(mRealm, response.body().getFeatures(), mMapType);
         loadMapData(mMapType);
     }
@@ -388,7 +410,8 @@ public class MainActivity extends BaseActivity implements
      * @throws IntentSender.SendIntentException
      */
     @Override
-    public void requestLocationSettingsChange(Status status) throws IntentSender.SendIntentException {
+    public void requestLocationSettingsChange(Status status)
+            throws IntentSender.SendIntentException {
         status.startResolutionForResult(
                 MainActivity.this,
                 Const.RequestCodes.LOCATION_SETTINGS_CHANGE);

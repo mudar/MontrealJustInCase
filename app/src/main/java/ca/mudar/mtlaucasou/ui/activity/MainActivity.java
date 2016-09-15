@@ -283,8 +283,6 @@ public class MainActivity extends BaseActivity implements
      * @param type
      */
     private void loadMapData(@MapType String type) {
-        Log.v(TAG, "loadMapData");
-
         if (vMap == null) {
             return;
         }

@@ -32,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/footer_buttons"
-        android:background="@color/color_background_light" />
+        android:background="@color/color_background_dark" />
 
     <LinearLayout
         android:id="@+id/footer_buttons"

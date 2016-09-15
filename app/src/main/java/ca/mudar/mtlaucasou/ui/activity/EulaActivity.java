@@ -84,7 +84,7 @@ public class EulaActivity extends BaseActivity implements View.OnClickListener {
 
     private void loadWebView(WebView v) {
         // Set basic style
-        v.setBackgroundColor(ContextCompat.getColor(this, R.color.color_background));
+        v.setBackgroundColor(ContextCompat.getColor(this, R.color.color_background_dark));
         v.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
 
         // Open links in external browser

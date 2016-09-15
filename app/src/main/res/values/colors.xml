@@ -24,7 +24,7 @@
 <resources>
     <color name="color_primary">@color/yellow_700</color>
     <color name="color_primary_dark">@color/yellow_800</color>
-    <color name="color_accent">@color/blue_grey_400</color>
+    <color name="color_accent">@color/blue_grey_300</color>
 
     <!--Material Colors-->
     <color name="white">#ffffff</color>
@@ -38,6 +38,7 @@
     <color name="red_700">#D32F2F</color>
     <color name="blue_400">#78909C</color>
     <color name="blue_500">#2196F3</color>
+    <color name="blue_grey_300">#90A4AE</color>
     <color name="blue_grey_400">#78909C</color>
     <!--<color name="blue_grey_500">#607D8B</color>-->
     <color name="light_green_500">#8BC34A</color>
@@ -78,4 +79,8 @@
     <!--Snackbar-->
     <color name="snackbar_action_text_color">@color/yellow_800</color>
 
+    <!--Override libraries values-->
+    <color name="colorPrimary">@color/color_primary</color>
+    <color name="colorPrimaryDark">@color/color_primary_dark</color>
+    <color name="colorAccent">@color/color_accent</color>
 </resources>

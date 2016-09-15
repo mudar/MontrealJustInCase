@@ -49,6 +49,7 @@ import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.maps.GoogleMap;
 
 import ca.mudar.mtlaucasou.util.MapUtils;
+import ca.mudar.mtlaucasou.util.PermissionUtils;
 
 import static ca.mudar.mtlaucasou.util.LogUtils.makeLogTag;
 
@@ -61,19 +62,20 @@ public class LocationUpdatesManager implements
     private static final String TAG = makeLogTag("LocationUpdatesManager");
     private static final long LOCATION_UPDATES_INTERVAL = DateUtils.SECOND_IN_MILLIS * 10;
     private static final long LOCATION_UPDATES_FASTEST_INTERVAL = DateUtils.SECOND_IN_MILLIS * 5;
-    private static final int LOCATION_UPDATES_NUM_UPDATES = 3; // One could be enough
 
-    private GoogleMap mMap;
+    private final Context mContext;
     private final LocationUpdatesCallbacks mListener;
+    private GoogleMap mMap;
     private final GoogleApiClient mGoogleApiClient;
     private Location mUserLocation;
     private LocationRequest mLocationRequest;
     private boolean mHasCameraMoved;
 
     public LocationUpdatesManager(Context context, LocationUpdatesCallbacks listener) {
-        this.mListener = listener;
+        mContext = context;
+        mListener = listener;
 
-        this.mGoogleApiClient = new GoogleApiClient.Builder(context)
+        mGoogleApiClient = new GoogleApiClient.Builder(context)
                 .addApi(LocationServices.API)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
@@ -81,7 +83,7 @@ public class LocationUpdatesManager implements
     }
 
     public void setGoogleMap(GoogleMap map) {
-        this.mMap = map;
+        mMap = map;
 
         mMap.setOnCameraMoveStartedListener(this);
         moveMapToMyLocation();
@@ -102,16 +104,26 @@ public class LocationUpdatesManager implements
     }
 
     public void onLocationSettingsResult(int resultCode, Intent data) {
-        Log.v(TAG, "onLocationSettingsResult");
-        if (resultCode == Activity.RESULT_OK) {
+        if (resultCode == Activity.RESULT_OK && PermissionUtils.checkLocationPermission(mContext)) {
             // Start locationUpdates requests
-            //noinspection MissingPermission
             LocationServices.FusedLocationApi.requestLocationUpdates(
                     mGoogleApiClient,
                     mLocationRequest,
                     this);
         }
     }
+
+    public void onLocationPermissionGranted() {
+        if (mGoogleApiClient.isConnected()) {
+            moveMapToLastLocation();
+        }
+    }
+
+    @Nullable
+    public Location getUserLocation() {
+        return mUserLocation;
+    }
+
 
     /**
      * Implements GoogleApiClient.ConnectionCallbacks
@@ -120,7 +132,6 @@ public class LocationUpdatesManager implements
      */
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-        Log.v(TAG, "onConnected");
         moveMapToLastLocation();
     }
 
@@ -131,7 +142,7 @@ public class LocationUpdatesManager implements
      */
     @Override
     public void onConnectionSuspended(int cause) {
-        Log.v(TAG, "onConnectionSuspended");
+        Log.e(TAG, "onConnectionSuspended");
     }
 
     /**
@@ -141,9 +152,7 @@ public class LocationUpdatesManager implements
      */
     @Override
     public void onLocationChanged(Location location) {
-        Log.v(TAG, "onLocationChanged");
-
-        this.mUserLocation = location;
+        mUserLocation = location;
         MapUtils.moveCameraToLocation(mMap, location, true, null);
     }
 
@@ -155,8 +164,7 @@ public class LocationUpdatesManager implements
      */
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Log.v(TAG, "onConnectionFailed");
-
+        Log.e(TAG, "onConnectionFailed");
     }
 
     /**
@@ -166,20 +174,18 @@ public class LocationUpdatesManager implements
      */
     @Override
     public void onCameraMoveStarted(int reason) {
-        Log.v(TAG, "onCameraMoveStarted "
-                + String.format("reason = %s", reason));
-
         if (reason == REASON_GESTURE) {
             mHasCameraMoved = true;
         }
     }
 
     private void moveMapToLastLocation() {
-        Log.v(TAG, "moveMapToLastLocation");
+        if (!PermissionUtils.checkLocationPermission(mContext)) {
+            return;
+        }
 
-        //noinspection MissingPermission
-        mUserLocation = LocationServices.FusedLocationApi.getLastLocation(
-                mGoogleApiClient);
+        mUserLocation = LocationServices.FusedLocationApi
+                .getLastLocation(mGoogleApiClient);
 
         if (mUserLocation == null) {
             checkLocationSettings();
@@ -189,13 +195,10 @@ public class LocationUpdatesManager implements
     }
 
     private void checkLocationSettings() {
-        Log.v(TAG, "checkLocationSettings");
-
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(LOCATION_UPDATES_INTERVAL);
         mLocationRequest.setFastestInterval(LOCATION_UPDATES_FASTEST_INTERVAL);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        mLocationRequest.setNumUpdates(LOCATION_UPDATES_NUM_UPDATES);
 
         final PendingResult<LocationSettingsResult> result = LocationServices.SettingsApi
                 .checkLocationSettings(
@@ -214,19 +217,16 @@ public class LocationUpdatesManager implements
     }
 
     private void onLocationSettingsResult(@NonNull LocationSettingsResult result) {
-        Log.v(TAG, "onLocationSettingsResult");
+        // TODO Verify the use of this?
+        final LocationSettingsStates locationSettingsStates = result.getLocationSettingsStates();
 
         final Status status = result.getStatus();
-        final LocationSettingsStates locationSettingsStates = result.getLocationSettingsStates();
-        Log.v(TAG, "locationSettingsStates : " + locationSettingsStates.toString());
         switch (status.getStatusCode()) {
             case LocationSettingsStatusCodes.SUCCESS:
                 // Location settings are satisfied
                 onLocationSettingsResult(Activity.RESULT_OK, null);
                 break;
             case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
-                Log.v(TAG, "RESOLUTION_REQUIRED");
-
                 // Location settings are not satisfied, but this can be fixed
                 // by showing the user a dialog.
                 try {
@@ -235,12 +235,10 @@ public class LocationUpdatesManager implements
 
                     mListener.requestLocationSettingsChange(status);
                 } catch (IntentSender.SendIntentException e) {
-                    // Ignore the error.
+                    e.printStackTrace();
                 }
                 break;
             case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
-                Log.v(TAG, "SETTINGS_CHANGE_UNAVAILABLE");
-
                 // Location settings are not satisfied. However, we have no way
                 // to fix the settings so we won't show the dialog.
                 break;

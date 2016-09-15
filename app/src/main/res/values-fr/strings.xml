@@ -51,6 +51,7 @@
     <string name="action_about_libs">Librairies libres</string>
 
     <!--Buttons-->
+    <string name="btn_ok">Ok</string>
     <string name="btn_zoom_out">Zoom arrière</string>
     <string name="btn_accept_eula">Accepter et continuer</string>
 
@@ -89,11 +90,7 @@
     <string name="snackbar_api_error_message">Server error: %1$s [%2$d]</string>
     <string name="snackbar_host_unknown_error_message">Server connection error [%1$d]</string>
     <string name="snackbar_empty_map_visible_region">Cette partie de la carte ne contient pas d’emplacements.</string>
-
-    <!--Permissions-->
-    <string name="permission_rationale_location">Access to the location service is required to demonstrate the \'my location\' feature, which shows your current location on the map.</string>
-    <string name="location_permission_denied">This sample requires location permission to enable the \'my location\' layer. Please try again and grant access to use the location.\nIf the permission has been permanently denied, it can be enabled from the System Settings &gt; Apps &gt; \'Google Maps API Demos\'.</string>
-    <string name="permission_required_toast">Location permission is required for this demo.</string>
+    <string name="snackbar_location_permission_needed">L’emplacement est nécessaire pour afficher votre position sur la carte.</string>
 
     <!--Accessibility-->
     <string name="desc_montreal">Ville de Montréal</string>

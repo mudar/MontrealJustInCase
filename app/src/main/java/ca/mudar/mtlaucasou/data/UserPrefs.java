@@ -109,4 +109,13 @@ public class UserPrefs implements
         edit().putString(UNITS_SYSTEM, units)
                 .apply();
     }
+
+    public boolean isPermissionDeniedForEver() {
+        return mPrefs.getBoolean(PERMISSION_DENIED_FOR_EVER, false);
+    }
+
+    public void setPermissionDeniedForEver(boolean denied) {
+        edit().putBoolean(PERMISSION_DENIED_FOR_EVER, denied)
+                .apply();
+    }
 }

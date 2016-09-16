@@ -52,6 +52,8 @@
 
     <!--Buttons-->
     <string name="btn_ok">Ok</string>
+    <string name="btn_allow">Autoriser</string>
+    <string name="btn_device_settings">Paramètres de l’appareil</string>
     <string name="btn_zoom_out">Zoom arrière</string>
     <string name="btn_accept_eula">Accepter et continuer</string>
 
@@ -91,6 +93,7 @@
     <string name="snackbar_host_unknown_error_message">Server connection error [%1$d]</string>
     <string name="snackbar_empty_map_visible_region">Cette partie de la carte ne contient pas d’emplacements.</string>
     <string name="snackbar_location_permission_needed">L’emplacement est nécessaire pour afficher votre position sur la carte.</string>
+    <string name="snackbar_location_permission_denied">Si vous changez d’avis, vous pouvez modifiers les permissions dans les paramètres.</string>
 
     <!--Accessibility-->
     <string name="desc_montreal">Ville de Montréal</string>

@@ -24,7 +24,10 @@
 package ca.mudar.mtlaucasou.util;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -34,14 +37,17 @@ import android.view.View;
 
 import ca.mudar.mtlaucasou.Const;
 import ca.mudar.mtlaucasou.R;
+import ca.mudar.mtlaucasou.data.UserPrefs;
 
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+import static ca.mudar.mtlaucasou.util.LogUtils.makeLogTag;
 
 /**
  * Utility class for access to runtime permissions.
  */
 public abstract class PermissionUtils {
+    private static final String TAG = makeLogTag("PermissionUtils");
 
     public static boolean checkLocationPermission(Context context) {
         return (ContextCompat.checkSelfPermission(context, ACCESS_FINE_LOCATION)
@@ -50,27 +56,29 @@ public abstract class PermissionUtils {
                         == PackageManager.PERMISSION_GRANTED);
     }
 
-    public static void requestLocationPermission(AppCompatActivity activity,
-                                                 @Nullable View snackbarView) {
-
-        requestPermissionOrShowRationale(activity,
-                ACCESS_FINE_LOCATION,
-                Const.RequestCodes.LOCATION_PERMISSION,
-                snackbarView);
+    /**
+     * Requests the fine location permission.
+     */
+    public static void requestLocationPermission(AppCompatActivity activity) {
+        ActivityCompat.requestPermissions(activity,
+                new String[]{ACCESS_FINE_LOCATION},
+                Const.RequestCodes.LOCATION_PERMISSION);
     }
 
     /**
-     * Requests the fine location permission. If a rationale with an additional explanation should
-     * be shown to the user, displays a Snackbar that triggers the request.
+     * After onRequestPermissionsResult(), if the permission is still not granted, a call to
+     * this method tries to explain to the user why
+     *
+     * @param activity
+     * @param snackbarView
+     * @return
      */
-    private static void requestPermissionOrShowRationale(final AppCompatActivity activity,
-                                                         final String permission,
-                                                         final int requestId,
-                                                         @Nullable View snackbarView) {
+    public static void showLocationRationaleOrSurrender(final AppCompatActivity activity,
+                                                        @Nullable View snackbarView) {
 
-        if (ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)) {
-            final View view = (snackbarView != null) ? snackbarView :
-                    activity.findViewById(android.R.id.content);
+        final View view = (snackbarView != null) ? snackbarView :
+                activity.findViewById(android.R.id.content);
+        if (ActivityCompat.shouldShowRequestPermissionRationale(activity, ACCESS_FINE_LOCATION)) {
             // Display a dialog with rationale.
             Snackbar
                     .make(view,
@@ -80,19 +88,48 @@ public abstract class PermissionUtils {
                             new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    requestPermission(activity, permission, requestId);
+                                    requestLocationPermission(activity);
                                 }
                             })
                     .show();
         } else {
-            // Location permission has not been granted yet, request it.
-            requestPermission(activity, permission, requestId);
+            UserPrefs.getInstance(activity).setPermissionDeniedForEver(true);
+            Snackbar
+                    .make(view,
+                            R.string.snackbar_location_permission_denied,
+                            Snackbar.LENGTH_LONG)
+                    .setAction(R.string.btn_device_settings,
+                            new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    final Intent intent = new Intent();
+                                    intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                    Uri uri = Uri.fromParts("package", activity.getPackageName(), null);
+                                    intent.setData(uri);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+                                    activity.startActivity(intent);
+                                }
+                            })
+                    .show();
         }
     }
 
-    private static void requestPermission(AppCompatActivity activity, String permission,
-                                          int requestId) {
+    public static boolean checkPermissionWasDeniedForEver(Context context) {
+        final UserPrefs prefs = UserPrefs.getInstance(context);
 
-        ActivityCompat.requestPermissions(activity, new String[]{permission}, requestId);
+        if (prefs.isPermissionDeniedForEver()) {
+            // User has previously deniedForEver
+            if (checkLocationPermission(context)) {
+                // User has changed his mind, granting permission from app settings.
+                prefs.setPermissionDeniedForEver(false);
+            } else {
+                // User has previously deniedForEver
+                return true;
+            }
+        }
+
+        return false;
     }
 }

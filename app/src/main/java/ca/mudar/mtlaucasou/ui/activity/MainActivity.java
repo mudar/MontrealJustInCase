@@ -55,6 +55,7 @@ import ca.mudar.mtlaucasou.R;
 import ca.mudar.mtlaucasou.api.ApiClient;
 import ca.mudar.mtlaucasou.api.GeoApiService;
 import ca.mudar.mtlaucasou.data.RealmQueries;
+import ca.mudar.mtlaucasou.data.UserPrefs;
 import ca.mudar.mtlaucasou.model.MapType;
 import ca.mudar.mtlaucasou.model.Placemark;
 import ca.mudar.mtlaucasou.model.RealmPlacemark;
@@ -87,7 +88,7 @@ public class MainActivity extends BaseActivity implements
 
     private GoogleMap vMap;
     private View vMarkerInfoWindow;
-    private View mWrapperView;
+    private View mSnackbarParent;
     private CircleProgressBar vProgressBar;
     private FloatingActionButton mMyLocationFAB;
     private BottomBar mBottomBar;
@@ -110,7 +111,7 @@ public class MainActivity extends BaseActivity implements
         setContentView(R.layout.activity_main);
 
         vProgressBar = (CircleProgressBar) findViewById(R.id.progressBar);
-        mWrapperView = findViewById(R.id.map_wrapper);
+        mSnackbarParent = findViewById(R.id.map_wrapper);
 
         mRealm = Realm.getDefaultInstance();
 
@@ -125,6 +126,8 @@ public class MainActivity extends BaseActivity implements
         super.onStart();
 
         mLocationManger.onStart();
+
+        toggleMyLocationButton();
     }
 
     @Override
@@ -161,17 +164,21 @@ public class MainActivity extends BaseActivity implements
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
-        if (requestCode != Const.RequestCodes.LOCATION_PERMISSION) {
-            return;
-        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        if (PermissionUtils.checkLocationPermission(this)) {
-            MapUtils.enableMyLocation(this, vMap);
-            mLocationManger.onLocationPermissionGranted();
-        } else {
-            // TODO handle this ?
-            Log.e(TAG, "CALLED? probably on denied location. show snackbar about prefs?");
-//            MapUtils.moveCameraToLocation(vMap, mLocationManger.getUserLocation(), true, null);
+        if (requestCode == Const.RequestCodes.LOCATION_PERMISSION) {
+            if (PermissionUtils.checkLocationPermission(this)) {
+                UserPrefs.getInstance(this).setPermissionDeniedForEver(true);
+
+                mMyLocationFAB.show();
+                MapUtils.enableMyLocation(this, vMap);
+                mLocationManger.onLocationPermissionGranted();
+            } else {
+                PermissionUtils.showLocationRationaleOrSurrender(this, mSnackbarParent);
+
+                mMyLocationFAB.hide();
+                mMyLocationFAB.setVisibility(View.GONE);
+            }
         }
     }
 
@@ -217,7 +224,7 @@ public class MainActivity extends BaseActivity implements
                 if (PermissionUtils.checkLocationPermission(MainActivity.this)) {
                     MapUtils.moveCameraToLocation(vMap, mLocationManger.getUserLocation(), true, null);
                 } else {
-                    PermissionUtils.requestLocationPermission(MainActivity.this, mWrapperView);
+                    PermissionUtils.requestLocationPermission(MainActivity.this);
                 }
             }
         });
@@ -305,7 +312,7 @@ public class MainActivity extends BaseActivity implements
                 @Override
                 public void run() {
                     toggleProgressBar(false);
-                    MapUtils.findAndShowNearestMarker(vMap, markers, mWrapperView);
+                    MapUtils.findAndShowNearestMarker(vMap, markers, mSnackbarParent);
                 }
             }, PROGRESS_BAR_ANIM_DURATION);
         } else {
@@ -398,6 +405,18 @@ public class MainActivity extends BaseActivity implements
             vProgressBar.setVisibility(View.VISIBLE);
         } else {
             vProgressBar.setVisibility(View.GONE);
+        }
+    }
+
+    /**
+     * Verify if user has changed his mind about denying permission forever.
+     * This method uses setVisibility() instead of show/hide methods.
+     */
+    private void toggleMyLocationButton() {
+        if (PermissionUtils.checkPermissionWasDeniedForEver(this)) {
+            mMyLocationFAB.hide();
+        } else {
+            mMyLocationFAB.show();
         }
     }
 

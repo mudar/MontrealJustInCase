@@ -66,7 +66,10 @@ public abstract class BaseActivity extends AppCompatActivity implements
 
         LangUtils.updateUiLanguage(this);
 
-        UserPrefs.getPrefs(this).registerOnSharedPreferenceChangeListener(this);
+        if (this instanceof MainActivity) {
+            // Only MainActivity needs to register for updates about LANGUAGE prefs
+            UserPrefs.getSharedPrefs(this).registerOnSharedPreferenceChangeListener(this);
+        }
     }
 
     @Override
@@ -91,10 +94,13 @@ public abstract class BaseActivity extends AppCompatActivity implements
     protected void onDestroy() {
         super.onDestroy();
 
-        try {
-            UserPrefs.getPrefs(this).unregisterOnSharedPreferenceChangeListener(this);
-        } catch (Exception e) {
-            LogUtils.REMOTE_LOG(e);
+        if (this instanceof MainActivity) {
+            // Only MainActivity registered for updates about LANGUAGE prefs
+            try {
+                UserPrefs.getSharedPrefs(this).unregisterOnSharedPreferenceChangeListener(this);
+            } catch (Exception e) {
+                LogUtils.REMOTE_LOG(e);
+            }
         }
     }
 
@@ -158,6 +164,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
                         // Added manually to avoid issues with Proguard
                         , "AboutLibraries", "Crashlytics", "gson", "OkHttp"
                         , "Retrofit", "appcompat_v7", "design", "recyclerview_v7"
+                        , "Realm"
                 )
                 .withExcludedLibraries(
                         "AndroidIconics", "fastadapter", "okio", "support_v4"

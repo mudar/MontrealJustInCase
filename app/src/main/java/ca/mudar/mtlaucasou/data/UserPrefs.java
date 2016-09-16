@@ -49,7 +49,7 @@ public class UserPrefs implements
         return instance;
     }
 
-    public static SharedPreferences getPrefs(Context context) {
+    public static SharedPreferences getSharedPrefs(Context context) {
         return context.getSharedPreferences(Const.APP_PREFS_NAME, Context.MODE_PRIVATE);
     }
 
@@ -62,7 +62,7 @@ public class UserPrefs implements
     }
 
     private UserPrefs(Context context) {
-        mPrefs = getPrefs(context);
+        mPrefs = getSharedPrefs(context);
     }
 
     @SuppressLint("CommitPrefEdits")

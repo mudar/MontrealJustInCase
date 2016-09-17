@@ -100,12 +100,12 @@ public class SuggestionsCursorHelper {
      */
     public static Placemark cursorObjectToPlace(Cursor cursor) {
         final String name = cursor.getString(PlacemarksQuery.TITLE);
-        final LatLng latLng = new LatLng(
+        final LatLng position = new LatLng(
                 cursor.getDouble(PlacemarksQuery.LATITUDE),
                 cursor.getDouble(PlacemarksQuery.LONGITUDE));
         final @MapType String mapType = cursor.getString(PlacemarksQuery.MAP_TYPE);
 
-        return new SuggestionsPlacemark(name, latLng, mapType);
+        return new SuggestionsPlacemark(name, position, mapType);
     }
 
     /**

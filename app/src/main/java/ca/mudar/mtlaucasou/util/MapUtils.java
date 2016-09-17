@@ -146,13 +146,13 @@ public class MapUtils {
 
         final List<MarkerOptions> markerOptionsList = new ArrayList<>();
         for (Placemark placemark : placemarks) {
-            final LatLng latLng = placemark.getLatLng();
+            final LatLng position = placemark.getLatLng();
             final String title = placemark.getName();
             final String desc = MapUtils.getCleanDescription(placemark.getDescription(), title);
 
-            if (latLng != null && !TextUtils.isEmpty(title)) {
+            if (position != null && !TextUtils.isEmpty(title)) {
                 final MarkerOptions markerOptions = new MarkerOptions()
-                        .position(latLng)
+                        .position(position)
                         .icon(MapUtils.getMarkerIcon(placemark.getMapType()))
                         .title(title);
                 if (!TextUtils.isEmpty(desc)) {
@@ -250,12 +250,12 @@ public class MapUtils {
      * @param location User location. Null value defaults to Montreal coordinates
      */
     public static void moveCameraToInitialLocation(GoogleMap map, @Nullable Location location) {
-        final LatLng latLng = (location == null) ? Const.MONTREAL_GEO_LAT_LNG :
-                GeoUtils.getLocationLatLng(location);
+        final LatLng target = (location == null) ? Const.MONTREAL_GEO_LAT_LNG :
+                GeoUtils.locationToLatLng(location);
 
         map.moveCamera(CameraUpdateFactory.newCameraPosition(
                 new CameraPosition.Builder()
-                        .target(latLng)
+                        .target(target)
                         .bearing(Const.MONTREAL_NATURAL_NORTH_ROTATION)
                         .zoom(Const.ZOOM_DEFAULT)
                         .build()
@@ -277,17 +277,17 @@ public class MapUtils {
         if (map == null || location == null) {
             return;
         }
-        final LatLng latLng = GeoUtils.getLocationLatLng(location);
+        final LatLng position = GeoUtils.locationToLatLng(location);
 
         if (location.getExtras() != null) {
             // Add a marker only if the location has a title
             final MarkerOptions markerOptions = new MarkerOptions()
                     .title(location.getExtras().getString(Const.BundleKeys.NAME))
-                    .position(latLng);
+                    .position(position);
             map.addMarker(markerOptions);
         }
 
-        moveCameraToTarget(map, latLng, animate, cameraIdleListener);
+        moveCameraToTarget(map, position, animate, cameraIdleListener);
     }
 
     /**

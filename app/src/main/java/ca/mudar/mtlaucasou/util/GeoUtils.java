@@ -29,6 +29,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -75,22 +76,37 @@ public class GeoUtils {
         return results[0];
     }
 
-    public static LatLng getLocationLatLng(Location location) {
+    @Nullable
+    public static LatLng locationToLatLng(Location location) {
         if (location != null) {
             return new LatLng(location.getLatitude(), location.getLongitude());
         }
+
         return null;
     }
 
-    public static LatLng getCoordsLatLng(List<Double> coordinates) {
-        try {
-            return new LatLng(coordinates.get(1), coordinates.get(0));
-        } catch (Exception e) {
-            e.printStackTrace();
+    @Nullable
+    public static Location positionToLocation(LatLng position) {
+        if (position != null) {
+            final Location location = new Location(Const.CUSTOM_LOCATION_PROVIDER);
+            location.setLatitude(position.latitude);
+            location.setLongitude(position.longitude);
+
+            return location;
         }
 
         return null;
     }
+
+//    public static LatLng locationToLatLng(@NonNull List<Double> coordinates) {
+//        try {
+//            return new LatLng(coordinates.get(1), coordinates.get(0));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        return null;
+//    }
 
     /**
      * Get distance in Metric or Imperial units. Display changes depending on

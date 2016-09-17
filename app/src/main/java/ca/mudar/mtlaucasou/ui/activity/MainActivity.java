@@ -80,7 +80,6 @@ public class MainActivity extends BaseActivity implements
     private static final long PROGRESS_BAR_ANIM_DURATION = 750L; // 750ms
 
     private GoogleMap vMap;
-    private View vMarkerInfoWindow;
     private View mSnackbarParent;
     private CircleProgressBar vProgressBar;
     private FloatingActionButton mMyLocationFAB;
@@ -235,8 +234,6 @@ public class MainActivity extends BaseActivity implements
         final SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-        vMarkerInfoWindow = getLayoutInflater().inflate(R.layout.custom_info_window, null, false);
     }
 
     /**
@@ -249,8 +246,12 @@ public class MainActivity extends BaseActivity implements
         vMap = googleMap;
         vMap.getUiSettings().setMyLocationButtonEnabled(false);
 
-        vMap.setInfoWindowAdapter(new PlacemarkInfoWindowAdapter(vMarkerInfoWindow));
+        // Setup the InfoWindow
+        final View vMarkerInfoWindow = getLayoutInflater()
+                .inflate(R.layout.custom_info_window, null, false);
+        vMap.setInfoWindowAdapter(new PlacemarkInfoWindowAdapter(vMarkerInfoWindow, mLocationManger));
 
+        // Handle location
         MapUtils.moveCameraToInitialLocation(vMap, null);
         MapUtils.enableMyLocation(this, vMap);
 

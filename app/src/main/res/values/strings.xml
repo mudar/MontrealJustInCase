@@ -57,6 +57,9 @@
     <string name="btn_zoom_out">Zoom out</string>
     <string name="btn_accept_eula">Accept &amp; continue</string>
 
+    <!--InfoWindow-->
+    <string name="info_window_snippet_distance">%1$s\r\nDistance: %2$s</string>
+
     <!--Search-->
     <string name="search_hint">Postal code or place name</string>
 

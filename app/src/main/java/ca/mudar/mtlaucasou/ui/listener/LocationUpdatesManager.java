@@ -48,6 +48,7 @@ import com.google.android.gms.location.LocationSettingsStates;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.maps.GoogleMap;
 
+import ca.mudar.mtlaucasou.ui.adapter.PlacemarkInfoWindowAdapter;
 import ca.mudar.mtlaucasou.util.MapUtils;
 import ca.mudar.mtlaucasou.util.PermissionUtils;
 
@@ -57,7 +58,8 @@ public class LocationUpdatesManager implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener,
-        GoogleMap.OnCameraMoveStartedListener {
+        GoogleMap.OnCameraMoveStartedListener,
+        PlacemarkInfoWindowAdapter.InfoWindowLocationCallbacks {
 
     private static final String TAG = makeLogTag("LocationUpdatesManager");
     private static final long LOCATION_UPDATES_INTERVAL = DateUtils.SECOND_IN_MILLIS * 10;

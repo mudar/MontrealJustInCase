@@ -23,6 +23,8 @@
 
 package ca.mudar.mtlaucasou.ui.adapter;
 
+import android.location.Location;
+import android.support.annotation.Nullable;
 import android.text.SpannableString;
 import android.view.View;
 import android.widget.TextView;
@@ -31,19 +33,26 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
 
 import ca.mudar.mtlaucasou.R;
+import ca.mudar.mtlaucasou.util.GeoUtils;
+
+import static ca.mudar.mtlaucasou.util.LogUtils.makeLogTag;
 
 public class PlacemarkInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
 
-    private final View mView;
+    private static final String TAG = makeLogTag("PlacemarkInfoWindowAdapter");
 
-    public PlacemarkInfoWindowAdapter(View view) {
-        this.mView = view;
+    private final View mView;
+    private final InfoWindowLocationCallbacks mCallback;
+
+    public PlacemarkInfoWindowAdapter(View view, @Nullable InfoWindowLocationCallbacks callback) {
+        mView = view;
+        mCallback = callback;
     }
 
     @Override
     public View getInfoContents(Marker marker) {
         final String title = marker.getTitle();
-        final String snippet = marker.getSnippet();
+        String snippet = getSnippetWithDistance(marker);
         final TextView vTitle = (TextView) mView.findViewById(R.id.title);
         final TextView vSnippet = ((TextView) mView.findViewById(R.id.snippet));
 
@@ -64,5 +73,23 @@ public class PlacemarkInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
     @Override
     public View getInfoWindow(Marker marker) {
         return null;
+    }
+
+    private String getSnippetWithDistance(Marker marker) {
+        if (mCallback != null && mCallback.getUserLocation() != null) {
+            float distance = mCallback.getUserLocation().distanceTo(
+                    GeoUtils.positionToLocation(marker.getPosition()));
+
+            return mView.getContext().getString(R.string.info_window_snippet_distance,
+                    marker.getSnippet(),
+                    GeoUtils.getDistanceDisplay(mView.getContext(), distance)
+            );
+        }
+
+        return marker.getSnippet();
+    }
+
+    public interface InfoWindowLocationCallbacks {
+        public Location getUserLocation();
     }
 }

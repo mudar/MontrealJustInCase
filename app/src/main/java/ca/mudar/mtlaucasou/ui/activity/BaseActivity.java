@@ -38,6 +38,7 @@ import com.mikepenz.aboutlibraries.LibsBuilder;
 import ca.mudar.mtlaucasou.Const;
 import ca.mudar.mtlaucasou.R;
 import ca.mudar.mtlaucasou.data.UserPrefs;
+import ca.mudar.mtlaucasou.service.SyncService;
 import ca.mudar.mtlaucasou.util.LangUtils;
 import ca.mudar.mtlaucasou.util.LogUtils;
 
@@ -69,6 +70,11 @@ public abstract class BaseActivity extends AppCompatActivity implements
         if (this instanceof MainActivity) {
             // Only MainActivity needs to register for updates about LANGUAGE prefs
             UserPrefs.getSharedPrefs(this).registerOnSharedPreferenceChangeListener(this);
+        }
+
+        if (!UserPrefs.getInstance(this).hasLoadedData()) {
+            // Import local data
+            startService(SyncService.getIntent(this));
         }
     }
 

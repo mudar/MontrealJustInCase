@@ -74,13 +74,16 @@ public class UserPrefs implements
         return mPrefsEditor;
     }
 
-    public boolean isFirstLaunch() {
-        return mPrefs.getBoolean(HAS_LOADED_DATA, false);
-    }
+    public boolean hasLoadedData() {
+        final boolean hasLoadedData = mPrefs.getBoolean(HAS_LOADED_DATA, false);
+        if (!hasLoadedData) {
+            // The answer can be true only once. We need commit() instead of apply()
+            // to avoid possible delay-related issues.
+            edit().putBoolean(HAS_LOADED_DATA, true)
+                    .commit();
+        }
 
-    public void setFirstLaunch() {
-        edit().putBoolean(HAS_LOADED_DATA, true)
-                .commit();
+        return hasLoadedData;
     }
 
     public boolean hasAcceptedEula() {

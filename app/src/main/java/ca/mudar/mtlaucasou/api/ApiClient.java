@@ -23,16 +23,21 @@
 
 package ca.mudar.mtlaucasou.api;
 
+import android.support.annotation.Nullable;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import ca.mudar.mtlaucasou.BuildConfig;
 import ca.mudar.mtlaucasou.model.geojson.PointsFeatureCollection;
+import ca.mudar.mtlaucasou.util.LogUtils;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -93,5 +98,53 @@ public class ApiClient {
     public static void getEmergencyHostels(GeoApiService service, Callback<PointsFeatureCollection> cb) {
         service.getEmergencyHostels()
                 .enqueue(cb);
+    }
+
+    @Nullable
+    public static Response<PointsFeatureCollection> getFireHalls(GeoApiService service) {
+        try {
+            return service.getFireHalls()
+                    .execute();
+        } catch (IOException e) {
+            LogUtils.REMOTE_LOG(e);
+        }
+
+        return null;
+    }
+
+    @Nullable
+    public static Response<PointsFeatureCollection> getSpvmStations(GeoApiService service) {
+        try {
+            return service.getSpvmStations()
+                    .execute();
+        } catch (IOException e) {
+            LogUtils.REMOTE_LOG(e);
+        }
+
+        return null;
+    }
+
+    @Nullable
+    public static Response<PointsFeatureCollection> getWaterSupplies(GeoApiService service) {
+        try {
+            return service.getWaterSupplies()
+                    .execute();
+        } catch (IOException e) {
+            LogUtils.REMOTE_LOG(e);
+        }
+
+        return null;
+    }
+
+    @Nullable
+    public static Response<PointsFeatureCollection> getEmergencyHostels(GeoApiService service) {
+        try {
+            return service.getEmergencyHostels()
+                    .execute();
+        } catch (IOException e) {
+            LogUtils.REMOTE_LOG(e);
+        }
+
+        return null;
     }
 }

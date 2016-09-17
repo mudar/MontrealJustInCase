@@ -36,10 +36,14 @@ import java.io.InputStreamReader;
 
 import ca.mudar.mtlaucasou.Const;
 import ca.mudar.mtlaucasou.R;
+import ca.mudar.mtlaucasou.api.ApiClient;
+import ca.mudar.mtlaucasou.api.GeoApiService;
 import ca.mudar.mtlaucasou.data.RealmQueries;
+import ca.mudar.mtlaucasou.data.UserPrefs;
 import ca.mudar.mtlaucasou.model.MapType;
 import ca.mudar.mtlaucasou.model.geojson.PointsFeatureCollection;
 import io.realm.Realm;
+import retrofit2.Response;
 
 import static ca.mudar.mtlaucasou.util.LogUtils.makeLogTag;
 
@@ -59,19 +63,35 @@ public class SyncService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         mRealm = Realm.getDefaultInstance();
-
         final long startTime = System.currentTimeMillis();
 
+        if (!UserPrefs.getInstance(this).hasLoadedData()) {
+            loadInitialLocalData();
+        } else {
+            downloadRemoteUpdatesIfAvailable();
+        }
+
+        Log.v(TAG, String.format("Data sync duration: %dms", System.currentTimeMillis() - startTime));
+
+        mRealm.close();
+    }
+
+    private void loadInitialLocalData() {
         mRealm.beginTransaction();
+
         importLocalData(R.raw.fire_halls, Const.MapTypes.FIRE_HALLS);
         importLocalData(R.raw.spvm_stations, Const.MapTypes.SVPM_STATIONS);
         importLocalData(R.raw.water_supplies, Const.MapTypes.WATER_SUPPLIES);
         importLocalData(R.raw.emergency_hostes, Const.MapTypes.EMERGENCY_HOSTELS);
+
         mRealm.commitTransaction();
+    }
 
-        Log.v(TAG, String.format("Duration: %dms", System.currentTimeMillis() - startTime));
-
-        mRealm.close();
+    private void downloadRemoteUpdatesIfAvailable() {
+        importRemoteData(Const.MapTypes.FIRE_HALLS);
+        importRemoteData(Const.MapTypes.SVPM_STATIONS);
+        importRemoteData(Const.MapTypes.WATER_SUPPLIES);
+        importRemoteData(Const.MapTypes.EMERGENCY_HOSTELS);
     }
 
     private void importLocalData(@RawRes int resource, @MapType String mapType) {
@@ -82,5 +102,40 @@ public class SyncService extends IntentService {
                 .fromJson(inputStreamReader, PointsFeatureCollection.class);
 
         RealmQueries.cacheMapData(mRealm, collection.getFeatures(), mapType, false);
+    }
+
+    /**
+     * Request the GeoJSON data from the API
+     *
+     * @param mapType
+     */
+    private void importRemoteData(@MapType String mapType) {
+        final GeoApiService apiService = ApiClient.getService();
+
+        Response<PointsFeatureCollection> response;
+        switch (mapType) {
+            case Const.MapTypes.FIRE_HALLS:
+                response = ApiClient.getFireHalls(apiService);
+                break;
+            case Const.MapTypes.SVPM_STATIONS:
+                response = ApiClient.getSpvmStations(apiService);
+                break;
+            case Const.MapTypes.WATER_SUPPLIES:
+                response = ApiClient.getWaterSupplies(apiService);
+                break;
+            case Const.MapTypes.EMERGENCY_HOSTELS:
+                response = ApiClient.getEmergencyHostels(apiService);
+                break;
+            default:
+                response = null;
+                break;
+        }
+
+        if (response != null) {
+            PointsFeatureCollection collection = response.body();
+            if (collection != null && collection.getFeatures() != null) {
+                RealmQueries.cacheMapData(mRealm, collection.getFeatures(), mapType, true);
+            }
+        }
     }
 }

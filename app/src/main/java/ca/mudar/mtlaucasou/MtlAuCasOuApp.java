@@ -25,6 +25,8 @@ package ca.mudar.mtlaucasou;
 
 import android.app.Application;
 
+
+import ca.mudar.mtlaucasou.service.SyncService;
 import ca.mudar.mtlaucasou.util.LangUtils;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -34,11 +36,19 @@ public class MtlAuCasOuApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        // The Realm file will be located in Context.getFilesDir() with name "default.realm"
-        RealmConfiguration config = new RealmConfiguration.Builder(this).build();
-        Realm.setDefaultConfiguration(config);
-        Realm.deleteRealm(config);
+
+        setupRealm();
 
         LangUtils.updateUiLanguage(this);
+    }
+
+    private void setupRealm() {
+        RealmConfiguration config = new RealmConfiguration.Builder(this)
+                .name(Const.DATABASE_NAME)
+                .schemaVersion(Const.DATABASE_VERSION)
+                .build();
+        Realm.setDefaultConfiguration(config);
+
+        startService(SyncService.getIntent(this));
     }
 }

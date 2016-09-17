@@ -32,7 +32,6 @@ import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.MenuItemCompat;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -52,14 +51,11 @@ import java.util.List;
 
 import ca.mudar.mtlaucasou.Const;
 import ca.mudar.mtlaucasou.R;
-import ca.mudar.mtlaucasou.api.ApiClient;
-import ca.mudar.mtlaucasou.api.GeoApiService;
 import ca.mudar.mtlaucasou.data.RealmQueries;
 import ca.mudar.mtlaucasou.data.UserPrefs;
 import ca.mudar.mtlaucasou.model.MapType;
 import ca.mudar.mtlaucasou.model.Placemark;
 import ca.mudar.mtlaucasou.model.RealmPlacemark;
-import ca.mudar.mtlaucasou.model.geojson.PointsFeatureCollection;
 import ca.mudar.mtlaucasou.ui.adapter.PlacemarkInfoWindowAdapter;
 import ca.mudar.mtlaucasou.ui.listener.LocationUpdatesManager;
 import ca.mudar.mtlaucasou.ui.listener.SearchResultsManager;
@@ -69,17 +65,14 @@ import ca.mudar.mtlaucasou.util.MapUtils;
 import ca.mudar.mtlaucasou.util.NavigUtils;
 import ca.mudar.mtlaucasou.util.PermissionUtils;
 import io.realm.Realm;
+import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 import static ca.mudar.mtlaucasou.util.LogUtils.makeLogTag;
 
 public class MainActivity extends BaseActivity implements
         OnMapReadyCallback,
         SearchResultsManager.MapUpdatesListener,
-        Callback<PointsFeatureCollection>,
         LocationUpdatesManager.LocationUpdatesCallbacks {
 
     private static final String TAG = makeLogTag("MainActivity");
@@ -95,6 +88,7 @@ public class MainActivity extends BaseActivity implements
     @MapType
     private String mMapType;
     private Realm mRealm;
+    private RealmChangeListener mRealmListener;
     private Handler mHandler = new Handler(); // Waits for the BottomBar anim
     private LocationUpdatesManager mLocationManger;
 
@@ -149,6 +143,8 @@ public class MainActivity extends BaseActivity implements
     protected void onDestroy() {
         super.onDestroy();
 
+        // Remove all change listeners to avoid leaks
+        mRealm.removeAllChangeListeners();
         mRealm.close();
     }
 
@@ -246,7 +242,7 @@ public class MainActivity extends BaseActivity implements
     /**
      * Manipulate the map once available.
      *
-     * @param googleMap
+     * @param googleMap The GoogleMap
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -289,14 +285,20 @@ public class MainActivity extends BaseActivity implements
      *
      * @param type
      */
-    private void loadMapData(@MapType String type) {
+    private void loadMapData(@MapType final String type) {
         if (vMap == null) {
             return;
         }
 
+        if (mRealmListener != null) {
+            // Remove previously added RealmChangeListener
+            mRealm.removeChangeListener(mRealmListener);
+            mRealmListener = null;
+        }
+
         // First, query the Realm db for the current mapType
         final RealmResults<RealmPlacemark> realmPlacemarks = RealmQueries
-                .queryPlacemarksByMapType(mRealm, mMapType)
+                .queryPlacemarksByMapType(mRealm, type)
                 .findAll();
 
         if (realmPlacemarks.size() > 0) {
@@ -316,58 +318,17 @@ public class MainActivity extends BaseActivity implements
                 }
             }, PROGRESS_BAR_ANIM_DURATION);
         } else {
-            // Need to download remote API data
-            downloadApiData(type);
+            // Add a change listener for empty data only, to avoid showing empty maps.
+            // Remote updates will be showed on tab changes. This is not an issue for our app
+            // because of the low frequency/value of remote data updates.
+            mRealmListener = new RealmChangeListener() {
+                @Override
+                public void onChange(Object element) {
+                    loadMapData(type);
+                }
+            };
+            mRealm.addChangeListener(mRealmListener);
         }
-    }
-
-    /**
-     * Request the GeoJSON data from the API, received in the Callback's onResponse()
-     *
-     * @param type
-     */
-    private void downloadApiData(@MapType String type) {
-        final GeoApiService apiService = ApiClient.getService();
-        switch (type) {
-            case Const.MapTypes.FIRE_HALLS:
-                ApiClient.getFireHalls(apiService, this);
-                break;
-            case Const.MapTypes.SVPM_STATIONS:
-                ApiClient.getSpvmStations(apiService, this);
-                break;
-            case Const.MapTypes.WATER_SUPPLIES:
-                ApiClient.getWaterSupplies(apiService, this);
-                break;
-            case Const.MapTypes.EMERGENCY_HOSTELS:
-                ApiClient.getEmergencyHostels(apiService, this);
-                break;
-        }
-    }
-
-    /**
-     * Implements Callback<PointsFeatureCollection>
-     * Caches the results into Realm db then calls loadMapData
-     *
-     * @param call
-     * @param response
-     */
-    @Override
-    public void onResponse(Call<PointsFeatureCollection> call,
-                           Response<PointsFeatureCollection> response) {
-        RealmQueries.cacheMapData(mRealm, response.body().getFeatures(), mMapType);
-        loadMapData(mMapType);
-    }
-
-    /**
-     * Implements Callback<PointsFeatureCollection>
-     *
-     * @param call
-     * @param t
-     */
-    @Override
-    public void onFailure(Call<PointsFeatureCollection> call, Throwable t) {
-        Log.e(TAG, "onFailure");
-        t.printStackTrace();
     }
 
     @Override

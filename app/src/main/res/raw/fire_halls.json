@@ -1,140 +1,674 @@
 {
-"type": "FeatureCollection",
-                                                                                
-"features": [
-{ "type": "Feature", "properties": { "Name": "Caserne 32", "Description": "<p>Caserne 32<br\/>16101 rue Sherbrooke Est<br\/>Montréal<\/P><P> <\/P><P>     <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.492367178500004, 45.697052187899899 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 59", "Description": "<p>Caserne 59<br\/>18661 Boulevard Pierrefonds<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.897746831299898, 45.458753505300002 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 02", "Description": "<p>Caserne 02<br\/>1 Chemin du Tour-de-L’Isle<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.534726, 45.518966 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 03", "Description": "<p>Caserne 03<br\/>256 rue  Young<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.560172, 45.493454 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 20", "Description": "<p>Caserne 20<br\/>920 rue Saint-Urbain<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.559148, 45.505935 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 21", "Description": "<p>Caserne 21<br\/>6025 boulevard Lavoisier<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.600274, 45.597204 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 22", "Description": "<p>Caserne 22<br\/>5455 rue Antonio-Dagenais<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.585973, 45.582863 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 23", "Description": "<p>Caserne 23<br\/>523 place Saint-Henri<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.585251, 45.477925 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 25", "Description": "<p>Caserne 25<br\/>1212 rue Drummond<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.573087, 45.497811 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 26", "Description": "<p>Caserne 26<br\/>2151 avenue Mont-Royal Est<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.571933, 45.536028 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 27", "Description": "<p>Caserne 27<br\/>5353 rue Gatineau<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.621951, 45.497391 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 28", "Description": "<p>Caserne 28<br\/>7650 boulevard Châteauneuf<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.558724, 45.602839 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 29", "Description": "<p>Caserne 29<br\/>5375 1ère Avenue<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.576171, 45.545347 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 30", "Description": "<p>Caserne 30<br\/>5 rue Laurier Ouest<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.593242, 45.522964 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 31", "Description": "<p>Caserne 31<br\/>7041 rue Saint-Dominique<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.615694, 45.534723 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 33", "Description": "<p>Caserne 33<br\/>6040 boulevard Monk<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.595449, 45.457841 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 34", "Description": "<p>Caserne 34<br\/>5369 chemin de la Côte-Saint-Antoine<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.614255, 45.475452 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 35", "Description": "<p>Caserne 35<br\/>10827 rue Lajeunesse<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.67029, 45.556017 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 37", "Description": "<p>Caserne 37<br\/>795 rue Jarry Est<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.626757, 45.546373 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 38", "Description": "<p>Caserne 38<br\/>14201 rue Sherbrooke Est<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.505121, 45.672221 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 39", "Description": "<p>Caserne 39<br\/>2915 rue Monsabré<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.543318, 45.572521 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 40", "Description": "<p>Caserne 40<br\/>8639 avenue Pierre-De-Coubertin<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.522689, 45.60134 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 41", "Description": "<p>Caserne 41<br\/>7405 rue Champagneur<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.626382, 45.52763 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 42", "Description": "<p>Caserne 42<br\/>4180 rue De Salaberry<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.703847, 45.534465 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 43", "Description": "<p>Caserne 43<br\/>1945 rue Fleury Est<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.653009, 45.569404 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 44", "Description": "<p>Caserne 44<br\/>12145 boulevard Rivière-des-Prairies<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.562934, 45.652651 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 45", "Description": "<p>Caserne 45<br\/>5100 rue Hochelaga<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.541261, 45.563011 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 46", "Description": "<p>Caserne 46<br\/>4760 rue Cumberland<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.638523, 45.467002 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 47", "Description": "<p>Caserne 47<br\/>2111 rue Saint-Zotique Est<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.597983, 45.547517 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 48", "Description": "<p>Caserne 48<br\/>3616 rue Hochelaga<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.550829, 45.547323 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 49", "Description": "<p>Caserne 49<br\/>10 rue Chabanel Ouest<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.651006, 45.544049 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 50", "Description": "<p>Caserne 50<br\/>6490 30e Avenue<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.575457, 45.566863 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 51", "Description": "<p>Caserne 51<br\/>550 boulevard des Anciens-Combattants<br\/>Sainte-Anne-de-Bellevue<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.950015, 45.417779 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 52", "Description": "<p>Caserne 52<br\/>300 Surrey Drive<br\/>Baie-d’Urfé<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.911226, 45.41986 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 53", "Description": "<p>Caserne 53<br\/>310 Beaurepaire Drive<br\/>Beaconsfield<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.868415, 45.428788 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 54", "Description": "<p>Caserne 54<br\/>3048 boulevard Saint-Charles<br\/>Kirkland<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.855993, 45.449092 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 55", "Description": "<p>Caserne 55<br\/>401 boulevard Saint-Jean<br\/>Pointe-Claire<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.816303, 45.447814 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 57", "Description": "<p>Caserne 57<br\/>13795 boulevard Pierrefonds<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.849838, 45.493753 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 58", "Description": "<p>Caserne 58<br\/>13 rue Centre Commercial<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.806295, 45.509652 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 61", "Description": "<p>Caserne 61<br\/>10 chemin Sunnydale<br\/>Dollard-des-Ormeaux<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.806646, 45.494039 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 62", "Description": "<p>Caserne 62<br\/>155 avenue Avro<br\/>Dorval<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.786534, 45.474196 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 63", "Description": "<p>Caserne 63<br\/>530 boulevard Bouchard<br\/>Dorval<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.73544, 45.447056 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 64", "Description": "<p>Caserne 64<br\/>3175 rue Remembrance<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.691098, 45.437285 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 65", "Description": "<p>Caserne 65<br\/>1300 avenue Dollard<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.626538, 45.425947 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 66", "Description": "<p>Caserne 66<br\/>4398 boulevard LaSalle<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.562795, 45.459942 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 67", "Description": "<p>Caserne 67<br\/>911 boulevard René-Lévesque<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.534248, 45.469214 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 71", "Description": "<p>Caserne 71<br\/>5500 chemin du Bois-Franc<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.744348, 45.493865 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 72", "Description": "<p>Caserne 72<br\/>2727 boulevard Poirier<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.709576, 45.508431 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 73", "Description": "<p>Caserne 73<br\/>820 rue Saint-Germain<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.678042, 45.512615 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 74", "Description": "<p>Caserne 74<br\/>10 avenue Roosevelt<br\/>Mont-Royal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.640779, 45.515267 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 75", "Description": "<p>Caserne 75<br\/>40 avenue Saint-Just<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.6078, 45.51776 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 76", "Description": "<p>Caserne 76<br\/>19 rue Stanton<br\/>Westmount<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.598427, 45.486318 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 77", "Description": "<p>Caserne 77<br\/>114 avenue Westminster Nord<br\/>Montréal-Ouest<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.648054, 45.453717 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 78", "Description": "<p>Caserne 78<br\/>6815 chemin Côte-Saint-Luc<br\/>Côte-Saint-Luc<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.652171, 45.467957 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 56", "Description": "<p>Caserne 56<br\/>230 boulevard Chèvremont<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.876412, 45.493677 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 04", "Description": "<p>Caserne 04<br\/>5260 rue Van Horne<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.641637, 45.489989 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 05", "Description": "<p>Caserne 05<br\/>75 rue Ontario Est<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.566847, 45.512239 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 08", "Description": "<p>Caserne 08<br\/>11371 Notre-Dame Est<br\/>Montréal-Est<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.496254, 45.631549 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 09", "Description": "<p>Caserne 09<br\/>8100 boulevard Saint-Michel<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.610168, 45.563748 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 10", "Description": "<p>Caserne 10<br\/>1445 rue Saint-Mathieu<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.580145, 45.494566 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 13", "Description": "<p>Caserne 13<br\/>3250 rue Sainte-Catherine Est<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.540309, 45.539867 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 14", "Description": "<p>Caserne 14<br\/>8216 boulevard Maurice-Duplessis<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.586222, 45.633602 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 15", "Description": "<p>Caserne 15<br\/>1255 rue de la Sucrerie<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.560917, 45.484419 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 16", "Description": "<p>Caserne 16<br\/>1041 rue Rachel Est<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.574902, 45.525812 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 17", "Description": "<p>Caserne 17<br\/>4240 rue de Charleroi<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.637283, 45.593413 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 18", "Description": "<p>Caserne 18<br\/>12012 boulevard Rolland<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.621504, 45.616611 ] } }
-,
-{ "type": "Feature", "properties": { "Name": "Caserne 19", "Description": "<p>Caserne 19<br\/>2000 rue de Lorimier<br\/>Montréal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.557968, 45.527982 ] } }
-
-]
+  "type": "FeatureCollection",
+  "features": [{
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 32",
+      "Description": "<p>Caserne 32<br\/>16101 rue Sherbrooke Est<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.492367178500004, 45.697052187899899]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 59",
+      "Description": "<p>Caserne 59<br\/>18661 Boulevard Pierrefonds<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.897746831299898, 45.458753505300002]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 02",
+      "Description": "<p>Caserne 02<br\/>1 Chemin du Tour-de-L’Isle<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.534726, 45.518966]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 03",
+      "Description": "<p>Caserne 03<br\/>256 rue Young<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.560172, 45.493454]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 20",
+      "Description": "<p>Caserne 20<br\/>920 rue Saint-Urbain<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.559148, 45.505935]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 21",
+      "Description": "<p>Caserne 21<br\/>6025 boulevard Lavoisier<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.600274, 45.597204]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 22",
+      "Description": "<p>Caserne 22<br\/>5455 rue Antonio-Dagenais<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.585973, 45.582863]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 23",
+      "Description": "<p>Caserne 23<br\/>523 place Saint-Henri<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.585251, 45.477925]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 25",
+      "Description": "<p>Caserne 25<br\/>1212 rue Drummond<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.573087, 45.497811]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 26",
+      "Description": "<p>Caserne 26<br\/>2151 avenue Mont-Royal Est<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.571933, 45.536028]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 27",
+      "Description": "<p>Caserne 27<br\/>5353 rue Gatineau<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.621951, 45.497391]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 28",
+      "Description": "<p>Caserne 28<br\/>7650 boulevard Châteauneuf<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.558724, 45.602839]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 29",
+      "Description": "<p>Caserne 29<br\/>5375 1ère Avenue<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.576171, 45.545347]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 30",
+      "Description": "<p>Caserne 30<br\/>5 rue Laurier Ouest<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.593242, 45.522964]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 31",
+      "Description": "<p>Caserne 31<br\/>7041 rue Saint-Dominique<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.615694, 45.534723]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 33",
+      "Description": "<p>Caserne 33<br\/>6040 boulevard Monk<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.595449, 45.457841]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 34",
+      "Description": "<p>Caserne 34<br\/>5369 chemin de la Côte-Saint-Antoine<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.614255, 45.475452]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 35",
+      "Description": "<p>Caserne 35<br\/>10827 rue Lajeunesse<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.67029, 45.556017]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 37",
+      "Description": "<p>Caserne 37<br\/>795 rue Jarry Est<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.626757, 45.546373]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 38",
+      "Description": "<p>Caserne 38<br\/>14201 rue Sherbrooke Est<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.505121, 45.672221]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 39",
+      "Description": "<p>Caserne 39<br\/>2915 rue Monsabré<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.543318, 45.572521]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 40",
+      "Description": "<p>Caserne 40<br\/>8639 avenue Pierre-De-Coubertin<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.522689, 45.60134]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 41",
+      "Description": "<p>Caserne 41<br\/>7405 rue Champagneur<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.626382, 45.52763]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 42",
+      "Description": "<p>Caserne 42<br\/>4180 rue De Salaberry<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.703847, 45.534465]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 43",
+      "Description": "<p>Caserne 43<br\/>1945 rue Fleury Est<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.653009, 45.569404]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 44",
+      "Description": "<p>Caserne 44<br\/>12145 boulevard Rivière-des-Prairies<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.562934, 45.652651]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 45",
+      "Description": "<p>Caserne 45<br\/>5100 rue Hochelaga<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.541261, 45.563011]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 46",
+      "Description": "<p>Caserne 46<br\/>4760 rue Cumberland<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.638523, 45.467002]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 47",
+      "Description": "<p>Caserne 47<br\/>2111 rue Saint-Zotique Est<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.597983, 45.547517]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 48",
+      "Description": "<p>Caserne 48<br\/>3616 rue Hochelaga<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.550829, 45.547323]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 49",
+      "Description": "<p>Caserne 49<br\/>10 rue Chabanel Ouest<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.651006, 45.544049]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 50",
+      "Description": "<p>Caserne 50<br\/>6490 30e Avenue<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.575457, 45.566863]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 51",
+      "Description": "<p>Caserne 51<br\/>550 boulevard des Anciens-Combattants<br\/>Sainte-Anne-de-Bellevue<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.950015, 45.417779]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 52",
+      "Description": "<p>Caserne 52<br\/>300 Surrey Drive<br\/>Baie-d’Urfé<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.911226, 45.41986]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 53",
+      "Description": "<p>Caserne 53<br\/>310 Beaurepaire Drive<br\/>Beaconsfield<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.868415, 45.428788]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 54",
+      "Description": "<p>Caserne 54<br\/>3048 boulevard Saint-Charles<br\/>Kirkland<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.855993, 45.449092]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 55",
+      "Description": "<p>Caserne 55<br\/>401 boulevard Saint-Jean<br\/>Pointe-Claire<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.816303, 45.447814]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 57",
+      "Description": "<p>Caserne 57<br\/>13795 boulevard Pierrefonds<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.849838, 45.493753]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 58",
+      "Description": "<p>Caserne 58<br\/>13 rue Centre Commercial<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.806295, 45.509652]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 61",
+      "Description": "<p>Caserne 61<br\/>10 chemin Sunnydale<br\/>Dollard-des-Ormeaux<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.806646, 45.494039]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 62",
+      "Description": "<p>Caserne 62<br\/>155 avenue Avro<br\/>Dorval<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.786534, 45.474196]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 63",
+      "Description": "<p>Caserne 63<br\/>530 boulevard Bouchard<br\/>Dorval<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.73544, 45.447056]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 64",
+      "Description": "<p>Caserne 64<br\/>3175 rue Remembrance<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.691098, 45.437285]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 65",
+      "Description": "<p>Caserne 65<br\/>1300 avenue Dollard<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.626538, 45.425947]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 66",
+      "Description": "<p>Caserne 66<br\/>4398 boulevard LaSalle<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.562795, 45.459942]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 67",
+      "Description": "<p>Caserne 67<br\/>911 boulevard René-Lévesque<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.534248, 45.469214]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 71",
+      "Description": "<p>Caserne 71<br\/>5500 chemin du Bois-Franc<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.744348, 45.493865]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 72",
+      "Description": "<p>Caserne 72<br\/>2727 boulevard Poirier<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.709576, 45.508431]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 73",
+      "Description": "<p>Caserne 73<br\/>820 rue Saint-Germain<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.678042, 45.512615]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 74",
+      "Description": "<p>Caserne 74<br\/>10 avenue Roosevelt<br\/>Mont-Royal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.640779, 45.515267]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 75",
+      "Description": "<p>Caserne 75<br\/>40 avenue Saint-Just<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.6078, 45.51776]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 76",
+      "Description": "<p>Caserne 76<br\/>19 rue Stanton<br\/>Westmount<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.598427, 45.486318]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 77",
+      "Description": "<p>Caserne 77<br\/>114 avenue Westminster Nord<br\/>Montréal-Ouest<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.648054, 45.453717]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 78",
+      "Description": "<p>Caserne 78<br\/>6815 chemin Côte-Saint-Luc<br\/>Côte-Saint-Luc<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.652171, 45.467957]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 56",
+      "Description": "<p>Caserne 56<br\/>230 boulevard Chèvremont<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.876412, 45.493677]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 04",
+      "Description": "<p>Caserne 04<br\/>5260 rue Van Horne<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.641637, 45.489989]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 05",
+      "Description": "<p>Caserne 05<br\/>75 rue Ontario Est<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.566847, 45.512239]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 08",
+      "Description": "<p>Caserne 08<br\/>11371 Notre-Dame Est<br\/>Montréal-Est<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.496254, 45.631549]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 09",
+      "Description": "<p>Caserne 09<br\/>8100 boulevard Saint-Michel<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.610168, 45.563748]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 10",
+      "Description": "<p>Caserne 10<br\/>1445 rue Saint-Mathieu<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.580145, 45.494566]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 13",
+      "Description": "<p>Caserne 13<br\/>3250 rue Sainte-Catherine Est<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.540309, 45.539867]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 14",
+      "Description": "<p>Caserne 14<br\/>8216 boulevard Maurice-Duplessis<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.586222, 45.633602]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 15",
+      "Description": "<p>Caserne 15<br\/>1255 rue de la Sucrerie<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.560917, 45.484419]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 16",
+      "Description": "<p>Caserne 16<br\/>1041 rue Rachel Est<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.574902, 45.525812]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 17",
+      "Description": "<p>Caserne 17<br\/>4240 rue de Charleroi<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.637283, 45.593413]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 18",
+      "Description": "<p>Caserne 18<br\/>12012 boulevard Rolland<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.621504, 45.616611]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Caserne 19",
+      "Description": "<p>Caserne 19<br\/>2000 rue de Lorimier<br\/>Montréal<\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.557968, 45.527982]
+    }
+  }]
 }

@@ -81,6 +81,8 @@
     <string name="prefs_units_dialog_title">Système des unités de mesure</string>
     <string name="prefs_units_iso">Métrique (km)</string>
     <string name="prefs_units_imperial">Impérial (mile)</string>
+    <string name="prefs_permissions_title">My Location</string>
+    <string name="prefs_permissions_summary">Choisir Permissions &gt; activer Localisation</string>
     <string name="prefs_version_title">Version</string>
 
     <!--Units-->
@@ -95,7 +97,7 @@
     <string name="snackbar_api_error_message">Erreur serveur: %1$s [%2$d]</string>
     <string name="snackbar_host_unknown_error_message">Server connection error [%1$d]</string>
     <string name="snackbar_empty_map_visible_region">Cette partie de la carte ne contient pas d’emplacements.</string>
-    <string name="snackbar_location_permission_needed">L’emplacement est nécessaire pour afficher votre position sur la carte.</string>
+    <string name="snackbar_location_permission_needed">La localisation est nécessaire pour afficher votre position sur la carte.</string>
     <string name="snackbar_location_permission_denied">Si vous changez d’avis, vous pouvez modifiers les permissions dans les paramètres.</string>
 
     <!--Accessibility-->

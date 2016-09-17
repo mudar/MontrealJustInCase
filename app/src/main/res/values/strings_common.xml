@@ -4,7 +4,7 @@
     <!--TODO: Before you release your application, you need a Google Maps API key.-->
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">YOUR_KEY_HERE</string>
 
-    <string name="app_version" translatable="false">1.5</string>
+    <string name="app_version" translatable="false">2.0</string>
     <string name="url_playstore" translatable="false">http://play.google.com/store/apps/details?id=ca.mudar.mtlaucasou</string>
     <string name="url_mudar_ca" translatable="false">http://www.mudar.ca/</string>
     <string name="url_github" translatable="false">https://github.com/mudar/MontrealJustInCase</string>

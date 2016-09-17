@@ -50,6 +50,7 @@
             android:layout_gravity="top|end"
             android:layout_margin="@dimen/fab_margin"
             android:src="@drawable/ic_maps_my_location"
+            android:tint="@color/blue_grey_800"
             app:backgroundTint="@color/white"
             app:fabSize="mini" />
 

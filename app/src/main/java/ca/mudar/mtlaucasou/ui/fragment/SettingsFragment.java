@@ -35,8 +35,11 @@ import java.util.Locale;
 
 import ca.mudar.mtlaucasou.Const;
 import ca.mudar.mtlaucasou.R;
+import ca.mudar.mtlaucasou.util.PermissionUtils;
 
 import static ca.mudar.mtlaucasou.Const.PrefsNames.LANGUAGE;
+import static ca.mudar.mtlaucasou.Const.PrefsNames.PERMISSIONS;
+import static ca.mudar.mtlaucasou.Const.PrefsNames.PERMISSION_DENIED_FOR_EVER;
 import static ca.mudar.mtlaucasou.Const.PrefsNames.UNITS_SYSTEM;
 import static ca.mudar.mtlaucasou.Const.PrefsValues.LANG_EN;
 import static ca.mudar.mtlaucasou.Const.PrefsValues.LANG_FR;
@@ -45,13 +48,15 @@ import static ca.mudar.mtlaucasou.Const.PrefsValues.UNITS_ISO;
 import static ca.mudar.mtlaucasou.util.LogUtils.makeLogTag;
 
 public class SettingsFragment extends PreferenceFragment implements
-        SharedPreferences.OnSharedPreferenceChangeListener {
+        SharedPreferences.OnSharedPreferenceChangeListener,
+        Preference.OnPreferenceClickListener {
 
     private static final String TAG = makeLogTag("SettingsFragment");
 
     private SharedPreferences mSharedPrefs;
     private Preference mPrefUnits;
     private Preference mPrefLanguage;
+    private Preference mPrefPermissions;
     private OnConfigChangeListener mListener;
 
     public static SettingsFragment newInstance() {
@@ -95,12 +100,24 @@ public class SettingsFragment extends PreferenceFragment implements
         pm.setSharedPreferencesName(Const.APP_PREFS_NAME);
         pm.setSharedPreferencesMode(Context.MODE_PRIVATE);
 
-        addPreferencesFromResource(R.xml.prefs_settings);
+        mSharedPrefs = pm.getSharedPreferences();
+
+        /**
+         * Easiest way to hide a
+         */
+        if (mSharedPrefs.getBoolean(PERMISSION_DENIED_FOR_EVER, false)) {
+            addPreferencesFromResource(R.xml.prefs_settings_permissions);
+        } else {
+            addPreferencesFromResource(R.xml.prefs_settings);
+        }
 
         mPrefUnits = findPreference(UNITS_SYSTEM);
         mPrefLanguage = findPreference(LANGUAGE);
+        mPrefPermissions = findPreference(PERMISSIONS);
 
-        mSharedPrefs = pm.getSharedPreferences();
+        if (mPrefPermissions != null) {
+            mPrefPermissions.setOnPreferenceClickListener(this);
+        }
     }
 
     @Override
@@ -125,11 +142,15 @@ public class SettingsFragment extends PreferenceFragment implements
         mSharedPrefs.unregisterOnSharedPreferenceChangeListener(this);
     }
 
+    /**
+     * Implements SharedPreferences.OnSharedPreferenceChangeListener
+     * Update summary for changed prefs
+     *
+     * @param prefs The SharedPreferences that received the change.
+     * @param key   The key of the preference that was changed, added, or removed
+     */
     @Override
     public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
-        /**
-         * onChanged, new preferences values are sent to the AppHelper.
-         */
         if (UNITS_SYSTEM.equals(key)) {
             mPrefUnits.setSummary(getUnitsSummary(prefs.getString(key, UNITS_ISO)));
         } else if (LANGUAGE.equals(key)) {
@@ -138,6 +159,23 @@ public class SettingsFragment extends PreferenceFragment implements
             mListener.onConfigurationChanged(lg);
         }
     }
+
+    /**
+     * Implements Preference.OnPreferenceClickListener
+     * Show Android's app settings, to re-enable permissions previously denied forever.
+     *
+     * @param preference The Preference that was clicked
+     * @return True if the click was handled.
+     */
+    @Override
+    public boolean onPreferenceClick(Preference preference) {
+        if (PERMISSIONS.equals(preference.getKey())) {
+            startActivity(PermissionUtils.newAppSettingsIntent(getActivity()));
+            return true;
+        }
+        return false;
+    }
+
 
     private void setupSummaries() {
         /**
@@ -156,7 +194,6 @@ public class SettingsFragment extends PreferenceFragment implements
         }
         mPrefLanguage.setSummary(getLanguageSummary(lg));
     }
-
 
     private String getUnitsSummary(String index) {
         if (UNITS_ISO.equals(index)) {

@@ -23,6 +23,7 @@
 
 package ca.mudar.mtlaucasou.util;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -102,14 +103,7 @@ public abstract class PermissionUtils {
                             new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    final Intent intent = new Intent();
-                                    intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                                    Uri uri = Uri.fromParts("package", activity.getPackageName(), null);
-                                    intent.setData(uri);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-                                    activity.startActivity(intent);
+                                    activity.startActivity(newAppSettingsIntent(activity));
                                 }
                             })
                     .show();
@@ -131,5 +125,17 @@ public abstract class PermissionUtils {
         }
 
         return false;
+    }
+
+    public static Intent newAppSettingsIntent(Activity activity) {
+        final Intent intent = new Intent();
+        intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        Uri uri = Uri.fromParts("package", activity.getPackageName(), null);
+        intent.setData(uri);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        intent.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+
+        return intent;
     }
 }

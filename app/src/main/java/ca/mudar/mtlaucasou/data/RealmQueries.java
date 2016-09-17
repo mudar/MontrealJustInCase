@@ -43,13 +43,18 @@ public class RealmQueries {
      * @param pointsFeatures
      * @param mapType
      */
-    public static void cacheMapData(Realm realm, List<PointsFeature> pointsFeatures, @MapType String mapType) {
-        realm.beginTransaction();
+    public static void cacheMapData(Realm realm, List<PointsFeature> pointsFeatures, @MapType String mapType, boolean transaction) {
+        if (transaction) {
+            realm.beginTransaction();
+        }
         // Loop over results, convert GeoJSON to Realm then add to db
         for (PointsFeature feature : pointsFeatures) {
             realm.copyToRealm(new RealmPlacemark.Builder(feature, mapType).build());
         }
-        realm.commitTransaction();
+
+        if (transaction) {
+            realm.commitTransaction();
+        }
     }
 
     /**

@@ -62,10 +62,12 @@ public class SyncService extends IntentService {
 
         final long startTime = System.currentTimeMillis();
 
+        mRealm.beginTransaction();
         importLocalData(R.raw.fire_halls, Const.MapTypes.FIRE_HALLS);
         importLocalData(R.raw.spvm_stations, Const.MapTypes.SVPM_STATIONS);
         importLocalData(R.raw.water_supplies, Const.MapTypes.WATER_SUPPLIES);
         importLocalData(R.raw.emergency_hostes, Const.MapTypes.EMERGENCY_HOSTELS);
+        mRealm.commitTransaction();
 
         Log.v(TAG, String.format("Duration: %dms", System.currentTimeMillis() - startTime));
 
@@ -79,6 +81,6 @@ public class SyncService extends IntentService {
         final PointsFeatureCollection collection = new Gson()
                 .fromJson(inputStreamReader, PointsFeatureCollection.class);
 
-        RealmQueries.cacheMapData(mRealm, collection.getFeatures(), mapType);
+        RealmQueries.cacheMapData(mRealm, collection.getFeatures(), mapType, false);
     }
 }

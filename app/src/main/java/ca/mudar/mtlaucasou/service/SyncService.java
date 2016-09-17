@@ -68,7 +68,8 @@ public class SyncService extends IntentService {
         if (!UserPrefs.getInstance(this).hasLoadedData()) {
             loadInitialLocalData();
         } else {
-            downloadRemoteUpdatesIfAvailable();
+            // TODO handle updates frequency and redundancy
+//            downloadRemoteUpdatesIfAvailable();
         }
 
         Log.v(TAG, String.format("Data sync duration: %dms", System.currentTimeMillis() - startTime));

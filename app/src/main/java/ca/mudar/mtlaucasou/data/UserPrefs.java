@@ -86,8 +86,20 @@ public class UserPrefs implements
         return hasLoadedData;
     }
 
-    public boolean hasAcceptedEula() {
-        return mPrefs.getBoolean(HAS_ACCEPTED_EULA, false);
+    public boolean hasAcceptedEula(Context context) {
+        return mPrefs.getBoolean(HAS_ACCEPTED_EULA, false) || hasAcceptedEulaLegacy(context);
+    }
+
+    /**
+     * Legacy: EULA settings were stored in the default SharedPreferences.
+     * For some reason, that seemed like a good idea at the time!
+     *
+     * @param context The Context
+     * @return true if user had accepted EULA in version 1.0
+     */
+    private boolean hasAcceptedEulaLegacy(Context context) {
+        final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        return sp.getBoolean(HAS_ACCEPTED_EULA, false);
     }
 
     public void setHasAcceptedEula() {

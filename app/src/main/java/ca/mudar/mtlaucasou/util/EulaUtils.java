@@ -39,7 +39,7 @@ public class EulaUtils {
      */
     public static boolean showEulaIfNecessary(@NonNull Activity activity) {
         final boolean hasAcceptedEula = UserPrefs.getInstance(activity)
-                .hasAcceptedEula();
+                .hasAcceptedEula(activity);
         if (!hasAcceptedEula) {
             activity.startActivityForResult(EulaActivity.newIntent(activity, false),
                     Const.RequestCodes.EULA_ACCEPTED);

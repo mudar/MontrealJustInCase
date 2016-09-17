@@ -114,6 +114,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.activity.MainActivity" />
         </activity>
+
+        <service
+            android:name=".service.SyncService"
+            android:exported="false" />
+
     </application>
 
 </manifest>

@@ -1,0 +1,144 @@
+{
+"type": "FeatureCollection",
+                                                                                
+"features": [
+{ "type": "Feature", "properties": { "Name": "École secondaire Louis-Riel", "Description": "<p>École secondaire Louis-Riel<br\/>5850 Avenue De Carignan <br\/>Mercier-Hochelaga-Maisonneuve<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.555140587099999, 45.583507307200001 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "École Édouard-Montpetit", "Description": "<p>École Édouard-Montpetit<br\/>6200 Avenue Pierre-de-Coubertin <br\/>Mercier-Hochelaga-Maisonneuve<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.537221045199999, 45.576324388700002 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Centre Pierre-Charbonneau", "Description": "<p>Centre Pierre-Charbonneau<br\/>3000 Rue Viau <br\/>Mercier-Hochelaga-Maisonneuve<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.548599512, 45.5634174315 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Hôtel de Ville", "Description": "<p>Hôtel de Ville<br\/>90 Avenue Roosevelt <br\/>Mont-Royal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.641696552699997, 45.513487680300003 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Centre Édouard Rivet", "Description": "<p>Centre Édouard Rivet<br\/>11111 Rue Notre-Dame-Est <br\/>Montréal-Est<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.499273469100004, 45.628270168500002 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Centre des loisirs de Montréal-Nord", "Description": "<p>Centre des loisirs de Montréal-Nord<br\/>11121 Avenue Salk <br\/>Montréal-Nord<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.622839588, 45.601486093699997 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "École secondaire Henri-Bourassa", "Description": "<p>École secondaire Henri-Bourassa<br\/>6051 Boulevard Maurice-Duplessis <br\/>Montréal-Nord<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.621863886200003, 45.614521782700002 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Hôtel de Ville de Montréal-Ouest", "Description": "<p>Hôtel de Ville de Montréal-Ouest<br\/>50 Avenue Westminster Sud <br\/>Montréal-Ouest<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.642004709700004, 45.451622740600001 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Centre communautaire intergénérationnel", "Description": "<p>Centre communautaire intergénérationnel<br\/>999 artérielle McEachran <br\/>Outremont<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.618742991, 45.519516724900001 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Centre d’éducation aux adultes", "Description": "<p>Centre d’éducation aux adultes<br\/>500 Boulevard Dollard <br\/>Outremont<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.610685767600003, 45.516700933400003 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "École secondaire Riverdale", "Description": "<p>École secondaire Riverdale<br\/>5060 Boulevard Des Sources <br\/>Pierrefonds-Roxboro<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.822435750400004, 45.509703829800003 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Polyvalente de Pierrefonds", "Description": "<p>Polyvalente de Pierrefonds<br\/>13800 Boulevard Pierrefonds <br\/>Pierrefonds-Roxboro<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.848409667200002, 45.493847821499998 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Centre communautaire Roussin", "Description": "<p>Centre communautaire Roussin<br\/>12125 Rue Notre-Dame Est <br\/>Rivière-des-Prairies-Pointe-aux-Trembles<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.48981409, 45.641084062200001 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Ecole secondaire Daniel-Johnson", "Description": "<p>Ecole secondaire Daniel-Johnson<br\/>1200 Boulevard Tricentenaire <br\/>Rivière-des-Prairies-Pointe-aux-Trembles<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.496443271299995, 45.650487951700001 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "École secondaire Pointe-aux-Trembles", "Description": "<p>École secondaire Pointe-aux-Trembles<br\/>15200 Rue Sherbrooke Est <br\/>Rivière-des-Prairies-Pointe-aux-Trembles<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.496681155299996, 45.684778886399997 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Pavillon sportif du Centre Boscoville 2000", "Description": "<p>Pavillon sportif du Centre Boscoville 2000<br\/>10950 boulevard Perras <br\/>Rivière-des-Prairies-Pointe-aux-Trembles<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.545959814200003, 45.669292898599998 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "École secondaire Jean-Grou", "Description": "<p>École secondaire Jean-Grou<br\/>12725 Boulevard Rodolphe-Forget <br\/>Rivière-des-Prairies-Pointe-aux-Trembles<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.580703982100005, 45.651696963500001 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Centre Père-Marquette", "Description": "<p>Centre Père-Marquette<br\/>1600 Rue Drucourt <br\/>Rosemont-La Petite-Patrie<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.595524191899997, 45.541235617200002 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Centre Étienne Desmarteau", "Description": "<p>Centre Étienne Desmarteau<br\/>3430 Rue Bellechasse <br\/>Rosemont-La Petite-Patrie<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.580490661799999, 45.555594487199997 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Cegep de Saint-Laurent", "Description": "<p>Cegep de Saint-Laurent<br\/>625 Avenue Sainte-Croix <br\/>Saint-Laurent<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.672140424, 45.511904642799998 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Centre des loisirs de Saint-Laurent", "Description": "<p>Centre des loisirs de Saint-Laurent<br\/>1375 Rue Grenet <br\/>Saint-Laurent<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.690255972499997, 45.513877617399999 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Laurier Macdonald High School", "Description": "<p>Laurier Macdonald High School<br\/>7355 Boulevard Viau <br\/>Saint-Léonard<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.5858636297, 45.575575369 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "École secondaire Antoine-de-Saint-Exupéry", "Description": "<p>École secondaire Antoine-de-Saint-Exupéry<br\/>5150 Boulevard Robert <br\/>Saint-Léonard<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.602447048200005, 45.5851281865 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Chalet Peter Williamson", "Description": "<p>Chalet Peter Williamson<br\/>300 Rue Cypihot <br\/>Sainte-Anne-de-Bellevue<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.927094825099999, 45.439445878900003 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Centre Harpell", "Description": "<p>Centre Harpell<br\/>60 Rue St-Pierre <br\/>Sainte-Anne-de-Bellevue<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.950538254799994, 45.40565601 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Église Corpus Christi", "Description": "<p>Église Corpus Christi<br\/>16 Avenue Pacific <br\/>Senneville<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.953080161900004, 45.412443060699999 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "École secondaire Mgr-Richard", "Description": "<p>École secondaire Mgr-Richard<br\/>3000 boulevard Gaètan-Laberge <br\/>Verdun<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.561507222200007, 45.470206774899999 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Centre communautaire Marcel-Giroux", "Description": "<p>Centre communautaire Marcel-Giroux<br\/>4501 Rue Bannantyne <br\/>Verdun<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.575741655300007, 45.459566829499998 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Association Sportive et communautaire Centre-Sud", "Description": "<p>Association Sportive et communautaire Centre-Sud<br\/>2093 Rue de la Visitation <br\/>Ville-Marie<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.562599981899993, 45.522796271200001 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "École Pierre-Dupuy", "Description": "<p>École Pierre-Dupuy<br\/>2000 Rue Parthenais <br\/>Ville-Marie<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.555952916799995, 45.529447640199997 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Centre Jean-Claude-Malépart", "Description": "<p>Centre Jean-Claude-Malépart<br\/>2633 Rue Ontario Est <br\/>Ville-Marie<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.551429793799997, 45.534333661 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Patro Le Prévost", "Description": "<p>Patro Le Prévost<br\/>7355 Boulevard Christophe-Colomb <br\/>Villeray-Saint-Michel-Parc-Extension<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.614823884800003, 45.543987633199997 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Centre communautaire Victoria Hall", "Description": "<p>Centre communautaire Victoria Hall<br\/>4626 Rue Sherbrooke Ouest <br\/>Westmount<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.599853551500004, 45.481678869299998 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "7500 avenue Goncourt", "Description": "<p>7500 avenue Goncourt<br\/>7500 avenue Goncourt <br\/>Anjou<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.558236578899994, 45.603046269499998 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Centre communautaire de Saint-Raymond", "Description": "<p>Centre communautaire de Saint-Raymond<br\/>5600 chemin Upper-Lachine <br\/>Côte-des-Neiges-Notre-Dame-de-Grâce<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.609585914199997, 45.469268673099997 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Complexe culturel Guy-Descary", "Description": "<p>Complexe culturel Guy-Descary<br\/>2901 boulevard Saint-Joseph <br\/>Lachine<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.690195690899998, 45.433401423200003 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "École secondiare Calixa-Lavallée", "Description": "<p>École secondiare Calixa-Lavallée<br\/>4444 boulevard Henri-Bourassa <br\/>Montréal-nord<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.635615289, 45.599601983600003 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "YMCA Centre-Ville", "Description": "<p>YMCA Centre-Ville<br\/>1440 Rue Stanley <br\/>Ville-Marie<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.574478548200005, 45.4996795506 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Centre YMCA Cartierville", "Description": "<p>Centre YMCA Cartierville<br\/>11885 Boulevard Laurentien <br\/>Ahuntsic-Cartierville<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.711617756, 45.525363953199999 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Centre aquatique", "Description": "<p>Centre aquatique<br\/>60 Avenue Maywood <br\/>Pointe-Claire<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.814108798299998, 45.450004257800003 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Centre communautaire Senneville", "Description": "<p>Centre communautaire Senneville<br\/>20 Avenue Morningside <br\/>Senneville<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.958293994, 45.4155421452 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Complexe sportif Claude-Robillard", "Description": "<p>Complexe sportif Claude-Robillard<br\/>1000 Avenue Émile-Journault <br\/>Ahuntsic-Cartierville<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.637756291399995, 45.553766308599997 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Centre l’Acadie", "Description": "<p>Centre l’Acadie<br\/>2005 Rue Victor-Doré <br\/>Ahuntsic-Cartierville<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.688517815500006, 45.53627742 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "École secondaire d’Anjou", "Description": "<p>École secondaire d’Anjou<br\/>8205 Rue Fronteneau <br\/>Anjou<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.558015558, 45.601684272 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Centre Roger-Rousseau", "Description": "<p>Centre Roger-Rousseau<br\/>7501 Avenue Rondeau <br\/>Anjou<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.550282189499995, 45.615975139200003 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Club de Curling de Baie D’Urfé", "Description": "<p>Club de Curling de Baie D’Urfé<br\/>20599 Chemin Lakeshore <br\/>Baie D’Urfé<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.920547009200007, 45.406042874199997 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Centre récréatif de Beaconsfield", "Description": "<p>Centre récréatif de Beaconsfield<br\/>1974 Rue City Lane <br\/>Beaconsfield<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.866193972299996, 45.426591650799999 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Centre sportif Côte-des-Neiges", "Description": "<p>Centre sportif Côte-des-Neiges<br\/>4880 Avenue Van Horne <br\/>Côte-des-Neiges-Notre-Dame-de-Grâce<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.638114609699997, 45.4931268335 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Centre communautaire de loisirs de Côte-des-Neiges", "Description": "<p>Centre communautaire de loisirs de Côte-des-Neiges<br\/>5352 Avenue Gatineau <br\/>Côte-des-Neiges-Notre-Dame-de-Grâce<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.6216602099, 45.497230870599999 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Centre récréatif James G. Butler", "Description": "<p>Centre récréatif James G. Butler<br\/>7500 Chemin Mackle <br\/>Côte-Saint-Luc<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.671042353700003, 45.468823578200002 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Centre civique", "Description": "<p>Centre civique<br\/>12001 Boulevard De Salaberry <br\/>Dollard-des-Ormeaux<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.809162582200003, 45.482847701399997 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Centre communautaire Surrey", "Description": "<p>Centre communautaire Surrey<br\/>1945 Avenue Parkfield <br\/>Dorval<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.771539834600006, 45.453102637699999 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Centre communautaire Sarto Desnoyers", "Description": "<p>Centre communautaire Sarto Desnoyers<br\/>1335 Chemin Bord du Lac <br\/>Dorval<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.754071412, 45.439263608600001 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Centre communautaire Irving L. Adessky", "Description": "<p>Centre communautaire Irving L. Adessky<br\/>30 Chemin Lyncroft <br\/>Hampstead<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.644270783899998, 45.483078769499997 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Chalet Holleuffer", "Description": "<p>Chalet Holleuffer<br\/>75 Rue Charlevoix <br\/>Kirkland<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.878496078400005, 45.449897803399999 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Chalet Ecclestone", "Description": "<p>Chalet Ecclestone<br\/>130 Rue Argyle <br\/>Kirkland<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.858103366500004, 45.462680754200001 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Complexe sportif Kirkland", "Description": "<p>Complexe sportif Kirkland<br\/>16950 Boulevard Hymus <br\/>Kirkland<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.849423259800005, 45.4498637282 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Pavillon Vincent-Lecavalier", "Description": "<p>Pavillon Vincent-Lecavalier<br\/>488 Montée De l’Église <br\/>L’Ile-Bizard -Sainte-Geneviève<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.879725777299996, 45.4874498366 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Complexe sportif St-Raphael", "Description": "<p>Complexe sportif St-Raphael<br\/>750 Boulevard Jacques Bizard <br\/>L’Ile-Bizard -Sainte-Geneviève<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.876525514799994, 45.502094936699997 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Centre Socioculturel", "Description": "<p>Centre Socioculturel<br\/>490 Montée De l’Église <br\/>L’Ile-Bizard -Sainte-Geneviève<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.879725777299996, 45.4874498366 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "École secondaire Dalbé-Viau", "Description": "<p>École secondaire Dalbé-Viau<br\/>740 Rue Esther-Blondin <br\/>Lachine<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.679641909599994, 45.443714724499998 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Centre communautaire Albert-Gariépy", "Description": "<p>Centre communautaire Albert-Gariépy<br\/>800 Rue Sherbrooke <br\/>Lachine<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.670563579800003, 45.44507972 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Complexe sportif du Collège Sainte-Anne", "Description": "<p>Complexe sportif du Collège Sainte-Anne<br\/>50 Avenue 12i ème Avenue <br\/>Lachine<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.680690987899993, 45.432998741299997 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "École secondaire Cavalier-de-LaSalle", "Description": "<p>École secondaire Cavalier-de-LaSalle<br\/>9199 Rue Centrale <br\/>LaSalle<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.639015557700006, 45.417077689400003 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Hôtel de Ville", "Description": "<p>Hôtel de Ville<br\/>55 Avenue Dupras <br\/>LaSalle<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.661844280899999, 45.427601702700002 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "École secondaire Jeanne-Mance", "Description": "<p>École secondaire Jeanne-Mance<br\/>4240 Rue Bordeaux <br\/>Le Plateau-Mont-Royal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.568495437099998, 45.532535651899998 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Centre du Plateau", "Description": "<p>Centre du Plateau<br\/>2275 Boulevard St-Joseph Est <br\/>Le Plateau-Mont-Royal<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.575138610600007, 45.539651589599998 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Centre Sportif de la Petite-Bourgogne", "Description": "<p>Centre Sportif de la Petite-Bourgogne<br\/>1825 Boulevard Notre-Dame Ouest <br\/>Le Sud-Ouest<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.568155234100004, 45.488413158900002 ] } }
+,
+{ "type": "Feature", "properties": { "Name": "Complexe récréatif Gadbois", "Description": "<p>Complexe récréatif Gadbois<br\/>5485 Chemin De la Côte St-Paul <br\/>Le Sud-Ouest<\/P><P><\/P><P>  <\/P>" }, "geometry": { "type": "Point", "coordinates": [ -73.594856346, 45.466063775099997 ] } }
+
+]
+}

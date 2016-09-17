@@ -97,14 +97,14 @@ public class MainActivity extends BaseActivity implements
     private Realm mRealm;
     private Handler mHandler = new Handler(); // Waits for the BottomBar anim
     private LocationUpdatesManager mLocationManger;
-    private boolean mHasStartedEulaActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (!mHasStartedEulaActivity) {
-            mHasStartedEulaActivity = EulaUtils.showEulaIfNecessary(this);
+        if (savedInstanceState == null) {
+            // Avoid showing EULA twice on orientation change
+            EulaUtils.showEulaIfNecessary(this);
         }
 
         setTitle(R.string.title_activity_main);

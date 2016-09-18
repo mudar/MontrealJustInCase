@@ -24,7 +24,7 @@ android {
         applicationId "ca.mudar.mtlaucasou"
         minSdkVersion 19
         targetSdkVersion 24
-        versionCode 16
+        versionCode 20
         versionName "2.0"
 
         resConfigs "en", "fr"

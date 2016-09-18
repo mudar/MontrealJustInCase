@@ -25,9 +25,11 @@ package ca.mudar.mtlaucasou;
 
 import android.app.Application;
 
+import com.crashlytics.android.Crashlytics;
 
 import ca.mudar.mtlaucasou.service.SyncService;
 import ca.mudar.mtlaucasou.util.LangUtils;
+import io.fabric.sdk.android.Fabric;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
@@ -37,9 +39,17 @@ public class MtlAuCasOuApp extends Application {
     public void onCreate() {
         super.onCreate();
 
+        setupCrashlytics();
         setupRealm();
+        setupLeakCanary();
 
         LangUtils.updateUiLanguage(this);
+    }
+
+    private void setupCrashlytics() {
+        if (BuildConfig.USE_CRASHLYTICS) {
+            Fabric.with(this, new Crashlytics());
+        }
     }
 
     private void setupRealm() {
@@ -50,5 +60,9 @@ public class MtlAuCasOuApp extends Application {
         Realm.setDefaultConfiguration(config);
 
         startService(SyncService.getIntent(this));
+    }
+
+    private void setupLeakCanary() {
+//        LeakCanary.install(this);
     }
 }

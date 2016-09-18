@@ -1,4 +1,19 @@
+buildscript {
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+    }
+
+    dependencies {
+        classpath 'io.fabric.tools:gradle:1.+'
+    }
+}
 apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
+
 apply plugin: 'realm-android'
 
 android {
@@ -9,28 +24,38 @@ android {
         applicationId "ca.mudar.mtlaucasou"
         minSdkVersion 19
         targetSdkVersion 24
-        versionCode 15
-        versionName "1.5"
+        versionCode 16
+        versionName "2.0"
+
+        resConfigs "en", "fr"
     }
     buildTypes {
         release {
             minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            shrinkResources true
+            FileCollection proGuardFileCollection = files { file('./proguard').listFiles() }
+            proguardFiles(proGuardFileCollection)
+            proguardFile getDefaultProguardFile('proguard-android.txt')
 
             buildConfigField "String", "API_BASE_URL", '"http://www.montrealaucasou.com/api/"'
             buildConfigField "boolean", "USE_CRASHLYTICS", "true"
-            ext.enableCrashlytics = true
         }
 
         debug {
-//            applicationIdSuffix ".d"
-
+            applicationIdSuffix ".d"
             minifyEnabled false
 
             buildConfigField "String", "API_BASE_URL", '"http://www.montrealaucasou.com/api/"'
             buildConfigField "boolean", "USE_CRASHLYTICS", "false"
-            ext.enableCrashlytics = false
         }
+    }
+
+    packagingOptions {
+        exclude 'lib/arm64-v8a/librealm-jni.so'
+        exclude 'lib/armeabi-v7a/librealm-jni.so'
+        exclude 'lib/mips/librealm-jni.so'
+        exclude 'lib/mips/librealm-jni.so'
+        exclude 'lib/x86_64/librealm-jni.so'
     }
 }
 
@@ -57,4 +82,11 @@ dependencies {
     compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+    // Dev Tools
+//    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4'
+//    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4'
+//    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4'
+    compile('com.crashlytics.sdk.android:crashlytics:2.6.3@aar') {
+        transitive = true;
+    }
 }

@@ -52,7 +52,6 @@
 
     <!--Buttons-->
     <string name="btn_ok">Ok</string>
-    <string name="btn_allow">Autoriser</string>
     <string name="btn_device_settings">Paramètres de l’appareil</string>
     <string name="btn_zoom_out">Zoom arrière</string>
     <string name="btn_accept_eula">Accepter et continuer</string>

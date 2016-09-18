@@ -56,7 +56,6 @@ public class SettingsFragment extends PreferenceFragment implements
     private SharedPreferences mSharedPrefs;
     private Preference mPrefUnits;
     private Preference mPrefLanguage;
-    private Preference mPrefPermissions;
     private OnConfigChangeListener mListener;
 
     public static SettingsFragment newInstance() {
@@ -113,8 +112,8 @@ public class SettingsFragment extends PreferenceFragment implements
 
         mPrefUnits = findPreference(UNITS_SYSTEM);
         mPrefLanguage = findPreference(LANGUAGE);
-        mPrefPermissions = findPreference(PERMISSIONS);
 
+        final Preference mPrefPermissions = findPreference(PERMISSIONS);
         if (mPrefPermissions != null) {
             mPrefPermissions.setOnPreferenceClickListener(this);
         }

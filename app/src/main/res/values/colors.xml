@@ -36,7 +36,7 @@
     <!--<color name="cyan_500">#00BCD4</color>-->
     <!--<color name="red_500">#F44336</color>-->
     <color name="red_700">#D32F2F</color>
-    <color name="blue_400">#78909C</color>
+    <!--<color name="blue_400">#78909C</color>-->
     <color name="blue_500">#2196F3</color>
     <color name="blue_grey_300">#90A4AE</color>
     <color name="blue_grey_400">#78909C</color>
@@ -76,9 +76,6 @@
     <!--About-->
     <color name="intro_text_color">@color/color_primary</color>
     <color name="divider_bg">@color/grey_900</color>
-
-    <!--Snackbar-->
-    <color name="snackbar_action_text_color">@color/yellow_800</color>
 
     <!--Override libraries values-->
     <color name="colorPrimary">@color/color_primary</color>

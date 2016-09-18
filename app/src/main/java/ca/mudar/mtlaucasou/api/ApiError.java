@@ -62,7 +62,7 @@ public class ApiError extends IOException {
             String msg;
             if (mMessage != null && !mMessage.isEmpty()) {
                 msg = String.format(res.getString(R.string.snackbar_api_error_message),
-                        mMessage.toLowerCase(),
+                        mMessage,
                         mCode);
             } else {
                 if (isHostNotFound()) {

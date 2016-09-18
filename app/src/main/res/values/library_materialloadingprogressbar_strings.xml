@@ -21,7 +21,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="UnusedResources">
     <string name="define_int_materialloadingprogressbar" translatable="false">year;owner</string>
     <!-- Author section -->
     <string name="library_materialloadingprogressbar_author" translatable="false">lsjwzh</string>

@@ -90,6 +90,6 @@ public class PlacemarkInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
     }
 
     public interface InfoWindowLocationCallbacks {
-        public Location getUserLocation();
+        Location getUserLocation();
     }
 }

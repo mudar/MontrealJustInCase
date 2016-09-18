@@ -23,6 +23,7 @@
 
 package ca.mudar.mtlaucasou.ui.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.location.Location;
@@ -61,6 +62,7 @@ import ca.mudar.mtlaucasou.ui.listener.LocationUpdatesManager;
 import ca.mudar.mtlaucasou.ui.listener.SearchResultsManager;
 import ca.mudar.mtlaucasou.ui.view.PlacemarksSearchView;
 import ca.mudar.mtlaucasou.util.EulaUtils;
+import ca.mudar.mtlaucasou.util.LogUtils;
 import ca.mudar.mtlaucasou.util.MapUtils;
 import ca.mudar.mtlaucasou.util.NavigUtils;
 import ca.mudar.mtlaucasou.util.PermissionUtils;
@@ -184,8 +186,13 @@ public class MainActivity extends BaseActivity implements
         final PlacemarksSearchView searchView =
                 (PlacemarksSearchView) MenuItemCompat.getActionView(searchMenuItem);
 
-        searchView.setSearchMenuItem(searchMenuItem);
-        searchView.setListener(new SearchResultsManager(MainActivity.this, this));
+        try {
+            searchView.setSearchMenuItem(searchMenuItem);
+            searchView.setListener(new SearchResultsManager(MainActivity.this, this));
+        } catch (Exception e) {
+            LogUtils.REMOTE_LOG(e);
+            searchMenuItem.setVisible(false);
+        }
     }
 
     /**
@@ -217,7 +224,7 @@ public class MainActivity extends BaseActivity implements
             @Override
             public void onClick(View view) {
                 if (PermissionUtils.checkLocationPermission(MainActivity.this)) {
-                    MapUtils.moveCameraToLocation(vMap, mLocationManger.getUserLocation(), true, null);
+                    MapUtils.moveCameraToLocation(vMap, mLocationManger.getUserLocation(), true);
                 } else {
                     PermissionUtils.requestLocationPermission(MainActivity.this);
                 }
@@ -247,6 +254,7 @@ public class MainActivity extends BaseActivity implements
         vMap.getUiSettings().setMyLocationButtonEnabled(false);
 
         // Setup the InfoWindow
+        @SuppressLint("InflateParams")
         final View vMarkerInfoWindow = getLayoutInflater()
                 .inflate(R.layout.custom_info_window, null, false);
         vMap.setInfoWindowAdapter(new PlacemarkInfoWindowAdapter(vMarkerInfoWindow, mLocationManger));
@@ -358,7 +366,7 @@ public class MainActivity extends BaseActivity implements
 
     @Override
     public void moveCameraToLocation(Location location) {
-        MapUtils.moveCameraToLocation(vMap, location, true, null);
+        MapUtils.moveCameraToLocation(vMap, location, true);
     }
 
     private void toggleProgressBar(boolean visible) {

@@ -23,6 +23,8 @@
 
 package ca.mudar.mtlaucasou;
 
+import android.os.Build;
+
 import com.google.android.gms.maps.model.LatLng;
 
 public class Const {
@@ -30,14 +32,23 @@ public class Const {
      * MTL au cas ou
      */
     public static final float MONTREAL_NATURAL_NORTH_ROTATION = -34f;
-    public static final float ZOOM_DEFAULT = 15;
+    public static final float ZOOM_IN = 16;
+    public static final float ZOOM_DEFAULT = 14;
+    public static final float ZOOM_OUT = 11;
     public static final LatLng MONTREAL_GEO_LAT_LNG = new LatLng(45.5d, -73.666667d);
+
+    public interface MapTypes {
+        String FIRE_HALLS = "fire_halls";
+        String SVPM_STATIONS = "svpm_stations";
+        String WATER_SUPPLIES = "water_supplies";
+        String EMERGENCY_HOSTELS = "emergency_hostels";
+    }
 
     public static final double MAPS_GEOCODER_LIMITS[] = {
             45.380127d, // lowerLeftLat
             -73.982620d, // lowerLeftLng
             45.720444d, // upperRightLat
-            -73.466087d
+            -73.466087d // upperRightLng
     };
 
     /**
@@ -49,6 +60,12 @@ public class Const {
         String GET_SPVM_STATIONS = "spvm_stations.json";
         String GET_WATER_SUPPLIES = "water_supplies.json";
         String GET_EMERGENCY_HOSTELS = "emergency_hostes.json";
+    }
+
+    public interface BundleKeys {
+        String NAME = "name";
+        String DESCRIPTION = "desc";
+        String HAS_ACCEPTED_EULA = "has_accepted_eula";
     }
 
     /**
@@ -67,33 +84,70 @@ public class Const {
     }
 
 
-    public static interface PrefsNames {
-        final String HAS_LOADED_DATA = "prefs_has_loaded_data";
-        final String VERSION_DATABASE = "prefs_version_database";
-        final String LANGUAGE = "prefs_language";
-        final String UNITS_SYSTEM = "prefs_units_system";
-        final String LIST_SORT = "prefs_list_sort_by";
-        final String FOLLOW_LOCATION_CHANGES = "prefs_follow_location_changes";
-        final String LAST_UPDATE_TIME = "prefs_last_update_time";
-        final String LAST_UPDATE_LAT = "prefs_last_update_lat";
-        final String LAST_UPDATE_LNG = "prefs_last_update_lng";
+    /**
+     * Database
+     */
+    public static final String DATABASE_NAME = "mtlaucasou.realm";
+    public static final int DATABASE_VERSION = 10;
 
+    /**
+     * Settings, SharedPreferences
+     */
+    public static final String APP_PREFS_NAME = "MTL_JUSTINCASE_PREFS";
+
+    public interface PrefsNames {
+        String HAS_LOADED_DATA_LEGACY = "prefs_has_loaded_data"; // version 1.0
+        String HAS_LOADED_DATA = "prefs_has_loaded_data_v2";
+        String IS_FIRST_LAUNCH = "prefs_is_first_launch";
+        String HAS_ACCEPTED_EULA = "accepted_eula";
+//        String VERSION_DATABASE = "prefs_version_database";
+        String LANGUAGE = "prefs_language";
+        String PERMISSIONS = "prefs_permissions";
+        String UNITS_SYSTEM = "prefs_units_system";
+//        String LIST_SORT = "prefs_list_sort_by";
+//        String FOLLOW_LOCATION_CHANGES = "prefs_follow_location_changes";
+        String LAST_UPDATE_TIME = "prefs_last_update_time";
+        String LAST_UPDATE_LAT = "prefs_last_update_lat";
+        String LAST_UPDATE_LNG = "prefs_last_update_lng";
+        String PERMISSION_DENIED_FOR_EVER = "prefs_permission_denied";
     }
 
-    public static interface PrefsValues {
-        final String LANG_FR = "fr";
-        final String LANG_EN = "en";
-        final String UNITS_ISO = "iso";
-        final String UNITS_IMP = "imp";
-        final String LIST_SORT_NAME = "name";
-        final String LIST_SORT_DISTANCE = "distance";
+    public interface PrefsValues {
+        String LANG_FR = "fr";
+        String LANG_EN = "en";
+        String UNITS_ISO = "iso";
+        String UNITS_IMP = "imp";
+//        String LIST_SORT_NAME = "name";
+//        String LIST_SORT_DISTANCE = "distance";
+    }
+
+    public interface RequestCodes {
+        int EULA_ACCEPTED = 10;
+        int LOCATION_PERMISSION = 20;
+        int LOCATION_SETTINGS_CHANGE = 30;
+    }
+
+    public interface FragmentTags {
+        String SETTINGS = "fragment_settings";
     }
 
     /**
      * Other constants
      */
     public static final int UNKNOWN_VALUE = -1;
-    public static final long ANIM_SHORT_DURATION = 200L;
-    public static final long ANIM_MEDIUM_DURATION = 400L;
-    public static final long ANIM_LONG_DURATION = 500L;
+//    public static final long ANIM_SHORT_DURATION = 200L;
+//    public static final long ANIM_MEDIUM_DURATION = 400L;
+//    public static final long ANIM_LONG_DURATION = 500L;
+    public static final String CUSTOM_LOCATION_PROVIDER = "search_provider";
+    public static final String LINE_SEPARATOR = System.getProperty("line.separator");
+
+    // Assets
+    public interface LocalAssets {
+        String LICENSE = "gpl-3.0-standalone.html";
+    }
+
+    /**
+     * Compatibility
+     */
+    public static final boolean SUPPORTS_NOUGAT = android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.N;
 }

@@ -106,7 +106,9 @@ public class LocationUpdatesManager implements
     }
 
     public void onLocationSettingsResult(int resultCode, Intent data) {
-        if (resultCode == Activity.RESULT_OK && PermissionUtils.checkLocationPermission(mContext)) {
+        if (resultCode == Activity.RESULT_OK &&
+                PermissionUtils.checkLocationPermission(mContext) &&
+                mGoogleApiClient.isConnected()) {
             // Start locationUpdates requests
             LocationServices.FusedLocationApi.requestLocationUpdates(
                     mGoogleApiClient,

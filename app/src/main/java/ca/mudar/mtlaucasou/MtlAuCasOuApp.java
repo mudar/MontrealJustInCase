@@ -27,6 +27,7 @@ import android.app.Application;
 
 import com.crashlytics.android.Crashlytics;
 
+import ca.mudar.mtlaucasou.data.UserPrefs;
 import ca.mudar.mtlaucasou.service.SyncService;
 import ca.mudar.mtlaucasou.util.LangUtils;
 import io.fabric.sdk.android.Fabric;
@@ -44,6 +45,8 @@ public class MtlAuCasOuApp extends Application {
         setupLeakCanary();
 
         LangUtils.updateUiLanguage(this);
+
+        UserPrefs.setDefaultValues(this);
     }
 
     private void setupCrashlytics() {

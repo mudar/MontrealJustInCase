@@ -53,7 +53,7 @@ public class UserPrefs implements
         return context.getSharedPreferences(Const.APP_PREFS_NAME, Context.MODE_PRIVATE);
     }
 
-    public static void setDefaults(Context context) {
+    public static void setDefaultValues(Context context) {
         PreferenceManager.setDefaultValues(context,
                 Const.APP_PREFS_NAME,
                 Context.MODE_PRIVATE,
@@ -117,7 +117,7 @@ public class UserPrefs implements
     }
 
     public String getUnitsSystem() {
-        return mPrefs.getString(UNITS_SYSTEM, null);
+        return mPrefs.getString(UNITS_SYSTEM, Const.PrefsValues.UNITS_ISO);
     }
 
     public void setUnitsSystem(String units) {

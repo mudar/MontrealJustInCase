@@ -72,6 +72,7 @@
     <string name="about_montreal_ouvert">An Open Data project done in collaboration with Montréal&#160;ouvert.</string>
 
     <!--Settings-->
+    <string name="prefs_default_value_lang">en</string>
     <string name="prefs_language_title">Language</string>
     <string name="prefs_language_dialog_title">Set language</string>
     <string name="prefs_language_french">Français</string>

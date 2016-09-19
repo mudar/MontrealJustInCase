@@ -343,7 +343,7 @@ public class MainActivity extends BaseActivity implements
     @Override
     public void moveCameraToPlacemark(Placemark placemark) {
         GoogleMap.OnCameraIdleListener cameraIdleListener;
-        if (!mMapType.equals(placemark.getMapType())) {
+        if (mMapType != null && !mMapType.equals(placemark.getMapType())) {
             final int tabId = NavigUtils.getTabIdByMapType(placemark.getMapType());
 
             cameraIdleListener = new GoogleMap.OnCameraIdleListener() {

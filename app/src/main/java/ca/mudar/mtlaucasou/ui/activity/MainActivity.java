@@ -238,8 +238,17 @@ public class MainActivity extends BaseActivity implements
     private void setupMap() {
         mLocationManger = new LocationUpdatesManager(MainActivity.this, this);
 
-        final SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentByTag(Const.FragmentTags.MAP);
+        if (mapFragment == null) {
+            mapFragment = new SupportMapFragment();
+        }
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.content_frame, mapFragment, Const.FragmentTags.MAP)
+                .commit();
+
         mapFragment.getMapAsync(this);
     }
 

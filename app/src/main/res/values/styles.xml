@@ -23,6 +23,13 @@
 
 <resources>
 
+    <style name="BottomBarStyle">
+        <item name="bb_behavior">shifting</item>
+        <item name="bb_activeTabColor">@color/text_primary</item>
+        <item name="bb_inActiveTabColor">@color/text_secondary</item>
+        <item name="bb_tabXmlResource">@xml/bottombar_tabs</item>
+    </style>
+
     <style name="AboutPrimaryText">
         <item name="android:layout_marginLeft">@dimen/padding_large</item>
         <item name="android:textSize">@dimen/about_body_text_size</item>

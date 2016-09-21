@@ -78,11 +78,10 @@
 
     <com.roughike.bottombar.BottomBar
         android:id="@+id/bottom_bar"
+        style="@style/BottomBarStyle"
         android:layout_width="match_parent"
         android:layout_height="@dimen/bottombar_height"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="@dimen/bottombar_top_margin"
-        app:bb_behavior="shifting"
-        app:bb_tabXmlResource="@xml/bottombar_tabs" />
+        android:layout_marginTop="@dimen/bottombar_top_margin" />
 
 </RelativeLayout>

@@ -24,6 +24,8 @@ package ca.mudar.mtlaucasou.util;
 
 import android.util.Log;
 
+import com.crashlytics.android.Crashlytics;
+
 import ca.mudar.mtlaucasou.BuildConfig;
 
 public class LogUtils {
@@ -119,8 +121,7 @@ public class LogUtils {
     @Deprecated
     public static void REMOTE_LOG(Throwable cause) {
         if (BuildConfig.USE_CRASHLYTICS) {
-            // TODO use Crashlytics
-//            Crashlytics.logException(cause);
+            Crashlytics.logException(cause);
         }
         cause.printStackTrace();
     }

@@ -118,7 +118,6 @@ public class LogUtils {
         }
     }
 
-    @Deprecated
     public static void REMOTE_LOG(Throwable cause) {
         if (BuildConfig.USE_CRASHLYTICS) {
             Crashlytics.logException(cause);

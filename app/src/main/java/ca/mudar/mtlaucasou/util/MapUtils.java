@@ -267,9 +267,10 @@ public class MapUtils {
     /**
      * Move the camera to a Location obtained from the GeoLocator for a user search query.
      * Also adds a default Marker (pin) at the requested location.
-     *  @param map                The GoogleMap
-     * @param location           The selection location to show at center
-     * @param animate            With/out animation
+     *
+     * @param map      The GoogleMap
+     * @param location The selection location to show at center
+     * @param animate  With/out animation
      */
     public static void moveCameraToLocation(GoogleMap map, Location location, boolean animate) {
         if (map == null || location == null) {

@@ -32,6 +32,7 @@ import android.os.Handler;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.MenuItemCompat;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -109,6 +110,8 @@ public class MainActivity extends BaseActivity implements
         mSnackbarParent = findViewById(R.id.map_wrapper);
 
         mRealm = Realm.getDefaultInstance();
+
+        mLocationManger = new LocationUpdatesManager(MainActivity.this, this);
 
         setupMap();
         setupFAB();
@@ -211,7 +214,7 @@ public class MainActivity extends BaseActivity implements
         mBottomBar.setOnTabReselectListener(new OnTabReselectListener() {
             @Override
             public void onTabReSelected(@IdRes int tabId) {
-                if (vMap != null) {
+                if (isMapReady()) {
                     vMap.animateCamera(CameraUpdateFactory.zoomTo(Const.ZOOM_OUT));
                 }
             }
@@ -236,20 +239,23 @@ public class MainActivity extends BaseActivity implements
      * Obtain the SupportMapFragment and get notified when the map is ready to be used.
      */
     private void setupMap() {
-        mLocationManger = new LocationUpdatesManager(MainActivity.this, this);
+        try {
+            SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                    .findFragmentByTag(Const.FragmentTags.MAP);
+            if (mapFragment == null) {
+                mapFragment = new SupportMapFragment();
+            }
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentByTag(Const.FragmentTags.MAP);
-        if (mapFragment == null) {
-            mapFragment = new SupportMapFragment();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.content_frame, mapFragment, Const.FragmentTags.MAP)
+                    .commit();
+
+            mapFragment.getMapAsync(this);
+        } catch (Exception e) {
+            LogUtils.REMOTE_LOG(e);
+            isMapReady();
         }
-
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.content_frame, mapFragment, Const.FragmentTags.MAP)
-                .commit();
-
-        mapFragment.getMapAsync(this);
     }
 
     /**
@@ -277,12 +283,35 @@ public class MainActivity extends BaseActivity implements
         loadMapData(mMapType);
     }
 
+    /**
+     * Verify if GoogleMap has loaded correctly.
+     * Utility method to handle a Google Play Services error
+     * Ref: https://code.google.com/p/gmaps-api-issues/issues/detail?id=5100
+     *
+     * @return true if onMapReady() has been successfully called
+     */
+    private boolean isMapReady() {
+        if (vMap == null) {
+            Snackbar.make(mSnackbarParent, R.string.snackbar_google_maps_error, Snackbar.LENGTH_LONG)
+                    .setAction(R.string.btn_retry, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            setupMap();
+                        }
+                    })
+                    .show();
+            return false;
+        }
+
+        return true;
+    }
+
     private void setMapType(final @MapType String type, long delay) {
         mMapType = type;
 
-        toggleProgressBar(true);
+        if (isMapReady()) {
+            toggleProgressBar(true);
 
-        if (vMap != null) {
             // Remove previous markers
             MapUtils.clearMap(vMap);
 
@@ -304,7 +333,7 @@ public class MainActivity extends BaseActivity implements
      * @param type
      */
     private void loadMapData(@MapType final String type) {
-        if (vMap == null) {
+        if (!isMapReady()) {
             return;
         }
 

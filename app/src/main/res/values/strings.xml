@@ -52,6 +52,7 @@
 
     <!--Buttons-->
     <string name="btn_ok">OK</string>
+    <string name="btn_retry">Retry</string>
     <string name="btn_device_settings">Device settings</string>
     <string name="btn_zoom_out">Zoom out</string>
     <string name="btn_accept_eula">Accept &amp; continue</string>
@@ -99,6 +100,7 @@
     <string name="snackbar_empty_map_visible_region">The map’s visible region does not contain any places.</string>
     <string name="snackbar_location_permission_needed">Location permission is needed to show your position on the map.</string>
     <string name="snackbar_location_permission_denied">If you change your mind, you can go to settings to grant the location permission.</string>
+    <string name="snackbar_google_maps_error">Error loading Google Maps…</string>
 
     <!--Accessibility-->
     <string name="desc_montreal">City of Montréal</string>

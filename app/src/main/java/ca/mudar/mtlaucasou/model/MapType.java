@@ -35,6 +35,7 @@ import ca.mudar.mtlaucasou.Const;
         Const.MapTypes.FIRE_HALLS,
         Const.MapTypes.SVPM_STATIONS,
         Const.MapTypes.WATER_SUPPLIES,
-        Const.MapTypes.EMERGENCY_HOSTELS})
+        Const.MapTypes.EMERGENCY_HOSTELS,
+        Const.MapTypes.HOSPITALS})
 public @interface MapType {
 }

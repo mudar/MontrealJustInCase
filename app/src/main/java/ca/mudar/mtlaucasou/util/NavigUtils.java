@@ -36,7 +36,7 @@ public class NavigUtils {
      * Get the bottomBar tabId for the selected SuggestionPlacemark, allowing to switch tabs
      * when showing the placemark.
      *
-     * @param type Selected map type {fire_halls|svpm_stations|water_supplies|emergency_hostels}
+     * @param type Selected map type {fire_halls|svpm_stations|water_supplies|emergency_hostels|hospitals}
      * @return tabId
      */
     @IdRes
@@ -50,6 +50,8 @@ public class NavigUtils {
                 return R.id.tab_water_supplies;
             case Const.MapTypes.EMERGENCY_HOSTELS:
                 return R.id.tab_emergency_hostels;
+            case Const.MapTypes.HOSPITALS:
+                return R.id.tab_hospitals;
         }
 
         return 0;
@@ -59,7 +61,7 @@ public class NavigUtils {
      * Get the map type when user switches tabs in the bottomBar
      *
      * @param tabId the selected bottomBar tabId
-     * @return Selected map type {fire_halls|svpm_stations|water_supplies|emergency_hostels}
+     * @return Selected map type {fire_halls|svpm_stations|water_supplies|emergency_hostels|hospitals}
      */
     @MapType
     public static String getMapTypeByTabId(int tabId) {
@@ -72,6 +74,8 @@ public class NavigUtils {
                 return Const.MapTypes.WATER_SUPPLIES;
             case R.id.tab_emergency_hostels:
                 return Const.MapTypes.EMERGENCY_HOSTELS;
+            case R.id.tab_hospitals:
+                return Const.MapTypes.HOSPITALS;
         }
 
         return null;
@@ -80,7 +84,7 @@ public class NavigUtils {
     /**
      * Get the BottomBar and SearchSuggestions icon (logos)
      *
-     * @param type Selected map type {fire_halls|svpm_stations|water_supplies|emergency_hostels}
+     * @param type Selected map type {fire_halls|svpm_stations|water_supplies|emergency_hostels|hospitals}
      * @return map type resource icon
      */
     @DrawableRes
@@ -94,6 +98,8 @@ public class NavigUtils {
                 return R.drawable.ic_water_supplies;
             case Const.MapTypes.EMERGENCY_HOSTELS:
                 return R.drawable.ic_emergency_hostels;
+            case Const.MapTypes.HOSPITALS:
+                return R.drawable.ic_hospitals;
         }
         return 0;
     }

@@ -82,6 +82,8 @@ public class MapUtils {
                 return BitmapDescriptorFactory.fromResource(R.drawable.ic_maps_water_supplies);
             case Const.MapTypes.EMERGENCY_HOSTELS:
                 return BitmapDescriptorFactory.fromResource(R.drawable.ic_maps_emergency_hostels);
+            case Const.MapTypes.HOSPITALS:
+                return BitmapDescriptorFactory.fromResource(R.drawable.ic_maps_hospitals);
         }
         return null;
     }
@@ -108,6 +110,9 @@ public class MapUtils {
                 break;
             case Const.MapTypes.EMERGENCY_HOSTELS:
                 color = R.color.color_emergency_hostels;
+                break;
+            case Const.MapTypes.HOSPITALS:
+                color = R.color.color_hospitals;
                 break;
             default:
                 color = R.color.color_primary;

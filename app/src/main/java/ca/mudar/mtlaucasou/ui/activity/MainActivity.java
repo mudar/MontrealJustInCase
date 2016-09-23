@@ -117,7 +117,7 @@ public class MainActivity extends BaseActivity implements
         setupFAB();
         setupBottomBar();
 
-        setMapType(Const.MapTypes.FIRE_HALLS, 0);
+        setMapType(Const.MapTypes._DEFAULT, 0);
     }
 
     protected void onStart() {

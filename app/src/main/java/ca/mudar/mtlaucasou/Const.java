@@ -42,6 +42,8 @@ public class Const {
         String SVPM_STATIONS = "svpm_stations";
         String WATER_SUPPLIES = "water_supplies";
         String EMERGENCY_HOSTELS = "emergency_hostels";
+        String HOSPITALS = "hospitals";
+        String _DEFAULT = HOSPITALS;
     }
 
     public static final double MAPS_GEOCODER_LIMITS[] = {
@@ -60,6 +62,7 @@ public class Const {
         String GET_SPVM_STATIONS = "spvm_stations.json";
         String GET_WATER_SUPPLIES = "water_supplies.json";
         String GET_EMERGENCY_HOSTELS = "emergency_hostes.json";
+        String GET_HOSPITALS = "hospitals.json";
     }
 
     public interface BundleKeys {

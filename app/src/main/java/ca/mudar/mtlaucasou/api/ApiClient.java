@@ -147,4 +147,16 @@ public class ApiClient {
 
         return null;
     }
+
+    @Nullable
+    public static Response<PointsFeatureCollection> getHospitals(GeoApiService service) {
+        try {
+            return service.getHospitals()
+                    .execute();
+        } catch (IOException e) {
+            LogUtils.REMOTE_LOG(e);
+        }
+
+        return null;
+    }
 }

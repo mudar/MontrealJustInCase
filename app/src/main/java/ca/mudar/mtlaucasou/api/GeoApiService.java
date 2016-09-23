@@ -47,4 +47,8 @@ public interface GeoApiService {
     @Headers({CONTENT_TYPE})
     @GET(Const.ApiPaths.GET_EMERGENCY_HOSTELS)
     Call<PointsFeatureCollection> getEmergencyHostels();
+
+    @Headers({CONTENT_TYPE})
+    @GET(Const.ApiPaths.GET_HOSPITALS)
+    Call<PointsFeatureCollection> getHospitals();
 }

@@ -40,6 +40,7 @@
     <string name="btn_spvm_stations">Poste de police</string>
     <string name="btn_water_supplies">Points d’eau</string>
     <string name="btn_emergency_hostels">Hébergement</string>
+    <string name="btn_hospitals">Hôpitaux</string>
 
     <!--Menus-->
     <string name="action_search">Recherche</string>

@@ -84,6 +84,7 @@ public class SyncService extends IntentService {
         importLocalData(R.raw.spvm_stations, Const.MapTypes.SVPM_STATIONS);
         importLocalData(R.raw.water_supplies, Const.MapTypes.WATER_SUPPLIES);
         importLocalData(R.raw.emergency_hostes, Const.MapTypes.EMERGENCY_HOSTELS);
+        importLocalData(R.raw.hospitals, Const.MapTypes.HOSPITALS);
 
         mRealm.commitTransaction();
     }
@@ -93,6 +94,7 @@ public class SyncService extends IntentService {
         importRemoteData(Const.MapTypes.SVPM_STATIONS);
         importRemoteData(Const.MapTypes.WATER_SUPPLIES);
         importRemoteData(Const.MapTypes.EMERGENCY_HOSTELS);
+        importRemoteData(Const.MapTypes.HOSPITALS);
     }
 
     private void importLocalData(@RawRes int resource, @MapType String mapType) {
@@ -126,6 +128,9 @@ public class SyncService extends IntentService {
                 break;
             case Const.MapTypes.EMERGENCY_HOSTELS:
                 response = ApiClient.getEmergencyHostels(apiService);
+                break;
+            case Const.MapTypes.HOSPITALS:
+                response = ApiClient.getHospitals(apiService);
                 break;
             default:
                 response = null;

@@ -42,6 +42,7 @@
     <color name="blue_grey_400">#78909C</color>
     <!--<color name="blue_grey_500">#607D8B</color>-->
     <color name="blue_grey_800">#37474F</color>
+    <color name="teal_500">#009688</color>
     <color name="light_green_500">#8BC34A</color>
     <color name="grey_100">#F5F5F5</color>
     <color name="grey_200">#EEEEEE</color>
@@ -65,6 +66,7 @@
     <color name="color_svpm">@color/blue_500</color>
     <color name="color_water_supplies">@color/blue_grey_400</color>
     <color name="color_emergency_hostels">@color/light_green_500</color>
+    <color name="color_hospitals">@color/teal_500</color>
 
     <!--Map InfoWindow-->
     <color name="map_info_title">@color/grey_900</color>

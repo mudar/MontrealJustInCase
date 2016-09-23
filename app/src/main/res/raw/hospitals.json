@@ -1,0 +1,43 @@
+{
+  "type": "FeatureCollection",
+  "features": [{
+    "type": "Feature",
+    "properties": {
+      "Name": "CHU Sainte-Justine",
+      "Description": "<p>CHU Sainte-Justine<br\/>3175, chemin de la Côte-Sainte-Catherine<br\/>Montréal<\/P>",
+      "Type": "pediatrie",
+      "Phone": "+15143454931",
+      "Website": "https://www.chusj.org/"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.624198, 45.502951]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Hôpital de Montréal pour enfants",
+      "Description": "<p>Hôpital de Montréal pour enfants<br\/>1001, boulevard Décarie<br\/>Montréal<\/P>",
+      "Type": "pediatrie",
+      "Phone": "+15144124400",
+      "Website": "http://www.hopitalpourenfants.com/"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.599803, 45.473230]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Hôpital Maisonneuve-Rosemont",
+      "Description": "<p>Hôpital Maisonneuve-Rosemont<br\/>5415, boulevard de l’Assomption<br\/>Montréal<\/P>",
+      "Type": "pediatrie",
+      "Phone": "+15142523400",
+      "Website": "http://www.maisonneuve-rosemont.org/"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.560176, 45.573821]
+    }
+  }]
+}

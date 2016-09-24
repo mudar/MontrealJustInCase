@@ -6,7 +6,7 @@
       "Name": "Centre hospitalier de St. Mary",
       "Address": "3830, avenue Lacombe",
       "City": "Montréal",
-      "Phone": "+1514 345-3511",
+      "Phone": "+15143453511",
       "Website": "http://www.smhc.qc.ca/",
       "Types": ["urgences", "psychiatrie"]
     },
@@ -20,7 +20,7 @@
       "Name": "CHU Sainte-Justine",
       "Address": "3175, chemin de la Côte-Sainte-Catherine",
       "City": "Montréal",
-      "Phone": "+1514 3454931",
+      "Phone": "+15143454931",
       "Website": "https://www.chusj.org/",
       "Types": ["pediatrie"]
     },
@@ -34,7 +34,7 @@
       "Name": "Hôpital de Lachine (CUSM)",
       "Address": "650, 16e Avenue",
       "City": "Lachine",
-      "Phone": "+1514 637 2351",
+      "Phone": "+15146372351",
       "Website": "https://cusm.ca/lachine/",
       "Types": ["urgences"]
     },
@@ -48,7 +48,7 @@
       "Name": "Hôpital de LaSalle  ",
       "Address": "8585, Terrasse Champlain",
       "City": "LaSalle",
-      "Phone": "+1514 362 8000",
+      "Phone": "+15143628000",
       "Website": "https://www.csssdll.qc.ca/",
       "Types": ["urgences"]
     },
@@ -62,7 +62,7 @@
       "Name": "Hôpital de Montréal pour enfants",
       "Address": "1001, boulevard Décarie",
       "City": "Montréal",
-      "Phone": "+1514 4124400",
+      "Phone": "+15144124400",
       "Website": "http://www.hopitalpourenfants.com/",
       "Types": ["pediatrie"]
     },
@@ -76,7 +76,7 @@
       "Name": "Hôpital de Verdun ",
       "Address": "4000, boulevard Lasalle",
       "City": "Verdun",
-      "Phone": "+1514 362 1000",
+      "Phone": "+15143621000",
       "Website": "https://ciusss-centresudmtl.gouv.qc.ca/",
       "Types": ["urgences"]
     },
@@ -90,7 +90,7 @@
       "Name": "Hôpital du Sacré-Coeur de Montréal ",
       "Address": "5400, boulevard Gouin Ouest",
       "City": "Montréal",
-      "Phone": "+1514 338 2222",
+      "Phone": "+15143382222",
       "Website": "http://www.hscm.ca/",
       "Types": ["urgences", "psychiatrie"]
     },
@@ -104,7 +104,7 @@
       "Name": "Hôpital Fleury ",
       "Address": "2180, rue Fleury Est",
       "City": "Montréal",
-      "Phone": "+1514 384 2000",
+      "Phone": "+15143842000",
       "Website": "http://ciusss-nordmtl.gouv.qc.ca/",
       "Types": ["urgences", "psychiatrie"]
     },
@@ -118,7 +118,7 @@
       "Name": "Hôpital général de Montréal (CUSM)",
       "Address": "1650, avenue Cedar",
       "City": "Montréal",
-      "Phone": "+1514 934 1934",
+      "Phone": "+15149341934",
       "Website": "https://cusm.ca/mgh/",
       "Types": ["urgences", "psychiatrie"]
     },
@@ -132,7 +132,7 @@
       "Name": "Hôpital général du Lakeshore ",
       "Address": "160, avenue Stillview",
       "City": "Pointe-Claire",
-      "Phone": "+1514 630 2225",
+      "Phone": "+15146302225",
       "Website": "https://www.ciusss-ouestmtl.gouv.qc.ca/",
       "Types": ["urgences", "psychiatrie"]
     },
@@ -146,7 +146,7 @@
       "Name": "Hôpital général juif",
       "Address": "3755, chemin de la Côte-Sainte-Catherine",
       "City": "Montréal",
-      "Phone": "+1514 340‑8222",
+      "Phone": "+15143408222",
       "Website": "http://www.jgh.ca/",
       "Types": ["urgences", "psychiatrie"]
     },
@@ -160,7 +160,7 @@
       "Name": "Hôpital Jean-Talon",
       "Address": "1385, rue Jean-Talon Est",
       "City": "Montréal",
-      "Phone": "+1514 495‑6767",
+      "Phone": "+15144956767",
       "Website": "http://ciusss-nordmtl.gouv.qc.ca/",
       "Types": ["urgences", "psychiatrie"]
     },
@@ -174,7 +174,7 @@
       "Name": "Hôpital Maisonneuve-Rosemont",
       "Address": "5415, boulevard de l’Assomption",
       "City": "Montréal",
-      "Phone": "+1514 2523400",
+      "Phone": "+15142523400",
       "Website": "http://www.maisonneuve-rosemont.org/",
       "Types": ["urgences", "psychiatrie", "pediatrie"]
     },
@@ -188,7 +188,7 @@
       "Name": "Hôpital Notre-Dame (CHUM)",
       "Address": "1560, rue Sherbrooke Est",
       "City": "Montréal",
-      "Phone": "+1514 890‑8000",
+      "Phone": "+15148908000",
       "Website": "http://www.chumontreal.qc.ca/",
       "Types": ["urgences", "psychiatrie"]
     },
@@ -202,7 +202,7 @@
       "Name": "Hôpital Royal Victoria (CUSM)",
       "Address": "1001, boulevard Décarie",
       "City": "Montréal",
-      "Phone": "+1514 934‑1934",
+      "Phone": "+15149341934",
       "Website": "https://cusm.ca/royalvic/",
       "Types": ["urgences"]
     },
@@ -216,7 +216,7 @@
       "Name": "Hôpital Saint-Luc (CHUM)",
       "Address": "1058, rue Saint-Denis",
       "City": "Montréal",
-      "Phone": "+1514 890‑8000",
+      "Phone": "+15148908000",
       "Website": "http://www.chumontreal.qc.ca/",
       "Types": ["urgences", "psychiatrie"]
     },
@@ -230,7 +230,7 @@
       "Name": "Hôpital Santa Cabrini",
       "Address": "5655, rue Saint-Zotique Est",
       "City": "Montréal",
-      "Phone": "+1514 252-6000",
+      "Phone": "+15142526000",
       "Website": "http://www.santacabrini.qc.ca/",
       "Types": ["urgences"]
     },
@@ -244,7 +244,7 @@
       "Name": "Hôtel-Dieu (CHUM)",
       "Address": "3840, rue Saint-Urbain",
       "City": "Montréal",
-      "Phone": "+1514 890‑8000",
+      "Phone": "+15148908000",
       "Website": "http://www.chumontreal.qc.ca/",
       "Types": ["urgences"]
     },
@@ -258,7 +258,7 @@
       "Name": "Institut de cardiologie de Montréal",
       "Address": "5000, rue Bélanger",
       "City": "Montréal",
-      "Phone": "+1514 376‑3330",
+      "Phone": "+15143763330",
       "Website": "https://www.icm-mhi.org/",
       "Types": ["urgences"]
     },
@@ -272,7 +272,7 @@
       "Name": "IU en santé mentale de Montréal",
       "Address": "7401, rue Hochelaga",
       "City": "Montréal",
-      "Phone": "+1 514 251‑4000",
+      "Phone": "+15142514000",
       "Website": "http://www.iusmm.ca/",
       "Types": ["psychiatrie"]
     },
@@ -286,7 +286,7 @@
       "Name": "IU en santé mentale Douglas",
       "Address": "6875, boulevard Lasalle",
       "City": "Verdun",
-      "Phone": "+1514 761‑6131",
+      "Phone": "+15147616131",
       "Website": "http://www.douglas.qc.ca/",
       "Types": ["psychiatrie"]
     },

@@ -109,10 +109,10 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="false"
             android:label="@string/title_activity_eula"
-            android:parentActivityName=".ui.activity.MainActivity">
+            android:parentActivityName=".ui.activity.AboutActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.activity.MainActivity" />
+                android:value=".ui.activity.AboutActivity" />
         </activity>
 
         <service

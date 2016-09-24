@@ -26,6 +26,7 @@ package ca.mudar.mtlaucasou.ui.adapter;
 import android.location.Location;
 import android.support.annotation.Nullable;
 import android.text.SpannableString;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -76,12 +77,14 @@ public class PlacemarkInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
     }
 
     private String getSnippetWithDistance(Marker marker) {
-        if (mCallback != null && mCallback.getUserLocation() != null) {
+        final String snippet = marker.getSnippet();
+        if (mCallback != null && mCallback.getUserLocation() != null &&
+                !TextUtils.isEmpty(snippet)) {
             float distance = mCallback.getUserLocation().distanceTo(
                     GeoUtils.positionToLocation(marker.getPosition()));
 
             return mView.getContext().getString(R.string.info_window_snippet_distance,
-                    marker.getSnippet(),
+                    snippet,
                     GeoUtils.getDistanceDisplay(mView.getContext(), distance)
             );
         }

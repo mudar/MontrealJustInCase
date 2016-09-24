@@ -144,6 +144,8 @@ public class Const {
 //    public static final long ANIM_LONG_DURATION = 500L;
     public static final String CUSTOM_LOCATION_PROVIDER = "search_provider";
     public static final String LINE_SEPARATOR = System.getProperty("line.separator");
+    @Deprecated
+    public static final String HTML_LINE_SEPARATOR = "<br>";
 
     // Assets
     public interface LocalAssets {

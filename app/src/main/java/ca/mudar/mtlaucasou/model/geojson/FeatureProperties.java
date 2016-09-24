@@ -23,19 +23,75 @@
 
 package ca.mudar.mtlaucasou.model.geojson;
 
+import android.text.TextUtils;
+
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
+
+import ca.mudar.mtlaucasou.Const;
 
 public class FeatureProperties {
     @SerializedName("Name")
     private String name;
     @SerializedName("Description")
     private String description;
+    @SerializedName("Address")
+    private String address;
+    @SerializedName("City")
+    private String city;
+    @SerializedName("Phone")
+    private String phone;
+    @SerializedName("Website")
+    private String website;
+    @SerializedName("Type")
+    private String type;
+    @SerializedName("Types")
+    private List<String> types;
 
     public String getName() {
         return name;
     }
 
+    /**
+     * Returns the address, with city if available.
+     * If not, returns the Description field.
+     *
+     * @return The address
+     */
     public String getDescription() {
         return description;
+    }
+
+    public String getAddress() {
+        if (!TextUtils.isEmpty(address)) {
+            if (TextUtils.isEmpty(city)) {
+                return description;
+            } else {
+                return address + Const.HTML_LINE_SEPARATOR + city;
+            }
+        } else {
+            return description;
+        }
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public List<String> getTypes() {
+        return types;
     }
 }

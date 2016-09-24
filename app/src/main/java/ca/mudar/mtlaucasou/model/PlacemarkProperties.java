@@ -69,7 +69,7 @@ public class PlacemarkProperties extends RealmObject {
 
         public Builder(FeatureProperties properties) {
             this.name = properties.getName();
-            this.description = properties.getDescription();
+            this.description = properties.getAddress();
         }
 
         public PlacemarkProperties build() {

@@ -3,41 +3,296 @@
   "features": [{
     "type": "Feature",
     "properties": {
-      "Name": "CHU Sainte-Justine",
-      "Description": "<p>CHU Sainte-Justine<br\/>3175, chemin de la Côte-Sainte-Catherine<br\/>Montréal<\/P>",
-      "Type": "pediatrie",
-      "Phone": "+15143454931",
-      "Website": "https://www.chusj.org/"
+      "Name": "Centre hospitalier de St. Mary",
+      "Address": "3830, avenue Lacombe",
+      "City": "Montréal",
+      "Phone": "+1514 345-3511",
+      "Website": "http://www.smhc.qc.ca/",
+      "Types": ["urgences", "psychiatrie"]
     },
     "geometry": {
       "type": "Point",
-      "coordinates": [-73.624198, 45.502951]
+      "coordinates": [-73.623779, 45.494363]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "CHU Sainte-Justine",
+      "Address": "3175, chemin de la Côte-Sainte-Catherine",
+      "City": "Montréal",
+      "Phone": "+1514 3454931",
+      "Website": "https://www.chusj.org/",
+      "Types": ["pediatrie"]
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.624141, 45.502457]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Hôpital de Lachine (CUSM)",
+      "Address": "650, 16e Avenue",
+      "City": "Lachine",
+      "Phone": "+1514 637 2351",
+      "Website": "https://cusm.ca/lachine/",
+      "Types": ["urgences"]
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.677924, 45.440985]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Hôpital de LaSalle  ",
+      "Address": "8585, Terrasse Champlain",
+      "City": "LaSalle",
+      "Phone": "+1514 362 8000",
+      "Website": "https://www.csssdll.qc.ca/",
+      "Types": ["urgences"]
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.622672, 45.420519]
     }
   }, {
     "type": "Feature",
     "properties": {
       "Name": "Hôpital de Montréal pour enfants",
-      "Description": "<p>Hôpital de Montréal pour enfants<br\/>1001, boulevard Décarie<br\/>Montréal<\/P>",
-      "Type": "pediatrie",
-      "Phone": "+15144124400",
-      "Website": "http://www.hopitalpourenfants.com/"
+      "Address": "1001, boulevard Décarie",
+      "City": "Montréal",
+      "Phone": "+1514 4124400",
+      "Website": "http://www.hopitalpourenfants.com/",
+      "Types": ["pediatrie"]
     },
     "geometry": {
       "type": "Point",
-      "coordinates": [-73.599803, 45.473230]
+      "coordinates": [-73.602574, 45.471601]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Hôpital de Verdun ",
+      "Address": "4000, boulevard Lasalle",
+      "City": "Verdun",
+      "Phone": "+1514 362 1000",
+      "Website": "https://ciusss-centresudmtl.gouv.qc.ca/",
+      "Types": ["urgences"]
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.564394, 45.464067]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Hôpital du Sacré-Coeur de Montréal ",
+      "Address": "5400, boulevard Gouin Ouest",
+      "City": "Montréal",
+      "Phone": "+1514 338 2222",
+      "Website": "http://www.hscm.ca/",
+      "Types": ["urgences", "psychiatrie"]
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.716307, 45.533882]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Hôpital Fleury ",
+      "Address": "2180, rue Fleury Est",
+      "City": "Montréal",
+      "Phone": "+1514 384 2000",
+      "Website": "http://ciusss-nordmtl.gouv.qc.ca/",
+      "Types": ["urgences", "psychiatrie"]
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.650228, 45.572149]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Hôpital général de Montréal (CUSM)",
+      "Address": "1650, avenue Cedar",
+      "City": "Montréal",
+      "Phone": "+1514 934 1934",
+      "Website": "https://cusm.ca/mgh/",
+      "Types": ["urgences", "psychiatrie"]
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.589494, 45.497565]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Hôpital général du Lakeshore ",
+      "Address": "160, avenue Stillview",
+      "City": "Pointe-Claire",
+      "Phone": "+1514 630 2225",
+      "Website": "https://www.ciusss-ouestmtl.gouv.qc.ca/",
+      "Types": ["urgences", "psychiatrie"]
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.829249, 45.44782]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Hôpital général juif",
+      "Address": "3755, chemin de la Côte-Sainte-Catherine",
+      "City": "Montréal",
+      "Phone": "+1514 340‑8222",
+      "Website": "http://www.jgh.ca/",
+      "Types": ["urgences", "psychiatrie"]
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.627902, 45.498316]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Hôpital Jean-Talon",
+      "Address": "1385, rue Jean-Talon Est",
+      "City": "Montréal",
+      "Phone": "+1514 495‑6767",
+      "Website": "http://ciusss-nordmtl.gouv.qc.ca/",
+      "Types": ["urgences", "psychiatrie"]
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.60897, 45.546]
     }
   }, {
     "type": "Feature",
     "properties": {
       "Name": "Hôpital Maisonneuve-Rosemont",
-      "Description": "<p>Hôpital Maisonneuve-Rosemont<br\/>5415, boulevard de l’Assomption<br\/>Montréal<\/P>",
-      "Type": "pediatrie",
-      "Phone": "+15142523400",
-      "Website": "http://www.maisonneuve-rosemont.org/"
+      "Address": "5415, boulevard de l’Assomption",
+      "City": "Montréal",
+      "Phone": "+1514 2523400",
+      "Website": "http://www.maisonneuve-rosemont.org/",
+      "Types": ["urgences", "psychiatrie", "pediatrie"]
     },
     "geometry": {
       "type": "Point",
       "coordinates": [-73.560176, 45.573821]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Hôpital Notre-Dame (CHUM)",
+      "Address": "1560, rue Sherbrooke Est",
+      "City": "Montréal",
+      "Phone": "+1514 890‑8000",
+      "Website": "http://www.chumontreal.qc.ca/",
+      "Types": ["urgences", "psychiatrie"]
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.564298, 45.526555]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Hôpital Royal Victoria (CUSM)",
+      "Address": "1001, boulevard Décarie",
+      "City": "Montréal",
+      "Phone": "+1514 934‑1934",
+      "Website": "https://cusm.ca/royalvic/",
+      "Types": ["urgences"]
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.602574, 45.471601]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Hôpital Saint-Luc (CHUM)",
+      "Address": "1058, rue Saint-Denis",
+      "City": "Montréal",
+      "Phone": "+1514 890‑8000",
+      "Website": "http://www.chumontreal.qc.ca/",
+      "Types": ["urgences", "psychiatrie"]
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.55715, 45.512067]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Hôpital Santa Cabrini",
+      "Address": "5655, rue Saint-Zotique Est",
+      "City": "Montréal",
+      "Phone": "+1514 252-6000",
+      "Website": "http://www.santacabrini.qc.ca/",
+      "Types": ["urgences"]
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.570153, 45.579952]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Hôtel-Dieu (CHUM)",
+      "Address": "3840, rue Saint-Urbain",
+      "City": "Montréal",
+      "Phone": "+1514 890‑8000",
+      "Website": "http://www.chumontreal.qc.ca/",
+      "Types": ["urgences"]
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.578075, 45.514523]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Institut de cardiologie de Montréal",
+      "Address": "5000, rue Bélanger",
+      "City": "Montréal",
+      "Phone": "+1514 376‑3330",
+      "Website": "https://www.icm-mhi.org/",
+      "Types": ["urgences"]
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.579733, 45.573548]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "IU en santé mentale de Montréal",
+      "Address": "7401, rue Hochelaga",
+      "City": "Montréal",
+      "Phone": "+1 514 251‑4000",
+      "Website": "http://www.iusmm.ca/",
+      "Types": ["psychiatrie"]
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.526619, 45.587306]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "IU en santé mentale Douglas",
+      "Address": "6875, boulevard Lasalle",
+      "City": "Verdun",
+      "Phone": "+1514 761‑6131",
+      "Website": "http://www.douglas.qc.ca/",
+      "Types": ["psychiatrie"]
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.579558, 45.440803]
     }
   }]
 }

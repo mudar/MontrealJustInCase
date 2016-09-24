@@ -29,7 +29,7 @@
     android:fitsSystemWindows="true"
     tools:context=".ui.activity.MainActivity">
 
-    <android.support.design.widget.CoordinatorLayout
+    <FrameLayout
         android:id="@+id/map_wrapper"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -53,7 +53,7 @@
             app:backgroundTint="@color/white"
             app:fabSize="mini" />
 
-    </android.support.design.widget.CoordinatorLayout>
+    </FrameLayout>
 
     <com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar
         android:id="@+id/progressBar"

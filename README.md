@@ -89,11 +89,12 @@ These five projects are all released under the [Apache License v2.0][link_apache
 [link_wiki]: https://github.com/mudar/MontrealJustInCase/wiki/
 [link_gpl]: http://www.gnu.org/licenses/gpl.html
 [link_portal]: http://donnees.ville.montreal.qc.ca/
-[link_portal_1]: http://donnees.ville.montreal.qc.ca/archives/fiche-donnees/casernes-pompiers
-[link_portal_2]: http://donnees.ville.montreal.qc.ca/archives/fiche-donnees/carte-postes-quartier
-[link_portal_3]: http://donnees.ville.montreal.qc.ca/archives/fiche-donnees/points-eau
-[link_portal_4]: http://donnees.ville.montreal.qc.ca/archives/fiche-donnees/centres-hebergement-urgence
-[link_portal_license]: http://donnees.ville.montreal.qc.ca/licence-texte-complet
+[link_portal_1]: http://donnees.ville.montreal.qc.ca/dataset/casernes-pompiers
+[link_portal_2]: http://donnees.ville.montreal.qc.ca/dataset/carte-postes-quartier
+[link_portal_3]: http://donnees.ville.montreal.qc.ca/dataset/points-eau
+[link_portal_4]: http://donnees.ville.montreal.qc.ca/dataset/centres-hebergement-urgence
+[link_portal_5]: http://donnees.ville.montreal.qc.ca/dataset/limites-pdq-spvm
+[link_portal_license]: http://donnees.ville.montreal.qc.ca/portail/licence/
 [link_lib_actionbarsherlock]: https://github.com/JakeWharton/ActionBarSherlock
 [link_lib_mapviewballoons]: https://github.com/JakeWharton/ActionBarSherlock
 [link_lib_iosched]: http://code.google.com/p/iosched/

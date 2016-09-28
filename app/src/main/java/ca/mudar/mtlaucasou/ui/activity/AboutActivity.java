@@ -29,7 +29,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 
+import ca.mudar.mtlaucasou.Const;
 import ca.mudar.mtlaucasou.R;
+import ca.mudar.mtlaucasou.ui.dialog.OpenDataCreditsDialog;
+import ca.mudar.mtlaucasou.util.IntentUtils;
 
 public class AboutActivity extends BaseActivity implements
         View.OnClickListener {
@@ -63,13 +66,15 @@ public class AboutActivity extends BaseActivity implements
         final int id = view.getId();
 
         if (id == R.id.about_open_data) {
-            showWebsite(R.string.url_mtl_open_data);
+            OpenDataCreditsDialog
+                    .newInstance()
+                    .show(getSupportFragmentManager(), Const.FragmentTags.DIALOG_OD_CREDITS);
         } else if (id == R.id.about_source_code) {
-            showWebsite(R.string.url_github);
+            IntentUtils.showWebsite(this, R.string.url_github);
         } else if (id == R.id.about_credits_dev) {
-            showWebsite(R.string.url_mudar_ca);
+            IntentUtils.showWebsite(this, R.string.url_mudar_ca);
         } else if (id == R.id.about_montreal_ouvert) {
-            showWebsite(R.string.url_montreal_ouvert);
+            IntentUtils.showWebsite(this, R.string.url_montreal_ouvert);
         }
     }
 }

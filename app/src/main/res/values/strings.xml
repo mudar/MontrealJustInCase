@@ -83,11 +83,11 @@
     <string name="prefs_language_dialog_title">Set language</string>
     <string name="prefs_language_french">Français</string>
     <string name="prefs_language_english">English</string>
-    <string name="prefs_units_title">Distance Units System</string>
+    <string name="prefs_units_title">Distance units system</string>
     <string name="prefs_units_dialog_title">Set units system</string>
     <string name="prefs_units_iso">Metric (km)</string>
     <string name="prefs_units_imperial">Imperial (mile)</string>
-    <string name="prefs_permissions_title">My Location</string>
+    <string name="prefs_permissions_title">My location</string>
     <string name="prefs_permissions_summary">Select Permissions &gt; enable Location</string>
     <string name="prefs_version_title">Version</string>
 

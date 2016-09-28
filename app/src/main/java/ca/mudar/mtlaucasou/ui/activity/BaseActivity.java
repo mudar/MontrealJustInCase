@@ -25,10 +25,8 @@ package ca.mudar.mtlaucasou.ui.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -38,6 +36,7 @@ import com.mikepenz.aboutlibraries.LibsBuilder;
 import ca.mudar.mtlaucasou.Const;
 import ca.mudar.mtlaucasou.R;
 import ca.mudar.mtlaucasou.data.UserPrefs;
+import ca.mudar.mtlaucasou.util.IntentUtils;
 import ca.mudar.mtlaucasou.util.LangUtils;
 import ca.mudar.mtlaucasou.util.LogUtils;
 
@@ -52,12 +51,6 @@ public abstract class BaseActivity extends AppCompatActivity implements
 
     protected boolean isShowTitleEnabled() {
         return true;
-    }
-
-    protected void showWebsite(@StringRes int website) {
-        final Intent viewIntent = new Intent(Intent.ACTION_VIEW);
-        viewIntent.setData(Uri.parse(getResources().getString(website)));
-        startActivity(viewIntent);
     }
 
     @Override
@@ -125,7 +118,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
             onShareItemSelected();
             return true;
         } else if (id == R.id.action_rate) {
-            showWebsite(R.string.url_playstore);
+            IntentUtils.showWebsite(this, R.string.url_playstore);
             return true;
         } else if (id == R.id.action_eula) {
             startActivity(EulaActivity.newIntent(this, true));

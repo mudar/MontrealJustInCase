@@ -1,0 +1,1087 @@
+{
+  "type": "FeatureCollection",
+
+  "features": [{
+    "type": "Feature",
+    "properties": {
+      "Name": "Aréna municipale",
+      "Description": "<p>Aréna municipale<br\/>1050 chemin Dunkirk<br\/>Mont-Royal<\/P><P><\/P><P>Eau, jus 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.640462384, 45.515316943199998]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Bibliothèque R.-J.-P.-Dawson",
+      "Description": "<p>Bibliothèque R.-J.-P.-Dawson<br\/>1967 boulevard Graham<br\/>Mont-Royal<\/P><P><\/P><P> 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.646580291800007, 45.514062883]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Centre communautaire intergénérationnel",
+      "Description": "<p>Centre communautaire intergénérationnel<br\/>999 avenue McEachran<br\/>Outremont<\/P><P><\/P><P>Climatisation, eau 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.6201180698, 45.519915061100001]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Bibliothèque Robert-Bourassa",
+      "Description": "<p>Bibliothèque Robert-Bourassa<br\/>41 avenue St-Just<br\/>Outremont<\/P><P><\/P><P>Climatisation, eau 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.608174806899996, 45.517953640599998]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Bibliothèque de Roxboro William G. Boll",
+      "Description": "<p>Bibliothèque de Roxboro William G. Boll<br\/>110 rue Cartier<br\/>Pierrefonds\/Roxboro<\/P><P><\/P><P>Salles de repos, distribution d'eau 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.814502629800003, 45.5032841027]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Centre culturel de Pierrefonds",
+      "Description": "<p>Centre culturel de Pierrefonds<br\/>13850 boulevard Gouin O<br\/>Pierrefonds\/Roxboro<\/P><P><\/P><P>Salles de repos, distribution d'eau 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.852750587399996, 45.4947426544]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Chalet Munro",
+      "Description": "<p>Chalet Munro<br\/>5020 rue Chestnut<br\/>Pierrefonds\/Roxboro<\/P><P><\/P><P>Salles de repos, distribution d'eau 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.826810993199999, 45.508044959099998]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Riverdale High school",
+      "Description": "<p>Riverdale High school<br\/>5060 boulevard Sources<br\/>Pierrefonds\/Roxboro<\/P><P><\/P><P>Salles de repos, distribution d'eau 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.822994957700004, 45.509950105199998]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Sportplex 4 glaces Pierrefonds",
+      "Description": "<p>Sportplex 4 glaces Pierrefonds<br\/>14700 boulevard Pierrefonds<br\/>Pierrefonds\/Roxboro<\/P><P><\/P><P>Salles de repos, distribution d'eau 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.857271813099999, 45.485985875099999]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Centre communautaire de l'Est",
+      "Description": "<p>Centre communautaire de l'Est<br\/>9665 buolevard Gouin Ouest<br\/>Pierrefonds\/Roxboro<\/P><P><\/P><P>Salles de repos, distribution d'eau 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.782325561600004, 45.504572840400002]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Bibliothèque de Pierrefonds",
+      "Description": "<p>Bibliothèque de Pierrefonds<br\/>13555 boulevard Pierrefonds<br\/>Pierrefonds\/Roxboro<\/P><P><\/P><P>Salles de repos, distribution d'eau 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.846791349200004, 45.495605138499997]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Bibliothèque de Cartierville",
+      "Description": "<p>Bibliothèque de Cartierville<br\/>5900 rue de Salaberry<br\/>Ahuntsic\/Cartierville<\/P><P><\/P><P>Lecture, livres, revues, internet, projecteur DVD, internet sans fil 1 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.712922652499998, 45.527483346099999]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Bibliothèque de Salaberry",
+      "Description": "<p>Bibliothèque de Salaberry<br\/>4170 rue de Salaberry<br\/>Ahuntsic\/Cartierville<\/P><P><\/P><P>Lecture, livres et revues jeunes, internet et internet sans fil 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.703838475599994, 45.534711762599997]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Club Bocce",
+      "Description": "<p>Club Bocce<br\/>10536 boul de l'Acadie<br\/>Ahuntsic\/Cartierville<\/P><P><\/P><P>Lecture, livres, Internet, TV, projecteurs, système de son 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.678298405700005, 45.533523867100001]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Maison de la culture",
+      "Description": "<p>Maison de la culture<br\/>10300 rue Lajeunesse<br\/>Ahuntsic\/Cartierville<\/P><P><\/P><P>Rafraichissements, toilettes, ascenseur, trois étages 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.66242941, 45.553457079899999]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Bibliothèque Ahuntsic",
+      "Description": "<p>Bibliothèque Ahuntsic<br\/>10300 rue Lajeunesse<br\/>Ahuntsic\/Cartierville<\/P><P><\/P><P>Lecture, livres, revues, internet, internet sans fil, projecteur DVD 1 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.66242941, 45.553457079899999]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Café de Da",
+      "Description": "<p>Café de Da<br\/>545 rue Fleury est<br\/>Ahuntsic\/Cartierville<\/P><P><\/P><P>10 ordinateurs, Internet 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.662187200100007, 45.553235142299997]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Centre Roger-Rousseau",
+      "Description": "<p>Centre Roger-Rousseau<br\/>7501 avenue Rondeau<br\/>Anjou<\/P><P><\/P><P>Eau, local, chaises, tables, toilettes, ascenseur 1 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.550294962899997, 45.615678187599997]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Galeries d'Anjou",
+      "Description": "<p>Galeries d'Anjou<br\/>7999 boulevard Galeries d'Anjou<br\/>Anjou<\/P><P><\/P><P>Toilettes 1 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.568333108800005, 45.599074719800001]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Bibliothèque Jean-Corbeil",
+      "Description": "<p>Bibliothèque Jean-Corbeil<br\/>7500 avenue Goncourt<br\/>Anjou<\/P><P><\/P><P>Eau, local, chaises, tables, toilettes, ascenseurs 1 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.558833534200005, 45.603325003599998]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Maison de la culture Frontenac",
+      "Description": "<p>Maison de la culture Frontenac<br\/>2550 rue Ontario E<br\/>Ville-Marie<\/P><P><\/P><P>Lecture 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.552471783399994, 45.533038629499998]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "YMCA Centre-Ville",
+      "Description": "<p>YMCA Centre-Ville<br\/>1440 rue Stanley<br\/>Ville-Marie<\/P><P><\/P><P>Casse-croûte, machines distributrices de boissons et de collations 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.574377924700002, 45.4995891477]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Association sportive et communautaire Centre-Sud",
+      "Description": "<p>Association sportive et communautaire Centre-Sud<br\/>2093 rue Visitation<br\/>Ville-Marie<\/P><P><\/P><P>Machines distributrices de boissons et de collations 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.563083174799999, 45.522942968099997]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Centre communautaire et de loisirs Patro Le Prévost",
+      "Description": "<p>Centre communautaire et de loisirs Patro Le Prévost<br\/>7355 avenue Christophe-Colomb<br\/>Villeray\/Saint-Michel\/Parc-Extension<\/P><P><\/P><P>Accompagné, téléviseurs 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.614851057600006, 45.543857489499999]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Centre Communautaire Saint-Mathieu",
+      "Description": "<p>Centre Communautaire Saint-Mathieu<br\/>7110 avenue 8e<br\/>Villeray\/Saint-Michel\/Parc-Extension<\/P><P><\/P><P> 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.599102379399994, 45.5563551881]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Centre de loisirs communautaires Lajeunesse",
+      "Description": "<p>Centre de loisirs communautaires Lajeunesse<br\/>7378 rue Lajeunesse<br\/>Villeray\/Saint-Michel\/Parc-Extension<\/P><P><\/P><P>Revues, livres 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.61723527, 45.54043163]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Complexe William-Hingstone (secteur Parc-Extension)",
+      "Description": "<p>Complexe William-Hingstone (secteur Parc-Extension)<br\/>419 rue St-Roch<br\/>Villeray\/Saint-Michel\/Parc-Extension<\/P><P><\/P><P>Revues, livres 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.628543294400004, 45.531255226600003]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Aréna Saint-Michel (Secteur St-Michel)",
+      "Description": "<p>Aréna Saint-Michel (Secteur St-Michel)<br\/>3440 rue Jarry Est<br\/>Villeray\/Saint-Michel\/Parc-Extension<\/P><P><\/P><P> 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.607387237400005, 45.566039665]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Hôtel de ville",
+      "Description": "<p>Hôtel de ville<br\/>4333 rue Sherbrooke O<br\/>Westmount<\/P><P><\/P><P> 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.596259572299999, 45.485392309799998]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Victoria Hall",
+      "Description": "<p>Victoria Hall<br\/>4626 rue Sherbrooke O<br\/>Westmount<\/P><P><\/P><P> 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.599471287699998, 45.4822931311]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Bibliothèque",
+      "Description": "<p>Bibliothèque<br\/>4574 rue Sherbrooke O<br\/>Westmount<\/P><P><\/P><P> 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.598946333399994, 45.4827691558]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "7500 Goncourt - Salle 2-3",
+      "Description": "<p>7500 Goncourt - Salle 2-3<br\/>7500 avenue Goncourt<br\/>Anjou<\/P><P><\/P><P> 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.558935640399994, 45.603093814200001]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Club de curling Baie Durfé",
+      "Description": "<p>Club de curling Baie Durfé<br\/>20599 rue Lakeshore<br\/>Baie Durfé<\/P><P><\/P><P> 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.921607487900005, 45.405577115]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Club aquatique de Baie d'Urfé",
+      "Description": "<p>Club aquatique de Baie d'Urfé<br\/>20613 rue Lakeshore<br\/>Baie Durfé<\/P><P><\/P><P> 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.922250983599994, 45.405330404700003]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Centre récréatif",
+      "Description": "<p>Centre récréatif<br\/>1974 rue City Lane<br\/>Beaconsfield<\/P><P><\/P><P> 1 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.865942040799993, 45.425397890100001]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Bibliothèque",
+      "Description": "<p>Bibliothèque<br\/>303 boulevard Beaconsfield<br\/>Beaconsfield<\/P><P><\/P><P> 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.864747314400006, 45.424802872900003]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Bibliothèque NDG",
+      "Description": "<p>Bibliothèque NDG<br\/>3755 rue Botrel<br\/>Côte-des-Neiges\/Notre-Dame-de-Grâce<\/P><P><\/P><P>Rafraichissement, récupération 1 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.614482578799993, 45.475413701900003]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Centre  communautaire de St-Raymond",
+      "Description": "<p>Centre  communautaire de St-Raymond<br\/>5600 chemin Upper-Lachine<br\/>Côte-des-Neiges\/Notre-Dame-de-Grâce<\/P><P><\/P><P>Rafraichissement, récupération, douches 1 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.609276009799999, 45.469031187699997]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Centre de ressources communautaires de CDN",
+      "Description": "<p>Centre de ressources communautaires de CDN<br\/>6767 chemin Côte-Des-Neiges<br\/>Côte-des-Neiges\/Notre-Dame-de-Grâce<\/P><P><\/P><P>Rafraichissement, récupération 1 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.637056572299997, 45.503154014899998]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Centre sportif CDN",
+      "Description": "<p>Centre sportif CDN<br\/>4880 avenue Van Horne<br\/>Côte-des-Neiges\/Notre-Dame-de-Grâce<\/P><P><\/P><P>Rafraichissement, récupération, douches, piscines 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.638571580900006, 45.493137026]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Bibliothèque CDN",
+      "Description": "<p>Bibliothèque CDN<br\/>5293 chemin de la Côte-Des-Neiges<br\/>Côte-des-Neiges\/Notre-Dame-de-Grâce<\/P><P><\/P><P>Rafraichissement, récupération 1 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.622559902399999, 45.4964530986]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Bibliothèque CSL",
+      "Description": "<p>Bibliothèque CSL<br\/>5851 boulevard Cavendish<br\/>Côte-Saint-Luc<\/P><P><\/P><P>Toilettes, grande salle 1 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.664009932300004, 45.477261111700003]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Le Mail Cavendish",
+      "Description": "<p>Le Mail Cavendish<br\/>5800 boulevard Cavendish<br\/>Côte-Saint-Luc<\/P><P><\/P><P>Toilettes, casse-croûte, pharmacie, magasins, cinéma 1 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.664233455200005, 45.476998253799998]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Centre commercial Côte Saint-Luc",
+      "Description": "<p>Centre commercial Côte Saint-Luc<br\/>7155 chemin de la Côte-Saint-Luc<br\/>Côte-Saint-Luc<\/P><P><\/P><P>Toilettes, casse-croûte, pharmacie, magasins 1 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.6539151522, 45.465549446399997]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Samuel Moskovitch Arena",
+      "Description": "<p>Samuel Moskovitch Arena<br\/>6985 chemin Mackle<br\/>Côte-Saint-Luc<\/P><P><\/P><P> 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.669370477399994, 45.472892762199997]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Gymnase de Côte Saint-Luc",
+      "Description": "<p>Gymnase de Côte Saint-Luc<br\/>7500 chemin Mackle<br\/>Côte-Saint-Luc<\/P><P><\/P><P> 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.670853248, 45.468746506599999]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Salle de banquet du Centre communautaire",
+      "Description": "<p>Salle de banquet du Centre communautaire<br\/>12001 boulevard de Salaberry<br\/>Dollard-des-Ormeaux<\/P><P><\/P><P>Repos, nourriture 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.808065793, 45.483391648599998]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Bibliothèque publique de Dollard-des-Ormeaux",
+      "Description": "<p>Bibliothèque publique de Dollard-des-Ormeaux<br\/>12001 boulevard de Salaberry<br\/>Dollard-des-Ormeaux<\/P><P><\/P><P>Repos, lecture 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.808065793, 45.483391648599998]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Centre communautaire Sarto-Desnoyers",
+      "Description": "<p>Centre communautaire Sarto-Desnoyers<br\/>1335 chemin Bord-du-Lac<br\/>Dorval<\/P><P><\/P><P>Halte 1 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.754741866299995, 45.4391942241]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Centre communautaire Irving L Adessky",
+      "Description": "<p>Centre communautaire Irving L Adessky<br\/>30 rue Lyncroft<br\/>Hampstead<\/P><P><\/P><P>Programmes sportifs et socioculturels 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.644429336399995, 45.482970265500001]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Complexe Sportif",
+      "Description": "<p>Complexe Sportif<br\/>16950 boulevard Hymus<br\/>Kirkland<\/P><P><\/P><P> 1 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.848416919599998, 45.449838015099999]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Bibliothéque municipale Saul-Bellow",
+      "Description": "<p>Bibliothéque municipale Saul-Bellow<br\/>3100 rue Saint-Antoine<br\/>Lachine<\/P><P><\/P><P>Toilettes, abreuvoirs, chaises, téléviseur, radio 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.691994558800005, 45.439842021600001]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Complexe culturel Guy-Descary",
+      "Description": "<p>Complexe culturel Guy-Descary<br\/>2901 boulevard Saint-Joseph<br\/>Lachine<\/P><P><\/P><P>Toilettes, abreuvoirs, douches, chaises, téléviseur, radio 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.690193535, 45.433404145300003]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Bibliothèque de Saint-Pierre",
+      "Description": "<p>Bibliothèque de Saint-Pierre<br\/>183 rue des érables<br\/>Lachine<\/P><P><\/P><P>Toilettes, abreuvoirs, douches, chaises,  téléviseur, radio 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.651208586, 45.445856213399999]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Mairie",
+      "Description": "<p>Mairie<br\/>55 avenue Dupras<br\/>LaSalle<\/P><P><\/P><P>Télévision, lecture 1 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.662369808400001, 45.427692643100002]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "L'Octogone",
+      "Description": "<p>L'Octogone<br\/>1080 avenue Dollard<br\/>LaSalle<\/P><P><\/P><P> 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.623043367899996, 45.424451231699997]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Complexe Sportif Gadbois",
+      "Description": "<p>Complexe Sportif Gadbois<br\/>5485 chemin de la Côte Saint-Paul<br\/>Le Sud-Ouest<\/P><P><\/P><P> 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.594001916699995, 45.4671628117]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Centre sportif Petite Bourgogne",
+      "Description": "<p>Centre sportif Petite Bourgogne<br\/>1825 rue Notre-Dame<br\/>Le Sud-Ouest<\/P><P><\/P><P> 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.568677236699997, 45.488339446799998]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Bibliothèque de L'île-Bizard",
+      "Description": "<p>Bibliothèque de L'île-Bizard<br\/>500 montée de l'Église<br\/>L'île-Bizard\/Sainte-Geneviève<\/P><P><\/P><P>Piscines à proximité 1 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.883661328900004, 45.490942302400001]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Centre socio-communautaire (Salle Boileau)",
+      "Description": "<p>Centre socio-communautaire (Salle Boileau)<br\/>490 montée de l'Église<br\/>L'île-Bizard\/Sainte-Geneviève<\/P><P><\/P><P>Piscines à proximité 1 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.883547962500003, 45.4908905956]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Complexe sportif Saint-Raphaél",
+      "Description": "<p>Complexe sportif Saint-Raphaél<br\/>750 boulevard Jacques-Bizard<br\/>L'île-Bizard\/Sainte-Geneviève<\/P><P><\/P><P>Aire de restauration 1 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.876383614399998, 45.502739353899997]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Grenier Saint-Raphaél",
+      "Description": "<p>Grenier Saint-Raphaél<br\/>571 rue Cherrier<br\/>L'île-Bizard\/Sainte-Geneviève<\/P><P><\/P><P>Piscines à proximité 1 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.880577230699998, 45.485439029200002]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Pavillon Vincent-Lecavalier",
+      "Description": "<p>Pavillon Vincent-Lecavalier<br\/>488 montée de l'Église<br\/>L'île-Bizard\/Sainte-Geneviève<\/P><P><\/P><P>Piscines à proximité 1 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.883451223600005, 45.490805588900002]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Salle  Robert-Sauvé",
+      "Description": "<p>Salle  Robert-Sauvé<br\/>15734 rue Caserne<br\/>L'île-Bizard\/Sainte-Geneviève<\/P><P><\/P><P>Piscines à proximité 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.866497031600005, 45.481534178399997]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Aréna du Complexe sportif Saint-Raphaél",
+      "Description": "<p>Aréna du Complexe sportif Saint-Raphaél<br\/>750 boulevard Jacques-Bizard<br\/>L'île-Bizard\/Sainte-Geneviève<\/P><P><\/P><P> 1 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.876383614399998, 45.502739353899997]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Bibliothèque Langelier",
+      "Description": "<p>Bibliothèque Langelier<br\/>6473 rue Sherbrooke E<br\/>Mercier\/Hochelaga\/Maisonneuve<\/P><P><\/P><P> 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.544066015200002, 45.581513538400003]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Bibliothèque Mercier et Maison de la Culture Mercier",
+      "Description": "<p>Bibliothèque Mercier et Maison de la Culture Mercier<br\/>8105 rue Hochelaga<br\/>Mercier\/Hochelaga-Maisonneuve<\/P><P><\/P><P>Eau, chaises, lecture, Internet, toilettes 1 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.523477611800004, 45.595624401899997]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Maison de la Culture Maisonneuve",
+      "Description": "<p>Maison de la Culture Maisonneuve<br\/>4200 rue Ontario E<br\/>Mercier\/Hochelaga-Maisonneuve<\/P><P><\/P><P>Eau, chaises, tables, toilettes 1 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.540523257100006, 45.551175301800001]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Bibliothèque Maisonneuve",
+      "Description": "<p>Bibliothèque Maisonneuve<br\/>4120 rue Ontario E<br\/>Mercier\/Hochelaga-Maisonneuve<\/P><P><\/P><P>Eau, chaises, lecture, Internet, toilettes 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.540664767400003, 45.550955765499999]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Hôtel de ville",
+      "Description": "<p>Hôtel de ville<br\/>11370 rue Notre-Dame E<br\/>Montréal Est<\/P><P><\/P><P> 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.495862444799997, 45.631309014899998]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Centre Récréatif Edouard-Rivet Salle 1",
+      "Description": "<p>Centre Récréatif Edouard-Rivet Salle 1<br\/>11111 rue Notre-Dame E<br\/>Montréal Est<\/P><P><\/P><P>Cuisine avec réfrigérateur, lavabo, plaque-électrique et micro-ondes, ascenseur, piscine intérieure, 1 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.499659222, 45.628164606699997]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Mairie d'arrondissement Montéal-Nord",
+      "Description": "<p>Mairie d'arrondissement Montéal-Nord<br\/>4243 rue de Charleroi<br\/>Montréal Nord<\/P><P><\/P><P>Eau 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.63794597, 45.593615588799999]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Bibliothèque Henri-Bourassa",
+      "Description": "<p>Bibliothèque Henri-Bourassa<br\/>5400 boulevard Henri-Bourassa E<br\/>Montréal Nord<\/P><P><\/P><P>Eau 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.625750341300005, 45.605307968799998]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Hôtel de ville",
+      "Description": "<p>Hôtel de ville<br\/>50 avenue Westminster S<br\/>Montréal Ouest<\/P><P><\/P><P> 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.646123078399995, 45.4530735226]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Bibliothèque des adultes",
+      "Description": "<p>Bibliothèque des adultes<br\/>45 avenue Westminster S<br\/>Montréal Ouest<\/P><P><\/P><P> 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.645839124600002, 45.453167859700002]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Hôtel de ville (Salle Schofield)",
+      "Description": "<p>Hôtel de ville (Salle Schofield)<br\/>90 avenue Roosevelt<br\/>Mont-Royal<\/P><P><\/P><P>Eau, jus 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.642141859199995, 45.513426188]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Service des loisirs",
+      "Description": "<p>Service des loisirs<br\/>60 avenue Roosevelt<br\/>Mont-Royal<\/P><P><\/P><P>Eau, jus 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.641856846099998, 45.513901249100002]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Bibliothèque centrale",
+      "Description": "<p>Bibliothèque centrale<br\/>100 avenue Douglas-Shand<br\/>Pointe-Claire<\/P><P><\/P><P>Lecture, Internet 1 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.816238744299994, 45.449786284799998]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Aréna Bob-Birnie",
+      "Description": "<p>Aréna Bob-Birnie<br\/>58 avenue Maywood<br\/>Pointe-Claire<\/P><P><\/P><P>Piscine 1 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.814748313699994, 45.450532202200002]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Centre Communautaire RDP",
+      "Description": "<p>Centre Communautaire RDP<br\/>9140 boulevard Perras<br\/>Rivière-des-Prairies\/Pointe-aux-Trembles<\/P><P><\/P><P>Rafraichissements, toilettes, abreuvoir, réfrigérateur, micro-onde, cuisinière 1 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.577362303900003, 45.650497852299999]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Centre communautaire Roussin",
+      "Description": "<p>Centre communautaire Roussin<br\/>12125 rue Notre-Dame E<br\/>Rivière-des-Prairies\/Pointe-aux-Trembles<\/P><P><\/P><P>Rafraichissements, toilettes, douches, piscines, gymnases, abreuvoirs, casse-croûte, réfrigérateurs, 1 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.490145100500001, 45.641108534899999]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Centre communautaire Ste-Maria-Goretti",
+      "Description": "<p>Centre communautaire Ste-Maria-Goretti<br\/>15912 rue Notre-Dame E<br\/>Rivière-des-Prairies\/Pointe-aux-Trembles<\/P><P><\/P><P>Rafraichissements et réfrigérateurs 1 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.487831451100007, 45.694379397500001]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Centre récréatif de RDP",
+      "Description": "<p>Centre récréatif de RDP<br\/>7650 boulevard Maurice-Duplessis<br\/>Rivière-des-Prairies\/Pointe-aux-Trembles<\/P><P><\/P><P>Rafraichissements; aide psychosociale; transport, toilettes, abreuvoir, réfrigérateur, micro-onde 1 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.594831251900004, 45.627359762099999]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Centre communautaire Le mainbourg",
+      "Description": "<p>Centre communautaire Le mainbourg<br\/>14115 rue Prince-Arthur<br\/>Rivière-des-Prairies\/Pointe-aux-Trembles<\/P><P><\/P><P>Rafraichissements, machines distributrices, toilettes, abreuvoirs, réfrigérateur, cuisinière, lecteur 1 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.509072735800004, 45.671698261499998]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Bibliothèque Rivière-des-Prairies",
+      "Description": "<p>Bibliothèque Rivière-des-Prairies<br\/>9001 boulevard Perras<br\/>Rivière-des-Prairies\/Pointe-aux-Trembles<\/P><P><\/P><P> 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.578846698099994, 45.649860641499998]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Bibliothèque Pointe-aux-Trembles",
+      "Description": "<p>Bibliothèque Pointe-aux-Trembles<br\/>14001 rue Notre-Dame E<br\/>Rivière-des-Prairies\/Pointe-aux-Trembles<\/P><P><\/P><P> 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.495840347400005, 45.668020732700001]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Bibliothèque Rosemont",
+      "Description": "<p>Bibliothèque Rosemont<br\/>3131 boulevard Rosemont<br\/>Rosemont\/La Petite Patrie<\/P><P><\/P><P>Rafraichissements, toilettes, ascenseur, trois étages 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.581966199199996, 45.551581880699999]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Centre Étienne-Desmarteau",
+      "Description": "<p>Centre Étienne-Desmarteau<br\/>3430 rue Bellechasse<br\/>Rosemont\/La Petite Patrie<\/P><P><\/P><P>Rafraichissements, toilettes, ascenseur, douches 1 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.580570958400003, 45.555947798399998]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Maison de la culture",
+      "Description": "<p>Maison de la culture<br\/>6707 avenue de Lorimier<br\/>Rosemont\/La Petite Patrie<\/P><P><\/P><P>Rafraichissements, toilettes, ascenseur, trois étages 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.598355916100004, 45.547391423599997]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Bibliothèque Petite Patrie",
+      "Description": "<p>Bibliothèque Petite Patrie<br\/>6707 avenue de Lorimier<br\/>Rosemont\/La Petite Patrie<\/P><P><\/P><P>Rafraichissements, toilettes, ascenseur, trois étages 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.598355916100004, 45.547391423599997]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Bibliothèque Marc-Favreau",
+      "Description": "<p>Bibliothèque Marc-Favreau<br\/>500 boulevard rosemont<br\/>Rosemont\/La Petite Patrie<\/P><P><\/P><P> 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.597453015699998, 45.5318658618]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Chalet Peter Willamson",
+      "Description": "<p>Chalet Peter Willamson<br\/>300 rue Cypihot<br\/>Sainte-Anne-de-Bellevue<\/P><P><\/P><P> 1 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.927567310800001, 45.4394108742]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Centre Harpell",
+      "Description": "<p>Centre Harpell<br\/>60 rue St-Pierre<br\/>Sainte-Anne-de-Bellevue<\/P><P><\/P><P> 1 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.951014158800007, 45.406279291499999]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Centre des Loisirs",
+      "Description": "<p>Centre des Loisirs<br\/>1375 rue Grenet<br\/>Saint-Laurent<\/P><P><\/P><P>Hébergement - Accueil 1 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.689428620499996, 45.512995320199998]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Centre communautaire Leonardo da Vinci",
+      "Description": "<p>Centre communautaire Leonardo da Vinci<br\/>8350 boulevard Lacordaire<br\/>Saint-Léonard<\/P><P><\/P><P>Films, restauration, spectacles 1 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.595917522400001, 45.586024321]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Bibliothèque de St-Léonard et salle d'activités",
+      "Description": "<p>Bibliothèque de St-Léonard et salle d'activités<br\/>8420 boulevard Lacordaire<br\/>Saint-Léonard<\/P><P><\/P><P>Lecture, musique, journaux 1 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.596999810400007, 45.587112724900003]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Hôtel de ville",
+      "Description": "<p>Hôtel de ville<br\/>35 chemin de Senneville<br\/>Senneville<\/P><P><\/P><P> 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.9598493254, 45.413635719299997]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Centre communautaire",
+      "Description": "<p>Centre communautaire<br\/>20, avenue Morningside<br\/>Senneville<\/P><P><\/P><P> 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.958642735200002, 45.414929303199997]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Centre communautaire Marcel-Giroux",
+      "Description": "<p>Centre communautaire Marcel-Giroux<br\/>4501 rue Bannantyne<br\/>Verdun<\/P><P><\/P><P> 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.576123581600001, 45.459517321500002]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Centre culturel de Verdun",
+      "Description": "<p>Centre culturel de Verdun<br\/>5955 rue Bannantyne<br\/>Verdun<\/P><P><\/P><P> 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.577155835300005, 45.448280686700002]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Centre communautaire Elgar",
+      "Description": "<p>Centre communautaire Elgar<br\/>260 rue Elgar<br\/>Verdun<\/P><P><\/P><P> 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.5469199546, 45.457178240600001]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Bibliothèque Frontenac",
+      "Description": "<p>Bibliothèque Frontenac<br\/>2550 rue Ontario E<br\/>Ville-Marie<\/P><P><\/P><P>Lecture 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.552471783399994, 45.533038629499998]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Cégep du Vieux-Montréal",
+      "Description": "<p>Cégep du Vieux-Montréal<br\/>255 rue Ontario E<br\/>Ville-Marie<\/P><P><\/P><P>Machines distributrices de boissons et de collations 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.565812893200004, 45.514574217499998]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Centre Jean-Claude-Malépart",
+      "Description": "<p>Centre Jean-Claude-Malépart<br\/>2633 rue Ontario E<br\/>Ville-Marie<\/P><P><\/P><P>Machines distributrices de boissons et de collations 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.5521094522, 45.533898130099999]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Bibliothèque du Plateau-Mont-Royal",
+      "Description": "<p>Bibliothèque du Plateau-Mont-Royal<br\/>465 Avenue Mont-Royal E<br\/>Plateau Mont-Royal<\/P><P><\/P><P>Chaises, lecture, eau 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.582461369100002, 45.524637494099998]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Centre du Plateau",
+      "Description": "<p>Centre du Plateau<br\/>2275 boulevard Saint-Joseph E<br\/>Plateau Mont-Royal<\/P><P><\/P><P>Chaises, tables, eau, surveillance 1 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.575540439899996, 45.539567557]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "YMCA, succursale du Parc",
+      "Description": "<p>YMCA, succursale du Parc<br\/>5550 avenue Parc<br\/>Plateau Mont-Royal<\/P><P><\/P><P>Chaises, eau, surveillance, douches, animation 1 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.602777041699994, 45.522348641500002]
+    }
+  }, {
+    "type": "Feature",
+    "properties": {
+      "Name": "Bibliothèque du Mile End",
+      "Description": "<p>Bibliothèque du Mile End<br\/>5434 avenue Parc<br\/>Plateau Mont-Royal<\/P><P><\/P><P>Chaises, lecture, eau. (La salle d'animation, en haut, a une capacité d'acceuil de 50 personnes) 0 <\/P>"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-73.601256356600004, 45.521673633900001]
+    }
+  }
+
+  ]
+}

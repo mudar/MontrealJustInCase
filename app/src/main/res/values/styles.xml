@@ -45,6 +45,12 @@
         <item name="android:background">?attr/selectableItemBackground</item>
     </style>
 
+    <style name="AboutODCreditsText" parent="@style/AboutPrimaryText">
+        <item name="android:lines">1</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
     <style name="AboutIcon">
         <item name="android:layout_marginTop">@dimen/about_icon_fix_margin</item>
     </style>

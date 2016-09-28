@@ -57,6 +57,10 @@
     <string name="btn_device_settings">Paramètres de l’appareil</string>
     <string name="btn_zoom_out">Zoom arrière</string>
     <string name="btn_accept_eula">Accepter et continuer</string>
+    <string name="btn_close">Fermer</string>
+
+    <!--Dialogs-->
+    <string name="dialog_open_data_title">Sources des données ouvertes</string>
 
     <!--InfoWindow-->
     <string name="info_window_snippet_distance">%1$s\r\nDistance: %2$s</string>

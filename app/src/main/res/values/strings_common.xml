@@ -11,6 +11,22 @@
     <string name="url_montreal_ouvert" translatable="false">http://montrealouvert.net/donnees-ouvertes-questions-frequemment-demandees/</string>
     <string name="url_mtl_open_data" translatable="false">http://donnees.ville.montreal.qc.ca/dataset/casernes-pompiers</string>
 
+    <!--Open Data credits/links-->
+    <string name="about_od_fire_halls_title" translatable="false">Casernes de pompiers sur l’île de Montréal</string>
+    <string name="about_od_spvm_stations_title" translatable="false">Postes de police de quartier sur l’île de Montréal</string>
+    <string name="about_od_water_supplies_title" translatable="false">Points d’eau – mesures d’urgence</string>
+    <string name="about_od_emergency_hostels_title" translatable="false">Centres d’hébergement d’urgence</string>
+    <string name="about_od_spvm_stations_zones_title" translatable="false">Limites des secteurs de poste de quartier de police</string>
+    <string name="about_od_license_title" translatable="false">Licence d’utilisation des données ouvertes</string>
+    <string name="about_od_hospitals_title" translatable="false">@string/btn_hospitals</string>
+
+    <string name="about_od_fire_halls_url" translatable="false">http://donnees.ville.montreal.qc.ca/dataset/casernes-pompiers</string>
+    <string name="about_od_spvm_stations_url" translatable="false">http://donnees.ville.montreal.qc.ca/dataset/carte-postes-quartier</string>
+    <string name="about_od_water_supplies_url" translatable="false">http://donnees.ville.montreal.qc.ca/dataset/points-eau</string>
+    <string name="about_od_emergency_hostels_url" translatable="false">http://donnees.ville.montreal.qc.ca/dataset/centres-hebergement-urgence</string>
+    <string name="about_od_license_url" translatable="false">http://donnees.ville.montreal.qc.ca/portail/licence/</string>
+    <string name="about_od_hospitals_url" translatable="false">https://www.santemontreal.qc.ca/</string>
+
     <!--AboutLibraries-->
     <string name="library_AboutLibraries_libraryDescription" translatable="false">AboutLibraries is a library to offer you all the information you need of your libraries.</string>
     <string name="library_GooglePlayServices_libraryDescription" translatable="false">With Google Play services, your app can take advantage of the latest, Google-powered features such as Maps, Google Cloud Messaging (GCM), and more.</string>

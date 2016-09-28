@@ -133,6 +133,7 @@ public class Const {
     public interface FragmentTags {
         String SETTINGS = "fragment_settings";
         String MAP = "fragment_map";
+        String DIALOG_OD_CREDITS = "dialog_od_credits";
     }
 
     /**

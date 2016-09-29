@@ -137,6 +137,18 @@ public class ApiClient {
     }
 
     @Nullable
+    public static Response<PointsFeatureCollection> getAirConditioning(GeoApiService service) {
+        try {
+            return service.getAirConditioning()
+                    .execute();
+        } catch (IOException e) {
+            LogUtils.REMOTE_LOG(e);
+        }
+
+        return null;
+    }
+
+    @Nullable
     public static Response<PointsFeatureCollection> getEmergencyHostels(GeoApiService service) {
         try {
             return service.getEmergencyHostels()

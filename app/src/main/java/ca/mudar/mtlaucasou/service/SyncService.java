@@ -83,6 +83,7 @@ public class SyncService extends IntentService {
         importLocalData(R.raw.fire_halls, Const.MapTypes.FIRE_HALLS);
         importLocalData(R.raw.spvm_stations, Const.MapTypes.SVPM_STATIONS);
         importLocalData(R.raw.water_supplies, Const.MapTypes.WATER_SUPPLIES);
+        importLocalData(R.raw.air_conditioning, Const.MapTypes.WATER_SUPPLIES);
         importLocalData(R.raw.emergency_hostes, Const.MapTypes.EMERGENCY_HOSTELS);
         importLocalData(R.raw.hospitals, Const.MapTypes.HOSPITALS);
 
@@ -141,6 +142,17 @@ public class SyncService extends IntentService {
             PointsFeatureCollection collection = response.body();
             if (collection != null && collection.getFeatures() != null) {
                 RealmQueries.cacheMapData(mRealm, collection.getFeatures(), mapType, true);
+            }
+        }
+
+        if (Const.MapTypes.WATER_SUPPLIES.equals(mapType)) {
+            // WATER_SUPPLIES supplies has an extra source: air conditioning
+            response = ApiClient.getWaterSupplies(apiService);
+            if (response != null) {
+                PointsFeatureCollection collection = response.body();
+                if (collection != null && collection.getFeatures() != null) {
+                    RealmQueries.cacheMapData(mRealm, collection.getFeatures(), mapType, true);
+                }
             }
         }
     }

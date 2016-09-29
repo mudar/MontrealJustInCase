@@ -45,6 +45,10 @@ public interface GeoApiService {
     Call<PointsFeatureCollection> getWaterSupplies();
 
     @Headers({CONTENT_TYPE})
+    @GET(Const.ApiPaths.GET_AIR_CONDITIONING)
+    Call<PointsFeatureCollection> getAirConditioning();
+
+    @Headers({CONTENT_TYPE})
     @GET(Const.ApiPaths.GET_EMERGENCY_HOSTELS)
     Call<PointsFeatureCollection> getEmergencyHostels();
 

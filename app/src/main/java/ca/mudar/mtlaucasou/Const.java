@@ -61,6 +61,7 @@ public class Const {
         String GET_FIRE_HALLS = "fire_halls.json";
         String GET_SPVM_STATIONS = "spvm_stations.json";
         String GET_WATER_SUPPLIES = "water_supplies.json";
+        String GET_AIR_CONDITIONING = "air_conditioning.json";
         String GET_EMERGENCY_HOSTELS = "emergency_hostes.json";
         String GET_HOSPITALS = "hospitals.json";
     }

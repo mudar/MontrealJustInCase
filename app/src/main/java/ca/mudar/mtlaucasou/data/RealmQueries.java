@@ -38,10 +38,28 @@ import io.realm.RealmResults;
 public class RealmQueries {
 
     /**
+     * Delete data from the Realm db
+     *
+     * @param realm
+     * @param mapType
+     */
+    public static void clearMapData(Realm realm, @MapType String mapType) {
+        realm.beginTransaction();
+
+        queryPlacemarksByMapType(realm, mapType)
+                .findAll()
+                .deleteAllFromRealm();
+
+        realm.commitTransaction();
+    }
+
+    /**
      * Save the downloaded data to the Realm db
      *
+     * @param realm
      * @param pointsFeatures
      * @param mapType
+     * @param transaction
      */
     public static void cacheMapData(Realm realm, List<PointsFeature> pointsFeatures, @MapType String mapType, boolean transaction) {
         if (transaction) {

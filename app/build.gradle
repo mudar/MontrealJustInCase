@@ -33,9 +33,8 @@ android {
         release {
             minifyEnabled true
             shrinkResources true
-            FileCollection proGuardFileCollection = files { file('./proguard').listFiles() }
-            proguardFiles(proGuardFileCollection)
             proguardFile getDefaultProguardFile('proguard-android.txt')
+            proguardFiles fileTree(dir: 'proguard', include: ['*.pro']).asList().toArray()
 
             buildConfigField "String", "API_BASE_URL", '"http://www.montrealaucasou.com/api/"'
             buildConfigField "boolean", "USE_CRASHLYTICS", "true"

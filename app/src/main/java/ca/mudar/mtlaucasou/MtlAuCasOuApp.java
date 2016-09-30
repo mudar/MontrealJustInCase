@@ -56,7 +56,8 @@ public class MtlAuCasOuApp extends Application {
     }
 
     private void setupRealm() {
-        RealmConfiguration config = new RealmConfiguration.Builder(this)
+        Realm.init(this);
+        RealmConfiguration config = new RealmConfiguration.Builder()
                 .name(Const.DATABASE_NAME)
                 .schemaVersion(Const.DATABASE_VERSION)
                 .build();

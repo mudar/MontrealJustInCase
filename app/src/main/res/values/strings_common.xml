@@ -16,6 +16,7 @@
     <string name="about_od_spvm_stations_title" translatable="false">Postes de police de quartier sur l’île de Montréal</string>
     <string name="about_od_water_supplies_title" translatable="false">Points d’eau – mesures d’urgence</string>
     <string name="about_od_emergency_hostels_title" translatable="false">Centres d’hébergement d’urgence</string>
+    <string name="about_od_air_conditioning_title" translatable="false">Lieux publics climatisés</string>
     <string name="about_od_spvm_stations_zones_title" translatable="false">Limites des secteurs de poste de quartier de police</string>
     <string name="about_od_license_title" translatable="false">Licence d’utilisation des données ouvertes</string>
     <string name="about_od_hospitals_title" translatable="false">@string/btn_hospitals</string>
@@ -24,6 +25,8 @@
     <string name="about_od_spvm_stations_url" translatable="false">http://donnees.ville.montreal.qc.ca/dataset/carte-postes-quartier</string>
     <string name="about_od_water_supplies_url" translatable="false">http://donnees.ville.montreal.qc.ca/dataset/points-eau</string>
     <string name="about_od_emergency_hostels_url" translatable="false">http://donnees.ville.montreal.qc.ca/dataset/centres-hebergement-urgence</string>
+    <string name="about_od_air_conditioning_url" translatable="false">http://donnees.ville.montreal.qc.ca/dataset/lieux-publics-climatises</string>
+    <string name="about_od_spvm_stations_zones_url" translatable="false">http://donnees.ville.montreal.qc.ca/dataset/limites-pdq-spvm</string>
     <string name="about_od_license_url" translatable="false">http://donnees.ville.montreal.qc.ca/portail/licence/</string>
     <string name="about_od_hospitals_url" translatable="false">https://www.santemontreal.qc.ca/</string>
 

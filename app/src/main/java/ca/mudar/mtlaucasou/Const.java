@@ -58,12 +58,18 @@ public class Const {
      */
     public interface ApiPaths {
         // String BASE_URL = BuildConfig.API_BASE_URL; // "http://www.montrealaucasou.com/api/"
+        String GET_HELLO = "hello.json";
         String GET_FIRE_HALLS = "fire_halls.json";
         String GET_SPVM_STATIONS = "spvm_stations.json";
         String GET_WATER_SUPPLIES = "water_supplies.json";
         String GET_AIR_CONDITIONING = "air_conditioning.json";
         String GET_EMERGENCY_HOSTELS = "emergency_hostels.json";
         String GET_HOSPITALS = "hospitals.json";
+    }
+
+    public interface ApiValues {
+        String TYPE_PLACEMARKS = "placemarks";
+        String TYPE_SHAPES = "shapes";
     }
 
     public interface BundleKeys {
@@ -110,10 +116,11 @@ public class Const {
         String UNITS_SYSTEM = "prefs_units_system";
 //        String LIST_SORT = "prefs_list_sort_by";
 //        String FOLLOW_LOCATION_CHANGES = "prefs_follow_location_changes";
-        String LAST_UPDATE_TIME = "prefs_last_update_time";
-        String LAST_UPDATE_LAT = "prefs_last_update_lat";
-        String LAST_UPDATE_LNG = "prefs_last_update_lng";
+//        String LAST_UPDATE_TIME = "prefs_last_update_time";
+//        String LAST_UPDATE_LAT = "prefs_last_update_lat";
+//        String LAST_UPDATE_LNG = "prefs_last_update_lng";
         String PERMISSION_DENIED_FOR_EVER = "prefs_permission_denied";
+        String ITEM_UPDATED_AT = "prefs_updated_%s";
     }
 
     public interface PrefsValues {

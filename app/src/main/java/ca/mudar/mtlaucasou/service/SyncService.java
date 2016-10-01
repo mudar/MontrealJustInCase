@@ -33,15 +33,19 @@ import com.google.gson.Gson;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Date;
 
 import ca.mudar.mtlaucasou.Const;
 import ca.mudar.mtlaucasou.R;
 import ca.mudar.mtlaucasou.api.ApiClient;
-import ca.mudar.mtlaucasou.api.GeoApiService;
 import ca.mudar.mtlaucasou.data.RealmQueries;
 import ca.mudar.mtlaucasou.data.UserPrefs;
 import ca.mudar.mtlaucasou.model.MapType;
 import ca.mudar.mtlaucasou.model.geojson.PointsFeatureCollection;
+import ca.mudar.mtlaucasou.model.jsonapi.DataItem;
+import ca.mudar.mtlaucasou.model.jsonapi.HelloApi;
+import ca.mudar.mtlaucasou.util.ApiUtils;
+import ca.mudar.mtlaucasou.util.LogUtils;
 import io.realm.Realm;
 import retrofit2.Response;
 
@@ -65,11 +69,12 @@ public class SyncService extends IntentService {
         mRealm = Realm.getDefaultInstance();
         final long startTime = System.currentTimeMillis();
 
-        if (!UserPrefs.getInstance(this).hasLoadedData()) {
+        final UserPrefs userPrefs = UserPrefs.getInstance(this);
+        if (!userPrefs.hasLoadedData()) {
             loadInitialLocalData();
         } else {
             // TODO handle updates frequency and redundancy
-//            downloadRemoteUpdatesIfAvailable();
+            downloadRemoteUpdatesIfAvailable(userPrefs);
         }
 
         Log.v(TAG, String.format("Data sync duration: %dms", System.currentTimeMillis() - startTime));
@@ -81,7 +86,7 @@ public class SyncService extends IntentService {
         mRealm.beginTransaction();
 
         importLocalData(R.raw.fire_halls, Const.MapTypes.FIRE_HALLS);
-        importLocalData(R.raw.spvm_stations, Const.MapTypes.SVPM_STATIONS);
+        importLocalData(R.raw.spvm_stations, Const.MapTypes.SPVM_STATIONS);
         importLocalData(R.raw.water_supplies, Const.MapTypes.WATER_SUPPLIES);
         importLocalData(R.raw.air_conditioning, Const.MapTypes.WATER_SUPPLIES);
         importLocalData(R.raw.emergency_hostels, Const.MapTypes.EMERGENCY_HOSTELS);
@@ -90,12 +95,33 @@ public class SyncService extends IntentService {
         mRealm.commitTransaction();
     }
 
-    private void downloadRemoteUpdatesIfAvailable() {
-        importRemoteData(Const.MapTypes.FIRE_HALLS);
-        importRemoteData(Const.MapTypes.SVPM_STATIONS);
-        importRemoteData(Const.MapTypes.WATER_SUPPLIES);
-        importRemoteData(Const.MapTypes.EMERGENCY_HOSTELS);
-        importRemoteData(Const.MapTypes.HOSPITALS);
+    private void downloadRemoteUpdatesIfAvailable(UserPrefs prefs) {
+        try {
+            Response<HelloApi> helloResponse = ApiClient.hello(ApiClient.getService());
+            if (helloResponse != null && helloResponse.body() != null) {
+                final HelloApi api = helloResponse.body();
+                for (DataItem dataset : api.getData()) {
+                    if (!Const.ApiValues.TYPE_PLACEMARKS.equals(dataset.getType())) {
+                        continue;
+                    }
+
+                    final String key = ApiUtils.getSharedPrefsKey(dataset.getId());
+                    final Date updatedAt = dataset.getAttributes().getUpdated();
+
+                    if (prefs.isApiDataNewer(key, updatedAt)) {
+                        final boolean result = importRemoteData(dataset.getLinks().getSelf(),
+                                dataset.getAttributes().getType());
+
+                        if (result) {
+                            prefs.setDataUpdatedAt(key, updatedAt);
+                        }
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            LogUtils.REMOTE_LOG(e);
+        }
     }
 
     private void importLocalData(@RawRes int resource, @MapType String mapType) {
@@ -111,49 +137,24 @@ public class SyncService extends IntentService {
     /**
      * Request the GeoJSON data from the API
      *
-     * @param mapType
+     * @param url     The remote dataset URL
+     * @param mapType The MapType
+     * @return
      */
-    private void importRemoteData(@MapType String mapType) {
-        final GeoApiService apiService = ApiClient.getService();
-
-        Response<PointsFeatureCollection> response;
-        switch (mapType) {
-            case Const.MapTypes.FIRE_HALLS:
-                response = ApiClient.getFireHalls(apiService);
-                break;
-            case Const.MapTypes.SVPM_STATIONS:
-                response = ApiClient.getSpvmStations(apiService);
-                break;
-            case Const.MapTypes.WATER_SUPPLIES:
-                response = ApiClient.getWaterSupplies(apiService);
-                break;
-            case Const.MapTypes.EMERGENCY_HOSTELS:
-                response = ApiClient.getEmergencyHostels(apiService);
-                break;
-            case Const.MapTypes.HOSPITALS:
-                response = ApiClient.getHospitals(apiService);
-                break;
-            default:
-                response = null;
-                break;
-        }
+    private boolean importRemoteData(String url, @MapType String mapType) {
+        final Response<PointsFeatureCollection> response = ApiClient
+                .getPlacemarks(ApiClient.getService(), url);
 
         if (response != null) {
             PointsFeatureCollection collection = response.body();
             if (collection != null && collection.getFeatures() != null) {
+                RealmQueries.clearMapData(mRealm, mapType);
                 RealmQueries.cacheMapData(mRealm, collection.getFeatures(), mapType, true);
             }
+
+            return true;
         }
 
-        if (Const.MapTypes.WATER_SUPPLIES.equals(mapType)) {
-            // WATER_SUPPLIES supplies has an extra source: air conditioning
-            response = ApiClient.getWaterSupplies(apiService);
-            if (response != null) {
-                PointsFeatureCollection collection = response.body();
-                if (collection != null && collection.getFeatures() != null) {
-                    RealmQueries.cacheMapData(mRealm, collection.getFeatures(), mapType, true);
-                }
-            }
-        }
+        return false;
     }
 }

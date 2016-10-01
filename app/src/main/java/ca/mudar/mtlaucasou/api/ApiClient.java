@@ -33,6 +33,7 @@ import java.util.concurrent.TimeUnit;
 
 import ca.mudar.mtlaucasou.BuildConfig;
 import ca.mudar.mtlaucasou.model.geojson.PointsFeatureCollection;
+import ca.mudar.mtlaucasou.model.jsonapi.HelloApi;
 import ca.mudar.mtlaucasou.util.LogUtils;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -80,95 +81,37 @@ public class ApiClient {
         return retrofit.create(GeoApiService.class);
     }
 
-    public static void getFireHalls(GeoApiService service, Callback<PointsFeatureCollection> cb) {
-        service.getFireHalls()
+    @Nullable
+    public static Response<HelloApi> hello(GeoApiService service) {
+        try {
+            return service.hello()
+                    .execute();
+        } catch (IOException e) {
+            LogUtils.REMOTE_LOG(e);
+        }
+
+        return null;
+    }
+
+    public static void hello(GeoApiService service, Callback<HelloApi> cb) {
+        service.hello()
                 .enqueue(cb);
     }
 
-    public static void getSpvmStations(GeoApiService service, Callback<PointsFeatureCollection> cb) {
-        service.getSpvmStations()
+    @Nullable
+    public static Response<PointsFeatureCollection> getPlacemarks(GeoApiService service, String url) {
+        try {
+            return service.getPlacemarks(url)
+                    .execute();
+        } catch (IOException e) {
+            LogUtils.REMOTE_LOG(e);
+        }
+
+        return null;
+    }
+
+    public static void getPlacemarks(GeoApiService service, String url, Callback<PointsFeatureCollection> cb) {
+        service.getPlacemarks(url)
                 .enqueue(cb);
-    }
-
-    public static void getWaterSupplies(GeoApiService service, Callback<PointsFeatureCollection> cb) {
-        service.getWaterSupplies()
-                .enqueue(cb);
-    }
-
-    public static void getEmergencyHostels(GeoApiService service, Callback<PointsFeatureCollection> cb) {
-        service.getEmergencyHostels()
-                .enqueue(cb);
-    }
-
-    @Nullable
-    public static Response<PointsFeatureCollection> getFireHalls(GeoApiService service) {
-        try {
-            return service.getFireHalls()
-                    .execute();
-        } catch (IOException e) {
-            LogUtils.REMOTE_LOG(e);
-        }
-
-        return null;
-    }
-
-    @Nullable
-    public static Response<PointsFeatureCollection> getSpvmStations(GeoApiService service) {
-        try {
-            return service.getSpvmStations()
-                    .execute();
-        } catch (IOException e) {
-            LogUtils.REMOTE_LOG(e);
-        }
-
-        return null;
-    }
-
-    @Nullable
-    public static Response<PointsFeatureCollection> getWaterSupplies(GeoApiService service) {
-        try {
-            return service.getWaterSupplies()
-                    .execute();
-        } catch (IOException e) {
-            LogUtils.REMOTE_LOG(e);
-        }
-
-        return null;
-    }
-
-    @Nullable
-    public static Response<PointsFeatureCollection> getAirConditioning(GeoApiService service) {
-        try {
-            return service.getAirConditioning()
-                    .execute();
-        } catch (IOException e) {
-            LogUtils.REMOTE_LOG(e);
-        }
-
-        return null;
-    }
-
-    @Nullable
-    public static Response<PointsFeatureCollection> getEmergencyHostels(GeoApiService service) {
-        try {
-            return service.getEmergencyHostels()
-                    .execute();
-        } catch (IOException e) {
-            LogUtils.REMOTE_LOG(e);
-        }
-
-        return null;
-    }
-
-    @Nullable
-    public static Response<PointsFeatureCollection> getHospitals(GeoApiService service) {
-        try {
-            return service.getHospitals()
-                    .execute();
-        } catch (IOException e) {
-            LogUtils.REMOTE_LOG(e);
-        }
-
-        return null;
     }
 }

@@ -28,6 +28,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import java.util.Date;
 import java.util.Locale;
 
 import ca.mudar.mtlaucasou.Const;
@@ -131,6 +132,22 @@ public class UserPrefs implements
 
     public void setPermissionDeniedForEver(boolean denied) {
         edit().putBoolean(PERMISSION_DENIED_FOR_EVER, denied)
+                .apply();
+    }
+
+    /**
+     * Check if the API dataset has updates for the requested dataset item
+     *
+     * @param key       The local dataset key
+     * @param updatedAt The remote dataset date to compare to
+     * @return true if updates are needed
+     */
+    public boolean isApiDataNewer(String key, Date updatedAt) {
+        return Long.compare(mPrefs.getLong(key, Const.UNKNOWN_VALUE), updatedAt.getTime()) < 0;
+    }
+
+    public void setDataUpdatedAt(String key, Date updatedAt) {
+        edit().putLong(key, updatedAt.getTime())
                 .apply();
     }
 }

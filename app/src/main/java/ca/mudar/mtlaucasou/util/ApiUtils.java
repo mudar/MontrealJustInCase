@@ -21,25 +21,14 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package ca.mudar.mtlaucasou.api;
+package ca.mudar.mtlaucasou.util;
 
-import ca.mudar.mtlaucasou.Const;
-import ca.mudar.mtlaucasou.model.geojson.PointsFeatureCollection;
-import ca.mudar.mtlaucasou.model.jsonapi.HelloApi;
-import retrofit2.Call;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
-import retrofit2.http.Url;
+import java.util.Locale;
 
-public interface GeoApiService {
-    String CONTENT_TYPE = "Content-type: application/json";
+import static ca.mudar.mtlaucasou.Const.PrefsNames.ITEM_UPDATED_AT;
 
-    @Headers({CONTENT_TYPE})
-    @GET(Const.ApiPaths.GET_HELLO)
-    Call<HelloApi> hello();
-
-
-    @Headers({CONTENT_TYPE})
-    @GET
-    Call<PointsFeatureCollection> getPlacemarks(@Url String url);
+public class ApiUtils {
+    public static String getSharedPrefsKey(String id) {
+        return String.format(Locale.ROOT, ITEM_UPDATED_AT, id);
+    }
 }

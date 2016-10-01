@@ -59,12 +59,6 @@ public class Const {
     public interface ApiPaths {
         // String BASE_URL = BuildConfig.API_BASE_URL; // "http://www.montrealaucasou.com/api/"
         String GET_HELLO = "hello.json";
-        String GET_FIRE_HALLS = "fire_halls.json";
-        String GET_SPVM_STATIONS = "spvm_stations.json";
-        String GET_WATER_SUPPLIES = "water_supplies.json";
-        String GET_AIR_CONDITIONING = "air_conditioning.json";
-        String GET_EMERGENCY_HOSTELS = "emergency_hostels.json";
-        String GET_HOSPITALS = "hospitals.json";
     }
 
     public interface ApiValues {

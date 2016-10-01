@@ -7,7 +7,7 @@
         title="@string/btn_hospitals" />
 
     <tab
-        barColorWhenSelected="@color/color_svpm"
+        barColorWhenSelected="@color/color_spvm"
         icon="@drawable/ic_spvm"
         id="@+id/tab_spvm"
         title="@string/btn_spvm_stations" />

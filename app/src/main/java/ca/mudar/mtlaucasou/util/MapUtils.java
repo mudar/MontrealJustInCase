@@ -69,14 +69,14 @@ public class MapUtils {
     /**
      * Get the map marker icon (round buttons)
      *
-     * @param type Selected map type {fire_halls|svpm_stations|water_supplies|emergency_hostels}
+     * @param type Selected map type {fire_halls|spvm_stations|water_supplies|emergency_hostels}
      * @return bitmap for MarkerOptions
      */
     public static BitmapDescriptor getMarkerIcon(@MapType String type) {
         switch (type) {
             case Const.MapTypes.FIRE_HALLS:
                 return BitmapDescriptorFactory.fromResource(R.drawable.ic_maps_fire_halls);
-            case Const.MapTypes.SVPM_STATIONS:
+            case Const.MapTypes.SPVM_STATIONS:
                 return BitmapDescriptorFactory.fromResource(R.drawable.ic_maps_spvm);
             case Const.MapTypes.WATER_SUPPLIES:
                 return BitmapDescriptorFactory.fromResource(R.drawable.ic_maps_water_supplies);
@@ -92,7 +92,7 @@ public class MapUtils {
      * Get the app's colors for each section. Used for ProgressBar
      *
      * @param context Context to resolve resources
-     * @param type    Selected map type {fire_halls|svpm_stations|water_supplies|emergency_hostels}
+     * @return Selected map type {fire_halls|spvm_stations|water_supplies|emergency_hostels|hospitals}
      * @return the section's color
      */
     @ColorInt
@@ -102,8 +102,8 @@ public class MapUtils {
             case Const.MapTypes.FIRE_HALLS:
                 color = R.color.color_fire_halls;
                 break;
-            case Const.MapTypes.SVPM_STATIONS:
-                color = R.color.color_svpm;
+            case Const.MapTypes.SPVM_STATIONS:
+                color = R.color.color_spvm;
                 break;
             case Const.MapTypes.WATER_SUPPLIES:
                 color = R.color.color_water_supplies;

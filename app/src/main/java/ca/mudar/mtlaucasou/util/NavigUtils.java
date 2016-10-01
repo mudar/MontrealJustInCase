@@ -36,7 +36,7 @@ public class NavigUtils {
      * Get the bottomBar tabId for the selected SuggestionPlacemark, allowing to switch tabs
      * when showing the placemark.
      *
-     * @param type Selected map type {fire_halls|svpm_stations|water_supplies|emergency_hostels|hospitals}
+     * @param type Selected map type {fire_halls|spvm_stations|water_supplies|emergency_hostels|hospitals}
      * @return tabId
      */
     @IdRes
@@ -44,7 +44,7 @@ public class NavigUtils {
         switch (type) {
             case Const.MapTypes.FIRE_HALLS:
                 return R.id.tab_fire_halls;
-            case Const.MapTypes.SVPM_STATIONS:
+            case Const.MapTypes.SPVM_STATIONS:
                 return R.id.tab_spvm;
             case Const.MapTypes.WATER_SUPPLIES:
                 return R.id.tab_water_supplies;
@@ -61,7 +61,7 @@ public class NavigUtils {
      * Get the map type when user switches tabs in the bottomBar
      *
      * @param tabId the selected bottomBar tabId
-     * @return Selected map type {fire_halls|svpm_stations|water_supplies|emergency_hostels|hospitals}
+     * @return Selected map type {fire_halls|spvm_stations|water_supplies|emergency_hostels|hospitals}
      */
     @MapType
     public static String getMapTypeByTabId(int tabId) {
@@ -69,7 +69,7 @@ public class NavigUtils {
             case R.id.tab_fire_halls:
                 return Const.MapTypes.FIRE_HALLS;
             case R.id.tab_spvm:
-                return Const.MapTypes.SVPM_STATIONS;
+                return Const.MapTypes.SPVM_STATIONS;
             case R.id.tab_water_supplies:
                 return Const.MapTypes.WATER_SUPPLIES;
             case R.id.tab_emergency_hostels:
@@ -84,7 +84,7 @@ public class NavigUtils {
     /**
      * Get the BottomBar and SearchSuggestions icon (logos)
      *
-     * @param type Selected map type {fire_halls|svpm_stations|water_supplies|emergency_hostels|hospitals}
+     * @param type Selected map type {fire_halls|spvm_stations|water_supplies|emergency_hostels|hospitals}
      * @return map type resource icon
      */
     @DrawableRes
@@ -92,7 +92,7 @@ public class NavigUtils {
         switch (type) {
             case Const.MapTypes.FIRE_HALLS:
                 return R.drawable.ic_fire_hall;
-            case Const.MapTypes.SVPM_STATIONS:
+            case Const.MapTypes.SPVM_STATIONS:
                 return R.drawable.ic_spvm;
             case Const.MapTypes.WATER_SUPPLIES:
                 return R.drawable.ic_water_supplies;

@@ -39,7 +39,7 @@ public class Const {
 
     public interface MapTypes {
         String FIRE_HALLS = "fire_halls";
-        String SVPM_STATIONS = "svpm_stations";
+        String SPVM_STATIONS = "spvm_stations";
         String WATER_SUPPLIES = "water_supplies";
         String EMERGENCY_HOSTELS = "emergency_hostels";
         String HOSPITALS = "hospitals";

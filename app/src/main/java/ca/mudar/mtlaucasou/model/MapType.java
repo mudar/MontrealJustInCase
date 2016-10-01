@@ -33,7 +33,7 @@ import ca.mudar.mtlaucasou.Const;
 @Retention(RetentionPolicy.SOURCE)
 @StringDef({
         Const.MapTypes.FIRE_HALLS,
-        Const.MapTypes.SVPM_STATIONS,
+        Const.MapTypes.SPVM_STATIONS,
         Const.MapTypes.WATER_SUPPLIES,
         Const.MapTypes.EMERGENCY_HOSTELS,
         Const.MapTypes.HOSPITALS})

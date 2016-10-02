@@ -27,6 +27,9 @@ import android.app.Application;
 
 import com.crashlytics.android.Crashlytics;
 
+import java.io.FileNotFoundException;
+
+import ca.mudar.mtlaucasou.data.RealmSchemaMigration;
 import ca.mudar.mtlaucasou.data.UserPrefs;
 import ca.mudar.mtlaucasou.service.SyncService;
 import ca.mudar.mtlaucasou.util.LangUtils;
@@ -61,9 +64,14 @@ public class MtlAuCasOuApp extends Application {
                 .name(Const.DATABASE_NAME)
                 .schemaVersion(Const.DATABASE_VERSION)
                 .build();
+        try {
+            Realm.migrateRealm(config, new RealmSchemaMigration());
+        } catch (FileNotFoundException ignored) {
+            // If the Realm file doesn't exist, just ignore.
+        }
         Realm.setDefaultConfiguration(config);
 
-        startService(SyncService.getIntent(this));
+        startService(SyncService.newIntent(this));
     }
 
     private void setupLeakCanary() {

@@ -41,12 +41,13 @@ public class RealmQueries {
      * Delete data from the Realm db
      *
      * @param realm
-     * @param mapType
+     * @param dataType
      */
-    public static void clearMapData(Realm realm, @MapType String mapType) {
+    public static void clearMapData(Realm realm, String dataType) {
         realm.beginTransaction();
 
-        queryPlacemarksByMapType(realm, mapType)
+        realm.where(RealmPlacemark.class)
+                .equalTo(RealmPlacemark.FIELD_DATA_TYPE, dataType)
                 .findAll()
                 .deleteAllFromRealm();
 
@@ -61,13 +62,17 @@ public class RealmQueries {
      * @param mapType
      * @param transaction
      */
-    public static void cacheMapData(Realm realm, List<PointsFeature> pointsFeatures, @MapType String mapType, boolean transaction) {
+    public static void cacheMapData(Realm realm, List<PointsFeature> pointsFeatures,
+                                    @MapType String mapType, String dataType, boolean transaction) {
         if (transaction) {
             realm.beginTransaction();
         }
         // Loop over results, convert GeoJSON to Realm then add to db
         for (PointsFeature feature : pointsFeatures) {
-            realm.copyToRealm(new RealmPlacemark.Builder(feature, mapType).build());
+            realm.copyToRealm(new RealmPlacemark.Builder(feature)
+                    .mapType(mapType)
+                    .dataType(dataType)
+                    .build());
         }
 
         if (transaction) {

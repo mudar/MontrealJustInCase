@@ -42,6 +42,7 @@ import ca.mudar.mtlaucasou.data.RealmQueries;
 import ca.mudar.mtlaucasou.data.UserPrefs;
 import ca.mudar.mtlaucasou.model.MapType;
 import ca.mudar.mtlaucasou.model.geojson.PointsFeatureCollection;
+import ca.mudar.mtlaucasou.model.jsonapi.Attributes;
 import ca.mudar.mtlaucasou.model.jsonapi.DataItem;
 import ca.mudar.mtlaucasou.model.jsonapi.HelloApi;
 import ca.mudar.mtlaucasou.util.ApiUtils;
@@ -56,7 +57,7 @@ public class SyncService extends IntentService {
 
     private Realm mRealm;
 
-    public static Intent getIntent(Context context) {
+    public static Intent newIntent(Context context) {
         return new Intent(context, SyncService.class);
     }
 
@@ -85,12 +86,12 @@ public class SyncService extends IntentService {
     private void loadInitialLocalData() {
         mRealm.beginTransaction();
 
-        importLocalData(R.raw.fire_halls, Const.MapTypes.FIRE_HALLS);
-        importLocalData(R.raw.spvm_stations, Const.MapTypes.SPVM_STATIONS);
-        importLocalData(R.raw.water_supplies, Const.MapTypes.WATER_SUPPLIES);
-        importLocalData(R.raw.air_conditioning, Const.MapTypes.WATER_SUPPLIES);
-        importLocalData(R.raw.emergency_hostels, Const.MapTypes.EMERGENCY_HOSTELS);
-        importLocalData(R.raw.hospitals, Const.MapTypes.HOSPITALS);
+        importLocalData(R.raw.fire_halls, Const.MapTypes.FIRE_HALLS, Const.ApiValues.TYPE_FIRE_HALLS);
+        importLocalData(R.raw.spvm_stations, Const.MapTypes.SPVM_STATIONS, Const.ApiValues.TYPE_SPVM_STATIONS);
+        importLocalData(R.raw.water_supplies, Const.MapTypes.WATER_SUPPLIES, Const.ApiValues.TYPE_WATER_SUPPLIES);
+        importLocalData(R.raw.air_conditioning, Const.MapTypes.WATER_SUPPLIES, Const.ApiValues.TYPE_AIR_CONDITIONING);
+        importLocalData(R.raw.emergency_hostels, Const.MapTypes.EMERGENCY_HOSTELS, Const.ApiValues.TYPE_EMERGENCY_HOSTELS);
+        importLocalData(R.raw.hospitals, Const.MapTypes.HOSPITALS, Const.ApiValues.TYPE_HOSPITALS);
 
         mRealm.commitTransaction();
     }
@@ -109,9 +110,7 @@ public class SyncService extends IntentService {
                     final Date updatedAt = dataset.getAttributes().getUpdated();
 
                     if (prefs.isApiDataNewer(key, updatedAt)) {
-                        final boolean result = importRemoteData(dataset.getLinks().getSelf(),
-                                dataset.getAttributes().getType());
-
+                        final boolean result = importRemoteData(dataset);
                         if (result) {
                             prefs.setDataUpdatedAt(key, updatedAt);
                         }
@@ -124,32 +123,36 @@ public class SyncService extends IntentService {
         }
     }
 
-    private void importLocalData(@RawRes int resource, @MapType String mapType) {
+    private void importLocalData(@RawRes int resource, @MapType String mapType, String dataType) {
         final InputStream inputStream = getResources().openRawResource(resource);
         final InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
 
         final PointsFeatureCollection collection = new Gson()
                 .fromJson(inputStreamReader, PointsFeatureCollection.class);
 
-        RealmQueries.cacheMapData(mRealm, collection.getFeatures(), mapType, false);
+        RealmQueries.cacheMapData(mRealm, collection.getFeatures(), mapType, dataType, false);
     }
 
     /**
      * Request the GeoJSON data from the API
      *
-     * @param url     The remote dataset URL
-     * @param mapType The MapType
+     * @param dataset The dataset to import into the Realm db
      * @return
      */
-    private boolean importRemoteData(String url, @MapType String mapType) {
+    private boolean importRemoteData(DataItem dataset) {
         final Response<PointsFeatureCollection> response = ApiClient
-                .getPlacemarks(ApiClient.getService(), url);
+                .getPlacemarks(ApiClient.getService(), dataset.getLinks().getSelf());
 
         if (response != null) {
             PointsFeatureCollection collection = response.body();
             if (collection != null && collection.getFeatures() != null) {
-                RealmQueries.clearMapData(mRealm, mapType);
-                RealmQueries.cacheMapData(mRealm, collection.getFeatures(), mapType, true);
+                final Attributes attributes = dataset.getAttributes();
+                RealmQueries.clearMapData(mRealm, attributes.getDataType());
+                RealmQueries.cacheMapData(mRealm,
+                        collection.getFeatures(),
+                        attributes.getMapType(),
+                        attributes.getDataType(),
+                        true);
             }
 
             return true;

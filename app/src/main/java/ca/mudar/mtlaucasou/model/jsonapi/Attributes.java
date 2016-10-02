@@ -23,6 +23,8 @@
 
 package ca.mudar.mtlaucasou.model.jsonapi;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 
 import ca.mudar.mtlaucasou.model.MapType;
@@ -31,7 +33,9 @@ public class Attributes {
     private String title;
     private Date created;
     private Date updated;
-    private String type;
+    @SerializedName("type")
+    private String dataType;
+    private String mapType;
 
     public String getTitle() {
         return title;
@@ -45,8 +49,12 @@ public class Attributes {
         return updated;
     }
 
+    public String getDataType() {
+        return dataType;
+    }
+
     @MapType
-    public String getType() {
-        return type;
+    public String getMapType() {
+        return mapType;
     }
 }

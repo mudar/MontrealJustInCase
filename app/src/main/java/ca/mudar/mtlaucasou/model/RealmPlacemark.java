@@ -35,6 +35,8 @@ public class RealmPlacemark extends RealmObject implements
     @Ignore
     public static final String FIELD_MAP_TYPE = "mapType";
     @Ignore
+    public static final String FIELD_DATA_TYPE = "dataType";
+    @Ignore
     public static final String FIELD_COORDINATES = "coordinates";
     @Ignore
     public static final String FIELD_COORDINATES_LAT = "coordinates.lat";
@@ -47,6 +49,7 @@ public class RealmPlacemark extends RealmObject implements
     @MapType
     @Index
     private String mapType;
+    private String dataType;
     private PlacemarkProperties properties;
     private LongitudeLatitude coordinates;
 
@@ -62,6 +65,7 @@ public class RealmPlacemark extends RealmObject implements
     private RealmPlacemark(Builder builder) {
         this.id = builder.id;
         this.mapType = builder.mapType;
+        this.dataType = builder.dataType;
         this.properties = builder.properties;
         this.coordinates = builder.coordinates;
     }
@@ -99,6 +103,14 @@ public class RealmPlacemark extends RealmObject implements
         this.mapType = mapType;
     }
 
+    public String getDataType() {
+        return dataType;
+    }
+
+    public void setDataType(String dataType) {
+        this.dataType = dataType;
+    }
+
     public PlacemarkProperties getProperties() {
         return properties;
     }
@@ -122,17 +134,29 @@ public class RealmPlacemark extends RealmObject implements
         private String id;
         @MapType
         private String mapType;
+        private String dataType;
         private PlacemarkProperties properties;
         private LongitudeLatitude coordinates;
 
-        public Builder(PointsFeature pointsFeature, @MapType String mapType) {
+        public Builder(PointsFeature pointsFeature) {
             this.id = pointsFeature.getId();
-            this.mapType = mapType;
 
             this.properties = new PlacemarkProperties.Builder(pointsFeature.getProperties())
                     .build();
             this.coordinates = new LongitudeLatitude.Builder(pointsFeature.getGeometry())
                     .build();
+        }
+
+        public Builder mapType(@MapType String mapType) {
+            this.mapType = mapType;
+
+            return this;
+        }
+
+        public Builder dataType(String dataType) {
+            this.dataType = dataType;
+
+            return this;
         }
 
         public RealmPlacemark build() {

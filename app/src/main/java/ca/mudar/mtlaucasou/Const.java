@@ -64,6 +64,13 @@ public class Const {
     public interface ApiValues {
         String TYPE_PLACEMARKS = "placemarks";
         String TYPE_SHAPES = "shapes";
+        // There's a slight difference between mapType and dataType
+        String TYPE_FIRE_HALLS = MapTypes.FIRE_HALLS;
+        String TYPE_SPVM_STATIONS = MapTypes.SPVM_STATIONS;
+        String TYPE_WATER_SUPPLIES = MapTypes.WATER_SUPPLIES;
+        String TYPE_AIR_CONDITIONING = "air_conditioning";
+        String TYPE_EMERGENCY_HOSTELS = MapTypes.EMERGENCY_HOSTELS;
+        String TYPE_HOSPITALS = MapTypes.HOSPITALS;
     }
 
     public interface BundleKeys {
@@ -92,7 +99,7 @@ public class Const {
      * Database
      */
     public static final String DATABASE_NAME = "mtlaucasou.realm";
-    public static final int DATABASE_VERSION = 10;
+    public static final int DATABASE_VERSION = 11;
 
     /**
      * Settings, SharedPreferences

@@ -38,6 +38,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.github.clans.fab.FloatingActionMenu;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -60,6 +61,7 @@ import ca.mudar.mtlaucasou.model.Placemark;
 import ca.mudar.mtlaucasou.model.RealmPlacemark;
 import ca.mudar.mtlaucasou.ui.adapter.PlacemarkInfoWindowAdapter;
 import ca.mudar.mtlaucasou.ui.listener.LocationUpdatesManager;
+import ca.mudar.mtlaucasou.ui.listener.MapLayersManager;
 import ca.mudar.mtlaucasou.ui.listener.SearchResultsManager;
 import ca.mudar.mtlaucasou.ui.view.PlacemarksSearchView;
 import ca.mudar.mtlaucasou.util.EulaUtils;
@@ -86,6 +88,7 @@ public class MainActivity extends BaseActivity implements
     private View mSnackbarParent;
     private CircleProgressBar vProgressBar;
     private FloatingActionButton mMyLocationFAB;
+    private MapLayersManager mLayersManager;
     private BottomBar mBottomBar;
     @MapType
     private String mMapType;
@@ -204,6 +207,7 @@ public class MainActivity extends BaseActivity implements
     private void setupBottomBar() {
         mBottomBar = (BottomBar) findViewById(R.id.bottom_bar);
         assert mBottomBar != null;
+        mBottomBar.setDefaultTab(NavigUtils.getTabIdByMapType(Const.MapTypes._DEFAULT));
         mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes final int tabId) {
@@ -217,6 +221,7 @@ public class MainActivity extends BaseActivity implements
                 if (isMapReady()) {
                     vMap.animateCamera(CameraUpdateFactory.zoomTo(Const.ZOOM_OUT));
                 }
+                mLayersManager.toggleFilterMenu();
             }
         });
     }
@@ -233,6 +238,8 @@ public class MainActivity extends BaseActivity implements
                 }
             }
         });
+
+        mLayersManager = new MapLayersManager(this, (FloatingActionMenu) findViewById(R.id.fab_menu));
     }
 
     /**
@@ -281,6 +288,8 @@ public class MainActivity extends BaseActivity implements
         mLocationManger.setGoogleMap(vMap);
 
         loadMapData(mMapType);
+
+        mLayersManager.setMap(vMap);
     }
 
     /**
@@ -308,6 +317,8 @@ public class MainActivity extends BaseActivity implements
 
     private void setMapType(final @MapType String type, long delay) {
         mMapType = type;
+
+        final boolean hasFilterMenu = mLayersManager.toggleFilterMenu(type);
 
         if (isMapReady()) {
             toggleProgressBar(true);

@@ -55,6 +55,7 @@
             app:backgroundTint="@color/white"
             app:fabSize="mini" />
 
+        <include layout="@layout/inc_menu_fab" />
     </FrameLayout>
 
     <com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar

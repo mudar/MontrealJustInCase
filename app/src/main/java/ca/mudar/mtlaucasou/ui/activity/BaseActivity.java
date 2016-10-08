@@ -152,12 +152,12 @@ public abstract class BaseActivity extends AppCompatActivity implements
                 .withActivityTheme(R.style.AppTheme_AboutLibs)
                 .withAutoDetect(false) // For Proguard
                 .withFields(R.string.class.getFields()) // For Proguard
-                .withLibraries(
-                        "GooglePlayServices", "bottombar", "materialloadingprogressbar"
-                        // Added manually to avoid issues with Proguard
-                        , "AboutLibraries", "Crashlytics", "gson", "OkHttp"
-                        , "Retrofit", "appcompat_v7", "design", "recyclerview_v7"
-                        , "Realm"
+                .withLibraries(// Added manually to avoid issues with Proguard
+                        "GooglePlayServices", "bottombar", "materialloadingprogressbar",
+                        "clansfloatingactionbutton", "AboutLibraries",
+                        "Crashlytics",
+                        "Retrofit", "OkHttp", "Realm",
+                        "gson", "appcompat_v7", "design", "recyclerview_v7"
                 )
                 .withExcludedLibraries(
                         "AndroidIconics", "fastadapter", "okio", "support_v4"

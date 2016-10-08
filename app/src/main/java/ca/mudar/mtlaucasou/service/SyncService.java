@@ -42,12 +42,12 @@ import ca.mudar.mtlaucasou.R;
 import ca.mudar.mtlaucasou.api.ApiClient;
 import ca.mudar.mtlaucasou.data.RealmQueries;
 import ca.mudar.mtlaucasou.data.UserPrefs;
+import ca.mudar.mtlaucasou.model.LayerType;
 import ca.mudar.mtlaucasou.model.MapType;
 import ca.mudar.mtlaucasou.model.geojson.PointsFeatureCollection;
 import ca.mudar.mtlaucasou.model.jsonapi.Attributes;
 import ca.mudar.mtlaucasou.model.jsonapi.DataItem;
 import ca.mudar.mtlaucasou.model.jsonapi.HelloApi;
-import ca.mudar.mtlaucasou.model.LayerType;
 import ca.mudar.mtlaucasou.util.ApiDataUtils;
 import ca.mudar.mtlaucasou.util.LogUtils;
 import io.realm.Realm;
@@ -91,7 +91,7 @@ public class SyncService extends IntentService {
 
         importLocalData(R.raw.fire_halls, MapTypes.FIRE_HALLS, LayerTypes.FIRE_HALLS);
         importLocalData(R.raw.spvm_stations, MapTypes.SPVM_STATIONS, LayerTypes.SPVM_STATIONS);
-        importLocalData(R.raw.water_supplies, MapTypes.HEAT_WAVE, null);
+        importLocalData(R.raw.water_supplies, MapTypes.HEAT_WAVE, LayerTypes._HEAT_WAVE_MIXED);
         importLocalData(R.raw.air_conditioning, MapTypes.HEAT_WAVE, LayerTypes.AIR_CONDITIONING);
         importLocalData(R.raw.emergency_hostels, MapTypes.EMERGENCY_HOSTELS, LayerTypes.EMERGENCY_HOSTELS);
         importLocalData(R.raw.hospitals, MapTypes.HEALTH, LayerTypes.HOSPITALS);
@@ -150,15 +150,15 @@ public class SyncService extends IntentService {
             PointsFeatureCollection collection = response.body();
             if (collection != null && collection.getFeatures() != null) {
                 final Attributes attributes = dataset.getAttributes();
-                final @LayerType String layerType = ApiDataUtils
-                        .getLayerType(attributes.getDataType(), attributes.getMapType());
-                
-                RealmQueries.clearMapData(mRealm, layerType);
-                RealmQueries.cacheMapData(mRealm,
-                        collection.getFeatures(),
-                        attributes.getMapType(),
-                        layerType,
-                        true);
+
+                if (attributes != null) {
+                    RealmQueries.clearMapData(mRealm, attributes.getLayerType());
+                    RealmQueries.cacheMapData(mRealm,
+                            collection.getFeatures(),
+                            attributes.getMapType(),
+                            attributes.getLayerType(),
+                            true);
+                }
             }
 
             return true;

@@ -23,10 +23,9 @@
 
 package ca.mudar.mtlaucasou.model;
 
-import android.text.TextUtils;
-
 import com.google.android.gms.maps.model.LatLng;
 
+import ca.mudar.mtlaucasou.Const;
 import ca.mudar.mtlaucasou.model.geojson.PointsFeature;
 import ca.mudar.mtlaucasou.util.ApiDataUtils;
 import io.realm.RealmObject;
@@ -161,10 +160,11 @@ public class RealmPlacemark extends RealmObject implements
         }
 
         public Builder layerType(@LayerType String layerType, String dataType) {
-            if (!TextUtils.isEmpty(layerType)) {
-                this.layerType = layerType;
+            if (Const.LayerTypes._HEAT_WAVE_MIXED.equals(layerType)) {
+                // water_supplies dataset is the only one with mixed layers
+                this.layerType = ApiDataUtils.getPlacemarkLayerType(dataType);
             } else {
-                this.layerType = ApiDataUtils.getLayerType(dataType, mapType);
+                this.layerType = layerType;
             }
 
             return this;

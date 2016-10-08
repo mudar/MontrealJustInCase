@@ -40,6 +40,7 @@ import ca.mudar.mtlaucasou.Const;
         Const.LayerTypes.POOLS,
         Const.LayerTypes.WADING_POOLS,
         Const.LayerTypes.PLAY_FOUNTAINS,
+        Const.LayerTypes._HEAT_WAVE_MIXED,
         // Health x2
         Const.LayerTypes.HOSPITALS,
         Const.LayerTypes.CLSC

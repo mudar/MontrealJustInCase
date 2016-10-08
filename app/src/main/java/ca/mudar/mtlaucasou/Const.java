@@ -55,6 +55,7 @@ public class Const {
         String POOLS = "pools";
         String WADING_POOLS = "wading_pools";
         String PLAY_FOUNTAINS = "play_fountains";
+        String _HEAT_WAVE_MIXED = "water_supplies";
         // Health x2
         String HOSPITALS = "hospitals";
         String CLSC = "clsc";
@@ -83,8 +84,7 @@ public class Const {
         String TYPE_WADING_POOLS = "pataugeoire";
         String TYPE_POOLS_EXT = "piscine-ext";
         String TYPE_POOLS_INT = "piscine-int";
-        String TYPE_HOSPITALS = "hopital";
-        String TYPE_CLSC = "clsc";
+        String TYPE_BEACH = "plage";
     }
 
     public interface BundleKeys {

@@ -27,6 +27,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
 
+import ca.mudar.mtlaucasou.model.LayerType;
 import ca.mudar.mtlaucasou.model.MapType;
 
 public class Attributes {
@@ -34,7 +35,8 @@ public class Attributes {
     private Date created;
     private Date updated;
     @SerializedName("type")
-    private String dataType;
+    @LayerType
+    private String layerType;
     @MapType
     private String mapType;
 
@@ -50,8 +52,9 @@ public class Attributes {
         return updated;
     }
 
-    public String getDataType() {
-        return dataType;
+    @LayerType
+    public String getLayerType() {
+        return layerType;
     }
 
     @MapType

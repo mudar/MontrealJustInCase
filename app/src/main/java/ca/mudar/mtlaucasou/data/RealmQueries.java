@@ -27,16 +27,20 @@ import com.google.android.gms.maps.model.LatLngBounds;
 
 import java.util.List;
 
+import ca.mudar.mtlaucasou.Const;
+import ca.mudar.mtlaucasou.model.LayerType;
 import ca.mudar.mtlaucasou.model.MapType;
 import ca.mudar.mtlaucasou.model.RealmPlacemark;
 import ca.mudar.mtlaucasou.model.geojson.PointsFeature;
-import ca.mudar.mtlaucasou.model.LayerType;
 import io.realm.Case;
 import io.realm.Realm;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
 
+import static ca.mudar.mtlaucasou.util.LogUtils.makeLogTag;
+
 public class RealmQueries {
+    private static final String TAG = makeLogTag("RealmQueries");
 
     /**
      * Delete data from the Realm db
@@ -47,9 +51,18 @@ public class RealmQueries {
     public static void clearMapData(Realm realm, @LayerType String layerType) {
         realm.beginTransaction();
 
-        realm.where(RealmPlacemark.class)
-                .equalTo(RealmPlacemark.FIELD_LAYER_TYPE, layerType)
-                .findAll()
+        final RealmQuery query = realm.where(RealmPlacemark.class);
+        if (Const.LayerTypes._HEAT_WAVE_MIXED.equals(layerType)) {
+            // The `water_supplies` endpoint provides 3 layerTypes we need to delete
+            query.in(RealmPlacemark.FIELD_LAYER_TYPE, new String[]{
+                    Const.LayerTypes.POOLS,
+                    Const.LayerTypes.WADING_POOLS,
+                    Const.LayerTypes.PLAY_FOUNTAINS
+            });
+        } else {
+            query.equalTo(RealmPlacemark.FIELD_LAYER_TYPE, layerType);
+        }
+        query.findAll()
                 .deleteAllFromRealm();
 
         realm.commitTransaction();
@@ -65,7 +78,8 @@ public class RealmQueries {
      * @param transaction
      */
     public static void cacheMapData(Realm realm, List<PointsFeature> pointsFeatures,
-                                    @MapType String mapType, @LayerType String layerType, boolean transaction) {
+                                    @MapType String mapType, @LayerType String layerType,
+                                    boolean transaction) {
         if (transaction) {
             realm.beginTransaction();
         }

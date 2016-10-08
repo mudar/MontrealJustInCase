@@ -29,13 +29,14 @@ import java.util.Locale;
 
 import ca.mudar.mtlaucasou.Const.ApiValues;
 import ca.mudar.mtlaucasou.Const.LayerTypes;
-import ca.mudar.mtlaucasou.Const.MapTypes;
 import ca.mudar.mtlaucasou.model.LayerType;
-import ca.mudar.mtlaucasou.model.MapType;
 
 import static ca.mudar.mtlaucasou.Const.PrefsNames.ITEM_UPDATED_AT;
+import static ca.mudar.mtlaucasou.util.LogUtils.makeLogTag;
 
 public class ApiDataUtils {
+    private static final String TAG = makeLogTag("ApiDataUtils");
+
     public static String getSharedPrefsKey(String id) {
         return String.format(Locale.ROOT, ITEM_UPDATED_AT, id);
     }
@@ -44,36 +45,20 @@ public class ApiDataUtils {
      * Get the local layerType from the remote dataType
      *
      * @param dataType api values to convert to layerType
-     * @param mapType  fallback value, used for single-layer datasets
      * @return
      */
     @LayerType
-    public static String getLayerType(String dataType, @MapType String mapType) {
+    public static String getPlacemarkLayerType(String dataType) {
         if (!TextUtils.isEmpty(dataType)) {
             switch (dataType) {
                 case ApiValues.TYPE_PLAY_FOUNTAINS:
                     return LayerTypes.PLAY_FOUNTAINS;
                 case ApiValues.TYPE_WADING_POOLS:
                     return LayerTypes.WADING_POOLS;
+                case ApiValues.TYPE_BEACH:
                 case ApiValues.TYPE_POOLS_EXT:
                 case ApiValues.TYPE_POOLS_INT:
                     return LayerTypes.POOLS;
-                case ApiValues.TYPE_HOSPITALS:
-                    return LayerTypes.HOSPITALS;
-                case ApiValues.TYPE_CLSC:
-                    return LayerTypes.CLSC;
-            }
-        }
-
-        if (!TextUtils.isEmpty(mapType)) {
-            // These 3 mapTypes have a single layer type, the same as the mapType
-            switch (mapType) {
-                case MapTypes.FIRE_HALLS:
-                    return LayerTypes.FIRE_HALLS;
-                case MapTypes.SPVM_STATIONS:
-                    return LayerTypes.SPVM_STATIONS;
-                case MapTypes.EMERGENCY_HOSTELS:
-                    return LayerTypes.EMERGENCY_HOSTELS;
             }
         }
 

@@ -19,7 +19,7 @@
     <string name="about_od_air_conditioning_title" translatable="false">Lieux publics climatisés</string>
     <string name="about_od_spvm_stations_zones_title" translatable="false">Limites des secteurs de poste de quartier de police</string>
     <string name="about_od_license_title" translatable="false">Licence d’utilisation des données ouvertes</string>
-    <string name="about_od_hospitals_title" translatable="false">@string/btn_hospitals</string>
+    <!--<string name="about_od_hospitals_title" translatable="false">@string/btn_health</string>-->
 
     <string name="about_od_fire_halls_url" translatable="false">http://donnees.ville.montreal.qc.ca/dataset/casernes-pompiers</string>
     <string name="about_od_spvm_stations_url" translatable="false">http://donnees.ville.montreal.qc.ca/dataset/carte-postes-quartier</string>

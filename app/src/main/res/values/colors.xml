@@ -28,6 +28,7 @@
 
     <!--Material Colors-->
     <color name="white">#ffffff</color>
+    <color name="white_transp_80">#d0ffffff</color>
     <!--<color name="deep_orange_900">#BF360C</color>-->
     <!--<color name="orange_500">#FF9800</color>-->
     <!--<color name="orange_700">#F57C00</color>-->
@@ -59,7 +60,7 @@
 
     <!--App custom colors-->
     <color name="text_primary">#ffffffff</color>
-    <color name="text_secondary">#d0ffffff</color>
+    <color name="text_secondary">@color/white_transp_80</color>
     <color name="color_background">@color/yellow_700</color>
     <color name="color_background_light">@color/grey_200</color>
     <color name="color_background_dark">@color/grey_800</color>
@@ -72,6 +73,10 @@
     <!--Map InfoWindow-->
     <color name="map_info_title">@color/grey_900</color>
     <color name="map_info_snippet">@color/grey_600</color>
+
+    <!--FloatingActionMenu-->
+    <color name="fab_menu_item_color_normal">@color/grey_800</color>
+    <color name="fab_menu_background">@color/white_transp_80</color>
 
     <!--Search Suggestions-->
     <color name="search_suggestion_title">@color/grey_100</color>

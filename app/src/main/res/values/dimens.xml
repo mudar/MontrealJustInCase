@@ -63,4 +63,7 @@
     <!--FloatingActionButton-->
     <dimen name="fab_margin">12dp</dimen>
 
+    <!--FloatingActionMenu-->
+    <dimen name="fab_menu_elevation">6dp</dimen>
+
 </resources>

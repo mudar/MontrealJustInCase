@@ -40,7 +40,7 @@
     <string name="btn_spvm_stations">Police Stations</string>
     <string name="btn_water_supplies">Heat Wave</string>
     <string name="btn_emergency_hostels">Emgcy Hostels</string>
-    <string name="btn_hospitals">Hospitals</string>
+    <string name="btn_hospitals">Health</string>
 
     <!--Menus-->
     <string name="action_search">Search</string>
@@ -50,6 +50,15 @@
     <string name="action_rate">Rate</string>
     <string name="action_eula">License</string>
     <string name="action_about_libs">Open source libraries</string>
+
+    <!--FloatingActionMenu-->
+    <string name="fab_menu_label_layers">Subcategories</string>
+    <string name="fab_label_air_conditioning">Air conditioning</string>
+    <string name="fab_label_pools">Pools</string>
+    <string name="fab_label_wading_pools">Wading pools</string>
+    <string name="fab_label_play_fountains">Play fountains</string>
+    <string name="fab_label_hospitals">Hospitals</string>
+    <string name="fab_label_clsc">CLSC</string>
 
     <!--Buttons-->
     <string name="btn_ok">OK</string>

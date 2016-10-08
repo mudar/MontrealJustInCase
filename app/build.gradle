@@ -70,6 +70,7 @@ dependencies {
     // UI
     compile 'com.roughike:bottom-bar:2.0.2'
     compile('com.lsjwzh:materialloadingprogressbar:0.5.8-RELEASE')
+    compile 'com.github.clans:fab:1.6.4'
     compile('com.mikepenz:aboutlibraries:5.8.0@aar') {
         transitive = true
     }

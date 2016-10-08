@@ -30,6 +30,28 @@
         <item name="bb_tabXmlResource">@xml/bottombar_tabs</item>
     </style>
 
+    <style name="FabMenu">
+        <item name="android:layout_gravity">bottom|end</item>
+        <item name="menu_fab_hide_animation">@anim/fab_slide_out_to_right</item>
+        <item name="menu_fab_show_animation">@anim/fab_slide_in_from_right</item>
+        <item name="menu_fab_size">normal</item>
+        <item name="menu_icon">@drawable/ic_map_layers</item>
+    </style>
+
+    <style name="FabMenuItem">
+        <item name="android:layout_margin">@dimen/fab_margin</item>
+        <item name="fab_size">mini</item>
+        <item name="fab_colorNormal">@color/fab_menu_item_color_normal</item>
+    </style>
+
+    <style name="FabMenuItem.WaterSupplies">
+        <item name="fab_colorPressed">@color/color_water_supplies</item>
+    </style>
+
+    <style name="FabMenuItem.Hospitals">
+        <item name="fab_colorPressed">@color/color_hospitals</item>
+    </style>
+
     <style name="AboutPrimaryText">
         <item name="android:layout_marginLeft">@dimen/padding_large</item>
         <item name="android:textSize">@dimen/about_body_text_size</item>

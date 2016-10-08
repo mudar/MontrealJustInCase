@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/fab_menu"
+        style="@style/FabMenu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/fab_margin"
+        android:paddingEnd="@dimen/fab_margin"
+        android:visibility="gone"
+        app:menu_backgroundColor="@color/fab_menu_background"
+        app:menu_colorNormal="@color/color_primary"
+        app:menu_colorPressed="@color/color_primary"
+        app:menu_fab_label="@string/fab_menu_label_layers"
+        app:menu_labels_colorNormal="@color/fab_menu_item_color_normal"
+        app:menu_labels_colorPressed="@color/fab_menu_item_color_normal"
+        tools:ignore="RtlSymmetry">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_air_conditioning"
+            style="@style/FabMenuItem.WaterSupplies"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_water_supplies"
+            app:fab_label="@string/fab_label_air_conditioning" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_pools"
+            style="@style/FabMenuItem.WaterSupplies"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_water_supplies"
+            app:fab_label="@string/fab_label_pools" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_wading_pools"
+            style="@style/FabMenuItem.WaterSupplies"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_water_supplies"
+            app:fab_label="@string/fab_label_wading_pools" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_play_fountains"
+            style="@style/FabMenuItem.WaterSupplies"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_water_supplies"
+            app:fab_label="@string/fab_label_play_fountains" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_hospitals"
+            style="@style/FabMenuItem.Hospitals"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_hospitals"
+            app:fab_label="@string/fab_label_hospitals" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_clsc"
+            style="@style/FabMenuItem.Hospitals"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_hospitals"
+            app:fab_label="@string/fab_label_clsc" />
+    </com.github.clans.fab.FloatingActionMenu>
+
+</merge>

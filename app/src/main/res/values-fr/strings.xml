@@ -40,7 +40,7 @@
     <string name="btn_spvm_stations">Poste de police</string>
     <string name="btn_water_supplies">Canicule</string>
     <string name="btn_emergency_hostels">Hébergement</string>
-    <string name="btn_hospitals">Hôpitaux</string>
+    <string name="btn_hospitals">Santé</string>
 
     <!--Menus-->
     <string name="action_search">Recherche</string>
@@ -50,6 +50,15 @@
     <string name="action_rate">Évaluer</string>
     <string name="action_eula">Licence</string>
     <string name="action_about_libs">Librairies libres</string>
+
+    <!--FloatingActionMenu-->
+    <string name="fab_menu_label_layers">Sous-catégories</string>
+    <string name="fab_label_air_conditioning">Lieux climatisés</string>
+    <string name="fab_label_pools">Piscines</string>
+    <string name="fab_label_wading_pools">Pataugeoires</string>
+    <string name="fab_label_play_fountains">Jeux d’eau</string>
+    <string name="fab_label_hospitals">Hôpitaux</string>
+    <string name="fab_label_clsc">CLSC</string>
 
     <!--Buttons-->
     <string name="btn_ok">Ok</string>

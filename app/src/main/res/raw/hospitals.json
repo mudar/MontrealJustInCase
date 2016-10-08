@@ -8,7 +8,8 @@
       "City": "Montréal",
       "Phone": "+15143453511",
       "Website": "http://www.smhc.qc.ca/",
-      "Types": ["urgences", "psychiatrie"]
+      "Type": "hopital",
+      "Services": ["urgences", "psychiatrie"]
     },
     "geometry": {
       "type": "Point",
@@ -22,7 +23,8 @@
       "City": "Montréal",
       "Phone": "+15143454931",
       "Website": "https://www.chusj.org/",
-      "Types": ["pediatrie"]
+      "Type": "hopital",
+      "Services": ["pediatrie"]
     },
     "geometry": {
       "type": "Point",
@@ -36,7 +38,8 @@
       "City": "Lachine",
       "Phone": "+15146372351",
       "Website": "https://cusm.ca/lachine/",
-      "Types": ["urgences"]
+      "Type": "hopital",
+      "Services": ["urgences"]
     },
     "geometry": {
       "type": "Point",
@@ -50,7 +53,8 @@
       "City": "LaSalle",
       "Phone": "+15143628000",
       "Website": "https://www.csssdll.qc.ca/",
-      "Types": ["urgences"]
+      "Type": "hopital",
+      "Services": ["urgences"]
     },
     "geometry": {
       "type": "Point",
@@ -64,7 +68,8 @@
       "City": "Montréal",
       "Phone": "+15144124400",
       "Website": "http://www.hopitalpourenfants.com/",
-      "Types": ["pediatrie"]
+      "Type": "hopital",
+      "Services": ["pediatrie"]
     },
     "geometry": {
       "type": "Point",
@@ -78,7 +83,8 @@
       "City": "Verdun",
       "Phone": "+15143621000",
       "Website": "https://ciusss-centresudmtl.gouv.qc.ca/",
-      "Types": ["urgences"]
+      "Type": "hopital",
+      "Services": ["urgences"]
     },
     "geometry": {
       "type": "Point",
@@ -92,7 +98,8 @@
       "City": "Montréal",
       "Phone": "+15143382222",
       "Website": "http://www.hscm.ca/",
-      "Types": ["urgences", "psychiatrie"]
+      "Type": "hopital",
+      "Services": ["urgences", "psychiatrie"]
     },
     "geometry": {
       "type": "Point",
@@ -106,7 +113,8 @@
       "City": "Montréal",
       "Phone": "+15143842000",
       "Website": "http://ciusss-nordmtl.gouv.qc.ca/",
-      "Types": ["urgences", "psychiatrie"]
+      "Type": "hopital",
+      "Services": ["urgences", "psychiatrie"]
     },
     "geometry": {
       "type": "Point",
@@ -120,7 +128,8 @@
       "City": "Montréal",
       "Phone": "+15149341934",
       "Website": "https://cusm.ca/mgh/",
-      "Types": ["urgences", "psychiatrie"]
+      "Type": "hopital",
+      "Services": ["urgences", "psychiatrie"]
     },
     "geometry": {
       "type": "Point",
@@ -134,7 +143,8 @@
       "City": "Pointe-Claire",
       "Phone": "+15146302225",
       "Website": "https://www.ciusss-ouestmtl.gouv.qc.ca/",
-      "Types": ["urgences", "psychiatrie"]
+      "Type": "hopital",
+      "Services": ["urgences", "psychiatrie"]
     },
     "geometry": {
       "type": "Point",
@@ -148,7 +158,8 @@
       "City": "Montréal",
       "Phone": "+15143408222",
       "Website": "http://www.jgh.ca/",
-      "Types": ["urgences", "psychiatrie"]
+      "Type": "hopital",
+      "Services": ["urgences", "psychiatrie"]
     },
     "geometry": {
       "type": "Point",
@@ -162,7 +173,8 @@
       "City": "Montréal",
       "Phone": "+15144956767",
       "Website": "http://ciusss-nordmtl.gouv.qc.ca/",
-      "Types": ["urgences", "psychiatrie"]
+      "Type": "hopital",
+      "Services": ["urgences", "psychiatrie"]
     },
     "geometry": {
       "type": "Point",
@@ -176,7 +188,8 @@
       "City": "Montréal",
       "Phone": "+15142523400",
       "Website": "http://www.maisonneuve-rosemont.org/",
-      "Types": ["urgences", "psychiatrie", "pediatrie"]
+      "Type": "hopital",
+      "Services": ["urgences", "psychiatrie", "pediatrie"]
     },
     "geometry": {
       "type": "Point",
@@ -190,7 +203,8 @@
       "City": "Montréal",
       "Phone": "+15148908000",
       "Website": "http://www.chumontreal.qc.ca/",
-      "Types": ["urgences", "psychiatrie"]
+      "Type": "hopital",
+      "Services": ["urgences", "psychiatrie"]
     },
     "geometry": {
       "type": "Point",
@@ -204,7 +218,8 @@
       "City": "Montréal",
       "Phone": "+15149341934",
       "Website": "https://cusm.ca/royalvic/",
-      "Types": ["urgences"]
+      "Type": "hopital",
+      "Services": ["urgences"]
     },
     "geometry": {
       "type": "Point",
@@ -218,7 +233,8 @@
       "City": "Montréal",
       "Phone": "+15148908000",
       "Website": "http://www.chumontreal.qc.ca/",
-      "Types": ["urgences", "psychiatrie"]
+      "Type": "hopital",
+      "Services": ["urgences", "psychiatrie"]
     },
     "geometry": {
       "type": "Point",
@@ -232,7 +248,8 @@
       "City": "Montréal",
       "Phone": "+15142526000",
       "Website": "http://www.santacabrini.qc.ca/",
-      "Types": ["urgences"]
+      "Type": "hopital",
+      "Services": ["urgences"]
     },
     "geometry": {
       "type": "Point",
@@ -246,7 +263,8 @@
       "City": "Montréal",
       "Phone": "+15148908000",
       "Website": "http://www.chumontreal.qc.ca/",
-      "Types": ["urgences"]
+      "Type": "hopital",
+      "Services": ["urgences"]
     },
     "geometry": {
       "type": "Point",
@@ -260,7 +278,8 @@
       "City": "Montréal",
       "Phone": "+15143763330",
       "Website": "https://www.icm-mhi.org/",
-      "Types": ["urgences"]
+      "Type": "hopital",
+      "Services": ["urgences"]
     },
     "geometry": {
       "type": "Point",
@@ -274,7 +293,8 @@
       "City": "Montréal",
       "Phone": "+15142514000",
       "Website": "http://www.iusmm.ca/",
-      "Types": ["psychiatrie"]
+      "Type": "hopital",
+      "Services": ["psychiatrie"]
     },
     "geometry": {
       "type": "Point",
@@ -288,7 +308,8 @@
       "City": "Verdun",
       "Phone": "+15147616131",
       "Website": "http://www.douglas.qc.ca/",
-      "Types": ["psychiatrie"]
+      "Type": "hopital",
+      "Services": ["psychiatrie"]
     },
     "geometry": {
       "type": "Point",

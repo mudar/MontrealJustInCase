@@ -34,8 +34,8 @@ import ca.mudar.mtlaucasou.Const;
 @StringDef({
         Const.MapTypes.FIRE_HALLS,
         Const.MapTypes.SPVM_STATIONS,
-        Const.MapTypes.WATER_SUPPLIES,
+        Const.MapTypes.HEAT_WAVE,
         Const.MapTypes.EMERGENCY_HOSTELS,
-        Const.MapTypes.HOSPITALS})
+        Const.MapTypes.HEALTH})
 public @interface MapType {
 }

@@ -36,6 +36,8 @@ import java.io.InputStreamReader;
 import java.util.Date;
 
 import ca.mudar.mtlaucasou.Const;
+import ca.mudar.mtlaucasou.Const.LayerTypes;
+import ca.mudar.mtlaucasou.Const.MapTypes;
 import ca.mudar.mtlaucasou.R;
 import ca.mudar.mtlaucasou.api.ApiClient;
 import ca.mudar.mtlaucasou.data.RealmQueries;
@@ -45,7 +47,8 @@ import ca.mudar.mtlaucasou.model.geojson.PointsFeatureCollection;
 import ca.mudar.mtlaucasou.model.jsonapi.Attributes;
 import ca.mudar.mtlaucasou.model.jsonapi.DataItem;
 import ca.mudar.mtlaucasou.model.jsonapi.HelloApi;
-import ca.mudar.mtlaucasou.util.ApiUtils;
+import ca.mudar.mtlaucasou.model.LayerType;
+import ca.mudar.mtlaucasou.util.ApiDataUtils;
 import ca.mudar.mtlaucasou.util.LogUtils;
 import io.realm.Realm;
 import retrofit2.Response;
@@ -86,12 +89,12 @@ public class SyncService extends IntentService {
     private void loadInitialLocalData() {
         mRealm.beginTransaction();
 
-        importLocalData(R.raw.fire_halls, Const.MapTypes.FIRE_HALLS, Const.ApiValues.TYPE_FIRE_HALLS);
-        importLocalData(R.raw.spvm_stations, Const.MapTypes.SPVM_STATIONS, Const.ApiValues.TYPE_SPVM_STATIONS);
-        importLocalData(R.raw.water_supplies, Const.MapTypes.WATER_SUPPLIES, Const.ApiValues.TYPE_WATER_SUPPLIES);
-        importLocalData(R.raw.air_conditioning, Const.MapTypes.WATER_SUPPLIES, Const.ApiValues.TYPE_AIR_CONDITIONING);
-        importLocalData(R.raw.emergency_hostels, Const.MapTypes.EMERGENCY_HOSTELS, Const.ApiValues.TYPE_EMERGENCY_HOSTELS);
-        importLocalData(R.raw.hospitals, Const.MapTypes.HOSPITALS, Const.ApiValues.TYPE_HOSPITALS);
+        importLocalData(R.raw.fire_halls, MapTypes.FIRE_HALLS, LayerTypes.FIRE_HALLS);
+        importLocalData(R.raw.spvm_stations, MapTypes.SPVM_STATIONS, LayerTypes.SPVM_STATIONS);
+        importLocalData(R.raw.water_supplies, MapTypes.HEAT_WAVE, null);
+        importLocalData(R.raw.air_conditioning, MapTypes.HEAT_WAVE, LayerTypes.AIR_CONDITIONING);
+        importLocalData(R.raw.emergency_hostels, MapTypes.EMERGENCY_HOSTELS, LayerTypes.EMERGENCY_HOSTELS);
+        importLocalData(R.raw.hospitals, MapTypes.HEALTH, LayerTypes.HOSPITALS);
 
         mRealm.commitTransaction();
     }
@@ -106,7 +109,7 @@ public class SyncService extends IntentService {
                         continue;
                     }
 
-                    final String key = ApiUtils.getSharedPrefsKey(dataset.getId());
+                    final String key = ApiDataUtils.getSharedPrefsKey(dataset.getId());
                     final Date updatedAt = dataset.getAttributes().getUpdated();
 
                     if (prefs.isApiDataNewer(key, updatedAt)) {
@@ -123,14 +126,14 @@ public class SyncService extends IntentService {
         }
     }
 
-    private void importLocalData(@RawRes int resource, @MapType String mapType, String dataType) {
+    private void importLocalData(@RawRes int resource, @MapType String mapType, @LayerType String layerType) {
         final InputStream inputStream = getResources().openRawResource(resource);
         final InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
 
         final PointsFeatureCollection collection = new Gson()
                 .fromJson(inputStreamReader, PointsFeatureCollection.class);
 
-        RealmQueries.cacheMapData(mRealm, collection.getFeatures(), mapType, dataType, false);
+        RealmQueries.cacheMapData(mRealm, collection.getFeatures(), mapType, layerType, false);
     }
 
     /**
@@ -147,11 +150,14 @@ public class SyncService extends IntentService {
             PointsFeatureCollection collection = response.body();
             if (collection != null && collection.getFeatures() != null) {
                 final Attributes attributes = dataset.getAttributes();
-                RealmQueries.clearMapData(mRealm, attributes.getDataType());
+                final @LayerType String layerType = ApiDataUtils
+                        .getLayerType(attributes.getDataType(), attributes.getMapType());
+                
+                RealmQueries.clearMapData(mRealm, layerType);
                 RealmQueries.cacheMapData(mRealm,
                         collection.getFeatures(),
                         attributes.getMapType(),
-                        attributes.getDataType(),
+                        layerType,
                         true);
             }
 

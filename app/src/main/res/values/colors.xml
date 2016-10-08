@@ -66,9 +66,9 @@
     <color name="color_background_dark">@color/grey_800</color>
     <color name="color_fire_halls">@color/red_700</color>
     <color name="color_spvm">@color/blue_500</color>
-    <color name="color_water_supplies">@color/blue_grey_400</color>
+    <color name="color_heat_wave">@color/blue_grey_400</color>
     <color name="color_emergency_hostels">@color/light_green_700</color>
-    <color name="color_hospitals">@color/teal_500</color>
+    <color name="color_health">@color/teal_500</color>
 
     <!--Map InfoWindow-->
     <color name="map_info_title">@color/grey_900</color>

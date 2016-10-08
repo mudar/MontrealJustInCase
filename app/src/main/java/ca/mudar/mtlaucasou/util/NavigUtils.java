@@ -46,11 +46,11 @@ public class NavigUtils {
                 return R.id.tab_fire_halls;
             case Const.MapTypes.SPVM_STATIONS:
                 return R.id.tab_spvm;
-            case Const.MapTypes.WATER_SUPPLIES:
+            case Const.MapTypes.HEAT_WAVE:
                 return R.id.tab_water_supplies;
             case Const.MapTypes.EMERGENCY_HOSTELS:
                 return R.id.tab_emergency_hostels;
-            case Const.MapTypes.HOSPITALS:
+            case Const.MapTypes.HEALTH:
                 return R.id.tab_hospitals;
         }
 
@@ -71,11 +71,11 @@ public class NavigUtils {
             case R.id.tab_spvm:
                 return Const.MapTypes.SPVM_STATIONS;
             case R.id.tab_water_supplies:
-                return Const.MapTypes.WATER_SUPPLIES;
+                return Const.MapTypes.HEAT_WAVE;
             case R.id.tab_emergency_hostels:
                 return Const.MapTypes.EMERGENCY_HOSTELS;
             case R.id.tab_hospitals:
-                return Const.MapTypes.HOSPITALS;
+                return Const.MapTypes.HEALTH;
         }
 
         return null;
@@ -94,11 +94,11 @@ public class NavigUtils {
                 return R.drawable.ic_fire_hall;
             case Const.MapTypes.SPVM_STATIONS:
                 return R.drawable.ic_spvm;
-            case Const.MapTypes.WATER_SUPPLIES:
+            case Const.MapTypes.HEAT_WAVE:
                 return R.drawable.ic_water_supplies;
             case Const.MapTypes.EMERGENCY_HOSTELS:
                 return R.drawable.ic_emergency_hostels;
-            case Const.MapTypes.HOSPITALS:
+            case Const.MapTypes.HEALTH:
                 return R.drawable.ic_hospitals;
         }
         return 0;

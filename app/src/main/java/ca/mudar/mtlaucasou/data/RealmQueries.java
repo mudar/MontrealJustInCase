@@ -30,6 +30,7 @@ import java.util.List;
 import ca.mudar.mtlaucasou.model.MapType;
 import ca.mudar.mtlaucasou.model.RealmPlacemark;
 import ca.mudar.mtlaucasou.model.geojson.PointsFeature;
+import ca.mudar.mtlaucasou.model.LayerType;
 import io.realm.Case;
 import io.realm.Realm;
 import io.realm.RealmQuery;
@@ -41,13 +42,13 @@ public class RealmQueries {
      * Delete data from the Realm db
      *
      * @param realm
-     * @param dataType
+     * @param layerType
      */
-    public static void clearMapData(Realm realm, String dataType) {
+    public static void clearMapData(Realm realm, @LayerType String layerType) {
         realm.beginTransaction();
 
         realm.where(RealmPlacemark.class)
-                .equalTo(RealmPlacemark.FIELD_DATA_TYPE, dataType)
+                .equalTo(RealmPlacemark.FIELD_LAYER_TYPE, layerType)
                 .findAll()
                 .deleteAllFromRealm();
 
@@ -60,10 +61,11 @@ public class RealmQueries {
      * @param realm
      * @param pointsFeatures
      * @param mapType
+     * @param layerType
      * @param transaction
      */
     public static void cacheMapData(Realm realm, List<PointsFeature> pointsFeatures,
-                                    @MapType String mapType, String dataType, boolean transaction) {
+                                    @MapType String mapType, @LayerType String layerType, boolean transaction) {
         if (transaction) {
             realm.beginTransaction();
         }
@@ -71,7 +73,7 @@ public class RealmQueries {
         for (PointsFeature feature : pointsFeatures) {
             realm.copyToRealm(new RealmPlacemark.Builder(feature)
                     .mapType(mapType)
-                    .dataType(dataType)
+                    .layerType(layerType, feature.getProperties().getType())
                     .build());
         }
 

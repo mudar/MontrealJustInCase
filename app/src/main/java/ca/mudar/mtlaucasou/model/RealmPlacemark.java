@@ -23,9 +23,12 @@
 
 package ca.mudar.mtlaucasou.model;
 
+import android.text.TextUtils;
+
 import com.google.android.gms.maps.model.LatLng;
 
 import ca.mudar.mtlaucasou.model.geojson.PointsFeature;
+import ca.mudar.mtlaucasou.util.ApiDataUtils;
 import io.realm.RealmObject;
 import io.realm.annotations.Ignore;
 import io.realm.annotations.Index;
@@ -35,7 +38,7 @@ public class RealmPlacemark extends RealmObject implements
     @Ignore
     public static final String FIELD_MAP_TYPE = "mapType";
     @Ignore
-    public static final String FIELD_DATA_TYPE = "dataType";
+    public static final String FIELD_LAYER_TYPE = "layerType";
     @Ignore
     public static final String FIELD_COORDINATES = "coordinates";
     @Ignore
@@ -49,7 +52,9 @@ public class RealmPlacemark extends RealmObject implements
     @MapType
     @Index
     private String mapType;
-    private String dataType;
+    @LayerType
+    @Index
+    private String layerType;
     private PlacemarkProperties properties;
     private LongitudeLatitude coordinates;
 
@@ -65,7 +70,7 @@ public class RealmPlacemark extends RealmObject implements
     private RealmPlacemark(Builder builder) {
         this.id = builder.id;
         this.mapType = builder.mapType;
-        this.dataType = builder.dataType;
+        this.layerType = builder.layerType;
         this.properties = builder.properties;
         this.coordinates = builder.coordinates;
     }
@@ -103,12 +108,13 @@ public class RealmPlacemark extends RealmObject implements
         this.mapType = mapType;
     }
 
-    public String getDataType() {
-        return dataType;
+    @LayerType
+    public String getLayerType() {
+        return layerType;
     }
 
-    public void setDataType(String dataType) {
-        this.dataType = dataType;
+    public void setLayerType(@LayerType String layerType) {
+        this.layerType = layerType;
     }
 
     public PlacemarkProperties getProperties() {
@@ -134,7 +140,8 @@ public class RealmPlacemark extends RealmObject implements
         private String id;
         @MapType
         private String mapType;
-        private String dataType;
+        @LayerType
+        private String layerType;
         private PlacemarkProperties properties;
         private LongitudeLatitude coordinates;
 
@@ -153,8 +160,12 @@ public class RealmPlacemark extends RealmObject implements
             return this;
         }
 
-        public Builder dataType(String dataType) {
-            this.dataType = dataType;
+        public Builder layerType(@LayerType String layerType, String dataType) {
+            if (!TextUtils.isEmpty(layerType)) {
+                this.layerType = layerType;
+            } else {
+                this.layerType = ApiDataUtils.getLayerType(dataType, mapType);
+            }
 
             return this;
         }

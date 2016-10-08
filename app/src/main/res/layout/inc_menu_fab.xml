@@ -21,7 +21,7 @@
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/fab_air_conditioning"
-            style="@style/FabMenuItem.WaterSupplies"
+            style="@style/FabMenuItem.HeatWave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_water_supplies"
@@ -29,7 +29,7 @@
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/fab_pools"
-            style="@style/FabMenuItem.WaterSupplies"
+            style="@style/FabMenuItem.HeatWave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_water_supplies"
@@ -37,7 +37,7 @@
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/fab_wading_pools"
-            style="@style/FabMenuItem.WaterSupplies"
+            style="@style/FabMenuItem.HeatWave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_water_supplies"
@@ -45,7 +45,7 @@
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/fab_play_fountains"
-            style="@style/FabMenuItem.WaterSupplies"
+            style="@style/FabMenuItem.HeatWave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_water_supplies"
@@ -53,7 +53,7 @@
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/fab_hospitals"
-            style="@style/FabMenuItem.Hospitals"
+            style="@style/FabMenuItem.Health"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_hospitals"
@@ -61,7 +61,7 @@
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/fab_clsc"
-            style="@style/FabMenuItem.Hospitals"
+            style="@style/FabMenuItem.Health"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_hospitals"

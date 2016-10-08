@@ -69,7 +69,7 @@ public class MapUtils {
     /**
      * Get the map marker icon (round buttons)
      *
-     * @param type Selected map type {fire_halls|spvm_stations|water_supplies|emergency_hostels}
+     * @param type Selected map type {fire_halls|spvm_stations|water_supplies|emergency_hostels|health}
      * @return bitmap for MarkerOptions
      */
     public static BitmapDescriptor getMarkerIcon(@MapType String type) {
@@ -78,11 +78,11 @@ public class MapUtils {
                 return BitmapDescriptorFactory.fromResource(R.drawable.ic_maps_fire_halls);
             case Const.MapTypes.SPVM_STATIONS:
                 return BitmapDescriptorFactory.fromResource(R.drawable.ic_maps_spvm);
-            case Const.MapTypes.WATER_SUPPLIES:
+            case Const.MapTypes.HEAT_WAVE:
                 return BitmapDescriptorFactory.fromResource(R.drawable.ic_maps_water_supplies);
             case Const.MapTypes.EMERGENCY_HOSTELS:
                 return BitmapDescriptorFactory.fromResource(R.drawable.ic_maps_emergency_hostels);
-            case Const.MapTypes.HOSPITALS:
+            case Const.MapTypes.HEALTH:
                 return BitmapDescriptorFactory.fromResource(R.drawable.ic_maps_hospitals);
         }
         return null;
@@ -92,7 +92,7 @@ public class MapUtils {
      * Get the app's colors for each section. Used for ProgressBar
      *
      * @param context Context to resolve resources
-     * @return Selected map type {fire_halls|spvm_stations|water_supplies|emergency_hostels|hospitals}
+     * @param type Selected map type {fire_halls|spvm_stations|water_supplies|emergency_hostels|health}
      * @return the section's color
      */
     @ColorInt
@@ -105,14 +105,14 @@ public class MapUtils {
             case Const.MapTypes.SPVM_STATIONS:
                 color = R.color.color_spvm;
                 break;
-            case Const.MapTypes.WATER_SUPPLIES:
-                color = R.color.color_water_supplies;
+            case Const.MapTypes.HEAT_WAVE:
+                color = R.color.color_heat_wave;
                 break;
             case Const.MapTypes.EMERGENCY_HOSTELS:
                 color = R.color.color_emergency_hostels;
                 break;
-            case Const.MapTypes.HOSPITALS:
-                color = R.color.color_hospitals;
+            case Const.MapTypes.HEALTH:
+                color = R.color.color_health;
                 break;
             default:
                 color = R.color.color_primary;

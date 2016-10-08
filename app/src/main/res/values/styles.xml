@@ -44,12 +44,12 @@
         <item name="fab_colorNormal">@color/fab_menu_item_color_normal</item>
     </style>
 
-    <style name="FabMenuItem.WaterSupplies">
-        <item name="fab_colorPressed">@color/color_water_supplies</item>
+    <style name="FabMenuItem.HeatWave">
+        <item name="fab_colorPressed">@color/color_heat_wave</item>
     </style>
 
-    <style name="FabMenuItem.Hospitals">
-        <item name="fab_colorPressed">@color/color_hospitals</item>
+    <style name="FabMenuItem.Health">
+        <item name="fab_colorPressed">@color/color_health</item>
     </style>
 
     <style name="AboutPrimaryText">

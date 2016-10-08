@@ -21,14 +21,28 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package ca.mudar.mtlaucasou.util;
+package ca.mudar.mtlaucasou.model;
 
-import java.util.Locale;
+import android.support.annotation.StringDef;
 
-import static ca.mudar.mtlaucasou.Const.PrefsNames.ITEM_UPDATED_AT;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
-public class ApiUtils {
-    public static String getSharedPrefsKey(String id) {
-        return String.format(Locale.ROOT, ITEM_UPDATED_AT, id);
-    }
+import ca.mudar.mtlaucasou.Const;
+
+@Retention(RetentionPolicy.SOURCE)
+@StringDef({
+        Const.LayerTypes.FIRE_HALLS,
+        Const.LayerTypes.SPVM_STATIONS,
+        Const.LayerTypes.EMERGENCY_HOSTELS,
+        // Heat wave x4
+        Const.LayerTypes.AIR_CONDITIONING,
+        Const.LayerTypes.POOLS,
+        Const.LayerTypes.WADING_POOLS,
+        Const.LayerTypes.PLAY_FOUNTAINS,
+        // Health x2
+        Const.LayerTypes.HOSPITALS,
+        Const.LayerTypes.CLSC
+})
+public @interface LayerType {
 }

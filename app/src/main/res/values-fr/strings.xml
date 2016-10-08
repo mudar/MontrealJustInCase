@@ -38,9 +38,9 @@
     <!--BottomBar tabs-->
     <string name="btn_fire_halls">Casernes</string>
     <string name="btn_spvm_stations">Poste de police</string>
-    <string name="btn_water_supplies">Canicule</string>
+    <string name="btn_heat_wave">Canicule</string>
     <string name="btn_emergency_hostels">Hébergement</string>
-    <string name="btn_hospitals">Santé</string>
+    <string name="btn_health">Santé</string>
 
     <!--Menus-->
     <string name="action_search">Recherche</string>

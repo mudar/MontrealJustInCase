@@ -35,6 +35,7 @@ public class Attributes {
     private Date updated;
     @SerializedName("type")
     private String dataType;
+    @MapType
     private String mapType;
 
     public String getTitle() {

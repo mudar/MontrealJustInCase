@@ -40,10 +40,24 @@ public class Const {
     public interface MapTypes {
         String FIRE_HALLS = "fire_halls";
         String SPVM_STATIONS = "spvm_stations";
-        String WATER_SUPPLIES = "water_supplies";
+        String HEAT_WAVE = "water_supplies";
         String EMERGENCY_HOSTELS = "emergency_hostels";
+        String HEALTH = "health";
+        String _DEFAULT = HEALTH;
+    }
+
+    public interface LayerTypes {
+        String FIRE_HALLS = "fire_halls";
+        String SPVM_STATIONS = "spvm_stations";
+        String EMERGENCY_HOSTELS = "emergency_hostels";
+        // Heat wave x4
+        String AIR_CONDITIONING = "air_conditioning";
+        String POOLS = "pools";
+        String WADING_POOLS = "wading_pools";
+        String PLAY_FOUNTAINS = "play_fountains";
+        // Health x2
         String HOSPITALS = "hospitals";
-        String _DEFAULT = HOSPITALS;
+        String CLSC = "clsc";
     }
 
     public static final double MAPS_GEOCODER_LIMITS[] = {
@@ -64,13 +78,13 @@ public class Const {
     public interface ApiValues {
         String TYPE_PLACEMARKS = "placemarks";
         String TYPE_SHAPES = "shapes";
-        // There's a slight difference between mapType and dataType
-        String TYPE_FIRE_HALLS = MapTypes.FIRE_HALLS;
-        String TYPE_SPVM_STATIONS = MapTypes.SPVM_STATIONS;
-        String TYPE_WATER_SUPPLIES = MapTypes.WATER_SUPPLIES;
-        String TYPE_AIR_CONDITIONING = "air_conditioning";
-        String TYPE_EMERGENCY_HOSTELS = MapTypes.EMERGENCY_HOSTELS;
-        String TYPE_HOSPITALS = MapTypes.HOSPITALS;
+        // Remote dataType is used to determine local layerType
+        String TYPE_PLAY_FOUNTAINS = "jeux-d-eau";
+        String TYPE_WADING_POOLS = "pataugeoire";
+        String TYPE_POOLS_EXT = "piscine-ext";
+        String TYPE_POOLS_INT = "piscine-int";
+        String TYPE_HOSPITALS = "hopital";
+        String TYPE_CLSC = "clsc";
     }
 
     public interface BundleKeys {

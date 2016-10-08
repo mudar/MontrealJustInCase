@@ -52,7 +52,7 @@
     <string name="action_about_libs">Open source libraries</string>
 
     <!--FloatingActionMenu-->
-    <string name="fab_menu_label_layers">Subcategories</string>
+    <!--<string name="fab_menu_label_layers">Subcategories</string>-->
     <string name="fab_label_air_conditioning">Air conditioning</string>
     <string name="fab_label_pools">Pools</string>
     <string name="fab_label_wading_pools">Wading pools</string>

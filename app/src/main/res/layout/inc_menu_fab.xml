@@ -14,7 +14,6 @@
         app:menu_backgroundColor="@color/fab_menu_background"
         app:menu_colorNormal="@color/color_primary"
         app:menu_colorPressed="@color/color_primary"
-        app:menu_fab_label="@string/fab_menu_label_layers"
         app:menu_labels_colorNormal="@color/fab_menu_item_color_normal"
         app:menu_labels_colorPressed="@color/fab_menu_item_color_normal"
         tools:ignore="RtlSymmetry">

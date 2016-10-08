@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <tabs>
     <tab
-        barColorWhenSelected="@color/color_hospitals"
+        barColorWhenSelected="@color/color_health"
         icon="@drawable/ic_hospitals"
         id="@+id/tab_hospitals"
-        title="@string/btn_hospitals" />
+        title="@string/btn_health" />
 
     <tab
         barColorWhenSelected="@color/color_spvm"
@@ -25,9 +25,9 @@
         title="@string/btn_emergency_hostels" />
 
     <tab
-        barColorWhenSelected="@color/color_water_supplies"
+        barColorWhenSelected="@color/color_heat_wave"
         icon="@drawable/ic_water_supplies"
         id="@+id/tab_water_supplies"
-        title="@string/btn_water_supplies" />
+        title="@string/btn_heat_wave" />
 
 </tabs>

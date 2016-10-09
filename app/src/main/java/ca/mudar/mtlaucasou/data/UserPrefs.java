@@ -29,10 +29,13 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Locale;
+import java.util.Set;
 
 import ca.mudar.mtlaucasou.Const;
 import ca.mudar.mtlaucasou.R;
+import ca.mudar.mtlaucasou.model.LayerType;
 
 import static ca.mudar.mtlaucasou.util.LogUtils.makeLogTag;
 
@@ -133,6 +136,33 @@ public class UserPrefs implements
     public void setPermissionDeniedForEver(boolean denied) {
         edit().putBoolean(PERMISSION_DENIED_FOR_EVER, denied)
                 .apply();
+    }
+
+    public Set<String> getEnabledLayers() {
+        return mPrefs.getStringSet(LAYERS_ENABLED, Const.PrefsValues.DEFAULT_LAYERS);
+    }
+
+    public boolean isLayerEnabled(@LayerType String layerType) {
+        return mPrefs.getStringSet(LAYERS_ENABLED, Const.PrefsValues.DEFAULT_LAYERS)
+                .contains(layerType);
+    }
+
+    public void setLayerEnabled(@LayerType String layerType, boolean enabled) {
+        // We need to make a copy of the hashset, not just get a reference
+        final Set<String> enabledLayers = new HashSet<>(mPrefs.getStringSet(LAYERS_ENABLED,
+                Const.PrefsValues.DEFAULT_LAYERS));
+
+        boolean result = false;
+        if (enabled && !enabledLayers.contains(layerType)) {
+            result = enabledLayers.add(layerType);
+        } else if (!enabled) {
+            result = enabledLayers.remove(layerType);
+        }
+
+        if (result) {
+            edit().putStringSet(LAYERS_ENABLED, enabledLayers)
+                    .apply();
+        }
     }
 
     /**

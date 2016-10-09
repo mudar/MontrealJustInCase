@@ -39,8 +39,10 @@ import com.google.android.gms.maps.model.Marker;
 import java.util.HashSet;
 import java.util.Set;
 
+import ca.mudar.mtlaucasou.Const;
 import ca.mudar.mtlaucasou.Const.MapTypes;
 import ca.mudar.mtlaucasou.R;
+import ca.mudar.mtlaucasou.data.UserPrefs;
 import ca.mudar.mtlaucasou.model.MapType;
 import ca.mudar.mtlaucasou.util.MapUtils;
 
@@ -64,6 +66,8 @@ public class MapLayersManager implements
     private boolean mMapTypeHasMenu;
     @ColorInt
     private int mMapTypeColor;
+    @ColorInt
+    private int mNormalColor;
 
     public MapLayersManager(@NonNull Context context, @NonNull FloatingActionMenu menu) {
         mContext = context;
@@ -75,6 +79,8 @@ public class MapLayersManager implements
 
         mActiveLayers = new HashSet<>();
 
+        mNormalColor = ContextCompat.getColor(mContext, R.color.fab_menu_item_color_normal);
+
         // The menu items
         mAirConditioningFAB = (FloatingActionButton) mMenuFAB.findViewById(R.id.fab_air_conditioning);
         mPoolsFAB = (FloatingActionButton) mMenuFAB.findViewById(R.id.fab_pools);
@@ -83,6 +89,7 @@ public class MapLayersManager implements
         mHospitalsFAB = (FloatingActionButton) mMenuFAB.findViewById(R.id.fab_hospitals);
         mClscFAB = (FloatingActionButton) mMenuFAB.findViewById(R.id.fab_clsc);
 
+        setupInitialValues(UserPrefs.getInstance(context));
         setupMenuItemsListeners();
     }
 
@@ -142,10 +149,10 @@ public class MapLayersManager implements
     public void onClick(final View view) {
         if (view instanceof FloatingActionButton) {
             final boolean isActivated = !view.isActivated(); // The new (toggled) value
-            @ColorInt final int color = isActivated ? mMapTypeColor :
-                    ContextCompat.getColor(mContext, R.color.fab_menu_item_color_normal);
-            view.setActivated(isActivated);
-            ((FloatingActionButton) view).setColorNormal(color);
+            setMenuItemState((FloatingActionButton) view, isActivated);
+            UserPrefs.getInstance(mContext).setLayerEnabled(
+                    MapUtils.getFilterItemLayerType(view.getId()),
+                    isActivated);
         }
     }
 
@@ -212,6 +219,22 @@ public class MapLayersManager implements
         mMenuFAB.setMenuButtonColorPressed(mMapTypeColor);
     }
 
+    private void setupInitialValues(UserPrefs prefs) {
+        final Set<String> enabledLayers = prefs.getEnabledLayers();
+
+        mMapTypeColor = MapUtils.getMapTypeColor(mContext, MapTypes.HEAT_WAVE);
+        setMenuItemState(mAirConditioningFAB, enabledLayers.contains(Const.LayerTypes.AIR_CONDITIONING));
+        setMenuItemState(mPoolsFAB, enabledLayers.contains(Const.LayerTypes.POOLS));
+        setMenuItemState(mWadingPoolsFAB, enabledLayers.contains(Const.LayerTypes.WADING_POOLS));
+        setMenuItemState(mPlayFountainsFAB, enabledLayers.contains(Const.LayerTypes.PLAY_FOUNTAINS));
+
+        mMapTypeColor = MapUtils.getMapTypeColor(mContext, MapTypes.HEALTH);
+        setMenuItemState(mHospitalsFAB, enabledLayers.contains(Const.LayerTypes.HOSPITALS));
+        setMenuItemState(mClscFAB, enabledLayers.contains(Const.LayerTypes.CLSC));
+
+        mMapTypeColor = mNormalColor;
+    }
+
     private void setupMenuItemsListeners() {
         mAirConditioningFAB.setOnClickListener(this);
         mPoolsFAB.setOnClickListener(this);
@@ -219,5 +242,11 @@ public class MapLayersManager implements
         mPlayFountainsFAB.setOnClickListener(this);
         mHospitalsFAB.setOnClickListener(this);
         mClscFAB.setOnClickListener(this);
+    }
+
+    private void setMenuItemState(FloatingActionButton fab, boolean activated) {
+        @ColorInt final int color = activated ? mMapTypeColor : mNormalColor;
+        fab.setActivated(activated);
+        fab.setColorNormal(color);
     }
 }

@@ -27,6 +27,10 @@ import android.os.Build;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 public class Const {
     /**
      * MTL au cas ou
@@ -129,6 +133,7 @@ public class Const {
         String LANGUAGE = "prefs_language";
         String PERMISSIONS = "prefs_permissions";
         String UNITS_SYSTEM = "prefs_units_system";
+        String LAYERS_ENABLED = "prefs_layers_enabled";
 //        String LIST_SORT = "prefs_list_sort_by";
 //        String FOLLOW_LOCATION_CHANGES = "prefs_follow_location_changes";
 //        String LAST_UPDATE_TIME = "prefs_last_update_time";
@@ -145,6 +150,10 @@ public class Const {
         String UNITS_IMP = "imp";
 //        String LIST_SORT_NAME = "name";
 //        String LIST_SORT_DISTANCE = "distance";
+        Set<String> DEFAULT_LAYERS = new HashSet<>(
+                Arrays.asList(Const.LayerTypes.HOSPITALS,
+                        Const.LayerTypes.AIR_CONDITIONING)
+        );
     }
 
     public interface RequestCodes {

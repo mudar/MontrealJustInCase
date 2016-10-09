@@ -27,6 +27,7 @@ import android.content.Context;
 import android.location.Location;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
+import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -52,6 +53,7 @@ import java.util.List;
 
 import ca.mudar.mtlaucasou.Const;
 import ca.mudar.mtlaucasou.R;
+import ca.mudar.mtlaucasou.model.LayerType;
 import ca.mudar.mtlaucasou.model.MapType;
 import ca.mudar.mtlaucasou.model.Placemark;
 
@@ -92,7 +94,7 @@ public class MapUtils {
      * Get the app's colors for each section. Used for ProgressBar
      *
      * @param context Context to resolve resources
-     * @param type Selected map type {fire_halls|spvm_stations|water_supplies|emergency_hostels|health}
+     * @param type    Selected map type {fire_halls|spvm_stations|water_supplies|emergency_hostels|health}
      * @return the section's color
      */
     @ColorInt
@@ -118,6 +120,26 @@ public class MapUtils {
                 color = R.color.color_primary;
         }
         return ContextCompat.getColor(context, color);
+    }
+
+    @LayerType
+    public static String getFilterItemLayerType(@IdRes int id) {
+
+        if (id == R.id.fab_air_conditioning) {
+            return Const.LayerTypes.AIR_CONDITIONING;
+        } else if (id == R.id.fab_pools) {
+            return Const.LayerTypes.POOLS;
+        } else if (id == R.id.fab_wading_pools) {
+            return Const.LayerTypes.WADING_POOLS;
+        } else if (id == R.id.fab_play_fountains) {
+            return Const.LayerTypes.PLAY_FOUNTAINS;
+        } else if (id == R.id.fab_hospitals) {
+            return Const.LayerTypes.HOSPITALS;
+        } else if (id == R.id.fab_clsc) {
+            return Const.LayerTypes.CLSC;
+        }
+
+        return null;
     }
 
     /**

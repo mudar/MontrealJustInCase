@@ -2446,7 +2446,8 @@
     "type": "Feature",
     "properties": {
       "Name": "Piscine François-Perrault",
-      "Description": "<p>Piscine François-Perrault<br\/>7525 rue François-Perrault<br\/>Villeray\/Saint-Michel\/Parc-Extension<\/P><P>Piscine extérieure, Pataugeoire<\/P>"
+      "Description": "<p>Piscine François-Perrault<br\/>7525 rue François-Perrault<br\/>Villeray\/Saint-Michel\/Parc-Extension<\/P><P>Piscine extérieure, Pataugeoire<\/P>",
+      "Type": "piscine-ext"
     },
     "geometry": {
       "type": "Point",
@@ -2522,7 +2523,8 @@
     "type": "Feature",
     "properties": {
       "Name": "Piscine Hampstead",
-      "Description": "<p>Piscine Hampstead<br\/>30 rue Lyncroft<br\/>Hampstead<\/P><P>Piscine extérieure, Pataugeoire<\/P>"
+      "Description": "<p>Piscine Hampstead<br\/>30 rue Lyncroft<br\/>Hampstead<\/P><P>Piscine extérieure, Pataugeoire<\/P>",
+      "Type": "piscine-ext"
     },
     "geometry": {
       "type": "Point",
@@ -2576,7 +2578,8 @@
     "type": "Feature",
     "properties": {
       "Name": "Piscine Ignace Bourget",
-      "Description": "<p>Piscine Ignace Bourget<br\/>5925 ave de Montmagny<br\/>Sud-Ouest<\/P><P>Piscine extérieure, Pataugeoire<\/P>"
+      "Description": "<p>Piscine Ignace Bourget<br\/>5925 ave de Montmagny<br\/>Sud-Ouest<\/P><P>Piscine extérieure, Pataugeoire<\/P>",
+      "Type": "piscine-ext"
     },
     "geometry": {
       "type": "Point",
@@ -2630,7 +2633,8 @@
     "type": "Feature",
     "properties": {
       "Name": "Piscine Jarry",
-      "Description": "<p>Piscine Jarry<br\/>205 rue Faillon ouest<br\/>Villeray\/Saint-Michel\/Parc-Extension<\/P><P>Piscine extérieure, Pataugeoire<\/P>"
+      "Description": "<p>Piscine Jarry<br\/>205 rue Faillon ouest<br\/>Villeray\/Saint-Michel\/Parc-Extension<\/P><P>Piscine extérieure, Pataugeoire<\/P>",
+      "Type": "piscine-ext"
     },
     "geometry": {
       "type": "Point",
@@ -2640,7 +2644,8 @@
     "type": "Feature",
     "properties": {
       "Name": "Plage du Parc Jean-Drapeau",
-      "Description": "<p>Plage du Parc Jean-Drapeau<br\/>1 Circuit Gilles-Villeneuve<br\/>Ville-Marie<\/P><P>Plage<\/P>"
+      "Description": "<p>Plage du Parc Jean-Drapeau<br\/>1 Circuit Gilles-Villeneuve<br\/>Ville-Marie<\/P><P>Plage<\/P>",
+      "Type": "plage"
     },
     "geometry": {
       "type": "Point",
@@ -2650,7 +2655,8 @@
     "type": "Feature",
     "properties": {
       "Name": "Piscine John-F.-Kennedy",
-      "Description": "<p>Piscine John-F.-Kennedy<br\/>860 ave Outremont<br\/>Outremont<\/P><P>Piscine extérieure, Pataugeoire<\/P>"
+      "Description": "<p>Piscine John-F.-Kennedy<br\/>860 ave Outremont<br\/>Outremont<\/P><P>Piscine extérieure, Pataugeoire<\/P>",
+      "Type": "piscine-ext"
     },
     "geometry": {
       "type": "Point",
@@ -2682,7 +2688,8 @@
     "type": "Feature",
     "properties": {
       "Name": "Piscine Joseph-Paré",
-      "Description": "<p>Piscine Joseph-Paré<br\/>6525 41e Ave<br\/>Rosemont\/La-Petite-Patrie<\/P><P>Piscine extérieure, Pataugeoire<\/P>"
+      "Description": "<p>Piscine Joseph-Paré<br\/>6525 41e Ave<br\/>Rosemont\/La-Petite-Patrie<\/P><P>Piscine extérieure, Pataugeoire<\/P>",
+      "Type": "piscine-ext"
     },
     "geometry": {
       "type": "Point",
@@ -2725,7 +2732,8 @@
     "type": "Feature",
     "properties": {
       "Name": "Piscine Ladauversière",
-      "Description": "<p>Piscine Ladauversière<br\/>7560 boul Lacordaire<br\/>Saint-Léonard<\/P><P>Piscine extérieure, Pataugeoire<\/P>"
+      "Description": "<p>Piscine Ladauversière<br\/>7560 boul Lacordaire<br\/>Saint-Léonard<\/P><P>Piscine extérieure, Pataugeoire<\/P>",
+      "Type": "piscine-ext"
     },
     "geometry": {
       "type": "Point",
@@ -2779,7 +2787,8 @@
     "type": "Feature",
     "properties": {
       "Name": "Piscine Le Pélican",
-      "Description": "<p>Piscine Le Pélican<br\/>2560 rue Masson<br\/>Rosemont\/La-Petite-Patrie<\/P><P>Piscine extérieure, Pataugeoire<\/P>"
+      "Description": "<p>Piscine Le Pélican<br\/>2560 rue Masson<br\/>Rosemont\/La-Petite-Patrie<\/P><P>Piscine extérieure, Pataugeoire<\/P>",
+      "Type": "piscine-ext"
     },
     "geometry": {
       "type": "Point",
@@ -2811,7 +2820,8 @@
     "type": "Feature",
     "properties": {
       "Name": "Piscine Maisonneuve",
-      "Description": "<p>Piscine Maisonneuve<br\/>4350 rue de Rouen<br\/>Mercier\/hochelaga\/Maisonneuve<\/P><P>Piscine extérieure, Pataugeoire<\/P>"
+      "Description": "<p>Piscine Maisonneuve<br\/>4350 rue de Rouen<br\/>Mercier\/hochelaga\/Maisonneuve<\/P><P>Piscine extérieure, Pataugeoire<\/P>",
+      "Type": "piscine-ext"
     },
     "geometry": {
       "type": "Point",
@@ -3007,8 +3017,9 @@
   }, {
     "type": "Feature",
     "properties": {
-      "Name": "Piscine Pi XII",
-      "Description": "<p>Piscine Pi XII<br\/>5200 boul Lavoisier<br\/>Saint-Léonard<\/P><P>Piscine extérieure, Pataugeoire<\/P>"
+      "Name": "Piscine Pie-XII",
+      "Description": "<p>Piscine Pie-XII<br\/>5200 boul Lavoisier<br\/>Saint-Léonard<\/P><P>Piscine extérieure, Pataugeoire<\/P>",
+      "Type": "piscine-ext"
     },
     "geometry": {
       "type": "Point",
@@ -3117,7 +3128,8 @@
     "type": "Feature",
     "properties": {
       "Name": "Piscine Sainte-Lucie",
-      "Description": "<p>Piscine Sainte-Lucie<br\/>9093 16e avenue<br\/>Villeray\/Saint-Michel\/Parc-Extension<\/P><P>Piscine extérieure, Pataugeoire<\/P>"
+      "Description": "<p>Piscine Sainte-Lucie<br\/>9093 16e avenue<br\/>Villeray\/Saint-Michel\/Parc-Extension<\/P><P>Piscine extérieure, Pataugeoire<\/P>",
+      "Type": "piscine-ext"
     },
     "geometry": {
       "type": "Point",
@@ -3259,7 +3271,8 @@
     "type": "Feature",
     "properties": {
       "Name": "Plage du cap Saint-Jacques",
-      "Description": "<p>Plage du cap Saint-Jacques<br\/>21 115 boul Gouin ouest<br\/>Pierrefonds\/Roxborro<\/P><P>Plage<\/P>"
+      "Description": "<p>Plage du cap Saint-Jacques<br\/>21 115 boul Gouin ouest<br\/>Pierrefonds\/Roxborro<\/P><P>Plage<\/P>",
+      "Type": "plage"
     },
     "geometry": {
       "type": "Point",
@@ -3962,7 +3975,8 @@
     "type": "Feature",
     "properties": {
       "Name": "Jeux d’eau Montmartre",
-      "Description": "<p>Jeux d’eau Montmartre<br\/>coin de Montigny et 59e ave<br\/>Rivière-des-Prairies\/Pointe-aux-Trembles<\/P><P>Jeux d’eau, Piscine<\/P>"
+      "Description": "<p>Jeux d’eau Montmartre<br\/>coin de Montigny et 59e ave<br\/>Rivière-des-Prairies\/Pointe-aux-Trembles<\/P><P>Jeux d’eau, Piscine<\/P>",
+      "Type": "jeux-d-eau"
     },
     "geometry": {
       "type": "Point",

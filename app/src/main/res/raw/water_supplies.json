@@ -982,8 +982,8 @@
   }, {
     "type": "Feature",
     "properties": {
-      "Name": "Parc Pélican *",
-      "Description": "<p>Parc Pélican *<br\/>2 560, Rue Masson<br\/>Rosemont-La Petite-Patrie<\/P><P>Pataugeoire<\/P>",
+      "Name": "Parc Pélican",
+      "Description": "<p>Parc Pélican<br\/>2 560, Rue Masson<br\/>Rosemont-La Petite-Patrie<\/P><P>Pataugeoire<\/P>",
       "Type": "pataugeoire"
     },
     "geometry": {

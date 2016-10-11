@@ -150,10 +150,9 @@ public class Const {
         String UNITS_IMP = "imp";
 //        String LIST_SORT_NAME = "name";
 //        String LIST_SORT_DISTANCE = "distance";
-        Set<String> DEFAULT_LAYERS = new HashSet<>(
-                Arrays.asList(Const.LayerTypes.HOSPITALS,
-                        Const.LayerTypes.AIR_CONDITIONING)
-        );
+        Set<String> DEFAULT_LAYERS = new HashSet<>(Arrays.asList(
+                Const.LayerTypes.HOSPITALS,
+                Const.LayerTypes.AIR_CONDITIONING));
     }
 
     public interface RequestCodes {

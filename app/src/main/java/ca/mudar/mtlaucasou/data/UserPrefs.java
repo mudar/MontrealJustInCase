@@ -138,6 +138,7 @@ public class UserPrefs implements
                 .apply();
     }
 
+    @LayerType
     public Set<String> getEnabledLayers() {
         return mPrefs.getStringSet(LAYERS_ENABLED, Const.PrefsValues.DEFAULT_LAYERS);
     }

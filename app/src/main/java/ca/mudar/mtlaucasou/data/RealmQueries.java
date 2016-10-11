@@ -25,9 +25,13 @@ package ca.mudar.mtlaucasou.data;
 
 import com.google.android.gms.maps.model.LatLngBounds;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import ca.mudar.mtlaucasou.Const;
+import ca.mudar.mtlaucasou.Const.LayerTypes;
 import ca.mudar.mtlaucasou.model.LayerType;
 import ca.mudar.mtlaucasou.model.MapType;
 import ca.mudar.mtlaucasou.model.RealmPlacemark;
@@ -41,6 +45,15 @@ import static ca.mudar.mtlaucasou.util.LogUtils.makeLogTag;
 
 public class RealmQueries {
     private static final String TAG = makeLogTag("RealmQueries");
+    private static final Set<String> HEAT_WAVE_LAYERS = new HashSet<>(Arrays.asList(
+            LayerTypes.AIR_CONDITIONING,
+            LayerTypes.POOLS,
+            LayerTypes.WADING_POOLS,
+            LayerTypes.PLAY_FOUNTAINS));
+    private static final Set<String> HEALTH_LAYERS = new HashSet<>(Arrays.asList(
+            LayerTypes.HOSPITALS,
+            LayerTypes.AIR_CONDITIONING));
+
 
     /**
      * Delete data from the Realm db
@@ -52,12 +65,12 @@ public class RealmQueries {
         realm.beginTransaction();
 
         final RealmQuery query = realm.where(RealmPlacemark.class);
-        if (Const.LayerTypes._HEAT_WAVE_MIXED.equals(layerType)) {
+        if (LayerTypes._HEAT_WAVE_MIXED.equals(layerType)) {
             // The `water_supplies` endpoint provides 3 layerTypes we need to delete
             query.in(RealmPlacemark.FIELD_LAYER_TYPE, new String[]{
-                    Const.LayerTypes.POOLS,
-                    Const.LayerTypes.WADING_POOLS,
-                    Const.LayerTypes.PLAY_FOUNTAINS
+                    LayerTypes.POOLS,
+                    LayerTypes.WADING_POOLS,
+                    LayerTypes.PLAY_FOUNTAINS
             });
         } else {
             query.equalTo(RealmPlacemark.FIELD_LAYER_TYPE, layerType);
@@ -97,13 +110,45 @@ public class RealmQueries {
     }
 
     /**
+     * Get all Placemarks for requested mapType and selected layers
+     *
+     * @param realm
+     * @param mapType
+     * @param layers
+     * @return
+     */
+    public static RealmQuery<RealmPlacemark> queryPlacemarksByMapType(Realm realm,
+                                                                      @MapType String mapType,
+                                                                      @LayerType Set<String> layers) {
+        final RealmQuery<RealmPlacemark> query = queryPlacemarksByMapType(realm, mapType);
+        if (layers != null) {
+            Set<String> filterLayers = null;
+
+            if (Const.MapTypes.HEAT_WAVE.equals(mapType)) {
+                filterLayers = new HashSet<>(HEAT_WAVE_LAYERS);
+                filterLayers.retainAll(layers);
+            } else if (Const.MapTypes.HEALTH.equals(mapType)) {
+                filterLayers = new HashSet<>(HEALTH_LAYERS);
+                filterLayers.retainAll(layers);
+            }
+
+            if (filterLayers != null && filterLayers.size() > 0) {
+                return query.in(RealmPlacemark.FIELD_LAYER_TYPE,
+                        filterLayers.toArray(new String[filterLayers.size()]));
+            }
+        }
+
+        return query;
+    }
+
+    /**
      * Get all Placemarks for requested mapType
      *
      * @param realm
      * @param mapType
      * @return
      */
-    public static RealmQuery<RealmPlacemark> queryPlacemarksByMapType(Realm realm, @MapType String mapType) {
+    private static RealmQuery<RealmPlacemark> queryPlacemarksByMapType(Realm realm, @MapType String mapType) {
         return realm
                 .where(RealmPlacemark.class)
                 .equalTo(RealmPlacemark.FIELD_MAP_TYPE, mapType);

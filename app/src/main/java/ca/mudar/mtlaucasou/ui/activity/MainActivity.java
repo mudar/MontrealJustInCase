@@ -78,7 +78,8 @@ import static ca.mudar.mtlaucasou.util.LogUtils.makeLogTag;
 public class MainActivity extends BaseActivity implements
         OnMapReadyCallback,
         SearchResultsManager.MapUpdatesListener,
-        LocationUpdatesManager.LocationUpdatesCallbacks {
+        LocationUpdatesManager.LocationUpdatesCallbacks,
+        MapLayersManager.LayersFilterCallbacks {
 
     private static final String TAG = makeLogTag("MainActivity");
     private static final long BOTTOM_BAR_ANIM_DURATION = 200L; // 200ms
@@ -239,7 +240,7 @@ public class MainActivity extends BaseActivity implements
             }
         });
 
-        mLayersManager = new MapLayersManager(this, (FloatingActionMenu) findViewById(R.id.fab_menu));
+        mLayersManager = new MapLayersManager(this, (FloatingActionMenu) findViewById(R.id.fab_menu), this);
     }
 
     /**
@@ -356,8 +357,10 @@ public class MainActivity extends BaseActivity implements
 
         // First, query the Realm db for the current mapType
         final RealmResults<RealmPlacemark> realmPlacemarks = RealmQueries
-                .queryPlacemarksByMapType(mRealm, type)
-                .findAll();
+                .queryPlacemarksByMapType(mRealm,
+                        type,
+                        UserPrefs.getInstance(this).getEnabledLayers()
+                ).findAll();
 
         if (realmPlacemarks.size() > 0) {
             // Has cached data
@@ -459,5 +462,23 @@ public class MainActivity extends BaseActivity implements
     @Override
     public void onLocationSettingsActivityResult(int resultCode, Intent data) {
         mLocationManger.onLocationSettingsResult(resultCode, data);
+    }
+
+    /**
+     * MapLayersManager.LayersFilterCallbacks
+     */
+    @Override
+    public void onFiltersChange() {
+        MapUtils.clearMap(vMap);
+    }
+
+    /**
+     * MapLayersManager.LayersFilterCallbacks
+     */
+    @Override
+    public void onFiltersApply() {
+        toggleProgressBar(true);
+
+        loadMapData(mMapType);
     }
 }

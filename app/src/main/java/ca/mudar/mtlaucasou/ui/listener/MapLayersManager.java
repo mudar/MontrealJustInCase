@@ -36,13 +36,13 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import ca.mudar.mtlaucasou.Const;
 import ca.mudar.mtlaucasou.Const.MapTypes;
 import ca.mudar.mtlaucasou.R;
 import ca.mudar.mtlaucasou.data.UserPrefs;
+import ca.mudar.mtlaucasou.model.LayerType;
 import ca.mudar.mtlaucasou.model.MapType;
 import ca.mudar.mtlaucasou.util.MapUtils;
 
@@ -51,10 +51,12 @@ import static ca.mudar.mtlaucasou.util.LogUtils.makeLogTag;
 public class MapLayersManager implements
         GoogleMap.OnMapClickListener,
         GoogleMap.OnMarkerClickListener,
-        View.OnClickListener {
+        View.OnClickListener,
+        FloatingActionMenu.OnMenuToggleListener {
     private static final String TAG = makeLogTag("MapLayersManager");
 
     private final Context mContext;
+    private final LayersFilterCallbacks mListener;
     private final FloatingActionMenu mMenuFAB;
     private final FloatingActionButton mAirConditioningFAB;
     private final FloatingActionButton mPoolsFAB;
@@ -62,22 +64,23 @@ public class MapLayersManager implements
     private final FloatingActionButton mPlayFountainsFAB;
     private final FloatingActionButton mHospitalsFAB;
     private final FloatingActionButton mClscFAB;
-    private Set<String> mActiveLayers;
     private boolean mMapTypeHasMenu;
+    private boolean mHasChangedFilters;
     @ColorInt
     private int mMapTypeColor;
     @ColorInt
     private int mNormalColor;
 
-    public MapLayersManager(@NonNull Context context, @NonNull FloatingActionMenu menu) {
+    public MapLayersManager(@NonNull Context context, @NonNull FloatingActionMenu menu, LayersFilterCallbacks listener) {
         mContext = context;
+        mListener = listener;
         mMenuFAB = menu;
+
+        mMenuFAB.setOnMenuToggleListener(this);
         mMenuFAB.setIconAnimated(false);
         mMenuFAB.hideMenu(false);
         ViewCompat.setElevation(mMenuFAB,
                 mContext.getResources().getDimensionPixelSize(R.dimen.fab_menu_elevation));
-
-        mActiveLayers = new HashSet<>();
 
         mNormalColor = ContextCompat.getColor(mContext, R.color.fab_menu_item_color_normal);
 
@@ -94,11 +97,11 @@ public class MapLayersManager implements
     }
 
     /**
-     * Provide reference to the GoogleMap to setup click listeners
+     * Sets map and markers click listeners that toggle the menu
      *
      * @param map The GoogleMap
      */
-    public void setMap(GoogleMap map) {
+    public void setMap(@NonNull GoogleMap map) {
         map.setOnMapClickListener(this);
         map.setOnMarkerClickListener(this);
     }
@@ -141,6 +144,7 @@ public class MapLayersManager implements
     }
 
     /**
+     * Updates menu item colors, sharedPrefs and toggles map data
      * Implements View.OnClickListener
      *
      * @param view
@@ -149,10 +153,28 @@ public class MapLayersManager implements
     public void onClick(final View view) {
         if (view instanceof FloatingActionButton) {
             final boolean isActivated = !view.isActivated(); // The new (toggled) value
+            // Update layout
             setMenuItemState((FloatingActionButton) view, isActivated);
+            // Updates userPrefs
             UserPrefs.getInstance(mContext).setLayerEnabled(
                     MapUtils.getFilterItemLayerType(view.getId()),
                     isActivated);
+            // Notify map of layer changes (to clear map)
+            mHasChangedFilters = true;
+            mListener.onFiltersChange();
+        }
+    }
+
+    /**
+     * Update the map data only when closing the filter menu, for smoother interaction.
+     * Implements FloatingActionMenu.OnMenuToggleListener
+     *
+     * @param opened
+     */
+    @Override
+    public void onMenuToggle(boolean opened) {
+        if (!opened && mHasChangedFilters && mListener != null) {
+            mListener.onFiltersApply();
         }
     }
 
@@ -164,6 +186,7 @@ public class MapLayersManager implements
      */
     public boolean toggleFilterMenu(@MapType String type) {
         mMapTypeHasMenu = MapTypes.HEAT_WAVE.equals(type) || MapTypes.HEALTH.equals(type);
+        mHasChangedFilters = false;
 
         toggleWaterSupplyFilterItems(MapTypes.HEAT_WAVE.equals(type));
         toggleHospitalsFilterItems(MapTypes.HEALTH.equals(type));
@@ -220,7 +243,7 @@ public class MapLayersManager implements
     }
 
     private void setupInitialValues(UserPrefs prefs) {
-        final Set<String> enabledLayers = prefs.getEnabledLayers();
+        final @LayerType Set<String> enabledLayers = prefs.getEnabledLayers();
 
         mMapTypeColor = MapUtils.getMapTypeColor(mContext, MapTypes.HEAT_WAVE);
         setMenuItemState(mAirConditioningFAB, enabledLayers.contains(Const.LayerTypes.AIR_CONDITIONING));
@@ -248,5 +271,11 @@ public class MapLayersManager implements
         @ColorInt final int color = activated ? mMapTypeColor : mNormalColor;
         fab.setActivated(activated);
         fab.setColorNormal(color);
+    }
+
+    public interface LayersFilterCallbacks {
+        void onFiltersChange();
+
+        void onFiltersApply();
     }
 }

@@ -52,7 +52,7 @@ public class RealmQueries {
             LayerTypes.PLAY_FOUNTAINS));
     private static final Set<String> HEALTH_LAYERS = new HashSet<>(Arrays.asList(
             LayerTypes.HOSPITALS,
-            LayerTypes.AIR_CONDITIONING));
+            LayerTypes.CLSC));
 
 
     /**

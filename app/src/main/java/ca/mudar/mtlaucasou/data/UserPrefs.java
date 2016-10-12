@@ -27,6 +27,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.text.TextUtils;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -36,6 +37,8 @@ import java.util.Set;
 import ca.mudar.mtlaucasou.Const;
 import ca.mudar.mtlaucasou.R;
 import ca.mudar.mtlaucasou.model.LayerType;
+import ca.mudar.mtlaucasou.model.MapType;
+import ca.mudar.mtlaucasou.util.MapUtils;
 
 import static ca.mudar.mtlaucasou.util.LogUtils.makeLogTag;
 
@@ -148,7 +151,21 @@ public class UserPrefs implements
                 .contains(layerType);
     }
 
+    public void setLayerEnabledForced(@MapType String mapType, @LayerType String layerType) {
+        if (MapUtils.isMultiLayerMapType(mapType)) {
+            setLayerEnabled(layerType, true, true);
+        }
+    }
+
     public void setLayerEnabled(@LayerType String layerType, boolean enabled) {
+        setLayerEnabled(layerType, enabled, false);
+    }
+
+    private void setLayerEnabled(@LayerType String layerType, boolean enabled, boolean commit) {
+        if (TextUtils.isEmpty(layerType)) {
+            return;
+        }
+
         // We need to make a copy of the hashset, not just get a reference
         final Set<String> enabledLayers = new HashSet<>(mPrefs.getStringSet(LAYERS_ENABLED,
                 Const.PrefsValues.DEFAULT_LAYERS));
@@ -161,8 +178,12 @@ public class UserPrefs implements
         }
 
         if (result) {
-            edit().putStringSet(LAYERS_ENABLED, enabledLayers)
-                    .apply();
+            final SharedPreferences.Editor editor = edit().putStringSet(LAYERS_ENABLED, enabledLayers);
+            if (commit) {
+                editor.commit();
+            } else {
+                editor.apply();
+            }
         }
     }
 

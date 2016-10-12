@@ -395,6 +395,15 @@ public class MainActivity extends BaseActivity implements
     @Override
     public void moveCameraToPlacemark(Placemark placemark) {
         GoogleMap.OnCameraIdleListener cameraIdleListener;
+
+        // Enable this placemark's layer if necessary
+        final UserPrefs prefs = UserPrefs.getInstance(this);
+        final boolean updateLayers = !prefs.isLayerEnabled(placemark.getLayerType());
+        if (updateLayers) {
+            prefs.setLayerEnabledForced(placemark.getMapType(), placemark.getLayerType());
+            mLayersManager.setupEnabledLayers(prefs);
+        }
+
         if (mMapType != null && !mMapType.equals(placemark.getMapType())) {
             final int tabId = NavigUtils.getTabIdByMapType(placemark.getMapType());
 
@@ -406,6 +415,16 @@ public class MainActivity extends BaseActivity implements
                 @Override
                 public void onCameraIdle() {
                     mBottomBar.selectTabWithId(tabId);
+                }
+            };
+        } else if (updateLayers) {
+            cameraIdleListener = new GoogleMap.OnCameraIdleListener() {
+                /**
+                 * After the camera animation, we need to
+                 */
+                @Override
+                public void onCameraIdle() {
+                    onFiltersApply();
                 }
             };
         } else {

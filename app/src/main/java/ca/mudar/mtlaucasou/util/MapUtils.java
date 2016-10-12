@@ -144,6 +144,10 @@ public class MapUtils {
         return null;
     }
 
+    public static boolean isMultiLayerMapType(@MapType String mapType) {
+        return MapTypes.HEAT_WAVE.equals(mapType) || MapTypes.HEALTH.equals(mapType);
+    }
+
     /**
      * Clean the HTML description provided by the city's data. Also removes duplicate title.
      *

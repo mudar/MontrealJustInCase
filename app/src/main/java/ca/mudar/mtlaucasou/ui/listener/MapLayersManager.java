@@ -92,7 +92,7 @@ public class MapLayersManager implements
         mHospitalsFAB = (FloatingActionButton) mMenuFAB.findViewById(R.id.fab_hospitals);
         mClscFAB = (FloatingActionButton) mMenuFAB.findViewById(R.id.fab_clsc);
 
-        setupInitialValues(UserPrefs.getInstance(context));
+        setupEnabledLayers(UserPrefs.getInstance(context));
         setupMenuItemsListeners();
     }
 
@@ -174,6 +174,7 @@ public class MapLayersManager implements
     @Override
     public void onMenuToggle(boolean opened) {
         if (!opened && mHasChangedFilters && mListener != null) {
+            mHasChangedFilters = false;
             mListener.onFiltersApply();
         }
     }
@@ -185,7 +186,7 @@ public class MapLayersManager implements
      * @return true if map type has a FloatingActionMenu
      */
     public boolean toggleFilterMenu(@MapType String type) {
-        mMapTypeHasMenu = MapTypes.HEAT_WAVE.equals(type) || MapTypes.HEALTH.equals(type);
+        mMapTypeHasMenu = MapUtils.isMultiLayerMapType(type);
         mHasChangedFilters = false;
 
         toggleWaterSupplyFilterItems(MapTypes.HEAT_WAVE.equals(type));
@@ -242,7 +243,7 @@ public class MapLayersManager implements
         mMenuFAB.setMenuButtonColorPressed(mMapTypeColor);
     }
 
-    private void setupInitialValues(UserPrefs prefs) {
+    public void setupEnabledLayers(UserPrefs prefs) {
         final @LayerType Set<String> enabledLayers = prefs.getEnabledLayers();
 
         mMapTypeColor = MapUtils.getMapTypeColor(mContext, MapTypes.HEAT_WAVE);

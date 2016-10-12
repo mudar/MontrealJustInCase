@@ -139,8 +139,9 @@ public class PlacemarkSearchAdapter extends CursorAdapter implements
                         final List<SuggestionsPlacemark> suggestions = new ArrayList<>();
                         for (RealmPlacemark realmPlacemark : realmPlacemarks) {
                             // Convert each RealmPlacemark then add it to the results list
-                            suggestions.add(
-                                    new SuggestionsPlacemark.Builder(realmPlacemark).build());
+                            suggestions.add(new SuggestionsPlacemark.Builder()
+                                    .placemark(realmPlacemark)
+                                    .build());
                         }
                         Collections.sort(suggestions);
                         results.values = suggestions;

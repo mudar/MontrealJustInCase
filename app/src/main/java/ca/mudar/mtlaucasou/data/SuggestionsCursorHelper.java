@@ -30,8 +30,9 @@ import com.google.android.gms.maps.model.LatLng;
 
 import java.util.List;
 
-import ca.mudar.mtlaucasou.model.Placemark;
+import ca.mudar.mtlaucasou.model.LayerType;
 import ca.mudar.mtlaucasou.model.MapType;
+import ca.mudar.mtlaucasou.model.Placemark;
 import ca.mudar.mtlaucasou.model.SuggestionsPlacemark;
 
 import static ca.mudar.mtlaucasou.util.LogUtils.makeLogTag;
@@ -71,6 +72,7 @@ public class SuggestionsCursorHelper {
                 id,
                 place.getName(),
                 place.getMapType(),
+                place.getLayerType(),
                 place.getLatLng().latitude,
                 place.getLatLng().longitude
         };
@@ -104,8 +106,14 @@ public class SuggestionsCursorHelper {
                 cursor.getDouble(PlacemarksQuery.LATITUDE),
                 cursor.getDouble(PlacemarksQuery.LONGITUDE));
         final @MapType String mapType = cursor.getString(PlacemarksQuery.MAP_TYPE);
+        final @LayerType String layerType = cursor.getString(PlacemarksQuery.LAYER_TYPE);
 
-        return new SuggestionsPlacemark(name, position, mapType);
+        return new SuggestionsPlacemark.Builder()
+                .name(name)
+                .latlng(position)
+                .maptype(mapType)
+                .layertype(layerType)
+                .build();
     }
 
     /**
@@ -122,7 +130,8 @@ public class SuggestionsCursorHelper {
         String[] PROJECTION = {
                 "_id",
                 "title",
-                "type",
+                "mapType",
+                "layerType",
                 "latitude",
                 "longitude",
         };
@@ -131,7 +140,8 @@ public class SuggestionsCursorHelper {
         int _ID = 0;
         int TITLE = 1;
         int MAP_TYPE = 2;
-        int LATITUDE = 3;
-        int LONGITUDE = 4;
+        int LAYER_TYPE = 3;
+        int LATITUDE = 4;
+        int LONGITUDE = 5;
     }
 }

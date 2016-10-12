@@ -34,4 +34,7 @@ public interface Placemark {
 
     @MapType
     String getMapType();
+
+    @LayerType
+    String getLayerType();
 }

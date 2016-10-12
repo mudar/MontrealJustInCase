@@ -41,11 +41,11 @@ public class SuggestionsPlacemark implements
     LatLng latLng;
     @MapType
     String mapType;
+    @LayerType
+    String layerType;
 
-    public SuggestionsPlacemark(String name, LatLng latLng, @MapType String mapType) {
-        this.name = name;
-        this.latLng = latLng;
-        this.mapType = mapType;
+    public SuggestionsPlacemark() {
+        // Empty constructor
     }
 
     @Override
@@ -69,10 +69,17 @@ public class SuggestionsPlacemark implements
         return mapType;
     }
 
+    @Override
+    @LayerType
+    public String getLayerType() {
+        return layerType;
+    }
+
     private SuggestionsPlacemark(Builder builder) {
         this.name = builder.name;
         this.latLng = builder.latLng;
         this.mapType = builder.mapType;
+        this.layerType = builder.layerType;
     }
 
     @Override
@@ -86,11 +93,43 @@ public class SuggestionsPlacemark implements
         LatLng latLng;
         @MapType
         String mapType;
+        @LayerType
+        String layerType;
 
-        public Builder(Placemark placemark) {
+        public Builder() {
+        }
+
+        public Builder placemark(Placemark placemark) {
             this.name = placemark.getName();
             this.latLng = placemark.getLatLng();
             this.mapType = placemark.getMapType();
+            this.layerType = placemark.getLayerType();
+
+            return this;
+        }
+
+        public Builder name(String name) {
+            this.name = name;
+
+            return this;
+        }
+
+        public Builder latlng(LatLng latLng) {
+            this.latLng = latLng;
+
+            return this;
+        }
+
+        public Builder maptype(@MapType String mapType) {
+            this.mapType = mapType;
+
+            return this;
+        }
+
+        public Builder layertype(@LayerType String layerType) {
+            this.layerType = layerType;
+
+            return this;
         }
 
         public SuggestionsPlacemark build() {

@@ -294,7 +294,7 @@ public class MainActivity extends BaseActivity implements
         vMap.setInfoWindowAdapter(new PlacemarkInfoWindowAdapter(vMarkerInfoWindow, mLocationManger));
 
         // Handle location
-        MapUtils.moveCameraToInitialLocation(vMap, null);
+        MapUtils.setupMapLocation(vMap);
         MapUtils.enableMyLocation(this, vMap);
 
         mLocationManger.setGoogleMap(vMap);
@@ -391,7 +391,7 @@ public class MainActivity extends BaseActivity implements
             }, PROGRESS_BAR_ANIM_DURATION);
         } else {
             // Add a change listener for empty data only, to avoid showing empty maps.
-            // Remote updates will be showed on tab changes. This is not an issue for our app
+            // Remote updates will be shown on tab changes. This is not an issue for our app
             // because of the low frequency/value of remote data updates.
             mRealmListener = new RealmChangeListener() {
                 @Override

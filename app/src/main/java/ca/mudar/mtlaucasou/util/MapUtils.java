@@ -64,6 +64,8 @@ import static ca.mudar.mtlaucasou.util.LogUtils.makeLogTag;
 public class MapUtils {
     private static final String TAG = makeLogTag("MapUtils");
 
+    private static final int MY_LOCATION_ANIM_DURATION = 300;
+
     public static void enableMyLocation(AppCompatActivity activity, GoogleMap map) {
         if (map != null && PermissionUtils.checkLocationPermission(activity)) {
             map.setMyLocationEnabled(true);
@@ -277,20 +279,17 @@ public class MapUtils {
     }
 
     /**
-     * When first showing the map, move the camera to the user's location or to Montreal coordinates
+     * When first showing the map, center the camera (wide zoom) on Montreal coordinates
+     * and setup the bounding box.
      *
-     * @param map      The GoogleMap
-     * @param location User location. Null value defaults to Montreal coordinates
+     * @param map The GoogleMap
      */
-    public static void moveCameraToInitialLocation(GoogleMap map, @Nullable Location location) {
-        final LatLng target = (location == null) ? Const.MONTREAL_GEO_LAT_LNG :
-                GeoUtils.locationToLatLng(location);
-
+    public static void setupMapLocation(GoogleMap map) {
         map.moveCamera(CameraUpdateFactory.newCameraPosition(
                 new CameraPosition.Builder()
-                        .target(target)
+                        .target(Const.MONTREAL_GEO_LAT_LNG)
                         .bearing(Const.MONTREAL_NATURAL_NORTH_ROTATION)
-                        .zoom(Const.ZOOM_DEFAULT)
+                        .zoom(Const.ZOOM_OUT)
                         .build()
                 )
         );
@@ -298,7 +297,27 @@ public class MapUtils {
     }
 
     /**
-     * Move the camera to a Location obtained from the GeoLocator for a user search query.
+     * Move the camera to the user's location when found, if user hasn't touched the map yet.
+     * Default zoom, with an animated camera.
+     *
+     * @param map      The GoogleMap
+     * @param location The location found for the user
+     */
+    public static void moveCameraToMyLocation(GoogleMap map, Location location) {
+        map.animateCamera(CameraUpdateFactory.newCameraPosition(
+                new CameraPosition.Builder()
+                        .target(GeoUtils.locationToLatLng(location))
+                        .bearing(Const.MONTREAL_NATURAL_NORTH_ROTATION)
+                        .zoom(Const.ZOOM_DEFAULT)
+                        .build()),
+                MY_LOCATION_ANIM_DURATION, // short duration
+                null // ignore callback
+        );
+    }
+
+    /**
+     * Move the camera to a Location obtained from the GeoLocator for a user search query,
+     * or to user's location when tapping mMyLocationFAB. Near zoom.
      * Also adds a default Marker (pin) at the requested location.
      *
      * @param map      The GoogleMap

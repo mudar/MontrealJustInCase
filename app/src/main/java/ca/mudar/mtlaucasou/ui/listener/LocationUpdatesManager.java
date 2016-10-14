@@ -157,7 +157,7 @@ public class LocationUpdatesManager implements
     @Override
     public void onLocationChanged(Location location) {
         mUserLocation = location;
-        MapUtils.moveCameraToLocation(mMap, location, true);
+        moveMapToMyLocation();
     }
 
     /**
@@ -251,7 +251,7 @@ public class LocationUpdatesManager implements
 
     private void moveMapToMyLocation() {
         if (!mHasCameraMoved && mUserLocation != null && mMap != null) {
-            MapUtils.moveCameraToLocation(mMap, mUserLocation, true);
+            MapUtils.moveCameraToMyLocation(mMap, mUserLocation);
         }
     }
 

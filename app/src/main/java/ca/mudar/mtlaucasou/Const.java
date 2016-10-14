@@ -141,6 +141,7 @@ public class Const {
 //        String LAST_UPDATE_LNG = "prefs_last_update_lng";
         String PERMISSION_DENIED_FOR_EVER = "prefs_permission_denied";
         String ITEM_UPDATED_AT = "prefs_updated_%s";
+        String LAST_MAP_TYPE = "prefs_last_map_type";
     }
 
     public interface PrefsValues {

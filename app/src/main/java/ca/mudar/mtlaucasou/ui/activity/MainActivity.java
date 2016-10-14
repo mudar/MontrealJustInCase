@@ -119,9 +119,10 @@ public class MainActivity extends BaseActivity implements
 
         setupMap();
         setupFAB();
-        setupBottomBar();
 
-        setMapType(Const.MapTypes._DEFAULT, 0);
+        final @MapType String lastMapType = UserPrefs.getInstance(this).getLastMapType();
+        setupBottomBar(lastMapType);
+        setMapType(lastMapType, 0);
     }
 
     protected void onStart() {
@@ -144,16 +145,26 @@ public class MainActivity extends BaseActivity implements
     protected void onStop() {
         super.onStop();
 
-        mLocationManger.onStop();
+        try {
+            mLocationManger.onStop();
+
+            UserPrefs.getInstance(this).setLastMapType(mMapType);
+        } catch (Exception e) {
+            LogUtils.REMOTE_LOG(e);
+        }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
 
-        // Remove all change listeners to avoid leaks
-        mRealm.removeAllChangeListeners();
-        mRealm.close();
+        try {
+            // Remove all change listeners to avoid leaks
+            mRealm.removeAllChangeListeners();
+            mRealm.close();
+        } catch (Exception e) {
+            LogUtils.REMOTE_LOG(e);
+        }
     }
 
     @Override
@@ -205,10 +216,10 @@ public class MainActivity extends BaseActivity implements
     /**
      * Show the bottom bar navigation items
      */
-    private void setupBottomBar() {
+    private void setupBottomBar(final @MapType String type) {
         mBottomBar = (BottomBar) findViewById(R.id.bottom_bar);
         assert mBottomBar != null;
-        mBottomBar.setDefaultTab(NavigUtils.getTabIdByMapType(Const.MapTypes._DEFAULT));
+        mBottomBar.setDefaultTab(NavigUtils.getTabIdByMapType(type));
         mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes final int tabId) {

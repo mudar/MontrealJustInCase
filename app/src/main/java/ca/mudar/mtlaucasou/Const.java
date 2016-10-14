@@ -37,7 +37,7 @@ public class Const {
      */
     public static final float MONTREAL_NATURAL_NORTH_ROTATION = -34f;
     public static final float ZOOM_IN = 16;
-    public static final float ZOOM_DEFAULT = 14;
+    public static final float ZOOM_DEFAULT = 13;
     public static final float ZOOM_OUT = 11;
     public static final LatLng MONTREAL_GEO_LAT_LNG = new LatLng(45.5d, -73.666667d);
 

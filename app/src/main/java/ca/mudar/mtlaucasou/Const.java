@@ -39,7 +39,7 @@ public class Const {
     public static final float ZOOM_IN = 16;
     public static final float ZOOM_DEFAULT = 13;
     public static final float ZOOM_OUT = 11;
-    public static final LatLng MONTREAL_GEO_LAT_LNG = new LatLng(45.5d, -73.666667d);
+    public static final LatLng MONTREAL_GEO_LAT_LNG = new LatLng(45.508830d, -73.554112d);
 
     public interface MapTypes {
         String FIRE_HALLS = "fire_halls";

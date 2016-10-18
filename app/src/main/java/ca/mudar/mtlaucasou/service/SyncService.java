@@ -95,6 +95,7 @@ public class SyncService extends IntentService {
         importLocalData(R.raw.air_conditioning, MapTypes.HEAT_WAVE, LayerTypes.AIR_CONDITIONING);
         importLocalData(R.raw.emergency_hostels, MapTypes.EMERGENCY_HOSTELS, LayerTypes.EMERGENCY_HOSTELS);
         importLocalData(R.raw.hospitals, MapTypes.HEALTH, LayerTypes.HOSPITALS);
+        importLocalData(R.raw.clsc, MapTypes.HEALTH, LayerTypes.CLSC);
 
         mRealm.commitTransaction();
     }

@@ -94,7 +94,7 @@ public abstract class PermissionUtils {
                             })
                     .show();
         } else {
-            UserPrefs.getInstance(activity).setPermissionDeniedForEver(true);
+            UserPrefs.getInstance(activity.getApplicationContext()).setPermissionDeniedForEver(true);
             Snackbar
                     .make(view,
                             R.string.snackbar_location_permission_denied,

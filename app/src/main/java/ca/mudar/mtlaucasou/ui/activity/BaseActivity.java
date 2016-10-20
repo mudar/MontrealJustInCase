@@ -57,11 +57,11 @@ public abstract class BaseActivity extends AppCompatActivity implements
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        LangUtils.updateUiLanguage(this);
+        LangUtils.updateUiLanguage(getApplicationContext());
 
         if (this instanceof MainActivity) {
             // Only MainActivity needs to register for updates about LANGUAGE prefs
-            UserPrefs.getSharedPrefs(this).registerOnSharedPreferenceChangeListener(this);
+            UserPrefs.getSharedPrefs(getApplicationContext()).registerOnSharedPreferenceChangeListener(this);
         }
     }
 
@@ -90,7 +90,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
         if (this instanceof MainActivity) {
             // Only MainActivity registered for updates about LANGUAGE prefs
             try {
-                UserPrefs.getSharedPrefs(this).unregisterOnSharedPreferenceChangeListener(this);
+                UserPrefs.getSharedPrefs(getApplicationContext()).unregisterOnSharedPreferenceChangeListener(this);
             } catch (Exception e) {
                 LogUtils.REMOTE_LOG(e);
             }
@@ -100,7 +100,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         if (Const.PrefsNames.LANGUAGE.equals(key)) {
-            LangUtils.updateUiLanguage(this);
+            LangUtils.updateUiLanguage(getApplicationContext());
             recreate();
         }
     }
@@ -109,19 +109,19 @@ public abstract class BaseActivity extends AppCompatActivity implements
     public boolean onMenuItemClick(MenuItem item) {
         final int id = item.getItemId();
         if (id == R.id.action_settings) {
-            startActivity(SettingsActivity.newIntent(this));
+            startActivity(SettingsActivity.newIntent(getApplicationContext()));
             return true;
         } else if (id == R.id.action_about) {
-            startActivity(AboutActivity.newIntent(this));
+            startActivity(AboutActivity.newIntent(getApplicationContext()));
             return true;
         } else if (id == R.id.action_share) {
             onShareItemSelected();
             return true;
         } else if (id == R.id.action_rate) {
-            IntentUtils.showWebsite(this, R.string.url_playstore);
+            IntentUtils.showWebsite(getApplicationContext(), R.string.url_playstore);
             return true;
         } else if (id == R.id.action_eula) {
-            startActivity(EulaActivity.newIntent(this, true));
+            startActivity(EulaActivity.newIntent(getApplicationContext(), true));
             return true;
         } else if (id == R.id.action_about_libs) {
             onAboutLibsItemSelected();
@@ -146,7 +146,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
      * Show the AboutLibraries acknowledgements activity
      */
     private void onAboutLibsItemSelected() {
-        LangUtils.updateUiLanguage(this);
+        LangUtils.updateUiLanguage(getApplicationContext());
         new LibsBuilder()
                 .withActivityTitle(getString(R.string.title_activity_about_libs))
                 .withActivityTheme(R.style.AppTheme_AboutLibs)
@@ -162,7 +162,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
                 .withExcludedLibraries(
                         "AndroidIconics", "fastadapter", "okio", "support_v4"
                 )
-                .start(this);
+                .start(getApplicationContext());
     }
 
     /**

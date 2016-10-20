@@ -120,7 +120,7 @@ public class MainActivity extends BaseActivity implements
         setupMap();
         setupFAB();
 
-        final @MapType String lastMapType = UserPrefs.getInstance(this).getLastMapType();
+        final @MapType String lastMapType = UserPrefs.getInstance(getApplicationContext()).getLastMapType();
         setupBottomBar(lastMapType);
         setMapType(lastMapType, 0);
     }
@@ -148,7 +148,7 @@ public class MainActivity extends BaseActivity implements
         try {
             mLocationManger.onStop();
 
-            UserPrefs.getInstance(this).setLastMapType(mMapType);
+            UserPrefs.getInstance(getApplicationContext()).setLastMapType(mMapType);
         } catch (Exception e) {
             LogUtils.REMOTE_LOG(e);
         }
@@ -183,7 +183,7 @@ public class MainActivity extends BaseActivity implements
 
         if (requestCode == Const.RequestCodes.LOCATION_PERMISSION) {
             if (PermissionUtils.checkLocationPermission(this)) {
-                UserPrefs.getInstance(this).setPermissionDeniedForEver(true);
+                UserPrefs.getInstance(getApplicationContext()).setPermissionDeniedForEver(true);
 
                 mMyLocationFAB.show();
                 MapUtils.enableMyLocation(this, vMap);
@@ -370,7 +370,7 @@ public class MainActivity extends BaseActivity implements
         final RealmResults<RealmPlacemark> realmPlacemarks = RealmQueries
                 .queryPlacemarksByMapType(mRealm,
                         type,
-                        UserPrefs.getInstance(this).getEnabledLayers()
+                        UserPrefs.getInstance(getApplicationContext()).getEnabledLayers()
                 ).findAll();
 
         if (realmPlacemarks.size() > 0) {
@@ -408,7 +408,7 @@ public class MainActivity extends BaseActivity implements
         GoogleMap.OnCameraIdleListener cameraIdleListener;
 
         // Enable this placemark's layer if necessary
-        final UserPrefs prefs = UserPrefs.getInstance(this);
+        final UserPrefs prefs = UserPrefs.getInstance(getApplicationContext());
         final boolean updateLayers = !prefs.isLayerEnabled(placemark.getLayerType());
         if (updateLayers) {
             prefs.setLayerEnabledForced(placemark.getMapType(), placemark.getLayerType());
@@ -465,7 +465,7 @@ public class MainActivity extends BaseActivity implements
      * This method uses setVisibility() instead of show/hide methods.
      */
     private void toggleMyLocationButton() {
-        if (PermissionUtils.checkPermissionWasDeniedForEver(this)) {
+        if (PermissionUtils.checkPermissionWasDeniedForEver(getApplicationContext())) {
             mMyLocationFAB.hide();
         } else {
             mMyLocationFAB.show();

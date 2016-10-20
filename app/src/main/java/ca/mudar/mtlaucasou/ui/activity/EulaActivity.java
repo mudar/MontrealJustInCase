@@ -69,7 +69,7 @@ public class EulaActivity extends BaseActivity implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.btn_accept_eula) {
-            UserPrefs.getInstance(this).setHasAcceptedEula();
+            UserPrefs.getInstance(getApplicationContext()).setHasAcceptedEula();
             setResult(Activity.RESULT_OK);
             finish();
         }

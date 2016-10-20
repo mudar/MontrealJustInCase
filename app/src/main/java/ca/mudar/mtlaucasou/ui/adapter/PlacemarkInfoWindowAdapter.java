@@ -85,7 +85,7 @@ public class PlacemarkInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
 
             return mView.getContext().getString(R.string.info_window_snippet_distance,
                     snippet,
-                    GeoUtils.getDistanceDisplay(mView.getContext(), distance)
+                    GeoUtils.getDistanceDisplay(mView.getContext().getApplicationContext(), distance)
             );
         }
 

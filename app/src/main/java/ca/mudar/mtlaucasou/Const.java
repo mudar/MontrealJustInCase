@@ -47,7 +47,7 @@ public class Const {
         String HEAT_WAVE = "water_supplies";
         String EMERGENCY_HOSTELS = "emergency_hostels";
         String HEALTH = "health";
-        String _DEFAULT = HEALTH;
+        String _DEFAULT = FIRE_HALLS;
     }
 
     public interface LayerTypes {
@@ -133,7 +133,9 @@ public class Const {
         String LANGUAGE = "prefs_language";
         String PERMISSIONS = "prefs_permissions";
         String UNITS_SYSTEM = "prefs_units_system";
+        String ENABLE_METRICS = "prefs_metrics";
         String LAYERS_ENABLED = "prefs_layers_enabled";
+        String SHOWCASE_LAYERS = "prefs_showcase_layers";
 //        String LIST_SORT = "prefs_list_sort_by";
 //        String FOLLOW_LOCATION_CHANGES = "prefs_follow_location_changes";
 //        String LAST_UPDATE_TIME = "prefs_last_update_time";

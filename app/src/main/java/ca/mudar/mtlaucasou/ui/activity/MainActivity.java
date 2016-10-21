@@ -67,6 +67,7 @@ import ca.mudar.mtlaucasou.ui.view.PlacemarksSearchView;
 import ca.mudar.mtlaucasou.util.EulaUtils;
 import ca.mudar.mtlaucasou.util.LogUtils;
 import ca.mudar.mtlaucasou.util.MapUtils;
+import ca.mudar.mtlaucasou.util.MetricsUtils;
 import ca.mudar.mtlaucasou.util.NavigUtils;
 import ca.mudar.mtlaucasou.util.PermissionUtils;
 import io.realm.Realm;
@@ -350,6 +351,8 @@ public class MainActivity extends BaseActivity implements
                 }
             }, delay);
         }
+
+        MetricsUtils.logMapView(type);
     }
 
     /**

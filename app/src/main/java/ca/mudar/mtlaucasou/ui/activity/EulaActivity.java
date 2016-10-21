@@ -36,6 +36,7 @@ import android.webkit.WebViewClient;
 import ca.mudar.mtlaucasou.Const;
 import ca.mudar.mtlaucasou.R;
 import ca.mudar.mtlaucasou.data.UserPrefs;
+import ca.mudar.mtlaucasou.util.MetricsUtils;
 
 public class EulaActivity extends BaseActivity implements View.OnClickListener {
     private static final String ASSETS_URI = "file:///android_asset/";
@@ -64,6 +65,10 @@ public class EulaActivity extends BaseActivity implements View.OnClickListener {
         loadWebView((WebView) findViewById(R.id.webview));
 
         findViewById(R.id.btn_accept_eula).setOnClickListener(this);
+
+        if (hasAcceptedEula) {
+            MetricsUtils.logAboutView(Const.MetricsContentNames.EULA);
+        }
     }
 
     @Override

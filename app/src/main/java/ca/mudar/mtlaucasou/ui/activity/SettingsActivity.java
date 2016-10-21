@@ -33,6 +33,7 @@ import ca.mudar.mtlaucasou.Const;
 import ca.mudar.mtlaucasou.R;
 import ca.mudar.mtlaucasou.ui.fragment.SettingsFragment;
 import ca.mudar.mtlaucasou.util.LangUtils;
+import ca.mudar.mtlaucasou.util.MetricsUtils;
 
 public class SettingsActivity extends AppCompatActivity implements
         SettingsFragment.OnConfigChangeListener {
@@ -52,6 +53,8 @@ public class SettingsActivity extends AppCompatActivity implements
                     .replace(android.R.id.content, fragment, Const.FragmentTags.SETTINGS)
                     .commit();
         }
+
+        MetricsUtils.logSettingsView();
     }
 
     /**

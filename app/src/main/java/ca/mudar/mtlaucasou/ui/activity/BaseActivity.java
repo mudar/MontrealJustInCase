@@ -44,6 +44,7 @@ import ca.mudar.mtlaucasou.util.IntentUtils;
 import ca.mudar.mtlaucasou.util.LangUtils;
 import ca.mudar.mtlaucasou.util.LogUtils;
 import ca.mudar.mtlaucasou.util.MapUtils;
+import ca.mudar.mtlaucasou.util.MetricsUtils;
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 
 import static ca.mudar.mtlaucasou.util.LogUtils.makeLogTag;
@@ -169,6 +170,8 @@ public abstract class BaseActivity extends AppCompatActivity implements
                         "AndroidIconics", "fastadapter", "okio", "support_v4"
                 )
                 .start(getApplicationContext());
+
+        MetricsUtils.logAboutView(Const.MetricsContentNames.ABOUT_LIBS);
     }
 
     /**

@@ -170,6 +170,19 @@ public class Const {
         String DIALOG_OD_CREDITS = "dialog_od_credits";
     }
 
+    public interface MetricsContentTypes {
+        String MAP = "Map";
+        String SETTINGS = "Settings";
+        String ABOUT = "About";
+    }
+
+    public interface MetricsContentNames {
+        String SETTINGS = "SettingsActivity";
+        String ABOUT = "AboutActivity";
+        String ABOUT_LIBS = "AboutLibsActivity";
+        String EULA = "EulaActivity";
+    }
+
     /**
      * Other constants
      */

@@ -213,4 +213,15 @@ public class UserPrefs implements
         edit().putLong(key, updatedAt.getTime())
                 .apply();
     }
+
+    public boolean shouldDisplayLayersShowcase() {
+        final boolean isFirst = mPrefs.getBoolean(SHOWCASE_LAYERS, true);
+
+        if (isFirst) {
+            edit().putBoolean(SHOWCASE_LAYERS, false)
+                    .apply();
+        }
+
+        return isFirst;
+    }
 }

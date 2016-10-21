@@ -30,15 +30,21 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 
+import com.github.clans.fab.FloatingActionButton;
 import com.mikepenz.aboutlibraries.LibsBuilder;
 
 import ca.mudar.mtlaucasou.Const;
 import ca.mudar.mtlaucasou.R;
 import ca.mudar.mtlaucasou.data.UserPrefs;
+import ca.mudar.mtlaucasou.model.MapType;
 import ca.mudar.mtlaucasou.util.IntentUtils;
 import ca.mudar.mtlaucasou.util.LangUtils;
 import ca.mudar.mtlaucasou.util.LogUtils;
+import ca.mudar.mtlaucasou.util.MapUtils;
+import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 
 import static ca.mudar.mtlaucasou.util.LogUtils.makeLogTag;
 
@@ -178,5 +184,41 @@ public abstract class BaseActivity extends AppCompatActivity implements
         sendIntent.setAction(Intent.ACTION_SEND);
         sendIntent.setType(SEND_INTENT_TYPE);
         startActivity(sendIntent);
+    }
+
+    /**
+     * Show tip about using the layers filter menu
+     *
+     * @param type
+     */
+    protected void showcaseMapLayers(@MapType String type) {
+        if (MapUtils.isMultiLayerMapType(type) &&
+                UserPrefs.getInstance(getApplicationContext()).shouldDisplayLayersShowcase()) {
+            // TODO remove this when issue fixed
+            // Ref: https://github.com/sjwall/MaterialTapTargetPrompt/issues/15
+            // Toggle the fabMenu dummy button
+            final FloatingActionButton dummy = (FloatingActionButton) findViewById(R.id.dummy_fab_menu);
+            dummy.setColorNormal(MapUtils.getMapTypeColor(getApplicationContext(), type));
+            dummy.setColorPressed(MapUtils.getMapTypeColor(getApplicationContext(), type));
+            dummy.setVisibility(View.VISIBLE);
+
+            new MaterialTapTargetPrompt.Builder(this)
+                    .setTarget(dummy)
+                    .setPrimaryText(R.string.showcase_map_layers_title)
+                    .setBackgroundColourFromRes(R.color.color_primary_dark)
+                    .setSecondaryText(R.string.showcase_map_layers_desc)
+                    .setOnHidePromptListener(new MaterialTapTargetPrompt.OnHidePromptListener() {
+                        @Override
+                        public void onHidePrompt(MotionEvent event, boolean tappedTarget) {
+                            dummy.setVisibility(View.GONE);
+                        }
+
+                        @Override
+                        public void onHidePromptComplete() {
+                            // ignore
+                        }
+                    })
+                    .show();
+        }
     }
 }

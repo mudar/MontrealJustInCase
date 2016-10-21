@@ -223,7 +223,9 @@ public class MainActivity extends BaseActivity implements
         mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes final int tabId) {
-                setMapType(NavigUtils.getMapTypeByTabId(tabId), BOTTOM_BAR_ANIM_DURATION);
+                final @MapType String mapType = NavigUtils.getMapTypeByTabId(tabId);
+                showcaseMapLayers(mapType);
+                setMapType(mapType, BOTTOM_BAR_ANIM_DURATION);
             }
         });
 

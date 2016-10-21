@@ -74,6 +74,8 @@ dependencies {
     compile('com.mikepenz:aboutlibraries:5.8.0@aar') {
         transitive = true
     }
+    compile 'uk.co.samuelwall:material-tap-target-prompt:1.4.3'
+
     // API and GeoJSON
     compile 'com.google.code.gson:gson:2.7'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'

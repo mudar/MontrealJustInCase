@@ -28,6 +28,7 @@
 
     <!--Material Colors-->
     <color name="white">#ffffff</color>
+    <color name="white_transp">#00ffffff</color>
     <color name="white_transp_80">#d0ffffff</color>
     <!--<color name="deep_orange_900">#BF360C</color>-->
     <!--<color name="orange_500">#FF9800</color>-->

@@ -26,6 +26,7 @@ package ca.mudar.mtlaucasou.data;
 import ca.mudar.mtlaucasou.model.RealmPlacemark;
 import io.realm.DynamicRealm;
 import io.realm.DynamicRealmObject;
+import io.realm.FieldAttribute;
 import io.realm.RealmMigration;
 import io.realm.RealmObjectSchema;
 import io.realm.RealmSchema;
@@ -41,17 +42,17 @@ public class RealmSchemaMigration implements RealmMigration {
 
         if (oldVersion == 10 && newVersion == 11) {
             /**
-             * v11 added string field `dataType` to v10
+             * v11 added string field `layerType` to v10
              */
             final RealmObjectSchema placemarkSchema = schema.get("RealmPlacemark");
-            // Add the `dataType` field, and set its value to `mapType`.
+            // Add the `layerType` field, and set its migration value to `mapType`.
             // Placemarks in v10 didn't have mixed types yet.
             placemarkSchema
-                    .addField(RealmPlacemark.FIELD_DATA_TYPE, String.class)
+                    .addField(RealmPlacemark.FIELD_LAYER_TYPE, String.class, FieldAttribute.INDEXED)
                     .transform(new RealmObjectSchema.Function() {
                         @Override
                         public void apply(DynamicRealmObject obj) {
-                            obj.set(RealmPlacemark.FIELD_DATA_TYPE,
+                            obj.set(RealmPlacemark.FIELD_LAYER_TYPE,
                                     obj.getString(RealmPlacemark.FIELD_MAP_TYPE));
                         }
                     });

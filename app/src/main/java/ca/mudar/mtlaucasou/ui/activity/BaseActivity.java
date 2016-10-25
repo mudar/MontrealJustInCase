@@ -30,10 +30,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
 
-import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
 import com.mikepenz.aboutlibraries.LibsBuilder;
 
 import ca.mudar.mtlaucasou.Const;
@@ -161,7 +159,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
                 .withFields(R.string.class.getFields()) // For Proguard
                 .withLibraries(// Added manually to avoid issues with Proguard
                         "GooglePlayServices", "bottombar", "materialloadingprogressbar",
-                        "clansfloatingactionbutton", "AboutLibraries",
+                        "clansfloatingactionbutton", "AboutLibraries", "materialtaptargetprompt",
                         "Crashlytics",
                         "Retrofit", "OkHttp", "Realm",
                         "gson", "appcompat_v7", "design", "recyclerview_v7"
@@ -197,30 +195,14 @@ public abstract class BaseActivity extends AppCompatActivity implements
     protected void showcaseMapLayers(@MapType String type) {
         if (MapUtils.isMultiLayerMapType(type) &&
                 UserPrefs.getInstance(getApplicationContext()).shouldDisplayLayersShowcase()) {
-            // TODO remove this when issue fixed
-            // Ref: https://github.com/sjwall/MaterialTapTargetPrompt/issues/15
-            // Toggle the fabMenu dummy button
-            final FloatingActionButton dummy = (FloatingActionButton) findViewById(R.id.dummy_fab_menu);
-            dummy.setColorNormal(MapUtils.getMapTypeColor(getApplicationContext(), type));
-            dummy.setColorPressed(MapUtils.getMapTypeColor(getApplicationContext(), type));
-            dummy.setVisibility(View.VISIBLE);
+            final FloatingActionMenu fabMenu = (FloatingActionMenu) findViewById(R.id.fab_menu);
 
             new MaterialTapTargetPrompt.Builder(this)
-                    .setTarget(dummy)
+                    .setTarget(fabMenu.getMenuIconView())
+                    .setTargetRenderView(fabMenu)
                     .setPrimaryText(R.string.showcase_map_layers_title)
                     .setBackgroundColourFromRes(R.color.color_primary_dark)
                     .setSecondaryText(R.string.showcase_map_layers_desc)
-                    .setOnHidePromptListener(new MaterialTapTargetPrompt.OnHidePromptListener() {
-                        @Override
-                        public void onHidePrompt(MotionEvent event, boolean tappedTarget) {
-                            dummy.setVisibility(View.GONE);
-                        }
-
-                        @Override
-                        public void onHidePromptComplete() {
-                            // ignore
-                        }
-                    })
                     .show();
         }
     }

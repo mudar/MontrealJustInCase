@@ -123,7 +123,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
             onShareItemSelected();
             return true;
         } else if (id == R.id.action_rate) {
-            IntentUtils.showWebsite(getApplicationContext(), R.string.url_playstore);
+            IntentUtils.showWebsite(this, R.string.url_playstore);
             return true;
         } else if (id == R.id.action_eula) {
             startActivity(EulaActivity.newIntent(getApplicationContext(), true));
@@ -167,7 +167,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
                 .withExcludedLibraries(
                         "AndroidIconics", "fastadapter", "okio", "support_v4"
                 )
-                .start(getApplicationContext());
+                .start(this);
 
         MetricsUtils.logAboutView(Const.MetricsContentNames.ABOUT_LIBS);
     }

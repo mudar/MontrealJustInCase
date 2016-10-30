@@ -33,6 +33,7 @@ public class IntentUtils {
 
     public static void showWebsite(Context context, @StringRes int website) {
         final Intent viewIntent = new Intent(Intent.ACTION_VIEW);
+        viewIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         viewIntent.setData(Uri.parse(context.getResources().getString(website)));
         context.startActivity(viewIntent);
     }

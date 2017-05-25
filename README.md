@@ -1,6 +1,6 @@
 [![Montréal au cas où / Montréal Just in Case][img_github]][link_aucasou]
 
-##A Montréal Open Data project. Geographic locations of public safety services.
+## A Montréal Open Data project. Geographic locations of public safety services.
 
 Montréal Just in Case is an open source **Android** application that provides you with the geographic locations and addresses for five public safety services:
 
@@ -12,7 +12,7 @@ Montréal Just in Case is an open source **Android** application that provides y
 
 The source of the data is the City of Montréal on its [Open Data Portal][link_portal].
 
-##Links
+## Links
 
 [montrealaucasou.com][link_aucasou]
 
@@ -27,7 +27,7 @@ Also:
    * [Download the APK][link_apk]
 
 
-##Open Data
+## Open Data
 
 This project was done in collaboration with [Montréal Ouvert][link_mtl_ouvert].
 
@@ -61,7 +61,7 @@ This GPLv3 project includes (thanks!) libraries and derivative work of the follo
 Also includes Google Play Services and Crashlytics SDK.
 
 
-##Code license
+## Code license
 
     Montréal Just in Case
     Copyright (C) 2011  Mudar Noufal <mn@mudar.ca>

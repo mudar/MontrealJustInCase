@@ -15,3 +15,5 @@ Montréal au cas où vous donne accès aux localisations géographiques et aux a
 - centres d'hébergement d'urgence et lieux publics climatisés.
 
 Les données sont en provenance du Portail données ouvertes de la Ville de Montréal.
+
+Projet de logiciel libre, disponible sur GitHub. Le code source est publié sous la licence GPLv3 de la Free Software Foundation: https://github.com/mudar/MontrealJustInCase

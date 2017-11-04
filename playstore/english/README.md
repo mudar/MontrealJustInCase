@@ -15,3 +15,5 @@ Montreal Just in Case provides you with the geographic locations and addresses f
 - Emergency accommodation centres and air conditioned public places.
 
 The source of the data is the City of Montreal on its Open Data Portal.
+
+Open source project, available on GitHub. Source code is released under the GPLv3 license from the Free Software Foundation: https://github.com/mudar/MontrealJustInCase

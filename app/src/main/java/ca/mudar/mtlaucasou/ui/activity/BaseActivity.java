@@ -27,6 +27,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -201,7 +202,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
                     .setTarget(fabMenu.getMenuIconView())
                     .setTargetRenderView(fabMenu)
                     .setPrimaryText(R.string.showcase_map_layers_title)
-                    .setBackgroundColourFromRes(R.color.color_primary_dark)
+                    .setBackgroundColour(ContextCompat.getColor(this, R.color.color_primary_dark))
                     .setSecondaryText(R.string.showcase_map_layers_desc)
                     .show();
         }

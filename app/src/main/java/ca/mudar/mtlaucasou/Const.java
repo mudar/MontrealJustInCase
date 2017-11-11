@@ -131,6 +131,7 @@ public class Const {
         String HAS_ACCEPTED_EULA = "accepted_eula";
 //        String VERSION_DATABASE = "prefs_version_database";
         String LANGUAGE = "prefs_language";
+        String VERSION = "prefs_version";
         String PERMISSIONS = "prefs_permissions";
         String UNITS_SYSTEM = "prefs_units_system";
         String ENABLE_METRICS = "prefs_metrics";

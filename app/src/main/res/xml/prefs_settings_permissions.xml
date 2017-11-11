@@ -46,15 +46,15 @@
         android:title="@string/prefs_language_title" />
 
     <Preference
-        android:key="prefs_permissions"
         android:icon="@drawable/ic_maps_my_location"
+        android:key="prefs_permissions"
         android:summary="@string/prefs_permissions_summary"
         android:title="@string/prefs_permissions_title" />
 
     <Preference
         android:enabled="false"
         android:icon="@drawable/ic_info_version"
-        android:summary="@string/app_version"
+        android:key="prefs_version"
         android:title="@string/prefs_version_title" />
 
 </PreferenceScreen>

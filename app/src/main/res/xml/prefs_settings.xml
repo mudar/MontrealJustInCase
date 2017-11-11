@@ -48,7 +48,7 @@
     <Preference
         android:enabled="false"
         android:icon="@drawable/ic_info_version"
-        android:summary="@string/app_version"
+        android:key="prefs_version"
         android:title="@string/prefs_version_title" />
 
 </PreferenceScreen>

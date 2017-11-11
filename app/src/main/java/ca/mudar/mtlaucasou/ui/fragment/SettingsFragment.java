@@ -33,6 +33,7 @@ import android.preference.PreferenceManager;
 
 import java.util.Locale;
 
+import ca.mudar.mtlaucasou.BuildConfig;
 import ca.mudar.mtlaucasou.Const;
 import ca.mudar.mtlaucasou.R;
 import ca.mudar.mtlaucasou.util.PermissionUtils;
@@ -41,6 +42,7 @@ import static ca.mudar.mtlaucasou.Const.PrefsNames.LANGUAGE;
 import static ca.mudar.mtlaucasou.Const.PrefsNames.PERMISSIONS;
 import static ca.mudar.mtlaucasou.Const.PrefsNames.PERMISSION_DENIED_FOR_EVER;
 import static ca.mudar.mtlaucasou.Const.PrefsNames.UNITS_SYSTEM;
+import static ca.mudar.mtlaucasou.Const.PrefsNames.VERSION;
 import static ca.mudar.mtlaucasou.Const.PrefsValues.LANG_EN;
 import static ca.mudar.mtlaucasou.Const.PrefsValues.LANG_FR;
 import static ca.mudar.mtlaucasou.Const.PrefsValues.UNITS_IMP;
@@ -192,6 +194,8 @@ public class SettingsFragment extends PreferenceFragment implements
             lg = LANG_EN;
         }
         mPrefLanguage.setSummary(getLanguageSummary(lg));
+
+        findPreference(VERSION).setSummary(BuildConfig.VERSION_NAME);
     }
 
     private String getUnitsSummary(String index) {

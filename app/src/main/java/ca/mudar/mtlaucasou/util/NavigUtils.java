@@ -33,7 +33,7 @@ import ca.mudar.mtlaucasou.model.MapType;
 public class NavigUtils {
 
     /**
-     * Get the bottomBar tabId for the selected SuggestionPlacemark, allowing to switch tabs
+     * Get the bottomNav tabId for the selected SuggestionPlacemark, allowing to switch tabs
      * when showing the placemark.
      *
      * @param type Selected map type {fire_halls|spvm_stations|water_supplies|emergency_hostels|hospitals}
@@ -58,9 +58,9 @@ public class NavigUtils {
     }
 
     /**
-     * Get the map type when user switches tabs in the bottomBar
+     * Get the map type when user switches tabs in the bottomNav
      *
-     * @param tabId the selected bottomBar tabId
+     * @param tabId the selected bottomNav tabId
      * @return Selected map type {fire_halls|spvm_stations|water_supplies|emergency_hostels|hospitals}
      */
     @MapType
@@ -82,7 +82,7 @@ public class NavigUtils {
     }
 
     /**
-     * Get the BottomBar and SearchSuggestions icon (logos)
+     * Get the bottomNav and SearchSuggestions icon (logos)
      *
      * @param type Selected map type {fire_halls|spvm_stations|water_supplies|emergency_hostels|hospitals}
      * @return map type resource icon
@@ -105,7 +105,7 @@ public class NavigUtils {
     }
 
     /**
-     * Get the BottomBar colors
+     * Get the bottomNav colors
      *
      * @param type Selected map type {fire_halls|spvm_stations|water_supplies|emergency_hostels|hospitals}
      * @return map type resource color

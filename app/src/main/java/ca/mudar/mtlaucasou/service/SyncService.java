@@ -80,8 +80,6 @@ public class SyncService extends IntentService {
         }
 
         Log.v(TAG, String.format("Data sync duration: %dms", System.currentTimeMillis() - startTime));
-
-//        mDatabase.close();
     }
 
     private void loadInitialLocalData() {

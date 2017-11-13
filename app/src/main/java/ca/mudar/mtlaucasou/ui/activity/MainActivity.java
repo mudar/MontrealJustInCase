@@ -81,7 +81,7 @@ public class MainActivity extends BaseActivity implements
         MapLayersManager.LayersFilterCallbacks {
 
     private static final String TAG = makeLogTag("MainActivity");
-    private static final long BOTTOM_BAR_ANIM_DURATION = 200L; // 200ms
+    private static final long BOTTOM_NAV_ANIM_DURATION = 200L; // 200ms
     private static final long PROGRESS_BAR_ANIM_DURATION = 750L; // 750ms
 
     private GoogleMap vMap;
@@ -93,7 +93,7 @@ public class MainActivity extends BaseActivity implements
     @MapType
     private String mMapType;
     private AppDatabase mDb;
-    private Handler mHandler = new Handler(); // Waits for the BottomBar anim
+    private Handler mHandler = new Handler(); // Waits for the BottomNav anim
     private LocationUpdatesManager mLocationManger;
 
     @Override
@@ -226,7 +226,7 @@ public class MainActivity extends BaseActivity implements
                 final @MapType String mapType = NavigUtils.getMapTypeByTabId(itemId);
                 mBottomNav.setBackgroundResource(NavigUtils.getMapTypeColor(mapType));
                 showcaseMapLayers(mapType);
-                setMapType(mapType, BOTTOM_BAR_ANIM_DURATION);
+                setMapType(mapType, BOTTOM_NAV_ANIM_DURATION);
 
                 return true;
             }
@@ -334,6 +334,7 @@ public class MainActivity extends BaseActivity implements
     private void setMapType(final @MapType String type, long delay) {
         mMapType = type;
 
+        // return value is not used
         final boolean hasFilterMenu = mLayersManager.toggleFilterMenu(type);
 
         if (isMapReady()) {

@@ -160,7 +160,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
                 .withAutoDetect(false) // For Proguard
                 .withFields(R.string.class.getFields()) // For Proguard
                 .withLibraries(// Added manually to avoid issues with Proguard
-                        "GooglePlayServices", "bottombar", "materialloadingprogressbar",
+                        "GooglePlayServices", "materialloadingprogressbar",
                         "clansfloatingactionbutton", "AboutLibraries", "materialtaptargetprompt",
                         "Crashlytics",
                         "Retrofit", "OkHttp", "Realm",

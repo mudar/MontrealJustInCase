@@ -35,7 +35,7 @@
     <!--Share-->
     <string name="share_intent_title">Découvrez Montréal au cas où sur Google Play</string>
 
-    <!--BottomBar tabs-->
+    <!--BottomNav tabs-->
     <string name="btn_fire_halls">Casernes</string>
     <string name="btn_spvm_stations">Poste de police</string>
     <string name="btn_heat_wave">Canicule</string>

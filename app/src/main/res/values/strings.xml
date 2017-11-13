@@ -35,7 +35,7 @@
     <!--Share-->
     <string name="share_intent_title">Discover Montréal Just in Case on Google Play</string>
 
-    <!--BottomBar tabs-->
+    <!--BottomNav tabs-->
     <string name="btn_fire_halls">Fire Stations</string>
     <string name="btn_spvm_stations">Police Stations</string>
     <string name="btn_heat_wave">Heat Wave</string>

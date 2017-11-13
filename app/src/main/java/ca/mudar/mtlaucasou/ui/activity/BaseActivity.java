@@ -164,7 +164,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
                         "clansfloatingactionbutton", "AboutLibraries", "materialtaptargetprompt",
                         "Crashlytics",
                         "Retrofit", "OkHttp", "Realm",
-                        "gson", "appcompat_v7", "design", "recyclerview_v7"
+                        "gson", "appcompat_v7", "design", "recyclerview_v7", "architectureroom"
                 )
                 .withExcludedLibraries(
                         "AndroidIconics", "fastadapter", "okio", "support_v4"

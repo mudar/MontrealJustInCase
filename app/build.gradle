@@ -80,7 +80,7 @@ dependencies {
     implementation "com.google.android.gms:play-services-maps:$playServicesVersion"
     implementation "com.google.android.gms:play-services-location:$playServicesVersion"
     // UI
-    implementation 'com.roughike:bottom-bar:2.0.2'
+//    implementation 'com.roughike:bottom-bar:2.0.2'
     implementation('com.lsjwzh:materialloadingprogressbar:0.5.8-RELEASE')
     implementation 'com.github.clans:fab:1.6.4'
     implementation('com.mikepenz:aboutlibraries:5.8.0@aar') {

@@ -33,10 +33,10 @@ import android.os.Handler;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.MenuItemCompat;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -49,9 +49,6 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.Marker;
 import com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar;
-import com.roughike.bottombar.BottomBar;
-import com.roughike.bottombar.OnTabReselectListener;
-import com.roughike.bottombar.OnTabSelectListener;
 
 import java.util.List;
 
@@ -92,7 +89,7 @@ public class MainActivity extends BaseActivity implements
     private CircleProgressBar vProgressBar;
     private FloatingActionButton mMyLocationFAB;
     private MapLayersManager mLayersManager;
-    private BottomBar mBottomBar;
+    private BottomNavigationView mBottomNav;
     @MapType
     private String mMapType;
     private AppDatabase mDb;
@@ -122,7 +119,7 @@ public class MainActivity extends BaseActivity implements
         setupFAB();
 
         final @MapType String lastMapType = UserPrefs.getInstance(getApplicationContext()).getLastMapType();
-        setupBottomBar(lastMapType);
+        setupBottomNav(lastMapType);
         setMapType(lastMapType, 0);
     }
 
@@ -215,22 +212,29 @@ public class MainActivity extends BaseActivity implements
     /**
      * Show the bottom bar navigation items
      */
-    private void setupBottomBar(final @MapType String type) {
-        mBottomBar = (BottomBar) findViewById(R.id.bottom_bar);
-        assert mBottomBar != null;
-        mBottomBar.setDefaultTab(NavigUtils.getTabIdByMapType(type));
-        mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+    private void setupBottomNav(final @MapType String type) {
+        mBottomNav = findViewById(R.id.bottom_nav);
+        assert mBottomNav != null;
+        mBottomNav.setSelectedItemId(NavigUtils.getTabIdByMapType(type));
+        mBottomNav.setBackgroundResource(NavigUtils.getMapTypeColor(type));
+
+        mBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onTabSelected(@IdRes final int tabId) {
-                final @MapType String mapType = NavigUtils.getMapTypeByTabId(tabId);
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                @IdRes final int itemId = item.getItemId();
+
+                final @MapType String mapType = NavigUtils.getMapTypeByTabId(itemId);
+                mBottomNav.setBackgroundResource(NavigUtils.getMapTypeColor(mapType));
                 showcaseMapLayers(mapType);
                 setMapType(mapType, BOTTOM_BAR_ANIM_DURATION);
+
+                return true;
             }
         });
 
-        mBottomBar.setOnTabReselectListener(new OnTabReselectListener() {
+        mBottomNav.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
             @Override
-            public void onTabReSelected(@IdRes int tabId) {
+            public void onNavigationItemReselected(@NonNull MenuItem item) {
                 if (isMapReady()) {
                     vMap.animateCamera(CameraUpdateFactory.zoomTo(Const.ZOOM_OUT));
                 }
@@ -420,7 +424,7 @@ public class MainActivity extends BaseActivity implements
                  */
                 @Override
                 public void onCameraIdle() {
-                    mBottomBar.selectTabWithId(tabId);
+                    mBottomNav.setSelectedItemId(tabId);
                 }
             };
         } else if (updateLayers) {

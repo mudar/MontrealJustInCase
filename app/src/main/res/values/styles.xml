@@ -23,11 +23,11 @@
 
 <resources>
 
-    <style name="BottomBarStyle">
-        <item name="bb_behavior">shifting</item>
-        <item name="bb_activeTabColor">@color/text_primary</item>
-        <item name="bb_inActiveTabColor">@color/text_secondary</item>
-        <item name="bb_tabXmlResource">@xml/bottombar_tabs</item>
+    <style name="BottomNavStyle">
+        <item name="itemIconTint">@color/text_primary</item>
+        <item name="itemTextColor">@color/text_primary</item>
+        <item name="android:background">@color/color_background</item>
+        <item name="menu">@menu/bottom_nav</item>
     </style>
 
     <style name="FabMenu">

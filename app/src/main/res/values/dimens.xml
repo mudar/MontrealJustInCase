@@ -36,10 +36,6 @@
     <dimen name="padding_normal">16dp</dimen>
     <dimen name="padding_large">32dp</dimen>
 
-    <!--BottomBar-->
-    <dimen name="bottombar_height">60dp</dimen>
-    <dimen name="bottombar_top_margin">-5dp</dimen>
-
     <!--Search suggestions-->
     <dimen name="search_suggestion_text_size">15sp</dimen>
 

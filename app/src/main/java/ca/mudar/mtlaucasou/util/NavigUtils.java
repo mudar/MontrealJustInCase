@@ -23,10 +23,10 @@
 
 package ca.mudar.mtlaucasou.util;
 
+import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;
 
-import ca.mudar.mtlaucasou.Const;
 import ca.mudar.mtlaucasou.R;
 import ca.mudar.mtlaucasou.model.MapType;
 
@@ -100,6 +100,29 @@ public class NavigUtils {
                 return R.drawable.ic_emergency_hostels;
             case MapType.HEALTH:
                 return R.drawable.ic_hospitals;
+        }
+        return 0;
+    }
+
+    /**
+     * Get the BottomBar colors
+     *
+     * @param type Selected map type {fire_halls|spvm_stations|water_supplies|emergency_hostels|hospitals}
+     * @return map type resource color
+     */
+    @ColorRes
+    public static int getMapTypeColor(@MapType String type) {
+        switch (type) {
+            case MapType.FIRE_HALLS:
+                return R.color.color_fire_halls;
+            case MapType.SPVM_STATIONS:
+                return R.color.color_spvm;
+            case MapType.HEAT_WAVE:
+                return R.color.color_heat_wave;
+            case MapType.EMERGENCY_HOSTELS:
+                return R.color.color_emergency_hostels;
+            case MapType.HEALTH:
+                return R.color.color_health;
         }
         return 0;
     }

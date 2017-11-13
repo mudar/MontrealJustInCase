@@ -52,7 +52,6 @@ This GPLv3 project includes (thanks!) libraries and derivative work of the follo
 * [Retrofit][link_lib_retrofit] &copy; Square, Inc.
 * [Realm Java][link_lib_realm] &copy; Realm Inc.
 * [Gson][link_lib_gson] &copy; Google Inc
-* [BottomBar][link_lib_bottombar] &copy; Iiro Krankka.
 * [FloatingActionButton][link_lib_clansfloatingactionbutton] &copy; Dmytro Tarianyk.
 * [MaterialLoadingProgressBar][link_lib_materialloadingprogressbar] &copy; lsjwzh.
 * [Material Tap Target Prompt][link_lib_materialtaptargetprompt] &copy; Samuel Wall.

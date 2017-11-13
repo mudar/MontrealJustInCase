@@ -35,7 +35,7 @@
         android:id="@+id/map_wrapper"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bottom_bar"
+        android:layout_above="@+id/bottom_nav"
         android:layout_below="@+id/appbar"
         android:background="@color/color_background_light">
 
@@ -79,12 +79,11 @@
             android:theme="@style/ToolbarTheme" />
     </android.support.design.widget.AppBarLayout>
 
-    <com.roughike.bottombar.BottomBar
-        android:id="@+id/bottom_bar"
-        style="@style/BottomBarStyle"
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottom_nav"
+        style="@style/BottomNavStyle"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/bottombar_height"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="@dimen/bottombar_top_margin" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
 
 </RelativeLayout>

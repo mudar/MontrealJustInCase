@@ -50,7 +50,6 @@ This GPLv3 project includes (thanks!) libraries and derivative work of the follo
 
 * [Android Support Library][link_lib_appcompat] and [AOSP][link_lib_aosp] &copy; The Android Open Source Project.
 * [Retrofit][link_lib_retrofit] &copy; Square, Inc.
-* [Realm Java][link_lib_realm] &copy; Realm Inc.
 * [Gson][link_lib_gson] &copy; Google Inc
 * [FloatingActionButton][link_lib_clansfloatingactionbutton] &copy; Dmytro Tarianyk.
 * [MaterialLoadingProgressBar][link_lib_materialloadingprogressbar] &copy; lsjwzh.
@@ -101,8 +100,6 @@ Also includes Google Play Services and Crashlytics SDK.
 [link_health_portal]: http://sante.gouv.qc.ca/
 [link_lib_aosp]: http://source.android.com/
 [link_lib_retrofit]: https://github.com/square/retrofit
-[link_lib_realm]: https://github.com/realm/realm-java
-[link_lib_bottombar]: https://github.com/roughike/BottomBar
 [link_lib_materialloadingprogressbar]: https://github.com/lsjwzh/MaterialLoadingProgressBar
 [link_lib_clansfloatingactionbutton]: https://github.com/Clans/FloatingActionButton
 [link_lib_materialtaptargetprompt]: https://github.com/sjwall/MaterialTapTargetPrompt

@@ -21,28 +21,33 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package ca.mudar.mtlaucasou.model;
+package ca.mudar.mtlaucasou;
 
-import android.support.annotation.StringDef;
+public class ConstDb {
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
+    public static final String DATABASE_NAME = "mtlaucasou.db";
+    public static final int DATABASE_VERSION = 12;
 
-@Retention(RetentionPolicy.SOURCE)
-@StringDef({
-        MapType.FIRE_HALLS,
-        MapType.SPVM_STATIONS,
-        MapType.HEAT_WAVE,
-        MapType.EMERGENCY_HOSTELS,
-        MapType.HEALTH,
-        MetricsContentName.SETTINGS,
-        MetricsContentName.ABOUT,
-        MetricsContentName.ABOUT_LIBS,
-        MetricsContentName.EULA,
-})
-public @interface MetricsContentName {
-    String SETTINGS = "SettingsActivity";
-    String ABOUT = "AboutActivity";
-    String ABOUT_LIBS = "AboutLibsActivity";
-    String EULA = "EulaActivity";
+    public interface Tables {
+        String PLACEMARKS = "placemarks";
+    }
+
+    public interface Fields {
+        String MAP_TYPE = "mapType";
+        String LAYER_TYPE = "layerType";
+        String COORDINATES = "coordinates";
+        String COORDINATES_LAT = "coords_lat";
+        String COORDINATES_LNG = "coords_lng";
+        String PROPERTIES_NAME = "props_name";
+        String NAME = "name";
+    }
+
+    public interface Prefixes {
+        String COORDINATES = "coords_";
+        String PROPERTIES = "props_";
+    }
+
+    private ConstDb() {
+        // Private constructor, const class only
+    }
 }

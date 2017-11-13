@@ -24,6 +24,7 @@
 package ca.mudar.mtlaucasou.ui.activity;
 
 import android.annotation.SuppressLint;
+import android.arch.lifecycle.Observer;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.location.Location;
@@ -31,9 +32,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.MenuItemCompat;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -54,6 +57,7 @@ import java.util.List;
 
 import ca.mudar.mtlaucasou.Const;
 import ca.mudar.mtlaucasou.R;
+import ca.mudar.mtlaucasou.data.AppDatabase;
 import ca.mudar.mtlaucasou.data.RealmQueries;
 import ca.mudar.mtlaucasou.data.UserPrefs;
 import ca.mudar.mtlaucasou.model.MapType;
@@ -70,9 +74,6 @@ import ca.mudar.mtlaucasou.util.MapUtils;
 import ca.mudar.mtlaucasou.util.MetricsUtils;
 import ca.mudar.mtlaucasou.util.NavigUtils;
 import ca.mudar.mtlaucasou.util.PermissionUtils;
-import io.realm.Realm;
-import io.realm.RealmChangeListener;
-import io.realm.RealmResults;
 
 import static ca.mudar.mtlaucasou.util.LogUtils.makeLogTag;
 
@@ -94,8 +95,7 @@ public class MainActivity extends BaseActivity implements
     private BottomBar mBottomBar;
     @MapType
     private String mMapType;
-    private Realm mRealm;
-    private RealmChangeListener mRealmListener;
+    private AppDatabase mDb;
     private Handler mHandler = new Handler(); // Waits for the BottomBar anim
     private LocationUpdatesManager mLocationManger;
 
@@ -114,7 +114,7 @@ public class MainActivity extends BaseActivity implements
         vProgressBar = (CircleProgressBar) findViewById(R.id.progressBar);
         mSnackbarParent = findViewById(R.id.map_wrapper);
 
-        mRealm = Realm.getDefaultInstance();
+        mDb = AppDatabase.getAppDatabase(getApplicationContext());
 
         mLocationManger = new LocationUpdatesManager(MainActivity.this, this);
 
@@ -160,9 +160,7 @@ public class MainActivity extends BaseActivity implements
         super.onDestroy();
 
         try {
-            // Remove all change listeners to avoid leaks
-            mRealm.removeAllChangeListeners();
-            mRealm.close();
+            AppDatabase.destroyInstance();
         } catch (Exception e) {
             LogUtils.REMOTE_LOG(e);
         }
@@ -291,8 +289,7 @@ public class MainActivity extends BaseActivity implements
         vMap.getUiSettings().setMyLocationButtonEnabled(false);
 
         // Setup the InfoWindow
-        @SuppressLint("InflateParams")
-        final View vMarkerInfoWindow = getLayoutInflater()
+        @SuppressLint("InflateParams") final View vMarkerInfoWindow = getLayoutInflater()
                 .inflate(R.layout.custom_info_window, null, false);
         vMap.setInfoWindowAdapter(new PlacemarkInfoWindowAdapter(vMarkerInfoWindow, mLocationManger));
 
@@ -365,47 +362,40 @@ public class MainActivity extends BaseActivity implements
             return;
         }
 
-        if (mRealmListener != null) {
-            // Remove previously added RealmChangeListener
-            mRealm.removeChangeListener(mRealmListener);
-            mRealmListener = null;
-        }
+//        if (mRealmListener != null) {
+//            // Remove previously added RealmChangeListener
+//            mDb.removeChangeListener(mRealmListener);
+//            mRealmListener = null;
+//        }
 
-        // First, query the Realm db for the current mapType
-        final RealmResults<RealmPlacemark> realmPlacemarks = RealmQueries
-                .queryPlacemarksByMapType(mRealm,
-                        type,
-                        UserPrefs.getInstance(getApplicationContext()).getEnabledLayers()
-                ).findAll();
+        // Query the Realm db for the current mapType
+        RealmQueries.queryPlacemarksByMapType(
+                mDb,
+                type,
+                UserPrefs.getInstance(getApplicationContext()).getEnabledLayers()
+        ).observe(this, new Observer<List<RealmPlacemark>>() {
+            @Override
+            public void onChanged(@Nullable List<RealmPlacemark> realmPlacemarks) {
 
-        if (realmPlacemarks.size() > 0) {
-            // Has cached data
-            final List<Marker> markers = MapUtils.addPlacemarksToMap(vMap, realmPlacemarks);
+                if (realmPlacemarks != null && realmPlacemarks.size() > 0) {
+                    // Has cached data
+                    final List<Marker> markers = MapUtils.addPlacemarksToMap(vMap, realmPlacemarks);
 
-            new Handler().postDelayed(new Runnable() {
-                /**
-                 * Delay hiding the progressbar for 750ms, avoids blink-effect on fast operations.
-                 * And allows findAndShowNearestMarker() to wait for the real center in case
-                 * of camera animation.
-                 */
-                @Override
-                public void run() {
-                    toggleProgressBar(false);
-                    MapUtils.findAndShowNearestMarker(vMap, markers, mSnackbarParent);
+                    new Handler().postDelayed(new Runnable() {
+                        /**
+                         * Delay hiding the progressbar for 750ms, avoids blink-effect on fast operations.
+                         * And allows findAndShowNearestMarker() to wait for the real center in case
+                         * of camera animation.
+                         */
+                        @Override
+                        public void run() {
+                            toggleProgressBar(false);
+                            MapUtils.findAndShowNearestMarker(vMap, markers, mSnackbarParent);
+                        }
+                    }, PROGRESS_BAR_ANIM_DURATION);
                 }
-            }, PROGRESS_BAR_ANIM_DURATION);
-        } else {
-            // Add a change listener for empty data only, to avoid showing empty maps.
-            // Remote updates will be shown on tab changes. This is not an issue for our app
-            // because of the low frequency/value of remote data updates.
-            mRealmListener = new RealmChangeListener() {
-                @Override
-                public void onChange(Object element) {
-                    loadMapData(type);
-                }
-            };
-            mRealm.addChangeListener(mRealmListener);
-        }
+            }
+        });
     }
 
     @Override

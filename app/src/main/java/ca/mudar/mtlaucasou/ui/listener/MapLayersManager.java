@@ -38,8 +38,6 @@ import com.google.android.gms.maps.model.Marker;
 
 import java.util.Set;
 
-import ca.mudar.mtlaucasou.Const;
-import ca.mudar.mtlaucasou.Const.MapTypes;
 import ca.mudar.mtlaucasou.R;
 import ca.mudar.mtlaucasou.data.UserPrefs;
 import ca.mudar.mtlaucasou.model.LayerType;
@@ -189,8 +187,8 @@ public class MapLayersManager implements
         mMapTypeHasMenu = MapUtils.isMultiLayerMapType(type);
         mHasChangedFilters = false;
 
-        toggleWaterSupplyFilterItems(MapTypes.HEAT_WAVE.equals(type));
-        toggleHospitalsFilterItems(MapTypes.HEALTH.equals(type));
+        toggleWaterSupplyFilterItems(MapType.HEAT_WAVE.equals(type));
+        toggleHospitalsFilterItems(MapType.HEALTH.equals(type));
 
         if (mMapTypeHasMenu) {
             // Initial visibility is GONE to avoid visual flickering
@@ -246,15 +244,15 @@ public class MapLayersManager implements
     public void setupEnabledLayers(UserPrefs prefs) {
         final @LayerType Set<String> enabledLayers = prefs.getEnabledLayers();
 
-        mMapTypeColor = MapUtils.getMapTypeColor(mContext, MapTypes.HEAT_WAVE);
-        setMenuItemState(mAirConditioningFAB, enabledLayers.contains(Const.LayerTypes.AIR_CONDITIONING));
-        setMenuItemState(mPoolsFAB, enabledLayers.contains(Const.LayerTypes.POOLS));
-        setMenuItemState(mWadingPoolsFAB, enabledLayers.contains(Const.LayerTypes.WADING_POOLS));
-        setMenuItemState(mPlayFountainsFAB, enabledLayers.contains(Const.LayerTypes.PLAY_FOUNTAINS));
+        mMapTypeColor = MapUtils.getMapTypeColor(mContext, MapType.HEAT_WAVE);
+        setMenuItemState(mAirConditioningFAB, enabledLayers.contains(LayerType.AIR_CONDITIONING));
+        setMenuItemState(mPoolsFAB, enabledLayers.contains(LayerType.POOLS));
+        setMenuItemState(mWadingPoolsFAB, enabledLayers.contains(LayerType.WADING_POOLS));
+        setMenuItemState(mPlayFountainsFAB, enabledLayers.contains(LayerType.PLAY_FOUNTAINS));
 
-        mMapTypeColor = MapUtils.getMapTypeColor(mContext, MapTypes.HEALTH);
-        setMenuItemState(mHospitalsFAB, enabledLayers.contains(Const.LayerTypes.HOSPITALS));
-        setMenuItemState(mClscFAB, enabledLayers.contains(Const.LayerTypes.CLSC));
+        mMapTypeColor = MapUtils.getMapTypeColor(mContext, MapType.HEALTH);
+        setMenuItemState(mHospitalsFAB, enabledLayers.contains(LayerType.HOSPITALS));
+        setMenuItemState(mClscFAB, enabledLayers.contains(LayerType.CLSC));
 
         mMapTypeColor = mNormalColor;
     }

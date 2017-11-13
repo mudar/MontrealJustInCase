@@ -28,7 +28,6 @@ import android.text.TextUtils;
 import java.util.Locale;
 
 import ca.mudar.mtlaucasou.Const.ApiValues;
-import ca.mudar.mtlaucasou.Const.LayerTypes;
 import ca.mudar.mtlaucasou.model.LayerType;
 
 import static ca.mudar.mtlaucasou.Const.PrefsNames.ITEM_UPDATED_AT;
@@ -52,13 +51,13 @@ public class ApiDataUtils {
         if (!TextUtils.isEmpty(dataType)) {
             switch (dataType) {
                 case ApiValues.TYPE_PLAY_FOUNTAINS:
-                    return LayerTypes.PLAY_FOUNTAINS;
+                    return LayerType.PLAY_FOUNTAINS;
                 case ApiValues.TYPE_WADING_POOLS:
-                    return LayerTypes.WADING_POOLS;
+                    return LayerType.WADING_POOLS;
                 case ApiValues.TYPE_BEACH:
                 case ApiValues.TYPE_POOLS_EXT:
                 case ApiValues.TYPE_POOLS_INT:
-                    return LayerTypes.POOLS;
+                    return LayerType.POOLS;
             }
         }
 

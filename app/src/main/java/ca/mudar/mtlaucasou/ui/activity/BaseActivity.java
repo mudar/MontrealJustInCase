@@ -39,6 +39,7 @@ import ca.mudar.mtlaucasou.Const;
 import ca.mudar.mtlaucasou.R;
 import ca.mudar.mtlaucasou.data.UserPrefs;
 import ca.mudar.mtlaucasou.model.MapType;
+import ca.mudar.mtlaucasou.model.MetricsContentName;
 import ca.mudar.mtlaucasou.util.IntentUtils;
 import ca.mudar.mtlaucasou.util.LangUtils;
 import ca.mudar.mtlaucasou.util.LogUtils;
@@ -170,7 +171,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
                 )
                 .start(this);
 
-        MetricsUtils.logAboutView(Const.MetricsContentNames.ABOUT_LIBS);
+        MetricsUtils.logAboutView(MetricsContentName.ABOUT_LIBS);
     }
 
     /**

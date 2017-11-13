@@ -31,6 +31,8 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import ca.mudar.mtlaucasou.model.LayerType;
+
 public class Const {
     /**
      * MTL au cas ou
@@ -40,30 +42,6 @@ public class Const {
     public static final float ZOOM_DEFAULT = 13;
     public static final float ZOOM_OUT = 11;
     public static final LatLng MONTREAL_GEO_LAT_LNG = new LatLng(45.508830d, -73.554112d);
-
-    public interface MapTypes {
-        String FIRE_HALLS = "fire_halls";
-        String SPVM_STATIONS = "spvm_stations";
-        String HEAT_WAVE = "water_supplies";
-        String EMERGENCY_HOSTELS = "emergency_hostels";
-        String HEALTH = "health";
-        String _DEFAULT = FIRE_HALLS;
-    }
-
-    public interface LayerTypes {
-        String FIRE_HALLS = "fire_halls";
-        String SPVM_STATIONS = "spvm_stations";
-        String EMERGENCY_HOSTELS = "emergency_hostels";
-        // Heat wave x4
-        String AIR_CONDITIONING = "air_conditioning";
-        String POOLS = "pools";
-        String WADING_POOLS = "wading_pools";
-        String PLAY_FOUNTAINS = "play_fountains";
-        String _HEAT_WAVE_MIXED = "water_supplies";
-        // Health x2
-        String HOSPITALS = "hospitals";
-        String CLSC = "clsc";
-    }
 
     public static final double MAPS_GEOCODER_LIMITS[] = {
             45.380127d, // lowerLeftLat
@@ -114,12 +92,6 @@ public class Const {
 
 
     /**
-     * Database
-     */
-    public static final String DATABASE_NAME = "mtlaucasou.realm";
-    public static final int DATABASE_VERSION = 11;
-
-    /**
      * Settings, SharedPreferences
      */
     public static final String APP_PREFS_NAME = "MTL_JUSTINCASE_PREFS";
@@ -155,8 +127,8 @@ public class Const {
 //        String LIST_SORT_NAME = "name";
 //        String LIST_SORT_DISTANCE = "distance";
         Set<String> DEFAULT_LAYERS = new HashSet<>(Arrays.asList(
-                Const.LayerTypes.HOSPITALS,
-                Const.LayerTypes.AIR_CONDITIONING));
+                LayerType.HOSPITALS,
+                LayerType.AIR_CONDITIONING));
     }
 
     public interface RequestCodes {
@@ -175,13 +147,6 @@ public class Const {
         String MAP = "Map";
         String SETTINGS = "Settings";
         String ABOUT = "About";
-    }
-
-    public interface MetricsContentNames {
-        String SETTINGS = "SettingsActivity";
-        String ABOUT = "AboutActivity";
-        String ABOUT_LIBS = "AboutLibsActivity";
-        String EULA = "EulaActivity";
     }
 
     /**

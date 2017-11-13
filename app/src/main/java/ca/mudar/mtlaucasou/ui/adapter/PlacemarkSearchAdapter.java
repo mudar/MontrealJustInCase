@@ -39,6 +39,7 @@ import java.util.Collections;
 import java.util.List;
 
 import ca.mudar.mtlaucasou.R;
+import ca.mudar.mtlaucasou.data.AppDatabase;
 import ca.mudar.mtlaucasou.data.RealmQueries;
 import ca.mudar.mtlaucasou.data.SuggestionsCursorHelper;
 import ca.mudar.mtlaucasou.model.Placemark;
@@ -46,9 +47,6 @@ import ca.mudar.mtlaucasou.model.RealmPlacemark;
 import ca.mudar.mtlaucasou.model.SuggestionsPlacemark;
 import ca.mudar.mtlaucasou.util.LogUtils;
 import ca.mudar.mtlaucasou.util.NavigUtils;
-import io.realm.Realm;
-import io.realm.RealmQuery;
-import io.realm.RealmResults;
 
 import static ca.mudar.mtlaucasou.util.LogUtils.makeLogTag;
 
@@ -60,13 +58,14 @@ public class PlacemarkSearchAdapter extends CursorAdapter implements
 
     private final ResultsFilter mFilter;
     private final LayoutInflater mInflater;
+    private final AppDatabase mDb;
 
     public PlacemarkSearchAdapter(Context context) {
         super(context, null, true);
 
         this.mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.mFilter = new ResultsFilter();
-
+        this.mDb = AppDatabase.getAppDatabase(mContext.getApplicationContext());
     }
 
     @Override
@@ -119,22 +118,20 @@ public class PlacemarkSearchAdapter extends CursorAdapter implements
             FilterResults results = new FilterResults();
 
             try {
-                final Realm realm = Realm.getDefaultInstance();
-
                 if (constraint != null && constraint.length() >= THRESHOLD) {
-                    /**
+                    /*
                      * Query the database for filtered RealmPlacemarks,
                      * then convert results to SuggestionsPlacemark.
                      * Realm doesn't allow mixed use by Worker/UI threads, and this allows for
                      * safer calls to realm.close()
                      */
-                    final RealmQuery<RealmPlacemark> query = RealmQueries
-                            .queryPlacemarksByName(realm, String.valueOf(constraint));
+                    final List<RealmPlacemark> realmPlacemarks = RealmQueries
+                            .queryPlacemarksByName(mDb, String.valueOf(constraint));
 
-                    results.count = (int) query.count();
-                    if (query.count() > 0) {
-                        final RealmResults<RealmPlacemark> realmPlacemarks = query
-                                .findAll();
+                    if (realmPlacemarks != null) {
+                        results.count = realmPlacemarks.size();
+                    }
+                    if (results.count > 0) {
                         // The SuggestionsPlacemark list
                         final List<SuggestionsPlacemark> suggestions = new ArrayList<>();
                         for (RealmPlacemark realmPlacemark : realmPlacemarks) {
@@ -152,7 +149,7 @@ public class PlacemarkSearchAdapter extends CursorAdapter implements
 
                 // Safe to close Realm now, the adapter will be using SuggestionsPlacemarks
                 // to fill the MatrixCursor and bind the views.
-                realm.close();
+//                realm.close();
 
             } catch (Exception e) {
                 e.printStackTrace();

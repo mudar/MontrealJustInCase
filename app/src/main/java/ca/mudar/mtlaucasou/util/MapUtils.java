@@ -52,8 +52,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ca.mudar.mtlaucasou.Const;
-import ca.mudar.mtlaucasou.Const.LayerTypes;
-import ca.mudar.mtlaucasou.Const.MapTypes;
 import ca.mudar.mtlaucasou.R;
 import ca.mudar.mtlaucasou.model.LayerType;
 import ca.mudar.mtlaucasou.model.MapType;
@@ -80,15 +78,15 @@ public class MapUtils {
      */
     public static BitmapDescriptor getMarkerIcon(@MapType String type) {
         switch (type) {
-            case MapTypes.FIRE_HALLS:
+            case MapType.FIRE_HALLS:
                 return BitmapDescriptorFactory.fromResource(R.drawable.ic_maps_fire_halls);
-            case MapTypes.SPVM_STATIONS:
+            case MapType.SPVM_STATIONS:
                 return BitmapDescriptorFactory.fromResource(R.drawable.ic_maps_spvm);
-            case MapTypes.HEAT_WAVE:
+            case MapType.HEAT_WAVE:
                 return BitmapDescriptorFactory.fromResource(R.drawable.ic_maps_water_supplies);
-            case MapTypes.EMERGENCY_HOSTELS:
+            case MapType.EMERGENCY_HOSTELS:
                 return BitmapDescriptorFactory.fromResource(R.drawable.ic_maps_emergency_hostels);
-            case MapTypes.HEALTH:
+            case MapType.HEALTH:
                 return BitmapDescriptorFactory.fromResource(R.drawable.ic_maps_hospitals);
         }
         return null;
@@ -105,19 +103,19 @@ public class MapUtils {
     public static int getMapTypeColor(Context context, @MapType String type) {
         @ColorRes int color;
         switch (type) {
-            case MapTypes.FIRE_HALLS:
+            case MapType.FIRE_HALLS:
                 color = R.color.color_fire_halls;
                 break;
-            case MapTypes.SPVM_STATIONS:
+            case MapType.SPVM_STATIONS:
                 color = R.color.color_spvm;
                 break;
-            case MapTypes.HEAT_WAVE:
+            case MapType.HEAT_WAVE:
                 color = R.color.color_heat_wave;
                 break;
-            case MapTypes.EMERGENCY_HOSTELS:
+            case MapType.EMERGENCY_HOSTELS:
                 color = R.color.color_emergency_hostels;
                 break;
-            case MapTypes.HEALTH:
+            case MapType.HEALTH:
                 color = R.color.color_health;
                 break;
             default:
@@ -130,24 +128,24 @@ public class MapUtils {
     public static String getFilterItemLayerType(@IdRes int id) {
 
         if (id == R.id.fab_air_conditioning) {
-            return LayerTypes.AIR_CONDITIONING;
+            return LayerType.AIR_CONDITIONING;
         } else if (id == R.id.fab_pools) {
-            return LayerTypes.POOLS;
+            return LayerType.POOLS;
         } else if (id == R.id.fab_wading_pools) {
-            return LayerTypes.WADING_POOLS;
+            return LayerType.WADING_POOLS;
         } else if (id == R.id.fab_play_fountains) {
-            return LayerTypes.PLAY_FOUNTAINS;
+            return LayerType.PLAY_FOUNTAINS;
         } else if (id == R.id.fab_hospitals) {
-            return LayerTypes.HOSPITALS;
+            return LayerType.HOSPITALS;
         } else if (id == R.id.fab_clsc) {
-            return LayerTypes.CLSC;
+            return LayerType.CLSC;
         }
 
         return null;
     }
 
     public static boolean isMultiLayerMapType(@MapType String mapType) {
-        return MapTypes.HEAT_WAVE.equals(mapType) || MapTypes.HEALTH.equals(mapType);
+        return MapType.HEAT_WAVE.equals(mapType) || MapType.HEALTH.equals(mapType);
     }
 
     /**

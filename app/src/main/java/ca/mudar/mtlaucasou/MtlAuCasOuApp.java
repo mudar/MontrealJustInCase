@@ -27,15 +27,10 @@ import android.app.Application;
 
 import com.crashlytics.android.Crashlytics;
 
-import java.io.FileNotFoundException;
-
-import ca.mudar.mtlaucasou.data.RealmSchemaMigration;
 import ca.mudar.mtlaucasou.data.UserPrefs;
 import ca.mudar.mtlaucasou.service.SyncService;
 import ca.mudar.mtlaucasou.util.LangUtils;
 import io.fabric.sdk.android.Fabric;
-import io.realm.Realm;
-import io.realm.RealmConfiguration;
 
 public class MtlAuCasOuApp extends Application {
 
@@ -59,17 +54,17 @@ public class MtlAuCasOuApp extends Application {
     }
 
     private void setupRealm() {
-        Realm.init(this);
-        RealmConfiguration config = new RealmConfiguration.Builder()
-                .name(Const.DATABASE_NAME)
-                .schemaVersion(Const.DATABASE_VERSION)
-                .build();
-        try {
-            Realm.migrateRealm(config, new RealmSchemaMigration());
-        } catch (FileNotFoundException ignored) {
-            // If the Realm file doesn't exist, just ignore.
-        }
-        Realm.setDefaultConfiguration(config);
+//        Realm.init(this);
+//        RealmConfiguration config = new RealmConfiguration.Builder()
+//                .name(Const.DATABASE_NAME)
+//                .schemaVersion(Const.DATABASE_VERSION)
+//                .build();
+//        try {
+//            Realm.migrateRealm(config, new RealmSchemaMigration());
+//        } catch (FileNotFoundException ignored) {
+//            // If the Realm file doesn't exist, just ignore.
+//        }
+//        Realm.setDefaultConfiguration(config);
 
         startService(SyncService.newIntent(this));
     }

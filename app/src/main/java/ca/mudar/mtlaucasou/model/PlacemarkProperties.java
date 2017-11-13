@@ -23,10 +23,19 @@
 
 package ca.mudar.mtlaucasou.model;
 
-import ca.mudar.mtlaucasou.model.geojson.FeatureProperties;
-import io.realm.RealmObject;
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 
-public class PlacemarkProperties extends RealmObject {
+import ca.mudar.mtlaucasou.model.geojson.FeatureProperties;
+
+@Entity
+public class PlacemarkProperties {
+    @NonNull
+    @PrimaryKey(autoGenerate = true)
+    private long id;
+    @ColumnInfo.Collate()
     private String name;
     private String description;
 
@@ -42,6 +51,15 @@ public class PlacemarkProperties extends RealmObject {
     private PlacemarkProperties(Builder builder) {
         this.name = builder.name;
         this.description = builder.description;
+    }
+
+    @NonNull
+    public long getId() {
+        return id;
+    }
+
+    public void setId(@NonNull long id) {
+        this.id = id;
     }
 
     public String getName() {

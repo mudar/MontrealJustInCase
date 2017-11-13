@@ -42,15 +42,15 @@ public class NavigUtils {
     @IdRes
     public static int getTabIdByMapType(@MapType String type) {
         switch (type) {
-            case Const.MapTypes.FIRE_HALLS:
+            case MapType.FIRE_HALLS:
                 return R.id.tab_fire_halls;
-            case Const.MapTypes.SPVM_STATIONS:
+            case MapType.SPVM_STATIONS:
                 return R.id.tab_spvm;
-            case Const.MapTypes.HEAT_WAVE:
+            case MapType.HEAT_WAVE:
                 return R.id.tab_water_supplies;
-            case Const.MapTypes.EMERGENCY_HOSTELS:
+            case MapType.EMERGENCY_HOSTELS:
                 return R.id.tab_emergency_hostels;
-            case Const.MapTypes.HEALTH:
+            case MapType.HEALTH:
                 return R.id.tab_hospitals;
         }
 
@@ -67,15 +67,15 @@ public class NavigUtils {
     public static String getMapTypeByTabId(int tabId) {
         switch (tabId) {
             case R.id.tab_fire_halls:
-                return Const.MapTypes.FIRE_HALLS;
+                return MapType.FIRE_HALLS;
             case R.id.tab_spvm:
-                return Const.MapTypes.SPVM_STATIONS;
+                return MapType.SPVM_STATIONS;
             case R.id.tab_water_supplies:
-                return Const.MapTypes.HEAT_WAVE;
+                return MapType.HEAT_WAVE;
             case R.id.tab_emergency_hostels:
-                return Const.MapTypes.EMERGENCY_HOSTELS;
+                return MapType.EMERGENCY_HOSTELS;
             case R.id.tab_hospitals:
-                return Const.MapTypes.HEALTH;
+                return MapType.HEALTH;
         }
 
         return null;
@@ -90,15 +90,15 @@ public class NavigUtils {
     @DrawableRes
     public static int getMapTypeIcon(@MapType String type) {
         switch (type) {
-            case Const.MapTypes.FIRE_HALLS:
+            case MapType.FIRE_HALLS:
                 return R.drawable.ic_fire_hall;
-            case Const.MapTypes.SPVM_STATIONS:
+            case MapType.SPVM_STATIONS:
                 return R.drawable.ic_spvm;
-            case Const.MapTypes.HEAT_WAVE:
+            case MapType.HEAT_WAVE:
                 return R.drawable.ic_water_supplies;
-            case Const.MapTypes.EMERGENCY_HOSTELS:
+            case MapType.EMERGENCY_HOSTELS:
                 return R.drawable.ic_emergency_hostels;
-            case Const.MapTypes.HEALTH:
+            case MapType.HEALTH:
                 return R.drawable.ic_hospitals;
         }
         return 0;

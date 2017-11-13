@@ -31,6 +31,7 @@ import android.view.View;
 
 import ca.mudar.mtlaucasou.Const;
 import ca.mudar.mtlaucasou.R;
+import ca.mudar.mtlaucasou.model.MetricsContentName;
 import ca.mudar.mtlaucasou.ui.dialog.OpenDataCreditsDialog;
 import ca.mudar.mtlaucasou.util.IntentUtils;
 import ca.mudar.mtlaucasou.util.MetricsUtils;
@@ -49,7 +50,7 @@ public class AboutActivity extends BaseActivity implements
         // setTitle(R.string.title_activity_about);
         setContentView(R.layout.activity_about);
 
-        MetricsUtils.logAboutView(Const.MetricsContentNames.ABOUT);
+        MetricsUtils.logAboutView(MetricsContentName.ABOUT);
     }
 
     @Override

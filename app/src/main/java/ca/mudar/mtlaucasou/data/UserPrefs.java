@@ -144,7 +144,7 @@ public class UserPrefs implements
     @SuppressWarnings("WrongConstant")
     @MapType
     public String getLastMapType() {
-        return mPrefs.getString(LAST_MAP_TYPE, Const.MapTypes._DEFAULT);
+        return mPrefs.getString(LAST_MAP_TYPE, MapType._DEFAULT);
     }
 
     public void setLastMapType(@MapType String mapType) {

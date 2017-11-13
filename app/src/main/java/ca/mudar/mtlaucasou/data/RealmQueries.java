@@ -23,166 +23,152 @@
 
 package ca.mudar.mtlaucasou.data;
 
-import com.google.android.gms.maps.model.LatLngBounds;
+import android.arch.lifecycle.LiveData;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import ca.mudar.mtlaucasou.Const;
-import ca.mudar.mtlaucasou.Const.LayerTypes;
 import ca.mudar.mtlaucasou.model.LayerType;
 import ca.mudar.mtlaucasou.model.MapType;
 import ca.mudar.mtlaucasou.model.RealmPlacemark;
 import ca.mudar.mtlaucasou.model.geojson.PointsFeature;
-import io.realm.Case;
-import io.realm.Realm;
-import io.realm.RealmQuery;
-import io.realm.RealmResults;
 
 import static ca.mudar.mtlaucasou.util.LogUtils.makeLogTag;
 
 public class RealmQueries {
     private static final String TAG = makeLogTag("RealmQueries");
     private static final Set<String> HEAT_WAVE_LAYERS = new HashSet<>(Arrays.asList(
-            LayerTypes.AIR_CONDITIONING,
-            LayerTypes.POOLS,
-            LayerTypes.WADING_POOLS,
-            LayerTypes.PLAY_FOUNTAINS));
+            LayerType.AIR_CONDITIONING,
+            LayerType.POOLS,
+            LayerType.WADING_POOLS,
+            LayerType.PLAY_FOUNTAINS));
     private static final Set<String> HEALTH_LAYERS = new HashSet<>(Arrays.asList(
-            LayerTypes.HOSPITALS,
-            LayerTypes.CLSC));
+            LayerType.HOSPITALS,
+            LayerType.CLSC));
 
 
     /**
      * Delete data from the Realm db
      *
-     * @param realm
+     * @param db
      * @param layerType
      */
-    public static void clearMapData(Realm realm, @LayerType String layerType) {
-        realm.beginTransaction();
+    public static void clearMapData(AppDatabase db, @LayerType String layerType) {
+        db.beginTransaction();
 
-        final RealmQuery query = realm.where(RealmPlacemark.class);
-        if (LayerTypes._HEAT_WAVE_MIXED.equals(layerType)) {
-            // The `water_supplies` endpoint provides 3 layerTypes we need to delete
-            query.in(RealmPlacemark.FIELD_LAYER_TYPE, new String[]{
-                    LayerTypes.POOLS,
-                    LayerTypes.WADING_POOLS,
-                    LayerTypes.PLAY_FOUNTAINS
-            });
-        } else {
-            query.equalTo(RealmPlacemark.FIELD_LAYER_TYPE, layerType);
+        try {
+            if (LayerType._HEAT_WAVE_MIXED.equals(layerType)) {
+                // The `water_supplies` endpoint provides 3 layerTypes we need to delete
+                db.placemarkDao().deleteByLayerType(new String[]{
+                        LayerType.POOLS,
+                        LayerType.WADING_POOLS,
+                        LayerType.PLAY_FOUNTAINS});
+            } else {
+                db.placemarkDao().deleteByLayerType(new String[]{layerType});
+            }
+
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
         }
-        query.findAll()
-                .deleteAllFromRealm();
-
-        realm.commitTransaction();
     }
 
     /**
      * Save the downloaded data to the Realm db
      *
-     * @param realm
+     * @param db
      * @param pointsFeatures
      * @param mapType
      * @param layerType
-     * @param transaction
      */
-    public static void cacheMapData(Realm realm, List<PointsFeature> pointsFeatures,
-                                    @MapType String mapType, @LayerType String layerType,
-                                    boolean transaction) {
-        if (transaction) {
-            realm.beginTransaction();
-        }
+    public static void cacheMapData(AppDatabase db,
+                                    List<PointsFeature> pointsFeatures,
+                                    @MapType String mapType,
+                                    @LayerType String layerType) {
         // Loop over results, convert GeoJSON to Realm then add to db
         for (PointsFeature feature : pointsFeatures) {
-            realm.copyToRealm(new RealmPlacemark.Builder(feature)
+            db.placemarkDao().insert(new RealmPlacemark.Builder(feature)
                     .mapType(mapType)
                     .layerType(layerType, feature.getProperties().getType())
                     .build());
         }
+    }
 
-        if (transaction) {
-            realm.commitTransaction();
+    /**
+     * Save the downloaded data to the Realm db enclosed in a transaction
+     *
+     * @param db
+     * @param pointsFeatures
+     * @param mapType
+     * @param layerType
+     */
+    public static void cacheMapDataWithTransaction(AppDatabase db,
+                                                   List<PointsFeature> pointsFeatures,
+                                                   @MapType String mapType,
+                                                   @LayerType String layerType) {
+        db.beginTransaction();
+        try {
+            cacheMapData(db, pointsFeatures, mapType, layerType);
+
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
         }
     }
 
     /**
      * Get all Placemarks for requested mapType and selected layers
      *
-     * @param realm
+     * @param db
      * @param mapType
      * @param layers
      * @return
      */
-    public static RealmQuery<RealmPlacemark> queryPlacemarksByMapType(Realm realm,
-                                                                      @MapType String mapType,
-                                                                      @LayerType Set<String> layers) {
-        final RealmQuery<RealmPlacemark> query = queryPlacemarksByMapType(realm, mapType);
-        if (layers != null) {
-            Set<String> filterLayers = null;
-
-            if (Const.MapTypes.HEAT_WAVE.equals(mapType)) {
+    public static LiveData<List<RealmPlacemark>> queryPlacemarksByMapType(AppDatabase db,
+                                                                          @MapType String mapType,
+                                                                          @LayerType Set<String> layers) {
+        Set<String> filterLayers = null;
+        if (layers != null && !layers.isEmpty()) {
+            if (MapType.HEAT_WAVE.equals(mapType)) {
                 filterLayers = new HashSet<>(HEAT_WAVE_LAYERS);
                 filterLayers.retainAll(layers);
-            } else if (Const.MapTypes.HEALTH.equals(mapType)) {
+            } else if (MapType.HEALTH.equals(mapType)) {
                 filterLayers = new HashSet<>(HEALTH_LAYERS);
                 filterLayers.retainAll(layers);
             }
-
-            if (filterLayers != null && filterLayers.size() > 0) {
-                return query.in(RealmPlacemark.FIELD_LAYER_TYPE,
-                        filterLayers.toArray(new String[filterLayers.size()]));
-            }
         }
 
-        return query;
+        if (filterLayers == null || filterLayers.isEmpty()) {
+            return queryPlacemarksByMapType(db, mapType);
+        } else {
+            final int size = filterLayers.size();
+            return db.placemarkDao().getByMapAndLayerType(mapType, filterLayers.toArray(new String[size]));
+        }
     }
 
     /**
      * Get all Placemarks for requested mapType
      *
-     * @param realm
+     * @param db
      * @param mapType
      * @return
      */
-    private static RealmQuery<RealmPlacemark> queryPlacemarksByMapType(Realm realm, @MapType String mapType) {
-        return realm
-                .where(RealmPlacemark.class)
-                .equalTo(RealmPlacemark.FIELD_MAP_TYPE, mapType);
-    }
-
-    /**
-     * Filter RealmResults by the visibleRegion bounding box
-     * Deprecated: not used anymore to allow adding all markers immediately. Limiting the results
-     * to the bounds means adding multiple markers repeatedly, which blocks the UI thread.
-     *
-     * @param query
-     * @param bounds
-     * @return
-     */
-    @Deprecated
-    public static RealmResults<RealmPlacemark> filterPlacemarksQueryByBounds(RealmQuery<RealmPlacemark> query, LatLngBounds bounds) {
-        return query
-                .greaterThan(RealmPlacemark.FIELD_COORDINATES_LAT, bounds.southwest.latitude)
-                .greaterThan(RealmPlacemark.FIELD_COORDINATES_LNG, bounds.southwest.longitude)
-                .lessThan(RealmPlacemark.FIELD_COORDINATES_LAT, bounds.northeast.latitude)
-                .lessThan(RealmPlacemark.FIELD_COORDINATES_LNG, bounds.northeast.longitude)
-                .findAll();
+    private static LiveData<List<RealmPlacemark>> queryPlacemarksByMapType(AppDatabase db,
+                                                                           @MapType String mapType) {
+        return db.placemarkDao().getByMapType(mapType);
     }
 
     /**
      * Get all Placemarks with name containing the search-word
      *
-     * @param realm
+     * @param db
      * @param name
      * @return
      */
-    public static RealmQuery<RealmPlacemark> queryPlacemarksByName(Realm realm, String name) {
-        return realm
-                .where(RealmPlacemark.class)
-                .contains(RealmPlacemark.FIELD_PROPERTIES_NAME, String.valueOf(name), Case.INSENSITIVE);
+    public static List<RealmPlacemark> queryPlacemarksByName(AppDatabase db, String name) {
+        return db.placemarkDao()
+                .getByName("% " + name + "%");
     }
 }

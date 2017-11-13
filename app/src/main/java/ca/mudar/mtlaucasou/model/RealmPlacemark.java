@@ -23,38 +23,36 @@
 
 package ca.mudar.mtlaucasou.model;
 
+import android.arch.persistence.room.Embedded;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Index;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
 import com.google.android.gms.maps.model.LatLng;
 
-import ca.mudar.mtlaucasou.Const;
+import ca.mudar.mtlaucasou.ConstDb.Fields;
+import ca.mudar.mtlaucasou.ConstDb.Prefixes;
+import ca.mudar.mtlaucasou.ConstDb.Tables;
 import ca.mudar.mtlaucasou.model.geojson.PointsFeature;
 import ca.mudar.mtlaucasou.util.ApiDataUtils;
-import io.realm.RealmObject;
-import io.realm.annotations.Ignore;
-import io.realm.annotations.Index;
 
-public class RealmPlacemark extends RealmObject implements
+
+@Entity(tableName = Tables.PLACEMARKS,
+        indices = {@Index(Fields.MAP_TYPE), @Index(Fields.LAYER_TYPE)})
+public class RealmPlacemark implements
         Placemark {
-    @Ignore
-    public static final String FIELD_MAP_TYPE = "mapType";
-    @Ignore
-    public static final String FIELD_LAYER_TYPE = "layerType";
-    @Ignore
-    public static final String FIELD_COORDINATES = "coordinates";
-    @Ignore
-    public static final String FIELD_COORDINATES_LAT = "coordinates.lat";
-    @Ignore
-    public static final String FIELD_COORDINATES_LNG = "coordinates.lng";
-    @Ignore
-    public static final String FIELD_PROPERTIES_NAME = "properties.name";
 
-    private String id;
+    @NonNull
+    @PrimaryKey(autoGenerate = true)
+    private long id;
     @MapType
-    @Index
     private String mapType;
     @LayerType
-    @Index
     private String layerType;
+    @Embedded(prefix = Prefixes.PROPERTIES)
     private PlacemarkProperties properties;
+    @Embedded(prefix = Prefixes.COORDINATES)
     private LongitudeLatitude coordinates;
 
     public RealmPlacemark() {
@@ -67,18 +65,20 @@ public class RealmPlacemark extends RealmObject implements
      * @param builder
      */
     private RealmPlacemark(Builder builder) {
-        this.id = builder.id;
+        if (builder.id != null ) {
+            this.id = builder.id.hashCode();
+        }
         this.mapType = builder.mapType;
         this.layerType = builder.layerType;
         this.properties = builder.properties;
         this.coordinates = builder.coordinates;
     }
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -160,7 +160,7 @@ public class RealmPlacemark extends RealmObject implements
         }
 
         public Builder layerType(@LayerType String layerType, String dataType) {
-            if (Const.LayerTypes._HEAT_WAVE_MIXED.equals(layerType)) {
+            if (LayerType._HEAT_WAVE_MIXED.equals(layerType)) {
                 // water_supplies dataset is the only one with mixed layers
                 this.layerType = ApiDataUtils.getPlacemarkLayerType(dataType);
             } else {

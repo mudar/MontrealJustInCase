@@ -36,6 +36,7 @@ import android.webkit.WebViewClient;
 import ca.mudar.mtlaucasou.Const;
 import ca.mudar.mtlaucasou.R;
 import ca.mudar.mtlaucasou.data.UserPrefs;
+import ca.mudar.mtlaucasou.model.MetricsContentName;
 import ca.mudar.mtlaucasou.util.MetricsUtils;
 
 public class EulaActivity extends BaseActivity implements View.OnClickListener {
@@ -67,7 +68,7 @@ public class EulaActivity extends BaseActivity implements View.OnClickListener {
         findViewById(R.id.btn_accept_eula).setOnClickListener(this);
 
         if (hasAcceptedEula) {
-            MetricsUtils.logAboutView(Const.MetricsContentNames.EULA);
+            MetricsUtils.logAboutView(MetricsContentName.EULA);
         }
     }
 

@@ -28,22 +28,32 @@ import android.support.annotation.StringDef;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-import ca.mudar.mtlaucasou.Const;
-
 @Retention(RetentionPolicy.SOURCE)
 @StringDef({
-        Const.LayerTypes.FIRE_HALLS,
-        Const.LayerTypes.SPVM_STATIONS,
-        Const.LayerTypes.EMERGENCY_HOSTELS,
+        LayerType.FIRE_HALLS,
+        LayerType.SPVM_STATIONS,
+        LayerType.EMERGENCY_HOSTELS,
         // Heat wave x4
-        Const.LayerTypes.AIR_CONDITIONING,
-        Const.LayerTypes.POOLS,
-        Const.LayerTypes.WADING_POOLS,
-        Const.LayerTypes.PLAY_FOUNTAINS,
-        Const.LayerTypes._HEAT_WAVE_MIXED,
+        LayerType.AIR_CONDITIONING,
+        LayerType.POOLS,
+        LayerType.WADING_POOLS,
+        LayerType.PLAY_FOUNTAINS,
+        LayerType._HEAT_WAVE_MIXED,
         // Health x2
-        Const.LayerTypes.HOSPITALS,
-        Const.LayerTypes.CLSC
+        LayerType.HOSPITALS,
+        LayerType.CLSC
 })
 public @interface LayerType {
+    String FIRE_HALLS = "fire_halls";
+    String SPVM_STATIONS = "spvm_stations";
+    String EMERGENCY_HOSTELS = "emergency_hostels";
+    // Heat wave x4
+    String AIR_CONDITIONING = "air_conditioning";
+    String POOLS = "pools";
+    String WADING_POOLS = "wading_pools";
+    String PLAY_FOUNTAINS = "play_fountains";
+    String _HEAT_WAVE_MIXED = "water_supplies";
+    // Health x2
+    String HOSPITALS = "hospitals";
+    String CLSC = "clsc";
 }

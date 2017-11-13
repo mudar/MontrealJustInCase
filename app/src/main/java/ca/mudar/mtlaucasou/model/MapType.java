@@ -28,14 +28,18 @@ import android.support.annotation.StringDef;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-import ca.mudar.mtlaucasou.Const;
-
 @Retention(RetentionPolicy.SOURCE)
 @StringDef({
-        Const.MapTypes.FIRE_HALLS,
-        Const.MapTypes.SPVM_STATIONS,
-        Const.MapTypes.HEAT_WAVE,
-        Const.MapTypes.EMERGENCY_HOSTELS,
-        Const.MapTypes.HEALTH})
+        MapType.FIRE_HALLS,
+        MapType.SPVM_STATIONS,
+        MapType.HEAT_WAVE,
+        MapType.EMERGENCY_HOSTELS,
+        MapType.HEALTH})
 public @interface MapType {
+    String FIRE_HALLS = "fire_halls";
+    String SPVM_STATIONS = "spvm_stations";
+    String HEAT_WAVE = "water_supplies";
+    String EMERGENCY_HOSTELS = "emergency_hostels";
+    String HEALTH = "health";
+    String _DEFAULT = FIRE_HALLS;
 }

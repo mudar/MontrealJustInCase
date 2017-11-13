@@ -27,7 +27,6 @@ import com.crashlytics.android.answers.Answers;
 import com.crashlytics.android.answers.ContentViewEvent;
 
 import ca.mudar.mtlaucasou.BuildConfig;
-import ca.mudar.mtlaucasou.Const;
 import ca.mudar.mtlaucasou.Const.MetricsContentTypes;
 import ca.mudar.mtlaucasou.model.MetricsContentName;
 import ca.mudar.mtlaucasou.model.MetricsContentType;
@@ -39,7 +38,7 @@ public class MetricsUtils {
     }
 
     public static void logSettingsView() {
-        logView(Const.MetricsContentNames.SETTINGS, MetricsContentTypes.SETTINGS);
+        logView(MetricsContentName.SETTINGS, MetricsContentTypes.SETTINGS);
     }
 
     public static void logAboutView(@MetricsContentName String name) {

@@ -98,7 +98,8 @@ public class Const {
 
     public interface PrefsNames {
         String HAS_LOADED_DATA_LEGACY = "prefs_has_loaded_data"; // version 1.0
-        String HAS_LOADED_DATA = "prefs_has_loaded_data_v2";
+        String HAS_LOADED_DATA_REALM = "prefs_has_loaded_data_v2";
+        String HAS_LOADED_DATA = "prefs_has_loaded_data_v3";
         String IS_FIRST_LAUNCH = "prefs_is_first_launch";
         String HAS_ACCEPTED_EULA = "accepted_eula";
 //        String VERSION_DATABASE = "prefs_version_database";

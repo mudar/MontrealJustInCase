@@ -23,20 +23,13 @@
 
 package ca.mudar.mtlaucasou.model;
 
-import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
-import android.arch.persistence.room.PrimaryKey;
-import android.support.annotation.NonNull;
 
 import com.google.android.gms.maps.model.LatLng;
 
 import ca.mudar.mtlaucasou.model.geojson.Point;
 
-@Entity
 public class LongitudeLatitude {
-    @NonNull
-    @PrimaryKey(autoGenerate = true)
-    private long id;
     private double lng;
     private double lat;
 
@@ -55,15 +48,6 @@ public class LongitudeLatitude {
     private LongitudeLatitude(Builder builder) {
         this.lng = builder.lng;
         this.lat = builder.lat;
-    }
-
-    @NonNull
-    public long getId() {
-        return id;
-    }
-
-    public void setId(@NonNull long id) {
-        this.id = id;
     }
 
     public double getLng() {

@@ -26,7 +26,7 @@ package ca.mudar.mtlaucasou;
 public class ConstDb {
 
     public static final String DATABASE_NAME = "mtlaucasou.db";
-    public static final int DATABASE_VERSION = 12;
+    public static final int DATABASE_VERSION = 13;
 
     public interface Tables {
         String PLACEMARKS = "placemarks";

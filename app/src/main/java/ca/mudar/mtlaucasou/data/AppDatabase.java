@@ -29,11 +29,9 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
 import ca.mudar.mtlaucasou.ConstDb;
-import ca.mudar.mtlaucasou.model.LongitudeLatitude;
-import ca.mudar.mtlaucasou.model.PlacemarkProperties;
 import ca.mudar.mtlaucasou.model.RealmPlacemark;
 
-@Database(entities = {RealmPlacemark.class, PlacemarkProperties.class, LongitudeLatitude.class},
+@Database(entities = {RealmPlacemark.class},
         version = ConstDb.DATABASE_VERSION)
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase INSTANCE;

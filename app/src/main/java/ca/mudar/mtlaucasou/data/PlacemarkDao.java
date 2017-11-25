@@ -26,6 +26,7 @@ package ca.mudar.mtlaucasou.data;
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
+import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 
 import java.util.List;
@@ -55,7 +56,7 @@ public interface PlacemarkDao {
     LiveData<List<RealmPlacemark>> getByMapAndLayerType(@MapType String mapType,
                                                         @LayerType String[] layerType);
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     long insert(RealmPlacemark placemark);
 
     @Query("DELETE FROM " + Tables.PLACEMARKS +

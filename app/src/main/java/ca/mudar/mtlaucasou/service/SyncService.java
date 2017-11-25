@@ -44,6 +44,7 @@ import ca.mudar.mtlaucasou.data.UserPrefs;
 import ca.mudar.mtlaucasou.model.LayerType;
 import ca.mudar.mtlaucasou.model.MapType;
 import ca.mudar.mtlaucasou.model.geojson.PointsFeatureCollection;
+import ca.mudar.mtlaucasou.model.geojson.base.GeometryFeatureCollection;
 import ca.mudar.mtlaucasou.model.jsonapi.Attributes;
 import ca.mudar.mtlaucasou.model.jsonapi.DataItem;
 import ca.mudar.mtlaucasou.model.jsonapi.HelloApi;
@@ -131,8 +132,9 @@ public class SyncService extends IntentService {
         final InputStream inputStream = getResources().openRawResource(resource);
         final InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
 
-        final PointsFeatureCollection collection = new Gson()
-                .fromJson(inputStreamReader, PointsFeatureCollection.class);
+        final GeometryFeatureCollection collection = new Gson()
+                .fromJson(inputStreamReader,
+                        ApiDataUtils.getCollectionType(mapType, layerType));
 
         RealmQueries.cacheMapData(mDatabase,
                 collection.getFeatures(),

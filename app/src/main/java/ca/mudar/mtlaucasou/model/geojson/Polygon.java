@@ -25,7 +25,5 @@ package ca.mudar.mtlaucasou.model.geojson;
 
 import java.util.List;
 
-import ca.mudar.mtlaucasou.model.geojson.base.Geometry;
-
-public class Polygon extends Geometry<List<List<Double>>> {
+public class Polygon extends MixedPolygonGeometry<List<List<List<Point>>>> {
 }

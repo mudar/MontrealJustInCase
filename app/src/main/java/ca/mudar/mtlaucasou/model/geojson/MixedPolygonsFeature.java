@@ -23,8 +23,8 @@
 
 package ca.mudar.mtlaucasou.model.geojson;
 
-import java.util.List;
+import ca.mudar.mtlaucasou.model.geojson.base.GeometryFeature;
 
-public class MultiPolygon extends MixedPolygonGeometry<List<List<List<List<Point>>>>> {
+public class MixedPolygonsFeature extends GeometryFeature<MixedPolygonGeometry> {
 
 }

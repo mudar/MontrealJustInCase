@@ -33,7 +33,9 @@ import java.util.Set;
 import ca.mudar.mtlaucasou.model.LayerType;
 import ca.mudar.mtlaucasou.model.MapType;
 import ca.mudar.mtlaucasou.model.RealmPlacemark;
+import ca.mudar.mtlaucasou.model.geojson.MixedPolygonsFeature;
 import ca.mudar.mtlaucasou.model.geojson.PointsFeature;
+import ca.mudar.mtlaucasou.model.geojson.base.GeometryFeature;
 
 import static ca.mudar.mtlaucasou.util.LogUtils.makeLogTag;
 
@@ -79,20 +81,24 @@ public class RealmQueries {
      * Save the downloaded data to the Realm db
      *
      * @param db
-     * @param pointsFeatures
+     * @param geometryFeatures
      * @param mapType
      * @param layerType
      */
-    public static void cacheMapData(AppDatabase db,
-                                    List<PointsFeature> pointsFeatures,
-                                    @MapType String mapType,
-                                    @LayerType String layerType) {
+    public static <G extends GeometryFeature> void cacheMapData(AppDatabase db,
+                                                                List<G> geometryFeatures,
+                                                                @MapType String mapType,
+                                                                @LayerType String layerType) {
         // Loop over results, convert GeoJSON to Realm then add to db
-        for (PointsFeature feature : pointsFeatures) {
-            db.placemarkDao().insert(new RealmPlacemark.Builder(feature)
-                    .mapType(mapType)
-                    .layerType(layerType, feature.getProperties().getType())
-                    .build());
+        for (GeometryFeature feature : geometryFeatures) {
+            if (feature instanceof PointsFeature) {
+                db.placemarkDao().insert(new RealmPlacemark.Builder((PointsFeature) feature)
+                        .mapType(mapType)
+                        .layerType(layerType, feature.getProperties().getType())
+                        .build());
+            } else if (feature instanceof MixedPolygonsFeature) {
+// TODO save polygons to Room db
+            }
         }
     }
 
@@ -100,17 +106,17 @@ public class RealmQueries {
      * Save the downloaded data to the Realm db enclosed in a transaction
      *
      * @param db
-     * @param pointsFeatures
+     * @param geometryFeatures
      * @param mapType
      * @param layerType
      */
-    public static void cacheMapDataWithTransaction(AppDatabase db,
-                                                   List<PointsFeature> pointsFeatures,
-                                                   @MapType String mapType,
-                                                   @LayerType String layerType) {
+    public static <G extends GeometryFeature> void cacheMapDataWithTransaction(AppDatabase db,
+                                                                               List<G> geometryFeatures,
+                                                                               @MapType String mapType,
+                                                                               @LayerType String layerType) {
         db.beginTransaction();
         try {
-            cacheMapData(db, pointsFeatures, mapType, layerType);
+            cacheMapData(db, geometryFeatures, mapType, layerType);
 
             db.setTransactionSuccessful();
         } finally {

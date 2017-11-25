@@ -89,6 +89,7 @@ public class SyncService extends IntentService {
         try {
             importLocalData(R.raw.fire_halls, MapType.FIRE_HALLS, LayerType.FIRE_HALLS);
             importLocalData(R.raw.spvm_stations, MapType.SPVM_STATIONS, LayerType.SPVM_STATIONS);
+            importLocalData(R.raw.spvm_areas, MapType.SPVM_STATIONS, LayerType.SPVM_AREAS);
             importLocalData(R.raw.water_supplies, MapType.HEAT_WAVE, LayerType._HEAT_WAVE_MIXED);
             importLocalData(R.raw.air_conditioning, MapType.HEAT_WAVE, LayerType.AIR_CONDITIONING);
             importLocalData(R.raw.emergency_hostels, MapType.EMERGENCY_HOSTELS, LayerType.EMERGENCY_HOSTELS);

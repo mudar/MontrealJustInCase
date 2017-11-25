@@ -32,7 +32,11 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import ca.mudar.mtlaucasou.BuildConfig;
+import ca.mudar.mtlaucasou.Const;
+import ca.mudar.mtlaucasou.model.geojson.MixedPolygonGeometry;
+import ca.mudar.mtlaucasou.model.geojson.MultiPolygon;
 import ca.mudar.mtlaucasou.model.geojson.PointsFeatureCollection;
+import ca.mudar.mtlaucasou.model.geojson.Polygon;
 import ca.mudar.mtlaucasou.model.jsonapi.HelloApi;
 import ca.mudar.mtlaucasou.util.LogUtils;
 import okhttp3.OkHttpClient;
@@ -71,6 +75,11 @@ public class ApiClient {
                 .build();
 
         final Gson gson = new GsonBuilder()
+                .registerTypeAdapterFactory(RuntimeTypeAdapterFactory.
+                        of(MixedPolygonGeometry.class, Const.ApiFields.TYPE).
+                        registerSubtype(Polygon.class, Const.ApiValues.TYPE_POLYGON).
+                        registerSubtype(MultiPolygon.class, Const.ApiValues.TYPE_MULTI_POLYGON)
+                )
                 .create();
 
         final Retrofit retrofit = new Retrofit.Builder()

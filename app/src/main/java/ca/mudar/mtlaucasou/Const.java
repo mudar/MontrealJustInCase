@@ -58,6 +58,10 @@ public class Const {
         String GET_HELLO = "hello.json";
     }
 
+    public interface ApiFields {
+        String TYPE = "type";
+    }
+
     public interface ApiValues {
         String TYPE_PLACEMARKS = "placemarks";
         String TYPE_SHAPES = "shapes";
@@ -67,6 +71,9 @@ public class Const {
         String TYPE_POOLS_EXT = "piscine-ext";
         String TYPE_POOLS_INT = "piscine-int";
         String TYPE_BEACH = "plage";
+        // GeoJSON geometry types
+        String TYPE_POLYGON = "Polygon";
+        String TYPE_MULTI_POLYGON = "MultiPolygon";
     }
 
     public interface BundleKeys {

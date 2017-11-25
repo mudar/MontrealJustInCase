@@ -31,8 +31,10 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.SOURCE)
 @StringDef({
         LayerType.FIRE_HALLS,
-        LayerType.SPVM_STATIONS,
         LayerType.EMERGENCY_HOSTELS,
+        // SPVM x2
+        LayerType.SPVM_STATIONS,
+        LayerType.SPVM_AREAS,
         // Heat wave x4
         LayerType.AIR_CONDITIONING,
         LayerType.POOLS,
@@ -45,8 +47,10 @@ import java.lang.annotation.RetentionPolicy;
 })
 public @interface LayerType {
     String FIRE_HALLS = "fire_halls";
-    String SPVM_STATIONS = "spvm_stations";
     String EMERGENCY_HOSTELS = "emergency_hostels";
+    // SPVM x2
+    String SPVM_STATIONS = "spvm_stations";
+    String SPVM_AREAS = "spvm_areas";
     // Heat wave x4
     String AIR_CONDITIONING = "air_conditioning";
     String POOLS = "pools";

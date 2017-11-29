@@ -165,7 +165,7 @@ public class MapUtils {
     }
 
     /**
-     * Add the Realm Placemarks to the map
+     * Add the Room Placemarks to the map
      *
      * @param map        the Map object
      * @param placemarks list of Placemarks

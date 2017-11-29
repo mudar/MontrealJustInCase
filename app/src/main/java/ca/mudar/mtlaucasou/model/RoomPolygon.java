@@ -41,7 +41,7 @@ import ca.mudar.mtlaucasou.model.geojson.Feature;
                 @Index(Fields.PLACEMARK_ID)
         },
         foreignKeys = @ForeignKey(
-                entity = RealmPlacemark.class,
+                entity = RoomPlacemark.class,
                 parentColumns = Fields.ID,
                 childColumns = Fields.PLACEMARK_ID,
                 onDelete = ForeignKey.CASCADE

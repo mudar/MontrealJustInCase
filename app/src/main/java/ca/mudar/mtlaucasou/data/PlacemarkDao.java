@@ -34,30 +34,30 @@ import java.util.List;
 import ca.mudar.mtlaucasou.ConstDb.Tables;
 import ca.mudar.mtlaucasou.model.LayerType;
 import ca.mudar.mtlaucasou.model.MapType;
-import ca.mudar.mtlaucasou.model.RealmPlacemark;
+import ca.mudar.mtlaucasou.model.RoomPlacemark;
 
 import static ca.mudar.mtlaucasou.ConstDb.Fields;
 
 @Dao
 public interface PlacemarkDao {
     @Query("SELECT * FROM " + Tables.PLACEMARKS)
-    List<RealmPlacemark> getAll();
+    List<RoomPlacemark> getAll();
 
     @Query("SELECT *, props_name FROM " + Tables.PLACEMARKS +
             " WHERE ' ' || " + Fields.PROPERTIES_NAME + " COLLATE UNICODE LIKE :name")
-    List<RealmPlacemark> getByName(String name);
+    List<RoomPlacemark> getByName(String name);
 
     @Query("SELECT * FROM " + Tables.PLACEMARKS +
             " WHERE " + Fields.MAP_TYPE + " = :mapType")
-    LiveData<List<RealmPlacemark>> getByMapType(@MapType String mapType);
+    LiveData<List<RoomPlacemark>> getByMapType(@MapType String mapType);
 
     @Query("SELECT * FROM " + Tables.PLACEMARKS
             + " WHERE " + Fields.MAP_TYPE + " = :mapType AND " + Fields.LAYER_TYPE + " IN(:layerType)")
-    LiveData<List<RealmPlacemark>> getByMapAndLayerType(@MapType String mapType,
-                                                        @LayerType String[] layerType);
+    LiveData<List<RoomPlacemark>> getByMapAndLayerType(@MapType String mapType,
+                                                       @LayerType String[] layerType);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    long insert(RealmPlacemark placemark);
+    long insert(RoomPlacemark placemark);
 
     @Query("DELETE FROM " + Tables.PLACEMARKS +
             " WHERE " + Fields.LAYER_TYPE + " IN(:layerType)")

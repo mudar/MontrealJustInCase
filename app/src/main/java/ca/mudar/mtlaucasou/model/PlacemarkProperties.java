@@ -63,7 +63,7 @@ public class PlacemarkProperties {
     }
 
     /**
-     * Build a Realm PlacemarkProperties from GeoJSON FeatureProperties
+     * Build a Room PlacemarkProperties from GeoJSON FeatureProperties
      */
     public static class Builder {
         private final String name;

@@ -55,11 +55,11 @@ import java.util.List;
 import ca.mudar.mtlaucasou.Const;
 import ca.mudar.mtlaucasou.R;
 import ca.mudar.mtlaucasou.data.AppDatabase;
-import ca.mudar.mtlaucasou.data.RealmQueries;
+import ca.mudar.mtlaucasou.data.RoomQueries;
 import ca.mudar.mtlaucasou.data.UserPrefs;
 import ca.mudar.mtlaucasou.model.MapType;
 import ca.mudar.mtlaucasou.model.Placemark;
-import ca.mudar.mtlaucasou.model.RealmPlacemark;
+import ca.mudar.mtlaucasou.model.RoomPlacemark;
 import ca.mudar.mtlaucasou.ui.adapter.PlacemarkInfoWindowAdapter;
 import ca.mudar.mtlaucasou.ui.listener.LocationUpdatesManager;
 import ca.mudar.mtlaucasou.ui.listener.MapLayersManager;
@@ -367,24 +367,17 @@ public class MainActivity extends BaseActivity implements
             return;
         }
 
-//        if (mRealmListener != null) {
-//            // Remove previously added RealmChangeListener
-//            mDb.removeChangeListener(mRealmListener);
-//            mRealmListener = null;
-//        }
-
-        // Query the Realm db for the current mapType
-        RealmQueries.queryPlacemarksByMapType(
+        // Query the Room db for the current mapType
+        RoomQueries.queryPlacemarksByMapType(
                 mDb,
                 type,
                 UserPrefs.getInstance(getApplicationContext()).getEnabledLayers()
-        ).observe(this, new Observer<List<RealmPlacemark>>() {
+        ).observe(this, new Observer<List<RoomPlacemark>>() {
             @Override
-            public void onChanged(@Nullable List<RealmPlacemark> realmPlacemarks) {
-
-                if (realmPlacemarks != null && realmPlacemarks.size() > 0) {
+            public void onChanged(@Nullable List<RoomPlacemark> roomPlacemarks) {
+                if (roomPlacemarks != null && roomPlacemarks.size() > 0) {
                     // Has cached data
-                    final List<Marker> markers = MapUtils.addPlacemarksToMap(vMap, realmPlacemarks);
+                    final List<Marker> markers = MapUtils.addPlacemarksToMap(vMap, roomPlacemarks);
 
                     new Handler().postDelayed(new Runnable() {
                         /**

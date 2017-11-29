@@ -45,7 +45,7 @@ import ca.mudar.mtlaucasou.util.ApiDataUtils;
                 @Index(Fields.LAYER_TYPE)
         }
 )
-public class RealmPlacemark implements
+public class RoomPlacemark implements
         Placemark {
 
     @NonNull
@@ -60,7 +60,7 @@ public class RealmPlacemark implements
     @Embedded(prefix = Prefixes.COORDINATES)
     private LongitudeLatitude coordinates;
 
-    public RealmPlacemark() {
+    public RoomPlacemark() {
         // Empty constructor
     }
 
@@ -69,7 +69,7 @@ public class RealmPlacemark implements
      *
      * @param builder
      */
-    private RealmPlacemark(Builder builder) {
+    private RoomPlacemark(Builder builder) {
         if (builder.id != null) {
             this.id = builder.id.hashCode();
         }
@@ -138,7 +138,7 @@ public class RealmPlacemark implements
     }
 
     /**
-     * Build a Realm Placemark from GeoJSON PointsFeature
+     * Build a Room Placemark from GeoJSON PointsFeature
      */
     public static class Builder {
         private String id;
@@ -176,8 +176,8 @@ public class RealmPlacemark implements
             return this;
         }
 
-        public RealmPlacemark build() {
-            return new RealmPlacemark(this);
+        public RoomPlacemark build() {
+            return new RoomPlacemark(this);
         }
     }
 }

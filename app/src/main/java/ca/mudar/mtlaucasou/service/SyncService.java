@@ -39,7 +39,7 @@ import ca.mudar.mtlaucasou.Const;
 import ca.mudar.mtlaucasou.R;
 import ca.mudar.mtlaucasou.api.ApiClient;
 import ca.mudar.mtlaucasou.data.AppDatabase;
-import ca.mudar.mtlaucasou.data.RealmQueries;
+import ca.mudar.mtlaucasou.data.RoomQueries;
 import ca.mudar.mtlaucasou.data.UserPrefs;
 import ca.mudar.mtlaucasou.model.LayerType;
 import ca.mudar.mtlaucasou.model.MapType;
@@ -136,7 +136,7 @@ public class SyncService extends IntentService {
         final FeatureCollection collection = gson.fromJson(inputStreamReader,
                 FeatureCollection.class);
 
-        RealmQueries.cacheMapData(mDatabase,
+        RoomQueries.cacheMapData(mDatabase,
                 collection.getFeatures(),
                 mapType,
                 layerType);
@@ -145,7 +145,7 @@ public class SyncService extends IntentService {
     /**
      * Request the GeoJSON data from the API
      *
-     * @param dataset The dataset to import into the Realm db
+     * @param dataset The dataset to import into the Room db
      * @return
      */
     private boolean importRemoteData(DataItem dataset) {
@@ -158,8 +158,8 @@ public class SyncService extends IntentService {
                 final Attributes attributes = dataset.getAttributes();
 
                 if (attributes != null) {
-                    RealmQueries.clearMapData(mDatabase, attributes.getLayerType());
-                    RealmQueries.cacheMapDataWithTransaction(mDatabase,
+                    RoomQueries.clearMapData(mDatabase, attributes.getLayerType());
+                    RoomQueries.cacheMapDataWithTransaction(mDatabase,
                             collection.getFeatures(),
                             attributes.getMapType(),
                             attributes.getLayerType());

@@ -32,7 +32,7 @@ import java.util.Set;
 
 import ca.mudar.mtlaucasou.model.LayerType;
 import ca.mudar.mtlaucasou.model.MapType;
-import ca.mudar.mtlaucasou.model.RealmPlacemark;
+import ca.mudar.mtlaucasou.model.RoomPlacemark;
 import ca.mudar.mtlaucasou.model.RoomPolygon;
 import ca.mudar.mtlaucasou.model.geojson.Feature;
 import ca.mudar.mtlaucasou.model.geojson.MultiPolygonGeometry;
@@ -42,8 +42,8 @@ import ca.mudar.mtlaucasou.model.geojson.base.BaseGeometry;
 
 import static ca.mudar.mtlaucasou.util.LogUtils.makeLogTag;
 
-public class RealmQueries {
-    private static final String TAG = makeLogTag("RealmQueries");
+public class RoomQueries {
+    private static final String TAG = makeLogTag("RoomQueries");
     private static final Set<String> HEAT_WAVE_LAYERS = new HashSet<>(Arrays.asList(
             LayerType.AIR_CONDITIONING,
             LayerType.POOLS,
@@ -55,7 +55,7 @@ public class RealmQueries {
 
 
     /**
-     * Delete data from the Realm db
+     * Delete data from the Room db
      *
      * @param db
      * @param layerType
@@ -81,7 +81,7 @@ public class RealmQueries {
     }
 
     /**
-     * Save the downloaded data to the Realm db
+     * Save the downloaded data to the Room db
      *
      * @param db
      * @param features
@@ -92,12 +92,12 @@ public class RealmQueries {
                                     List<Feature> features,
                                     @MapType String mapType,
                                     @LayerType String layerType) {
-        // Loop over results, convert GeoJSON to Realm then add to db
+        // Loop over results, convert GeoJSON to Room then add to db
         for (Feature feature : features) {
             final BaseGeometry baseGeometry = feature.getGeometry();
 
             if (baseGeometry instanceof PointGeometry) {
-                db.placemarkDao().insert(new RealmPlacemark.Builder(feature)
+                db.placemarkDao().insert(new RoomPlacemark.Builder(feature)
                         .mapType(mapType)
                         .layerType(layerType, feature.getProperties().getType())
                         .build());
@@ -123,7 +123,7 @@ public class RealmQueries {
     }
 
     /**
-     * Save the downloaded data to the Realm db enclosed in a transaction
+     * Save the downloaded data to the Room db enclosed in a transaction
      *
      * @param db
      * @param features
@@ -152,9 +152,9 @@ public class RealmQueries {
      * @param layers
      * @return
      */
-    public static LiveData<List<RealmPlacemark>> queryPlacemarksByMapType(AppDatabase db,
-                                                                          @MapType String mapType,
-                                                                          @LayerType Set<String> layers) {
+    public static LiveData<List<RoomPlacemark>> queryPlacemarksByMapType(AppDatabase db,
+                                                                         @MapType String mapType,
+                                                                         @LayerType Set<String> layers) {
         Set<String> filterLayers = null;
         if (layers != null && !layers.isEmpty()) {
             if (MapType.HEAT_WAVE.equals(mapType)) {
@@ -181,8 +181,8 @@ public class RealmQueries {
      * @param mapType
      * @return
      */
-    private static LiveData<List<RealmPlacemark>> queryPlacemarksByMapType(AppDatabase db,
-                                                                           @MapType String mapType) {
+    private static LiveData<List<RoomPlacemark>> queryPlacemarksByMapType(AppDatabase db,
+                                                                          @MapType String mapType) {
         return db.placemarkDao().getByMapType(mapType);
     }
 
@@ -193,7 +193,7 @@ public class RealmQueries {
      * @param name
      * @return
      */
-    public static List<RealmPlacemark> queryPlacemarksByName(AppDatabase db, String name) {
+    public static List<RoomPlacemark> queryPlacemarksByName(AppDatabase db, String name) {
         return db.placemarkDao()
                 .getByName("% " + name + "%");
     }

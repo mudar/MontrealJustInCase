@@ -71,7 +71,7 @@ public class LongitudeLatitude {
     }
 
     /**
-     * Build a Realm LongitudeLatitude from GeoJSON Point
+     * Build a Room LongitudeLatitude from GeoJSON Point
      */
     public static class Builder {
         private final double lat;

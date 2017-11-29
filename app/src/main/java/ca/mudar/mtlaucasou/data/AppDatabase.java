@@ -29,12 +29,12 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
 import ca.mudar.mtlaucasou.ConstDb;
-import ca.mudar.mtlaucasou.model.RealmPlacemark;
+import ca.mudar.mtlaucasou.model.RoomPlacemark;
 import ca.mudar.mtlaucasou.model.RoomPolygon;
 
 @Database(version = ConstDb.DATABASE_VERSION,
         entities = {
-                RealmPlacemark.class,
+                RoomPlacemark.class,
                 RoomPolygon.class
         }
 )

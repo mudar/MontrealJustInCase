@@ -39,7 +39,7 @@ public class MtlAuCasOuApp extends Application {
         super.onCreate();
 
         setupCrashlytics();
-        setupRealm();
+        setupRoom();
         setupLeakCanary();
 
         LangUtils.updateUiLanguage(this);
@@ -53,7 +53,7 @@ public class MtlAuCasOuApp extends Application {
         }
     }
 
-    private void setupRealm() {
+    private void setupRoom() {
 //        Realm.init(this);
 //        RealmConfiguration config = new RealmConfiguration.Builder()
 //                .name(Const.DATABASE_NAME)

@@ -40,10 +40,10 @@ import java.util.List;
 
 import ca.mudar.mtlaucasou.R;
 import ca.mudar.mtlaucasou.data.AppDatabase;
-import ca.mudar.mtlaucasou.data.RealmQueries;
+import ca.mudar.mtlaucasou.data.RoomQueries;
 import ca.mudar.mtlaucasou.data.SuggestionsCursorHelper;
 import ca.mudar.mtlaucasou.model.Placemark;
-import ca.mudar.mtlaucasou.model.RealmPlacemark;
+import ca.mudar.mtlaucasou.model.RoomPlacemark;
 import ca.mudar.mtlaucasou.model.SuggestionsPlacemark;
 import ca.mudar.mtlaucasou.util.LogUtils;
 import ca.mudar.mtlaucasou.util.NavigUtils;
@@ -120,24 +120,24 @@ public class PlacemarkSearchAdapter extends CursorAdapter implements
             try {
                 if (constraint != null && constraint.length() >= THRESHOLD) {
                     /*
-                     * Query the database for filtered RealmPlacemarks,
+                     * Query the database for filtered RoomPlacemarks,
                      * then convert results to SuggestionsPlacemark.
                      * Realm doesn't allow mixed use by Worker/UI threads, and this allows for
                      * safer calls to realm.close()
                      */
-                    final List<RealmPlacemark> realmPlacemarks = RealmQueries
+                    final List<RoomPlacemark> roomPlacemarks = RoomQueries
                             .queryPlacemarksByName(mDb, String.valueOf(constraint));
 
-                    if (realmPlacemarks != null) {
-                        results.count = realmPlacemarks.size();
+                    if (roomPlacemarks != null) {
+                        results.count = roomPlacemarks.size();
                     }
                     if (results.count > 0) {
                         // The SuggestionsPlacemark list
                         final List<SuggestionsPlacemark> suggestions = new ArrayList<>();
-                        for (RealmPlacemark realmPlacemark : realmPlacemarks) {
-                            // Convert each RealmPlacemark then add it to the results list
+                        for (RoomPlacemark roomPlacemark : roomPlacemarks) {
+                            // Convert each RoomPlacemark then add it to the results list
                             suggestions.add(new SuggestionsPlacemark.Builder()
-                                    .placemark(realmPlacemark)
+                                    .placemark(roomPlacemark)
                                     .build());
                         }
                         Collections.sort(suggestions);

@@ -163,7 +163,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
                         "GooglePlayServices", "materialloadingprogressbar",
                         "clansfloatingactionbutton", "AboutLibraries", "materialtaptargetprompt",
                         "Crashlytics",
-                        "Retrofit", "OkHttp", "Realm",
+                        "Retrofit", "OkHttp",
                         "gson", "appcompat_v7", "design", "recyclerview_v7", "architectureroom"
                 )
                 .withExcludedLibraries(

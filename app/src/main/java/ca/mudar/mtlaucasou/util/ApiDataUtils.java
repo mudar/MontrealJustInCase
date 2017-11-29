@@ -29,10 +29,6 @@ import java.util.Locale;
 
 import ca.mudar.mtlaucasou.Const.ApiValues;
 import ca.mudar.mtlaucasou.model.LayerType;
-import ca.mudar.mtlaucasou.model.MapType;
-import ca.mudar.mtlaucasou.model.geojson.MixedPolygonsFeatureCollection;
-import ca.mudar.mtlaucasou.model.geojson.PointsFeatureCollection;
-import ca.mudar.mtlaucasou.model.geojson.base.GeometryFeatureCollection;
 
 import static ca.mudar.mtlaucasou.Const.PrefsNames.ITEM_UPDATED_AT;
 import static ca.mudar.mtlaucasou.util.LogUtils.makeLogTag;
@@ -66,13 +62,5 @@ public class ApiDataUtils {
         }
 
         return null;
-    }
-
-    public static Class<? extends GeometryFeatureCollection> getCollectionType(@MapType String mapType, @LayerType String layerType) {
-        if (layerType.equals(LayerType.SPVM_AREAS)) {
-            return MixedPolygonsFeatureCollection.class;
-        } else {
-            return PointsFeatureCollection.class;
-        }
     }
 }

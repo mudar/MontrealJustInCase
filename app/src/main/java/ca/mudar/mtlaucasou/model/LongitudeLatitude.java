@@ -27,7 +27,7 @@ import android.arch.persistence.room.Ignore;
 
 import com.google.android.gms.maps.model.LatLng;
 
-import ca.mudar.mtlaucasou.model.geojson.Point;
+import java.util.List;
 
 public class LongitudeLatitude {
     private double lng;
@@ -77,9 +77,9 @@ public class LongitudeLatitude {
         private final double lat;
         private final double lng;
 
-        public Builder(Point point) {
-            this.lng = point.getCoordinates().get(0);
-            this.lat = point.getCoordinates().get(1);
+        public Builder(List<Double> point) {
+            this.lng = point.get(0);
+            this.lat = point.get(1);
         }
 
         public LongitudeLatitude build() {

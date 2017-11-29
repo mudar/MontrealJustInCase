@@ -31,7 +31,7 @@ import java.util.List;
 
 import ca.mudar.mtlaucasou.Const;
 
-public class FeatureProperties {
+public class Properties {
     @SerializedName("Name")
     private String name;
     @SerializedName("Description")

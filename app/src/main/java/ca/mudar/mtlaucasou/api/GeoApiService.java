@@ -24,8 +24,8 @@
 package ca.mudar.mtlaucasou.api;
 
 import ca.mudar.mtlaucasou.Const;
-import ca.mudar.mtlaucasou.model.geojson.PointsFeatureCollection;
 import ca.mudar.mtlaucasou.model.jsonapi.HelloApi;
+import ca.mudar.mtlaucasou.model.geojson.FeatureCollection;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
@@ -41,5 +41,5 @@ public interface GeoApiService {
 
     @Headers({CONTENT_TYPE})
     @GET
-    Call<PointsFeatureCollection> getPlacemarks(@Url String url);
+    Call<FeatureCollection> getPlacemarks(@Url String url);
 }

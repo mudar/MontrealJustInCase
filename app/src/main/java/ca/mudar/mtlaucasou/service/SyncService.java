@@ -43,11 +43,10 @@ import ca.mudar.mtlaucasou.data.RealmQueries;
 import ca.mudar.mtlaucasou.data.UserPrefs;
 import ca.mudar.mtlaucasou.model.LayerType;
 import ca.mudar.mtlaucasou.model.MapType;
-import ca.mudar.mtlaucasou.model.geojson.PointsFeatureCollection;
-import ca.mudar.mtlaucasou.model.geojson.base.GeometryFeatureCollection;
 import ca.mudar.mtlaucasou.model.jsonapi.Attributes;
 import ca.mudar.mtlaucasou.model.jsonapi.DataItem;
 import ca.mudar.mtlaucasou.model.jsonapi.HelloApi;
+import ca.mudar.mtlaucasou.model.geojson.FeatureCollection;
 import ca.mudar.mtlaucasou.util.ApiDataUtils;
 import ca.mudar.mtlaucasou.util.LogUtils;
 import retrofit2.Response;
@@ -133,9 +132,9 @@ public class SyncService extends IntentService {
         final InputStream inputStream = getResources().openRawResource(resource);
         final InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
 
-        final GeometryFeatureCollection collection = new Gson()
-                .fromJson(inputStreamReader,
-                        ApiDataUtils.getCollectionType(mapType, layerType));
+        final Gson gson = ApiClient.getGsonBuilder().create();
+        final FeatureCollection collection = gson.fromJson(inputStreamReader,
+                FeatureCollection.class);
 
         RealmQueries.cacheMapData(mDatabase,
                 collection.getFeatures(),
@@ -150,11 +149,11 @@ public class SyncService extends IntentService {
      * @return
      */
     private boolean importRemoteData(DataItem dataset) {
-        final Response<PointsFeatureCollection> response = ApiClient
+        final Response<FeatureCollection> response = ApiClient
                 .getPlacemarks(ApiClient.getService(), dataset.getLinks().getSelf());
 
         if (response != null) {
-            PointsFeatureCollection collection = response.body();
+            FeatureCollection collection = response.body();
             if (collection != null && collection.getFeatures() != null) {
                 final Attributes attributes = dataset.getAttributes();
 

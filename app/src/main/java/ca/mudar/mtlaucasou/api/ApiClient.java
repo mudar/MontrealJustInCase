@@ -32,11 +32,13 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import ca.mudar.mtlaucasou.BuildConfig;
-import ca.mudar.mtlaucasou.Const;
-import ca.mudar.mtlaucasou.model.geojson.MixedPolygonGeometry;
-import ca.mudar.mtlaucasou.model.geojson.MultiPolygon;
-import ca.mudar.mtlaucasou.model.geojson.PointsFeatureCollection;
-import ca.mudar.mtlaucasou.model.geojson.Polygon;
+import ca.mudar.mtlaucasou.Const.ApiFields;
+import ca.mudar.mtlaucasou.Const.ApiValues;
+import ca.mudar.mtlaucasou.model.geojson.base.BaseGeometry;
+import ca.mudar.mtlaucasou.model.geojson.FeatureCollection;
+import ca.mudar.mtlaucasou.model.geojson.MultiPolygonGeometry;
+import ca.mudar.mtlaucasou.model.geojson.PointGeometry;
+import ca.mudar.mtlaucasou.model.geojson.SimplePolygonGeometry;
 import ca.mudar.mtlaucasou.model.jsonapi.HelloApi;
 import ca.mudar.mtlaucasou.util.LogUtils;
 import okhttp3.OkHttpClient;
@@ -74,13 +76,7 @@ public class ApiClient {
                 .addInterceptor(interceptor)
                 .build();
 
-        final Gson gson = new GsonBuilder()
-                .registerTypeAdapterFactory(RuntimeTypeAdapterFactory.
-                        of(MixedPolygonGeometry.class, Const.ApiFields.TYPE).
-                        registerSubtype(Polygon.class, Const.ApiValues.TYPE_POLYGON).
-                        registerSubtype(MultiPolygon.class, Const.ApiValues.TYPE_MULTI_POLYGON)
-                )
-                .create();
+        final Gson gson = getGsonBuilder().create();
 
         final Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BuildConfig.API_BASE_URL)
@@ -108,7 +104,7 @@ public class ApiClient {
     }
 
     @Nullable
-    public static Response<PointsFeatureCollection> getPlacemarks(GeoApiService service, String url) {
+    public static Response<FeatureCollection> getPlacemarks(GeoApiService service, String url) {
         try {
             return service.getPlacemarks(url)
                     .execute();
@@ -119,8 +115,18 @@ public class ApiClient {
         return null;
     }
 
-    public static void getPlacemarks(GeoApiService service, String url, Callback<PointsFeatureCollection> cb) {
+    public static void getPlacemarks(GeoApiService service, String url, Callback<FeatureCollection> cb) {
         service.getPlacemarks(url)
                 .enqueue(cb);
+    }
+
+    public static GsonBuilder getGsonBuilder() {
+        return new GsonBuilder()
+                .registerTypeAdapterFactory(RuntimeTypeAdapterFactory
+                        .of(BaseGeometry.class, ApiFields.TYPE)
+                        .registerSubtype(PointGeometry.class, ApiValues.TYPE_POINT)
+                        .registerSubtype(SimplePolygonGeometry.class, ApiValues.TYPE_POLYGON)
+                        .registerSubtype(MultiPolygonGeometry.class, ApiValues.TYPE_MULTI_POLYGON)
+                );
     }
 }

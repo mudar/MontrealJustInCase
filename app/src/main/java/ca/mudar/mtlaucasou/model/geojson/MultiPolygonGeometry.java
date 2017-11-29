@@ -23,7 +23,14 @@
 
 package ca.mudar.mtlaucasou.model.geojson;
 
-import ca.mudar.mtlaucasou.model.geojson.base.GeometryFeatureCollection;
+import java.util.List;
 
-public class MultiPolygonsFeatureCollection extends GeometryFeatureCollection<MultiPolygonsFeature> {
+import ca.mudar.mtlaucasou.model.geojson.base.BaseGeometry;
+
+public class MultiPolygonGeometry extends BaseGeometry {
+    private List<List<List<List<Double>>>> coordinates;
+
+    public List<List<List<List<Double>>>> getCoordinates() {
+        return coordinates;
+    }
 }

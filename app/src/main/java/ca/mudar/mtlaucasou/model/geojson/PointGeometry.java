@@ -21,29 +21,16 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package ca.mudar.mtlaucasou.model.geojson.base;
+package ca.mudar.mtlaucasou.model.geojson;
 
-import ca.mudar.mtlaucasou.model.geojson.FeatureProperties;
+import java.util.List;
 
-public abstract class GeometryFeature<V extends Geometry> {
-    protected V geometry;
-    protected String id;
-    protected FeatureProperties properties;
-    protected String type;
+import ca.mudar.mtlaucasou.model.geojson.base.BaseGeometry;
 
-    public V getGeometry() {
-        return geometry;
-    }
+public class PointGeometry extends BaseGeometry {
+    private List<Double> coordinates;
 
-    public String getId() {
-        return id;
-    }
-
-    public FeatureProperties getProperties() {
-        return properties;
-    }
-
-    public String getType() {
-        return type;
+    public List<Double> getCoordinates() {
+        return coordinates;
     }
 }

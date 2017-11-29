@@ -34,12 +34,17 @@ import com.google.android.gms.maps.model.LatLng;
 import ca.mudar.mtlaucasou.ConstDb.Fields;
 import ca.mudar.mtlaucasou.ConstDb.Prefixes;
 import ca.mudar.mtlaucasou.ConstDb.Tables;
-import ca.mudar.mtlaucasou.model.geojson.PointsFeature;
+import ca.mudar.mtlaucasou.model.geojson.Feature;
+import ca.mudar.mtlaucasou.model.geojson.PointGeometry;
 import ca.mudar.mtlaucasou.util.ApiDataUtils;
 
 
 @Entity(tableName = Tables.PLACEMARKS,
-        indices = {@Index(Fields.MAP_TYPE), @Index(Fields.LAYER_TYPE)})
+        indices = {
+                @Index(Fields.MAP_TYPE),
+                @Index(Fields.LAYER_TYPE)
+        }
+)
 public class RealmPlacemark implements
         Placemark {
 
@@ -65,7 +70,7 @@ public class RealmPlacemark implements
      * @param builder
      */
     private RealmPlacemark(Builder builder) {
-        if (builder.id != null ) {
+        if (builder.id != null) {
             this.id = builder.id.hashCode();
         }
         this.mapType = builder.mapType;
@@ -144,12 +149,13 @@ public class RealmPlacemark implements
         private PlacemarkProperties properties;
         private LongitudeLatitude coordinates;
 
-        public Builder(PointsFeature pointsFeature) {
-            this.id = pointsFeature.getId();
+        public Builder(Feature feature) {
+            this.id = feature.getId();
 
-            this.properties = new PlacemarkProperties.Builder(pointsFeature.getProperties())
+            this.properties = new PlacemarkProperties.Builder(feature.getProperties())
                     .build();
-            this.coordinates = new LongitudeLatitude.Builder(pointsFeature.getGeometry())
+            this.coordinates = new LongitudeLatitude
+                    .Builder(((PointGeometry) feature.getGeometry()).getCoordinates())
                     .build();
         }
 

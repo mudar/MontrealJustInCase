@@ -30,13 +30,20 @@ import android.content.Context;
 
 import ca.mudar.mtlaucasou.ConstDb;
 import ca.mudar.mtlaucasou.model.RealmPlacemark;
+import ca.mudar.mtlaucasou.model.RoomPolygon;
 
-@Database(entities = {RealmPlacemark.class},
-        version = ConstDb.DATABASE_VERSION)
+@Database(version = ConstDb.DATABASE_VERSION,
+        entities = {
+                RealmPlacemark.class,
+                RoomPolygon.class
+        }
+)
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase INSTANCE;
 
     public abstract PlacemarkDao placemarkDao();
+
+    public abstract PolygonDao shapeDao();
 
     public static AppDatabase getAppDatabase(Context context) {
         if (INSTANCE == null) {

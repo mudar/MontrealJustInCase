@@ -21,9 +21,30 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package ca.mudar.mtlaucasou.model.geojson;
+package ca.mudar.mtlaucasou.data;
 
-import ca.mudar.mtlaucasou.model.geojson.base.GeometryFeatureCollection;
+import android.arch.persistence.room.Dao;
+import android.arch.persistence.room.Insert;
+import android.arch.persistence.room.OnConflictStrategy;
+import android.arch.persistence.room.Query;
 
-public class PolygonsFeatureCollection extends GeometryFeatureCollection<PolygonsFeature> {
+import java.util.List;
+
+import ca.mudar.mtlaucasou.ConstDb.Fields;
+import ca.mudar.mtlaucasou.ConstDb.Tables;
+import ca.mudar.mtlaucasou.model.RoomPolygon;
+
+@Dao
+public interface PolygonDao {
+    @Query("SELECT * FROM " + Tables.POLYGONS)
+    List<RoomPolygon> getAll();
+
+    @Query("SELECT * FROM " + Tables.POLYGONS + " WHERE " + Fields.ID + " = :id")
+    List<RoomPolygon> getById(long id);
+
+    @Query("SELECT * FROM " + Tables.POLYGONS + " WHERE " + Fields.PLACEMARK_ID + " = :placemarkId")
+    List<RoomPolygon> getByPlacemarkId(long placemarkId);
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    long insert(RoomPolygon polygon);
 }

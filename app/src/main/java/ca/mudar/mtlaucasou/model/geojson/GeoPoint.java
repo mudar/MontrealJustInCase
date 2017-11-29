@@ -21,19 +21,16 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package ca.mudar.mtlaucasou.model.geojson.base;
+package ca.mudar.mtlaucasou.model.geojson;
 
-import java.util.List;
+import java.util.ArrayList;
 
-public abstract class Geometry<V> {
-    protected List<V> coordinates;
-    protected String type;
-
-    public List<V> getCoordinates() {
-        return coordinates;
+public class SimplePoint extends ArrayList<Double> {
+    public Double getLng() {
+        return get(0);
     }
 
-    public String getType() {
-        return type;
+    public Double getLat() {
+        return get(0);
     }
 }

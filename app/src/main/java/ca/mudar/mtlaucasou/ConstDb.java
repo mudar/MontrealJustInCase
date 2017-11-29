@@ -26,20 +26,19 @@ package ca.mudar.mtlaucasou;
 public class ConstDb {
 
     public static final String DATABASE_NAME = "mtlaucasou.db";
-    public static final int DATABASE_VERSION = 13;
+    public static final int DATABASE_VERSION = 14;
 
     public interface Tables {
         String PLACEMARKS = "placemarks";
+        String POLYGONS = "polygons";
     }
 
     public interface Fields {
+        String ID = "id";
         String MAP_TYPE = "mapType";
         String LAYER_TYPE = "layerType";
-        String COORDINATES = "coordinates";
-        String COORDINATES_LAT = "coords_lat";
-        String COORDINATES_LNG = "coords_lng";
         String PROPERTIES_NAME = "props_name";
-        String NAME = "name";
+        String PLACEMARK_ID = "placemarkId";
     }
 
     public interface Prefixes {

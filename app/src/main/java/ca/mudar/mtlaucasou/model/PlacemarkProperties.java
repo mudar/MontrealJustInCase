@@ -24,9 +24,8 @@
 package ca.mudar.mtlaucasou.model;
 
 import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
 
-import ca.mudar.mtlaucasou.model.geojson.FeatureProperties;
+import ca.mudar.mtlaucasou.model.geojson.Properties;
 
 public class PlacemarkProperties {
     @ColumnInfo.Collate()
@@ -70,7 +69,7 @@ public class PlacemarkProperties {
         private final String name;
         private final String description;
 
-        public Builder(FeatureProperties properties) {
+        public Builder(Properties properties) {
             this.name = properties.getName();
             this.description = properties.getAddress();
         }

@@ -72,6 +72,7 @@ public class Const {
         String TYPE_POOLS_INT = "piscine-int";
         String TYPE_BEACH = "plage";
         // GeoJSON geometry types
+        String TYPE_POINT = "Point";
         String TYPE_POLYGON = "Polygon";
         String TYPE_MULTI_POLYGON = "MultiPolygon";
     }

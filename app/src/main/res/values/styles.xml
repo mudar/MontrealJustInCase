@@ -24,8 +24,8 @@
 <resources>
 
     <style name="BottomNavStyle">
-        <item name="itemIconTint">@color/text_primary</item>
-        <item name="itemTextColor">@color/text_primary</item>
+        <item name="itemIconTint">@color/bottom_nav_foreground</item>
+        <item name="itemTextColor">@color/bottom_nav_foreground</item>
         <item name="android:background">@color/color_background</item>
         <item name="menu">@menu/bottom_nav</item>
     </style>

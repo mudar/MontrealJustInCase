@@ -55,6 +55,7 @@
 
     <!--Map-->
     <dimen name="map_new_bounds_padding">64dp</dimen>
+    <dimen name="map_polygon_stroke">2dp</dimen>
 
     <!--FloatingActionButton-->
     <dimen name="fab_margin">12dp</dimen>

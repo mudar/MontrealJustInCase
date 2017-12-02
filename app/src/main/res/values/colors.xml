@@ -40,6 +40,8 @@
     <color name="red_700">#D32F2F</color>
     <!--<color name="blue_400">#78909C</color>-->
     <color name="blue_500">#2196F3</color>
+    <color name="blue_500_transp_12">#202196F3</color>
+    <color name="blue_600">#1E88E5</color>
     <color name="blue_grey_300">#90A4AE</color>
     <color name="blue_grey_400">#78909C</color>
     <!--<color name="blue_grey_500">#607D8B</color>-->
@@ -74,6 +76,10 @@
     <!--Map InfoWindow-->
     <color name="map_info_title">@color/grey_900</color>
     <color name="map_info_snippet">@color/grey_600</color>
+
+    <!--Map Polygons-->
+    <color name="map_polygon_stroke">@color/blue_600</color>
+    <color name="map_polygon_fill">@color/blue_500_transp_12</color>
 
     <!--FloatingActionMenu-->
     <color name="fab_menu_item_color_normal">@color/grey_800</color>

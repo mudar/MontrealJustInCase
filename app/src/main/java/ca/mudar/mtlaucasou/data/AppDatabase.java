@@ -26,6 +26,7 @@ package ca.mudar.mtlaucasou.data;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
+import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 
 import ca.mudar.mtlaucasou.ConstDb;
@@ -38,12 +39,15 @@ import ca.mudar.mtlaucasou.model.RoomPolygon;
                 RoomPolygon.class
         }
 )
+@TypeConverters({
+        Converters.class
+})
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase INSTANCE;
 
     public abstract PlacemarkDao placemarkDao();
 
-    public abstract PolygonDao shapeDao();
+    public abstract PolygonDao polygonDao();
 
     public static AppDatabase getAppDatabase(Context context) {
         if (INSTANCE == null) {

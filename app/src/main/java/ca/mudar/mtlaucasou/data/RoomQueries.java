@@ -24,6 +24,7 @@
 package ca.mudar.mtlaucasou.data;
 
 import android.arch.lifecycle.LiveData;
+import android.util.Log;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -102,13 +103,15 @@ public class RoomQueries {
                         .layerType(layerType, feature.getProperties().getType())
                         .build());
             } else if (baseGeometry instanceof SimplePolygonGeometry) {
-                db.shapeDao().insert(new RoomPolygon.Builder(feature)
+                db.polygonDao().insert(new RoomPolygon.Builder(feature)
                         .mapType(mapType)
                         .layerType(layerType)
                         .coordinates(((SimplePolygonGeometry) baseGeometry).getCoordinates())
                         .build());
             } else if (baseGeometry instanceof MultiPolygonGeometry) {
                 // Create multiple simple polygons instead
+                Log.w(TAG, String.format("Verification needed: feature %s is a MultiPolygonGeometry.",
+                        feature.getId()));
                 final RoomPolygon.Builder builder = new RoomPolygon.Builder(feature)
                         .mapType(mapType)
                         .layerType(layerType);
@@ -116,7 +119,7 @@ public class RoomQueries {
                 for (List<List<List<Double>>> polygonCoordinates : geometry) {
                     final RoomPolygon polygon = builder.coordinates(polygonCoordinates)
                             .build();
-                    db.shapeDao().insert(polygon);
+                    db.polygonDao().insert(polygon);
                 }
             }
         }
@@ -196,5 +199,17 @@ public class RoomQueries {
     public static List<RoomPlacemark> queryPlacemarksByName(AppDatabase db, String name) {
         return db.placemarkDao()
                 .getByName("% " + name + "%");
+    }
+
+    /**
+     * Get all Polygons for requested placemarkId
+     *
+     * @param db
+     * @param placemarkId
+     * @return
+     */
+    public static LiveData<List<RoomPolygon>> queryPolygonsByPlacemarkId(AppDatabase db, long placemarkId) {
+        return db.polygonDao()
+                .getByPlacemarkId(placemarkId);
     }
 }

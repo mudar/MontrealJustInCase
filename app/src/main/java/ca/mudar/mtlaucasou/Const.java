@@ -63,8 +63,6 @@ public class Const {
     }
 
     public interface ApiValues {
-        String TYPE_PLACEMARKS = "placemarks";
-        String TYPE_SHAPES = "shapes";
         // Remote dataType is used to determine local layerType
         String TYPE_PLAY_FOUNTAINS = "jeux-d-eau";
         String TYPE_WADING_POOLS = "pataugeoire";

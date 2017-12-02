@@ -48,6 +48,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.Polygon;
 import com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar;
 
 import java.util.List;
@@ -60,6 +61,7 @@ import ca.mudar.mtlaucasou.data.UserPrefs;
 import ca.mudar.mtlaucasou.model.MapType;
 import ca.mudar.mtlaucasou.model.Placemark;
 import ca.mudar.mtlaucasou.model.RoomPlacemark;
+import ca.mudar.mtlaucasou.model.RoomPolygon;
 import ca.mudar.mtlaucasou.ui.adapter.PlacemarkInfoWindowAdapter;
 import ca.mudar.mtlaucasou.ui.listener.LocationUpdatesManager;
 import ca.mudar.mtlaucasou.ui.listener.MapLayersManager;
@@ -379,6 +381,9 @@ public class MainActivity extends BaseActivity implements
                     // Has cached data
                     final List<Marker> markers = MapUtils.addPlacemarksToMap(vMap, roomPlacemarks);
 
+                    // Save markers IDs for onClick usage
+                    mLayersManager.saveMarkersIdsIfNecessary(type, markers, roomPlacemarks);
+
                     new Handler().postDelayed(new Runnable() {
                         /**
                          * Delay hiding the progressbar for 750ms, avoids blink-effect on fast operations.
@@ -503,5 +508,24 @@ public class MainActivity extends BaseActivity implements
         toggleProgressBar(true);
 
         loadMapData(mMapType);
+    }
+
+    /**
+     * MapLayersManager.LayersFilterCallbacks
+     */
+    @Override
+    public void onPlacemarkClick(long placemarkId) {
+        RoomQueries.queryPolygonsByPlacemarkId(mDb, placemarkId)
+                .observe(this, new Observer<List<RoomPolygon>>() {
+                    @Override
+                    public void onChanged(@Nullable List<RoomPolygon> roomPolygons) {
+                        if (roomPolygons != null && roomPolygons.size() > 0) {
+                            final List<Polygon> polygons = MapUtils
+                                    .addPolygonsToMap(MainActivity.this, vMap, roomPolygons);
+
+                            mLayersManager.togglePolygonsLayer(polygons);
+                        }
+                    }
+                });
     }
 }

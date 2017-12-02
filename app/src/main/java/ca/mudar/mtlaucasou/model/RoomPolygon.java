@@ -52,13 +52,13 @@ public class RoomPolygon {
     @PrimaryKey(autoGenerate = true)
     private long id;
     private long placemarkId;
+    private String placemarkName;
     @MapType
     private String mapType;
     @LayerType
     private String layerType;
-    // TODO handle coordinates and holes as Entities
-//    private List<LongitudeLatitude> coordinates;
-//    private List<List<LongitudeLatitude>> holes;
+    private ArrayList<LongitudeLatitude> coordinates;
+    private ArrayList<ArrayList<LongitudeLatitude>> holes;
 
     public RoomPolygon() {
         // Empty constructor
@@ -68,8 +68,11 @@ public class RoomPolygon {
         if (builder.placemarkId != null) {
             this.placemarkId = builder.placemarkId.hashCode();
         }
+        this.placemarkName = builder.placemarkId;
         this.mapType = builder.mapType;
         this.layerType = builder.layerType;
+        this.coordinates = builder.coordinates;
+        this.holes = builder.holes;
     }
 
     @NonNull
@@ -89,6 +92,14 @@ public class RoomPolygon {
         this.placemarkId = placemarkId;
     }
 
+    public String getPlacemarkName() {
+        return placemarkName;
+    }
+
+    public void setPlacemarkName(String placemarkName) {
+        this.placemarkName = placemarkName;
+    }
+
     public String getMapType() {
         return mapType;
     }
@@ -105,17 +116,33 @@ public class RoomPolygon {
         this.layerType = layerType;
     }
 
+    public ArrayList<LongitudeLatitude> getCoordinates() {
+        return coordinates;
+    }
+
+    public void setCoordinates(ArrayList<LongitudeLatitude> coordinates) {
+        this.coordinates = coordinates;
+    }
+
+    public ArrayList<ArrayList<LongitudeLatitude>> getHoles() {
+        return holes;
+    }
+
+    public void setHoles(ArrayList<ArrayList<LongitudeLatitude>> holes) {
+        this.holes = holes;
+    }
+
     public static class Builder {
         private String placemarkId;
         @MapType
         private String mapType;
         @LayerType
         private String layerType;
-        private List<LongitudeLatitude> coordinates = new ArrayList<>();
-        private List<List<LongitudeLatitude>> holes = new ArrayList<>();
+        private ArrayList<LongitudeLatitude> coordinates = new ArrayList<>();
+        private ArrayList<ArrayList<LongitudeLatitude>> holes = new ArrayList<>();
 
         public Builder(Feature mixedPolygonsFeature) {
-            this.placemarkId = mixedPolygonsFeature.getId();
+            this.placemarkId = mixedPolygonsFeature.getProperties().getSpvmPlacemarkId();
         }
 
         public Builder mapType(@MapType String mapType) {
@@ -145,8 +172,8 @@ public class RoomPolygon {
             // Other rings/shapes are holes
             final int nbHoles = coordinates.size() - 1;
             if (nbHoles > 0) {
-                for (int i = 1; i < nbHoles; i++) {
-                    final List<LongitudeLatitude> hole = new ArrayList<>();
+                for (int i = 1; i <= nbHoles; i++) {
+                    final ArrayList<LongitudeLatitude> hole = new ArrayList<>();
                     for (List<Double> point : coordinates.get(i)) {
                         hole.add(new LongitudeLatitude.Builder(point).build());
                     }

@@ -47,6 +47,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polygon;
+import com.google.android.gms.maps.model.PolygonOptions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,8 +56,10 @@ import java.util.List;
 import ca.mudar.mtlaucasou.Const;
 import ca.mudar.mtlaucasou.R;
 import ca.mudar.mtlaucasou.model.LayerType;
+import ca.mudar.mtlaucasou.model.LongitudeLatitude;
 import ca.mudar.mtlaucasou.model.MapType;
 import ca.mudar.mtlaucasou.model.Placemark;
+import ca.mudar.mtlaucasou.model.RoomPolygon;
 
 import static ca.mudar.mtlaucasou.util.LogUtils.makeLogTag;
 
@@ -203,6 +207,57 @@ public class MapUtils {
 
         Log.v(TAG, String.format("Added %1$d markers. Duration: %2$dms",
                 markerOptionsList.size(),
+                System.currentTimeMillis() - startTime));
+
+        return results;
+    }
+
+    public static List<Polygon> addPolygonsToMap(Context context, GoogleMap map, List<RoomPolygon> polygons) {
+        final long startTime = System.currentTimeMillis();
+        if (context == null || map == null || polygons == null) {
+            return null;
+        }
+
+        final int strokeWidth = context.getResources().getDimensionPixelSize(R.dimen.map_polygon_stroke);
+        final @ColorInt int strokeColor = ContextCompat.getColor(context, R.color.map_polygon_stroke);
+        final @ColorInt int fillColor = ContextCompat.getColor(context, R.color.map_polygon_fill);
+
+        final List<PolygonOptions> polygonOptionsList = new ArrayList<>();
+        for (RoomPolygon roomPolygon : polygons) {
+            if (roomPolygon.getCoordinates() != null) {
+                final PolygonOptions polygonOptions = new PolygonOptions()
+                        .strokeWidth(strokeWidth)
+                        .strokeColor(strokeColor)
+                        .fillColor(fillColor);
+                // A polygon has a single outer ring
+                for (LongitudeLatitude point : roomPolygon.getCoordinates()) {
+                    polygonOptions.add(point.getLatLng());
+                }
+
+                // A polygon has multiple inner rings for the holes
+                if (roomPolygon.getHoles() != null) {
+                    for (ArrayList<LongitudeLatitude> hole : roomPolygon.getHoles()) {
+                        final List<LatLng> holePoints = new ArrayList<>();
+                        for (LongitudeLatitude point : hole) {
+                            holePoints.add(point.getLatLng());
+                        }
+                        // Add each hole
+                        polygonOptions.addHole(holePoints);
+                    }
+                }
+
+                polygonOptionsList.add(polygonOptions);
+            }
+        }
+
+        // Add polygons once all are ready
+        final List<Polygon> results = new ArrayList<>();
+        for (PolygonOptions polygonOptions : polygonOptionsList) {
+            results.add(map.addPolygon(polygonOptions));
+        }
+
+        Log.v(TAG, String.format("Added %1$d polygons. Duration: %2$dms",
+                polygonOptionsList.size(),
                 System.currentTimeMillis() - startTime));
 
         return results;

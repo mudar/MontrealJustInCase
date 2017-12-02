@@ -26,6 +26,7 @@ package ca.mudar.mtlaucasou.ui.listener;
 import android.content.Context;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.view.View;
@@ -35,13 +36,19 @@ import com.github.clans.fab.FloatingActionMenu;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.Polygon;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import ca.mudar.mtlaucasou.R;
 import ca.mudar.mtlaucasou.data.UserPrefs;
 import ca.mudar.mtlaucasou.model.LayerType;
 import ca.mudar.mtlaucasou.model.MapType;
+import ca.mudar.mtlaucasou.model.RoomPlacemark;
 import ca.mudar.mtlaucasou.util.MapUtils;
 
 import static ca.mudar.mtlaucasou.util.LogUtils.makeLogTag;
@@ -69,6 +76,11 @@ public class MapLayersManager implements
     @ColorInt
     private int mNormalColor;
 
+    // Map of markerId/placemarkId, to show Polygons of clicked Placemark
+    private Map<String, Long> mMarkersList = new HashMap<>();
+    private String mMarkerId; // To handle marker re-click
+    private List<Polygon> mPolygonsList;
+
     public MapLayersManager(@NonNull Context context, @NonNull FloatingActionMenu menu, LayersFilterCallbacks listener) {
         mContext = context;
         mListener = listener;
@@ -89,6 +101,9 @@ public class MapLayersManager implements
         mPlayFountainsFAB = (FloatingActionButton) mMenuFAB.findViewById(R.id.fab_play_fountains);
         mHospitalsFAB = (FloatingActionButton) mMenuFAB.findViewById(R.id.fab_hospitals);
         mClscFAB = (FloatingActionButton) mMenuFAB.findViewById(R.id.fab_clsc);
+
+        mMarkersList = new HashMap<>();
+        mPolygonsList = new ArrayList<>();
 
         setupEnabledLayers(UserPrefs.getInstance(context));
         setupMenuItemsListeners();
@@ -138,6 +153,9 @@ public class MapLayersManager implements
         if (mMapTypeHasMenu) {
             mMenuFAB.hideMenu(true);
         }
+
+        showPolygonIfAvailable(marker);
+
         return false;
     }
 
@@ -201,6 +219,42 @@ public class MapLayersManager implements
         }
 
         return mMapTypeHasMenu;
+    }
+
+    /**
+     * Keep reference to all Markers' IDs, to allow DB query by placemark ID.
+     * Mainly because Markers cannot hold object ID, but generate their own once added to the map.
+     *
+     * @param type           Selected map type {fire_halls|spvm_stations|water_supplies|emergency_hostels|hospitals}
+     * @param markers        List of Markers shown on map (mMarkersList keys)
+     * @param roomPlacemarks List of RoomPlacemarks, for child polygon IDs (mMarkersList values)
+     */
+    public void saveMarkersIdsIfNecessary(@MapType final String type,
+                                          @Nullable List<Marker> markers,
+                                          List<RoomPlacemark> roomPlacemarks) {
+        mMarkersList.clear();
+        if (MapType.SPVM_STATIONS.equals(type) && markers != null &&
+                markers.size() == roomPlacemarks.size()) {
+            final int nbMarkers = markers.size();
+            for (int i = 0; i < nbMarkers; i++) {
+                mMarkersList.put(markers.get(i).getId(),
+                        roomPlacemarks.get(i).getId());
+            }
+        }
+    }
+
+    /**
+     * Remove previous polygons, and keep a reference to the new ones.
+     *
+     * @param polygons New polygons added to the map
+     */
+    public void togglePolygonsLayer(List<Polygon> polygons) {
+        for (Polygon polygon : mPolygonsList) {
+            polygon.remove();
+        }
+
+        mPolygonsList.clear();
+        mPolygonsList.addAll(polygons);
     }
 
     private void toggleWaterSupplyFilterItems(boolean visible) {
@@ -272,9 +326,27 @@ public class MapLayersManager implements
         fab.setColorNormal(color);
     }
 
+    private void showPolygonIfAvailable(@NonNull Marker marker) {
+        if (marker.getId().equals(mMarkerId)) {
+            // Marker re-clicked, nothing to do here
+            return;
+        }
+
+        mMarkerId = marker.getId();
+
+        if (mListener != null && mMarkersList != null && mMarkersList.size() > 0) {
+            final Long placemarkId = mMarkersList.get(marker.getId());
+            if (placemarkId != null) {
+                mListener.onPlacemarkClick(placemarkId);
+            }
+        }
+    }
+
     public interface LayersFilterCallbacks {
         void onFiltersChange();
 
         void onFiltersApply();
+
+        void onPlacemarkClick(long placemarkId);
     }
 }

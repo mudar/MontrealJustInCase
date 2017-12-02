@@ -48,6 +48,8 @@ public class Properties {
     private String type;
     @SerializedName("Types")
     private List<String> types;
+    @SerializedName("Nom_PDQ")
+    private String spvmPlacemarkId;
 
     public String getName() {
         return name;
@@ -93,5 +95,9 @@ public class Properties {
 
     public List<String> getTypes() {
         return types;
+    }
+
+    public String getSpvmPlacemarkId() {
+        return spvmPlacemarkId;
     }
 }

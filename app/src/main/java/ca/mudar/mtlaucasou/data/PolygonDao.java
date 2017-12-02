@@ -23,6 +23,7 @@
 
 package ca.mudar.mtlaucasou.data;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
@@ -37,13 +38,13 @@ import ca.mudar.mtlaucasou.model.RoomPolygon;
 @Dao
 public interface PolygonDao {
     @Query("SELECT * FROM " + Tables.POLYGONS)
-    List<RoomPolygon> getAll();
+    LiveData<List<RoomPolygon>> getAll();
 
     @Query("SELECT * FROM " + Tables.POLYGONS + " WHERE " + Fields.ID + " = :id")
-    List<RoomPolygon> getById(long id);
+    LiveData<List<RoomPolygon>> getById(long id);
 
     @Query("SELECT * FROM " + Tables.POLYGONS + " WHERE " + Fields.PLACEMARK_ID + " = :placemarkId")
-    List<RoomPolygon> getByPlacemarkId(long placemarkId);
+    LiveData<List<RoomPolygon>> getByPlacemarkId(long placemarkId);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long insert(RoomPolygon polygon);

@@ -35,7 +35,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Date;
 
-import ca.mudar.mtlaucasou.Const;
 import ca.mudar.mtlaucasou.R;
 import ca.mudar.mtlaucasou.api.ApiClient;
 import ca.mudar.mtlaucasou.data.AppDatabase;
@@ -43,10 +42,10 @@ import ca.mudar.mtlaucasou.data.RoomQueries;
 import ca.mudar.mtlaucasou.data.UserPrefs;
 import ca.mudar.mtlaucasou.model.LayerType;
 import ca.mudar.mtlaucasou.model.MapType;
+import ca.mudar.mtlaucasou.model.geojson.FeatureCollection;
 import ca.mudar.mtlaucasou.model.jsonapi.Attributes;
 import ca.mudar.mtlaucasou.model.jsonapi.DataItem;
 import ca.mudar.mtlaucasou.model.jsonapi.HelloApi;
-import ca.mudar.mtlaucasou.model.geojson.FeatureCollection;
 import ca.mudar.mtlaucasou.util.ApiDataUtils;
 import ca.mudar.mtlaucasou.util.LogUtils;
 import retrofit2.Response;
@@ -88,7 +87,7 @@ public class SyncService extends IntentService {
         try {
             importLocalData(R.raw.fire_halls, MapType.FIRE_HALLS, LayerType.FIRE_HALLS);
             importLocalData(R.raw.spvm_stations, MapType.SPVM_STATIONS, LayerType.SPVM_STATIONS);
-            importLocalData(R.raw.spvm_areas, MapType.SPVM_STATIONS, LayerType.SPVM_AREAS);
+            importLocalData(R.raw.spvm_stations_polygons, MapType.SPVM_STATIONS, LayerType.SPVM_AREAS);
             importLocalData(R.raw.water_supplies, MapType.HEAT_WAVE, LayerType._HEAT_WAVE_MIXED);
             importLocalData(R.raw.air_conditioning, MapType.HEAT_WAVE, LayerType.AIR_CONDITIONING);
             importLocalData(R.raw.emergency_hostels, MapType.EMERGENCY_HOSTELS, LayerType.EMERGENCY_HOSTELS);
@@ -107,10 +106,6 @@ public class SyncService extends IntentService {
             if (helloResponse != null && helloResponse.body() != null) {
                 final HelloApi api = helloResponse.body();
                 for (DataItem dataset : api.getData()) {
-                    if (!Const.ApiValues.TYPE_PLACEMARKS.equals(dataset.getType())) {
-                        continue;
-                    }
-
                     final String key = ApiDataUtils.getSharedPrefsKey(dataset.getId());
                     final Date updatedAt = dataset.getAttributes().getUpdated();
 

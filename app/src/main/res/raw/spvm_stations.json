@@ -2,7 +2,7 @@
   "type": "FeatureCollection",
   "features": [{
     "type": "Feature",
-    "id": "pdq-48",
+    "id": "PDQ-48",
     "properties": {
       "Name": "Poste de quartier 48",
       "Description": "<p>Poste de quartier 48<br\/>6680 rue Sherbrooke Est<br\/>Montréal<\/P>"
@@ -13,7 +13,7 @@
     }
   }, {
     "type": "Feature",
-    "id": "pdq-04",
+    "id": "PDQ-04",
     "properties": {
       "Name": "Poste de quartier 04",
       "Description": "<p>Poste de quartier 04<br\/>4139 boul des Sources<br\/>Dollard-des-Ormeaux<\/P>"
@@ -24,7 +24,7 @@
     }
   }, {
     "type": "Feature",
-    "id": "pdq-30",
+    "id": "PDQ-30",
     "properties": {
       "Name": "Poste de quartier 30",
       "Description": "<p>Poste de quartier 30<br\/>8930 boul Pie-IX<br\/>Montréal<\/P>"
@@ -35,7 +35,7 @@
     }
   }, {
     "type": "Feature",
-    "id": "pdq-23",
+    "id": "PDQ-23",
     "properties": {
       "Name": "Poste de quartier 23",
       "Description": "<p>Poste de quartier 23<br\/>4555 rue Hochelaga<br\/>Montréal<\/P>"
@@ -46,7 +46,7 @@
     }
   }, {
     "type": "Feature",
-    "id": "pdq-10",
+    "id": "PDQ-10",
     "properties": {
       "Name": "Poste de quartier 10",
       "Description": "<p>Poste de quartier 10<br\/>11756 boul O’brien<br\/>Montréal<\/P>"
@@ -57,7 +57,7 @@
     }
   }, {
     "type": "Feature",
-    "id": "pdq-42",
+    "id": "PDQ-42",
     "properties": {
       "Name": "Poste de quartier 42",
       "Description": "<p>Poste de quartier 42<br\/>8181 boul Lacordaire<br\/>Montréal<\/P>"
@@ -68,7 +68,7 @@
     }
   }, {
     "type": "Feature",
-    "id": "pdq-24",
+    "id": "PDQ-24",
     "properties": {
       "Name": "Poste de quartier 24",
       "Description": "<p>Poste de quartier 24<br\/>1435 aven Van-Horne<br\/>Montréal<\/P>"
@@ -79,7 +79,7 @@
     }
   }, {
     "type": "Feature",
-    "id": "pdq-39",
+    "id": "PDQ-39",
     "properties": {
       "Name": "Poste de quartier 39",
       "Description": "<p>Poste de quartier 39<br\/>6100 boul Henri-Bourassa<br\/>Montréal<\/P>"
@@ -90,7 +90,7 @@
     }
   }, {
     "type": "Feature",
-    "id": "pdq-05",
+    "id": "PDQ-05",
     "properties": {
       "Name": "Poste de quartier 05",
       "Description": "<p>Poste de quartier 05<br\/>395 boul St-Jean<br\/>Pointe-Claire<\/P>"
@@ -101,7 +101,7 @@
     }
   }, {
     "type": "Feature",
-    "id": "pdq-12",
+    "id": "PDQ-12",
     "properties": {
       "Name": "Poste de quartier 12",
       "Description": "<p>Poste de quartier 12<br\/>21 stre Stanton<br\/>Westmount<\/P>"
@@ -112,7 +112,7 @@
     }
   }, {
     "type": "Feature",
-    "id": "pdq-37",
+    "id": "PDQ-37",
     "properties": {
       "Name": "Poste de quartier 37",
       "Description": "<p>Poste de quartier 37<br\/>209 aven Laurier Est<br\/>Montréal<\/P>"
@@ -123,7 +123,7 @@
     }
   }, {
     "type": "Feature",
-    "id": "pdq-15",
+    "id": "PDQ-15",
     "properties": {
       "Name": "Poste de quartier 15",
       "Description": "<p>Poste de quartier 15<br\/>1625 aven de l’Église<br\/>Montréal<\/P>"
@@ -134,7 +134,7 @@
     }
   }, {
     "type": "Feature",
-    "id": "pdq-31",
+    "id": "PDQ-31",
     "properties": {
       "Name": "Poste de quartier 31",
       "Description": "<p>Poste de quartier 31<br\/>7920 boul St-Laurent<br\/>Montréal<\/P>"
@@ -145,7 +145,7 @@
     }
   }, {
     "type": "Feature",
-    "id": "pdq-49",
+    "id": "PDQ-49",
     "properties": {
       "Name": "Poste de quartier 49",
       "Description": "<p>Poste de quartier 49<br\/>1498 boul St-Jean-Baptiste<br\/>Montréal<\/P>"
@@ -156,7 +156,7 @@
     }
   }, {
     "type": "Feature",
-    "id": "pdq-35",
+    "id": "PDQ-35",
     "properties": {
       "Name": "Poste de quartier 35",
       "Description": "<p>Poste de quartier 35<br\/>920 rue Bélanger<br\/>Montréal<\/P>"
@@ -167,7 +167,7 @@
     }
   }, {
     "type": "Feature",
-    "id": "pdq-07",
+    "id": "PDQ-07",
     "properties": {
       "Name": "Poste de quartier 07",
       "Description": "<p>Poste de quartier 07<br\/>1761 rue Grenet<br\/>Montréal<\/P>"
@@ -178,7 +178,7 @@
     }
   }, {
     "type": "Feature",
-    "id": "pdq-01",
+    "id": "PDQ-01",
     "properties": {
       "Name": "Poste de quartier 01",
       "Description": "<p>Poste de quartier 01<br\/>2883 boul St-Charles<br\/>Kirkland<\/P>"
@@ -189,7 +189,7 @@
     }
   }, {
     "type": "Feature",
-    "id": "pdq-08",
+    "id": "PDQ-08",
     "properties": {
       "Name": "Poste de quartier 08",
       "Description": "<p>Poste de quartier 08<br\/>170 aven 15e<br\/>Montréal<\/P>"
@@ -200,7 +200,7 @@
     }
   }, {
     "type": "Feature",
-    "id": "pdq-46",
+    "id": "PDQ-46",
     "properties": {
       "Name": "Poste de quartier 46",
       "Description": "<p>Poste de quartier 46<br\/>6850 boul Joseph-Renaud<br\/>Montréal<\/P>"
@@ -211,7 +211,7 @@
     }
   }, {
     "type": "Feature",
-    "id": "pdq-09",
+    "id": "PDQ-09",
     "properties": {
       "Name": "Poste de quartier 09",
       "Description": "<p>Poste de quartier 09<br\/>5757 boul Cavendish<br\/>Côte-Saint-Luc<\/P>"
@@ -222,7 +222,7 @@
     }
   }, {
     "type": "Feature",
-    "id": "pdq-20",
+    "id": "PDQ-20",
     "properties": {
       "Name": "Poste de quartier 20",
       "Description": "<p>Poste de quartier 20<br\/>1432 rue Ste-Catherine Ouest<br\/>Montréal<\/P>"
@@ -233,7 +233,7 @@
     }
   }, {
     "type": "Feature",
-    "id": "pdq-21",
+    "id": "PDQ-21",
     "properties": {
       "Name": "Poste de quartier 21",
       "Description": "<p>Poste de quartier 21<br\/>1180 rue Ste-Élisabeth<br\/>Montréal<\/P>"
@@ -244,7 +244,7 @@
     }
   }, {
     "type": "Feature",
-    "id": "pdq-38",
+    "id": "PDQ-38",
     "properties": {
       "Name": "Poste de quartier 38",
       "Description": "<p>Poste de quartier 38<br\/>1033 rue Rachel Est<br\/>Montréal<\/P>"
@@ -255,7 +255,7 @@
     }
   }, {
     "type": "Feature",
-    "id": "pdq-13",
+    "id": "PDQ-13",
     "properties": {
       "Name": "Poste de quartier 13",
       "Description": "<p>Poste de quartier 13<br\/>8745 boul Lasalle<br\/>Montréal<\/P>"
@@ -266,7 +266,7 @@
     }
   }, {
     "type": "Feature",
-    "id": "pdq-22",
+    "id": "PDQ-22",
     "properties": {
       "Name": "Poste de quartier 22",
       "Description": "<p>Poste de quartier 22<br\/>1200 aven Papineau<br\/>Montréal<\/P>"
@@ -277,7 +277,7 @@
     }
   }, {
     "type": "Feature",
-    "id": "pdq-26",
+    "id": "PDQ-26",
     "properties": {
       "Name": "Poste de quartier 26",
       "Description": "<p>Poste de quartier 26<br\/>5995 boul Décarie<br\/>Montréal<\/P>"
@@ -288,7 +288,7 @@
     }
   }, {
     "type": "Feature",
-    "id": "pdq-45",
+    "id": "PDQ-45",
     "properties": {
       "Name": "Poste de quartier 45",
       "Description": "<p>Poste de quartier 45<br\/>8200 boul Maurice-Duplessis<br\/>Montréal<\/P>"
@@ -299,7 +299,7 @@
     }
   }, {
     "type": "Feature",
-    "id": "pdq-03",
+    "id": "PDQ-03",
     "properties": {
       "Name": "Poste de quartier 03",
       "Description": "<p>Poste de quartier 03<br\/>14680 boul de Pierrefonds<br\/>Montréal<\/P>"
@@ -310,7 +310,7 @@
     }
   }, {
     "type": "Feature",
-    "id": "pdq-44",
+    "id": "PDQ-44",
     "properties": {
       "Name": "Poste de quartier 44",
       "Description": "<p>Poste de quartier 44<br\/>4807 rue Molson<br\/>Montréal<\/P>"
@@ -321,7 +321,7 @@
     }
   }, {
     "type": "Feature",
-    "id": "pdq-27",
+    "id": "PDQ-27",
     "properties": {
       "Name": "Poste de quartier 27",
       "Description": "<p>Poste de quartier 27<br\/>1805 rue Fleury Est<br\/>Montréal<\/P>"
@@ -332,7 +332,7 @@
     }
   }, {
     "type": "Feature",
-    "id": "pdq-16",
+    "id": "PDQ-16",
     "properties": {
       "Name": "Poste de quartier 16",
       "Description": "<p>Poste de quartier 16<br\/>750 rue Willibrord<br\/>Montréal<\/P>"
@@ -343,7 +343,7 @@
     }
   }, {
     "type": "Feature",
-    "id": "pdq-33",
+    "id": "PDQ-33",
     "properties": {
       "Name": "Poste de quartier 33",
       "Description": "<p>Poste de quartier 33<br\/>570 aven Beaumont<br\/>Montréal<\/P>"
@@ -354,7 +354,7 @@
     }
   }, {
     "type": "Feature",
-    "id": "pdq-11",
+    "id": "PDQ-11",
     "properties": {
       "Name": "Poste de quartier 11",
       "Description": "<p>Poste de quartier 11<br\/>6255 aven Somerled<br\/>Montréal<\/P>"

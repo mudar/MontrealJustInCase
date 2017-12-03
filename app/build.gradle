@@ -22,8 +22,8 @@ android {
         applicationId "ca.mudar.mtlaucasou"
         minSdkVersion 21
         targetSdkVersion 26
-        versionCode 24
-        versionName "2.2.0"
+        versionCode 25
+        versionName "2.3.0"
 
         resConfigs "en", "fr"
 
@@ -60,7 +60,7 @@ def static getDate() {
 }
 
 ext.supportLibVersion = '26.1.0'
-ext.playServicesVersion = '11.6.0'
+ext.playServicesVersion = '11.6.2'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])

@@ -177,6 +177,10 @@ public class MapUtils {
      */
     public static List<Marker> addPlacemarksToMap(GoogleMap map, List<? extends Placemark> placemarks) {
         final long startTime = System.currentTimeMillis();
+
+        // Remove previous markers
+        clearMap(map);
+
         if (map == null || placemarks == null) {
             return null;
         }

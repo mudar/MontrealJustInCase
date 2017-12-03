@@ -342,9 +342,6 @@ public class MainActivity extends BaseActivity implements
         if (isMapReady()) {
             toggleProgressBar(true);
 
-            // Remove previous markers
-            MapUtils.clearMap(vMap);
-
             mHandler.removeCallbacksAndMessages(null);
             // Wait for the BottomBar animation to end before loading data
             mHandler.postDelayed(new Runnable() {

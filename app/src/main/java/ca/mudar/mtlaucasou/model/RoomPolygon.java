@@ -35,6 +35,7 @@ import java.util.List;
 import ca.mudar.mtlaucasou.ConstDb.Fields;
 import ca.mudar.mtlaucasou.ConstDb.Tables;
 import ca.mudar.mtlaucasou.model.geojson.Feature;
+import ca.mudar.mtlaucasou.model.geojson.GeoPoint;
 
 @Entity(tableName = Tables.POLYGONS,
         indices = {
@@ -163,9 +164,9 @@ public class RoomPolygon {
          * @param coordinates
          * @return
          */
-        public Builder coordinates(List<List<List<Double>>> coordinates) {
+        public Builder coordinates(List<List<GeoPoint>> coordinates) {
             // Outer ring
-            for (List<Double> point : coordinates.get(0)) {
+            for (GeoPoint point : coordinates.get(0)) {
                 this.coordinates.add(new LongitudeLatitude.Builder(point).build());
             }
 
@@ -174,7 +175,7 @@ public class RoomPolygon {
             if (nbHoles > 0) {
                 for (int i = 1; i <= nbHoles; i++) {
                     final ArrayList<LongitudeLatitude> hole = new ArrayList<>();
-                    for (List<Double> point : coordinates.get(i)) {
+                    for (GeoPoint point : coordinates.get(i)) {
                         hole.add(new LongitudeLatitude.Builder(point).build());
                     }
                     this.holes.add(hole);

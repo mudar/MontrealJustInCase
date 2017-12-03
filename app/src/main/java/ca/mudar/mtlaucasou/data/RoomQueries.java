@@ -36,6 +36,7 @@ import ca.mudar.mtlaucasou.model.MapType;
 import ca.mudar.mtlaucasou.model.RoomPlacemark;
 import ca.mudar.mtlaucasou.model.RoomPolygon;
 import ca.mudar.mtlaucasou.model.geojson.Feature;
+import ca.mudar.mtlaucasou.model.geojson.GeoPoint;
 import ca.mudar.mtlaucasou.model.geojson.MultiPolygonGeometry;
 import ca.mudar.mtlaucasou.model.geojson.PointGeometry;
 import ca.mudar.mtlaucasou.model.geojson.SimplePolygonGeometry;
@@ -115,8 +116,8 @@ public class RoomQueries {
                 final RoomPolygon.Builder builder = new RoomPolygon.Builder(feature)
                         .mapType(mapType)
                         .layerType(layerType);
-                final List<List<List<List<Double>>>> geometry = ((MultiPolygonGeometry) baseGeometry).getCoordinates();
-                for (List<List<List<Double>>> polygonCoordinates : geometry) {
+                final List<List<List<GeoPoint>>> geometry = ((MultiPolygonGeometry) baseGeometry).getCoordinates();
+                for (List<List<GeoPoint>> polygonCoordinates : geometry) {
                     final RoomPolygon polygon = builder.coordinates(polygonCoordinates)
                             .build();
                     db.polygonDao().insert(polygon);

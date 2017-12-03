@@ -23,14 +23,12 @@
 
 package ca.mudar.mtlaucasou.model.geojson;
 
-import java.util.List;
-
 import ca.mudar.mtlaucasou.model.geojson.base.BaseGeometry;
 
 public class PointGeometry extends BaseGeometry {
-    private List<Double> coordinates;
+    private GeoPoint coordinates;
 
-    public List<Double> getCoordinates() {
+    public GeoPoint getCoordinates() {
         return coordinates;
     }
 }

@@ -25,12 +25,20 @@ package ca.mudar.mtlaucasou.model.geojson;
 
 import java.util.ArrayList;
 
-public class SimplePoint extends ArrayList<Double> {
+public class GeoPoint extends ArrayList<Double> {
     public Double getLng() {
-        return get(0);
+        try {
+            return get(0);
+        } catch (Exception e) {
+            return 0d;
+        }
     }
 
     public Double getLat() {
-        return get(0);
+        try {
+            return get(1);
+        } catch (Exception e) {
+            return 0d;
+        }
     }
 }

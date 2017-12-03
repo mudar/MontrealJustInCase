@@ -28,9 +28,9 @@ import java.util.List;
 import ca.mudar.mtlaucasou.model.geojson.base.BaseGeometry;
 
 public class SimplePolygonGeometry extends BaseGeometry {
-    private List<List<List<Double>>> coordinates;
+    private List<List<GeoPoint>> coordinates;
 
-    public List<List<List<Double>>> getCoordinates() {
+    public List<List<GeoPoint>> getCoordinates() {
         return coordinates;
     }
 }

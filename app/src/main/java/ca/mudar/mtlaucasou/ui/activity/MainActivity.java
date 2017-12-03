@@ -237,7 +237,7 @@ public class MainActivity extends BaseActivity implements
         mBottomNav.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
             @Override
             public void onNavigationItemReselected(@NonNull MenuItem item) {
-                if (isMapReady()) {
+                if (isMapReady(false)) {
                     vMap.animateCamera(CameraUpdateFactory.zoomTo(Const.ZOOM_OUT));
                 }
                 mLayersManager.toggleFilterMenu();
@@ -280,7 +280,7 @@ public class MainActivity extends BaseActivity implements
             mapFragment.getMapAsync(this);
         } catch (Exception e) {
             LogUtils.REMOTE_LOG(e);
-            isMapReady();
+            isMapReady(true);
         }
     }
 
@@ -317,16 +317,18 @@ public class MainActivity extends BaseActivity implements
      *
      * @return true if onMapReady() has been successfully called
      */
-    private boolean isMapReady() {
+    private boolean isMapReady(boolean showError) {
         if (vMap == null) {
-            Snackbar.make(mSnackbarParent, R.string.snackbar_google_maps_error, Snackbar.LENGTH_LONG)
-                    .setAction(R.string.btn_retry, new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            setupMap();
-                        }
-                    })
-                    .show();
+            if (showError) {
+                Snackbar.make(mSnackbarParent, R.string.snackbar_google_maps_error, Snackbar.LENGTH_LONG)
+                        .setAction(R.string.btn_retry, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                setupMap();
+                            }
+                        })
+                        .show();
+            }
             return false;
         }
 
@@ -339,7 +341,7 @@ public class MainActivity extends BaseActivity implements
         // return value is not used
         final boolean hasFilterMenu = mLayersManager.toggleFilterMenu(type);
 
-        if (isMapReady()) {
+        if (isMapReady(false)) {
             toggleProgressBar(true);
 
             mHandler.removeCallbacksAndMessages(null);
@@ -362,7 +364,7 @@ public class MainActivity extends BaseActivity implements
      * @param type
      */
     private void loadMapData(@MapType final String type) {
-        if (!isMapReady()) {
+        if (!isMapReady(true)) {
             return;
         }
 

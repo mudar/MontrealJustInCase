@@ -72,7 +72,7 @@
     <string name="dialog_open_data_title">Sources des données ouvertes</string>
 
     <!--InfoWindow-->
-    <string name="info_window_snippet_distance">%1$s\r\nDistance: %2$s</string>
+    <string name="info_window_snippet_distance">%1$s\nDistance: %2$s</string>
 
     <!--Search-->
     <string name="search_hint">Code postal ou emplacement</string>

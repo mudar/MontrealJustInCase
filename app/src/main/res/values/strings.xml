@@ -72,7 +72,7 @@
     <string name="dialog_open_data_title">Open Data credits</string>
 
     <!--InfoWindow-->
-    <string name="info_window_snippet_distance">%1$s\r\nDistance: %2$s</string>
+    <string name="info_window_snippet_distance">%1$s\nDistance: %2$s</string>
 
     <!--Search-->
     <string name="search_hint">Postal code or place name</string>
